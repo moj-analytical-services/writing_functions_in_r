@@ -1,2 +1,2 @@
-# Intro to programming in R
+# Intro to programming concepts in R
 Functions and control structures
