@@ -12,9 +12,9 @@ sum_x <- sum(x) # Sum the numbers contained in 'x', and save the result as a new
 
 # Here's an example of a very basic custom function:
 
-add_two <- function(x){ # On this line we've named our function 'add_two', and have included 'x' as an input variable
+add_two <- function(x){ # On this line we've named our function 'add_two', and have included 'x' as an input variable (a function argument)
   
-  # This function takes the input variable 'x', and adds 2 to it
+  # This function takes the argument 'x', and adds 2 to it
   result <- x + 2
   return(result) # The output of the function
   
@@ -22,14 +22,27 @@ add_two <- function(x){ # On this line we've named our function 'add_two', and h
 
 # Let's try using the function 'add_two'
 
-x <- 3
-add_two(x) # Calling the function by itself prints the result to the console
-result <- add_two(x) # Alternatively the result can be saved as a new variable
+add_two(3) # Calling the function by itself prints the result to the console
+result <- add_two(3) # Alternatively the result can be saved as a new variable
+
+# The return statement is not always necessary, as R will automatically return the variable on the last line of
+# the function body. So this version of the function above would also work:
+
+add_two <- function(x){ 
+  
+  result <- x + 2
+  
+}
+
+result <- add_two(3)
+
+# It is good practise to always include the return statement though, since it is necessary for more complicated functions
 
 
 # ----- Example 3 -----
 
-# Functions can accept as many input variables as you like (but can only output one object)
+# Functions can accept as many arguments as you like (but can only output one object)
+
 sum_squares <- function(x, y){
   
   result <- x^2 + y^2
@@ -37,9 +50,12 @@ sum_squares <- function(x, y){
   
 }
 
-x <- 3
-y <- 5
-z <- sum_squares(x, y)
+z <- sum_squares(3, 5)
+
+# The arguments can also be named when the function is called for clarity, and then the order or the arguments doesn't matter
+
+sum_squares(x=3, y=5)
+sum_squares(y=5, x=3)
 
 
 # ----- Example 4 -----
@@ -82,13 +98,52 @@ odd_or_even <- function(x){
 
 }
 
-x <- 4
-odd_or_even(x)
+odd_or_even(x=4)
 
 
 # ----- Example 6 -----
 
-# Here's a less trivial example - this function takes a string array as the input, and ensures all letters
+# Here's an example of how to include optional arguments
+
+add_a_number <- function(x, y=NULL){ # y is the optional input, with a default value of NULL
+  
+  if(!is.null(y)){
+    return(x + y)
+  }
+  else{
+    return(x)
+  }
+  
+}
+
+add_a_number(x=6)
+add_a_number(x=6, y=7)
+
+
+# ----- Example 7 -----
+
+# Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function
+# is called within a wrapper function. Here's an example:
+
+plot_x_and_y <- function(x, y, ...){
+  
+  plot(x, y, ...)
+  
+}
+
+x <- 1:10
+y <- (1:10) * 2
+
+# The function can be called with only the required arguments:
+plot_x_and_y(x, y)
+
+# Or the function can be called with any optional arguments accepted by the plot function:
+plot_x_and_y(x, y, col='red', type='l')
+
+
+# ----- Example 8 -----
+
+# Here's a less trivial example - this function takes a string array as the argument, and ensures all letters
 # are lower-case, and all spaces and punctuation marks are replaced with an underscore:
 
 generalise_names <- function(names){
@@ -108,3 +163,14 @@ generalise_names <- function(names){
 names <- c("Option 1", "   Option (1)", "Option: 1", "option 1", "OPTION - 1")
 
 names <- generalise_names(names)
+
+
+# ----- Example 9 -----
+
+# R scripts can get quite messy and difficult to follow if lots of functions are defined in the main script.
+# Therefore it's good practise to keep functions in their own R script.
+# All of the functions we've defined above have been added to the file functions.R.
+# To load all our functions, so that they're ready to use, we just need to add the following line to the main script:
+
+
+source("functions.R")
