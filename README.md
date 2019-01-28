@@ -48,7 +48,7 @@ The easiest way to store your functions is just to create a folder in your proje
 
 You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.
 
-Then just use ```source()``` to run the code and make your functions available to you in the current session. (As with loading libraries, it's best to do this at the top of your script).
+Then just use ```source()``` to run the code and make your functions available to you in the current session. As with loading libraries, it's best to do this at the top of your script.
 
 ### Writing packages
 An alternative is to make your own package to store your functions which you can then use like any other R package. There are a few advantages to this:
@@ -58,10 +58,23 @@ An alternative is to make your own package to store your functions which you can
 
 This comes at the cost of slightly higher overheads.
 
+A few examples of packages written by people in MoJ are:
+
++ [s3tools](https://github.com/moj-analytical-services/s3tools)
++ [asdrap](https://github.com/moj-analytical-services/asdrap)
+
+
 To find out more about writing packages, check out the further reading below. We're also hoping to do a Coffee and Coding session on it in future so watch this space!
 
+## Further reading
 
+### On functions
++ [DataCamp writing functions in R course](https://www.datacamp.com/courses/writing-functions-in-r)
++ [Functions chapter](https://adv-r.hadley.nz/functions.html) of Hadley's Advanced R book
 
+### On packages
++ [Writing an R package from scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
++ Hadley's [R packages](http://r-pkgs.had.co.nz/) book 
 
 
 
