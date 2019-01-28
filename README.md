@@ -24,7 +24,19 @@ If you write functions instead of writing variants of the same code over and ove
 
 You can use functions to make your code more succinct and better structured - done well, this can make your code a lot easier to understand for someone unfamiliar with it, or even yourself in a week's time or a few months down the line.
 
-In summary using functions can make your code easier to read, easier to write, easier to QA and easier to modify. So really the question is why would you not use functions!
+In short, using functions can make your code easier to read, easier to write, easier to QA and easier to modify. So really the question is why would you not use functions!
+
+# What is a function?
+
+# When to write a function
+
+There is a principal in software engineering called Don't Repeat Yourself (DRY) - which basically states that you should avoid duplication wherever possible. A good rule of thumb is whenever you find you've copied and pasted the same code three times, it's time to consider replacing that code with a function.
+
+You may also sometimes want to write a function for code you're only planning to use once as a way of structuring your code and "hiding" some of it to make your main script easier to read.
+
+*A word of warning*: the R ecosystem is full of high quality packages designed to solve many problems - it's generally best to ensure that a function doesn't already exist before writing your own. (You could think of this as a variant of the DRY principal!)
+
+
 
 
 
