@@ -43,7 +43,7 @@ Whenever you're working on something it's generally best to create a new R proje
 
 It's also best to keep your functions separate to the rest of your code to make them easier to find. There are a couple of ways to do this:
 
-## Storing your functions in your project
+### Storing your functions in your project
 The easiest way to store your functions is just to create a folder in your project called "functions" and saving your functions there.
 
 You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.
