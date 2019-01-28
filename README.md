@@ -41,17 +41,22 @@ The R ecosystem is full of high quality packages designed to solve all kinds of 
 
 Whenever you're working on something it's generally best to create a new R project and version control your code using on GitHub. There's guidance on how to do this in the Analytical Platform guidance.
 
-It's best to keep your functions separate to the rest of your code to make them easy to find, for example by creating a folder in your project called "functions" and saving your functions there. You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.
+It's also best to keep your functions separate to the rest of your code to make them easier to find. There are a couple of ways to do this:
+
+## Storing your functions in your project
+The easiest way to store your functions is just to create a folder in your project called "functions" and saving your functions there.
+
+You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.
 
 Then just use ```source()``` to run the code and make your functions available to you in the current session. (As with loading libraries, it's best to do this at the top of your script).
 
 ### Writing packages
-An alternative to the above is to make your own package to store your functions. There are a few advantages to this:
+An alternative is to make your own package to store your functions which you can then use like any other R package. There are a few advantages to this:
 
 + It means you (and others) can access your functions from different projects
 + There are certain requirements for making R packages which enforce good practice, such as documentation
 
-This comes at a cost of slightly higher overheads.
+This comes at the cost of slightly higher overheads.
 
 To find out more about writing packages, check out the further reading below. We're also hoping to do a Coffee and Coding session on it in future so watch this space!
 
