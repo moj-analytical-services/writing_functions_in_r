@@ -28,14 +28,32 @@ In short, using functions can make your code easier to read, easier to write, ea
 
 ## When to write a function
 
+### When you've copied and pasted three times
 There is a principal in software engineering called Don't Repeat Yourself (DRY) - which basically states that you should avoid duplication wherever possible. A good rule of thumb is whenever you find you've copied and pasted the same code three times, it's time to consider replacing that code with a function.
 
+### To structure your code
 You may also sometimes want to write a function for code you're only planning to use once as a way of structuring your code and "hiding" some of it to make your main script easier to read.
 
-*A word of warning*: the R ecosystem is full of high quality packages designed to solve many problems - it's generally best to ensure that a function doesn't already exist before writing your own. (You could think of this as a variant of the DRY principal!)
+### A word of warning
+The R ecosystem is full of high quality packages designed to solve all kinds of problems - it's generally best to ensure that a function doesn't already exist before writing your own. (This is really just an extension of the DRY principal).
 
 ## Organising your code
 
+Whenever you're working on something it's generally best to create a new R project and version control your code using on GitHub. There's guidance on how to do this in the Analytical Platform guidance.
+
+It's best to keep your functions separate to the rest of your code to make them easy to find, for example by creating a folder in your project called "functions" and saving your functions there. You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.
+
+Then just use ```source()``` to run the code and make your functions available to you in the current session. (As with loading libraries, it's best to do this at the top of your script).
+
+### Writing packages
+An alternative to the above is to make your own package to store your functions. There are a few advantages to this:
+
++ It means you (and others) can access your functions from different projects
++ There are certain requirements for making R packages which enforce good practice, such as documentation
+
+This comes at a cost of slightly higher overheads.
+
+To find out more about writing packages, check out the further reading below. We're also hoping to do a Coffee and Coding session on it in future so watch this space!
 
 
 
