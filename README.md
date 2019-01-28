@@ -12,7 +12,7 @@ You can see the code underlying a function by typing its name (without brackets)
 
 ### Abstraction
 
-One of the benefits of functions is they abstract away the details of *how* the code works, all you need to understand is *what* the function is designed to do.
+One of the benefits of functions is they abstract away the details of *how* the code works. To use a function, all you need to understand is *what* the function is designed to do.
 
 When you're writing your own function, you'll obviously need to understand how it works when you're writing it, but you won't need to think about it everytime you use it. This is particularly useful for things you might want to do more than once.
 
@@ -26,6 +26,28 @@ You can use functions to make your code more succinct and better structured - do
 
 In short, using functions can make your code easier to read, easier to write, easier to QA and easier to modify. So really the question is why would you not use functions!
 
+## How to write a function
+
+The syntax for creating a function is:
+
+```{r}
+function_name <- function(arg1, arg2){
+        # function body, e.g. 
+        print(paste(arg1, arg2))
+}
+
+```
+
+We're using the function `function()` to create a function (sorry, couldn't resist!) and assign it to the name `function_name`.
+
+A function is made up of three components:
+
+1. Its *arguments* (in this example, `arg1` and `arg2`)
+2. The function *body* (everything between the curly brackets)
+3. And the function *environment* (we're going to ignore this for now)
+
+The *arguments* allow us to pass values into the function and the *body* is where we put the code.
+
 ## When to write a function
 
 ### When you've copied and pasted three times
@@ -35,9 +57,9 @@ There is a principal in software engineering called Don't Repeat Yourself (DRY) 
 You may also sometimes want to write a function for code you're only planning to use once as a way of structuring your code and "hiding" some of it to make your main script easier to read.
 
 ### A word of warning
-The R ecosystem is full of high quality packages designed to solve all kinds of problems - it's generally best to ensure that a function doesn't already exist before writing your own. (This is really just an extension of the DRY principal).
+The R ecosystem is full of high quality packages designed to solve all kinds of problems - it's generally best to make sure that a function doesn't already exist before writing your own. (This is really just an extension of the DRY principal).
 
-## Organising your code
+## How to organise your code
 
 Whenever you're working on something it's generally best to create a new R project and version control your code using on GitHub. There's guidance on how to do this in the Analytical Platform guidance.
 
@@ -64,7 +86,7 @@ A few examples of packages written by people in MoJ are:
 + [asdrap](https://github.com/moj-analytical-services/asdrap)
 
 
-To find out more about writing packages, check out the further reading below. We're also hoping to do a Coffee and Coding session on it in future so watch this space!
+To find out more about writing packages, check out the further reading below. We're also hoping to do a Coffee and Coding session on it in future so watch this space (or let us know if you'd be interested in volunteering)!
 
 ## Further reading
 
@@ -76,5 +98,8 @@ To find out more about writing packages, check out the further reading below. We
 ### On packages
 + [Writing an R package from scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
 + Hadley's [R packages](http://r-pkgs.had.co.nz/) book
+
+### Misc
++ [Tidyverse style guide](https://style.tidyverse.org/) (has some guidance on choosing function and argument names)
 
 
