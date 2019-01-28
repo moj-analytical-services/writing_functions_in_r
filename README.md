@@ -71,10 +71,10 @@ To find out more about writing packages, check out the further reading below. We
 ### On functions
 + [DataCamp writing functions in R course](https://www.datacamp.com/courses/writing-functions-in-r)
 + [Functions chapter](https://adv-r.hadley.nz/functions.html) of Hadley's Advanced R book
++ [Tidy Evaluation](https://tidyeval.tidyverse.org/introduction.html) (useful for writing functions which behave like Tidyverse functions) 
 
 ### On packages
 + [Writing an R package from scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
-+ Hadley's [R packages](http://r-pkgs.had.co.nz/) book 
-
++ Hadley's [R packages](http://r-pkgs.had.co.nz/) book
 
 
