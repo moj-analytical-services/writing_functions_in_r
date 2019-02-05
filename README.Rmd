@@ -46,7 +46,7 @@ A function is made up of three components:
 2. The function *body* (everything between the curly brackets)
 3. And the function *environment* (we're going to ignore this for now)
 
-The *arguments* allow us to pass values into the function and the *body* is where we put the code.
+*Arguments* are variables used inside the function body which we can set each time we call the function. The function *body* is where we put the code.
 
 ## When to write a function
 
