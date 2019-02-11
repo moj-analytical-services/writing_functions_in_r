@@ -36,12 +36,11 @@ add_two <- function(x){
 
 result <- add_two(3)
 
-# It is good practise to always include the return statement though, since it is necessary for more complicated functions
-
 
 # ----- Example 3 -----
 
-# Functions can accept as many arguments as you like (but can only output one object)
+# Functions can accept as many arguments as you like, but can only output one object. If it is necessary to output
+# more than one object, then the desired outputs can be combined together into a list, and the list can be returned.
 
 sum_squares <- function(x, y){
   
@@ -122,6 +121,23 @@ add_a_number(x=6, y=7)
 
 # ----- Example 7 -----
 
+# Any value can be used as a default value for an optional argument. For example, we can generalise the
+# sum_squares function above by allowing it to sum together two numbers raised to any power, but have a 
+# default power of 2
+
+sum_powers <- function(x, y, z=2){
+  
+  result <- x^z + y^z
+  return(result)
+  
+}
+
+sum_powers(x=3, y=5)
+sum_powers(x=3, y=5, z=3)
+
+
+# ----- Example 8 -----
+
 # Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function
 # is called within a wrapper function. Here's an example:
 
@@ -141,7 +157,7 @@ plot_x_and_y(x, y)
 plot_x_and_y(x, y, col='red', type='l')
 
 
-# ----- Example 8 -----
+# ----- Example 9 -----
 
 # Here's a less trivial example - this function takes a string array as the argument, and ensures all letters
 # are lower-case, and all spaces and punctuation marks are replaced with an underscore:
@@ -165,12 +181,10 @@ names <- c("Option 1", "   Option (1)", "Option: 1", "option 1", "OPTION - 1")
 names <- generalise_names(names)
 
 
-# ----- Example 9 -----
+# ----- Example 10 -----
 
 # R scripts can get quite messy and difficult to follow if lots of functions are defined in the main script.
-# Therefore it's good practise to keep functions in their own R script.
-# All of the functions we've defined above have been added to the file functions.R.
-# To load all our functions, so that they're ready to use, we just need to add the following line to the main script:
-
+# Therefore it's good practise to keep functions in their own R script, for example in a script called "functions.R".
+# To load the functions, so that they're ready to use, we just need to add the following line to the main script:
 
 source("functions.R")
