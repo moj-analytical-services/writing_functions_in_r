@@ -51,7 +51,7 @@ sum_squares <- function(x, y){
 
 z <- sum_squares(3, 5)
 
-# The arguments can also be named when the function is called for clarity, and then the order or the arguments doesn't matter
+# The arguments can also be named when the function is called for clarity, and then the order of the arguments doesn't matter
 
 sum_squares(x=3, y=5)
 sum_squares(y=5, x=3)
@@ -188,3 +188,5 @@ names <- generalise_names(names)
 # To load the functions, so that they're ready to use, we just need to add the following line to the main script:
 
 source("functions.R")
+
+
