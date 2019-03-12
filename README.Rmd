@@ -1,5 +1,8 @@
 ---
-output: rmarkdown::github_document
+output: 
+  rmarkdown::html_document:
+      keep_md: true
+  rmarkdown::github_document: default
 ---
 
 # Writing functions in R
