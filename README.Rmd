@@ -2,6 +2,7 @@
 
 Functions are a way to package up bits of code to make them easy to reuse. Base R includes numerous built-in functions and there are thousands more R functions in packages available on CRAN and elsewhere.
 
+
 Here is an example of one of the built-in R functions, `sum()`:
 
 ```{r}
@@ -316,7 +317,6 @@ names <- c("Option 1", "   Option (1)", "Option: 1", "option 1", "OPTION - 1")
 generalise_names(names)
 
 ```
-
 
 ## When to write a function
 

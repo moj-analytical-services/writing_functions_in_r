@@ -124,9 +124,11 @@ $(document).ready(function () {
 <div id="writing-functions-in-r" class="section level1">
 <h1>Writing functions in R</h1>
 <p>Functions are a way to package up bits of code to make them easy to reuse. Base R includes numerous built-in functions and there are thousands more R functions in packages available on CRAN and elsewhere.</p>
+
 <p>Here is an example of one of the built-in R functions, <code>sum()</code>:</p>
 <pre class="r"><code>x &lt;- c(1,2,3,4,5) # Create an array of numbers to sum
 sum_x &lt;- sum(x) # Sum the numbers contained in 'x', and save the result as a new variable 'sum_x'</code></pre>
+
 <p>You can also write your own functions, called “user-defined functions”.</p>
 <p>Functions in a package are the same thing as functions you define yourself, they’re just stored in a different way.</p>
 <p>You can see the code underlying a function by typing its name (without brackets) in the console and hitting “enter”.</p>
@@ -162,6 +164,7 @@ sum_x &lt;- sum(x) # Sum the numbers contained in 'x', and save the result as a 
 <li>And the function <em>environment</em> (we’re going to ignore this for now)</li>
 </ol>
 <p><em>Arguments</em> are variables used inside the function body which we can set each time we call the function. The function <em>body</em> is where we put the code.</p>
+
 <div id="examples-of-functions" class="section level3">
 <h3>Examples of functions</h3>
 <div id="example-1" class="section level4">
@@ -351,6 +354,7 @@ generalise_names(names)</code></pre>
 <pre><code>## [1] &quot;option_1&quot; &quot;option_1&quot; &quot;option_1&quot; &quot;option_1&quot; &quot;option_1&quot;</code></pre>
 </div>
 </div>
+
 </div>
 <div id="when-to-write-a-function" class="section level2">
 <h2>When to write a function</h2>
@@ -375,7 +379,9 @@ generalise_names(names)</code></pre>
 <h3>Storing your functions in your project</h3>
 <p>The easiest way to store your functions is just to create a folder in your project called “functions” and saving your functions there.</p>
 <p>You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.</p>
+
 <p>Then just use <code>source(&quot;my_functions_script.R&quot;)</code> (with <code>&quot;my_functions_script.R&quot;</code> replaced with the name of your script) to run the code and make your functions available to you in the current session. As with loading libraries, it’s best to do this at the top of your script.</p>
+
 </div>
 <div id="writing-packages" class="section level3">
 <h3>Writing packages</h3>
