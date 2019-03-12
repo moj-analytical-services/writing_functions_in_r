@@ -38,7 +38,8 @@ If you write functions instead of writing variants of the same code over and ove
 
 You can use functions to make your code more succinct and better structured - done well, this can make your code a lot easier to understand for someone unfamiliar with it, or even yourself in a week's time or a few months down the line.
 
-In short, using functions can make your code easier to read, easier to write, easier to QA and easier to modify. So really the question is why would you not use functions!
+
+In short, using functions can make your code easier to read, easier to write, easier to QA and easier to modify. So really the question is why would you not?
 
 ## How to write a function
 
@@ -52,15 +53,15 @@ function_name <- function(arg1, arg2){
 
 ```
 
-We're using the function `function()` to create a function (sorry, couldn't resist!) and assign it to the name `function_name`.
+We're using the function `function()` to create a function and assign it to the name `function_name`.
 
 A function is made up of three components:
 
 1. Its *arguments* (in this example, `arg1` and `arg2`)
 2. The function *body* (everything between the curly brackets)
-3. And the function *environment* (we're going to ignore this for now)
+3. And the function *environment* (where the function was created)
 
-*Arguments* are variables used inside the function body which we can set each time we call the function. The function *body* is where we put the code.
+*Arguments* are variables used inside the function body which we can set each time we call the function. The function *body* is where we put the code. The function's *environment* determines what variables and other functions it has access to. This is closely linked to the concept of scoping, something you can read more about [here](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html).
 
 ### Examples of functions
 
@@ -120,14 +121,14 @@ z <- sum_squares(3, 5)
 
 ```
 
-Arguments can be specified by position or name. In the above example, the function accepts arguments called `x` and `y`, with the order specified as `x` then `y` in the function definition. Therefore when `sum_squares(3,5)` is called, the arguments are interpreted as `x=3` and `y=5`. Alternatively, if we called `sum_squares(5,3)` then the arguments would be interpreted as `x=5` and `y=3`.
+Arguments can be specified by position or name. In the above example, the function accepts arguments called `x` and `y`, with the order specified as `x` then `y` in the function definition. Therefore when `sum_squares(3, 5)` is called, the arguments are interpreted as `x = 3` and `y = 5`. Alternatively, if we called `sum_squares(5, 3)` then the arguments would be interpreted as `x = 5` and `y = 3`.
 
 For more complicated functions with lots of arguments, specifying the arguments by position becomes more error-prone. Therefore it is often desirable to specify the arguments by name, then the order of the arguments doesn't matter:
 
 ```{r}
 
-sum_squares(x=3, y=5)
-sum_squares(y=5, x=3)
+sum_squares(x = 3, y = 5)
+sum_squares(y = 5, x = 3)
 
 ```
 
@@ -180,7 +181,7 @@ odd_or_even(x=4)
 
 Sometimes it can be useful to include helpful error messages in functions, by anticipating the sorts of variables that could input. What happens if you try to use a non-integer or a string as an argument in the above example?
 
-```
+```{r}
 odd_or_even(x=1.5)
 odd_or_even(x="a")
 odd_or_even(x=c(1,2,3))
@@ -215,13 +216,14 @@ odd_or_even <- function(x){
 
 Now try passing some incompatible arguments to the function:
 
-```
+```{r}
 odd_or_even(x=1.5)
 odd_or_even(x="a")
 odd_or_even(x=c(1,2,3))
 
 ```
 
+`stop()` halts execution of the function and prints an error message to the console; alternatively you can use `warning()` which prints a warning message to the console but does not stop execution of the function.
 
 #### Example 6
 
@@ -229,7 +231,7 @@ Here's an example of how to include optional arguments:
 
 ```{r}
 
-add_a_number <- function(x, y=NULL){ # y is the optional input, with a default value of NULL
+add_a_number <- function(x, y = NULL){ # y is the optional input, with a default value of NULL
   
   if(!is.null(y)){
     return(x + y)
@@ -240,18 +242,18 @@ add_a_number <- function(x, y=NULL){ # y is the optional input, with a default v
   
 }
 
-add_a_number(x=6)
-add_a_number(x=6, y=7)
+add_a_number(x = 6)
+add_a_number(x = 6, y = 7)
 
 ```
 
 #### Example 7
 
-Any value can be used as a default value for an optional argument. For example, we can generalise the sum_squares function above by allowing it to sum together two numbers raised to any power, but have a default power of 2:
+Any value can be used as a default value for an argument. For example, we can generalise the sum_squares function above by allowing it to sum together two numbers raised to any power, but have a default power of 2:
 
 ```{r}
 
-sum_powers <- function(x, y, z=2){
+sum_powers <- function(x, y, z = 2){
   
   result <- x^z + y^z
   return(result)
@@ -359,8 +361,7 @@ A few examples of packages written by people in MoJ are:
 + [s3tools](https://github.com/moj-analytical-services/s3tools)
 + [asdrap](https://github.com/moj-analytical-services/asdrap)
 
-
-To find out more about writing packages, check out the further reading below. We're also hoping to do a Coffee and Coding session on it in future so watch this space (or let us know if you'd be interested in volunteering)!
+To find out more about writing packages, check out the further reading below.
 
 ## Further reading
 
@@ -375,5 +376,6 @@ To find out more about writing packages, check out the further reading below. We
 
 ### Misc
 + [Tidyverse style guide](https://style.tidyverse.org/) (has some guidance on choosing function and argument names)
++ [Scoping/environments](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)
 
 
