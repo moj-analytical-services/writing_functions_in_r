@@ -176,13 +176,13 @@ odd_or_even(x=4)
 
 #### Example 5
 
-Sometimes it can be useful to include helpful error messages in functions, by anticipating the sorts of variables that could input. What happens if you try to use a non-integer or a string as an argument in the above example?
+Sometimes it can be useful to include helpful error messages in functions, by anticipating the sorts of variables that could input. What happens if you try to use a non-integer or a string as an argument in the above example? Try the running the function with the following arguments:
 
     odd_or_even(x=1.5)
     odd_or_even(x="a")
     odd_or_even(x=c(1,2,3))
 
-Here is an adapted version of the function, with some more informative error messages built in:
+Here is an adapted version of the function, with some more informative error messages built in using the `stop()` function:
 
 ``` r
 odd_or_even <- function(x){
@@ -348,6 +348,23 @@ The easiest way to store your functions is just to create a folder in your proje
 You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.
 
 Then just use `source("my_functions_script.R")` (with `"my_functions_script.R"` replaced with the name of your script) to run the code and make your functions available to you in the current session. As with loading libraries, it's best to do this at the top of your script.
+
+Here's an example of calling a script that contains a new function, called `pick_a_colour`:
+
+``` r
+source("functions.R")
+```
+
+Now the function is ready to use:
+
+``` r
+# Create a list of colours to provide to the function
+colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pink")
+
+pick_a_colour(colours)
+```
+
+    ## [1] "Green"
 
 ### Writing packages
 
