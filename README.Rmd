@@ -1,8 +1,8 @@
 ---
 output: 
-  rmarkdown::html_document:
-      keep_md: true
   rmarkdown::github_document: default
+  rmarkdown::html_document: default
+
 ---
 
 # Writing functions in R
