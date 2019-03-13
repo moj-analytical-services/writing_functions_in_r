@@ -1,10 +1,10 @@
 ---
 output:
-
+  rmarkdown::github_document:
+          html_preview: true
   ioslides_presentation:
     widescreen: true
     smaller: true
-    keep_md: true
 ---
 
 # Writing functions in R
