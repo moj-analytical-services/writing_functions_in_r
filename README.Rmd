@@ -1,8 +1,10 @@
 ---
 output:
+
   ioslides_presentation:
     widescreen: true
     smaller: true
+    keep_md: true
 ---
 
 # Writing functions in R
@@ -42,9 +44,7 @@ One of the benefits of functions is they abstract away the details of *how* the 
 You can use functions to make your code better structured and easier to read - done well, this can make your code a lot easier to understand for someone unfamiliar with it, or even yourself a few months down the line.
 
 
-# How to write a function
-
-## Structure of a function
+## How to write a function
 
 The syntax for creating a function is:
 
@@ -60,11 +60,11 @@ We use `function()` to create a function and assign it to the object `function_n
 
 A function is made up of three components:
 
-1. Its **arguments** (in this example, `arg1` and `arg2`) - these are variables used inside the function body which we can set each time we call the function.
++ Its **arguments** (in this example, `arg1` and `arg2`) - these are variables used inside the function body which we can set each time we call the function.
    
-2. The function **body** (everything between the curly brackets) - this is where we put the code.
++ The function **body** (everything between the curly brackets) - this is where we put the code.
    
-3. And the function **environment** (where the function was created) - this determines what variables and other functions it has access to - you can find out more about environments  [here](https://r4ds.had.co.nz/functions.html#environment).
++ And the function **environment** (where the function was created) - this determines what variables and other functions it has access to - you can find out more about environments  [here](https://r4ds.had.co.nz/functions.html#environment).
 
 # Examples of functions
 
@@ -310,12 +310,11 @@ plot_x_and_y(x, y, col='red', type='l')
 
 ## Example 9
 
-Here's a less trivial example - this function takes a vector of strings as the argument, ensures all letters in the string array are lower-case, and makes use of "regular expressions" or "regex" to find and replace all spaces and punctuation marks with an underscore:
+Here's a less trivial example - this function takes a vector of strings as the argument, ensures all letters in the string vector are lower-case, and makes use of "regular expressions" or "regex" to find and replace all spaces and punctuation marks with an underscore:
 
 ```{r}
 
 generalise_names <- function(names){
-  #library(stringr)
   names <- tolower(names) # Convert any uppercase letters to lowercase
   names <- stringr::str_trim(names) # Trim any blank spaces at the start or end of each string
   names <- stringr::str_replace_all(names, " ", "_") # Replace spaces with an underscore
@@ -358,7 +357,7 @@ A rule of thumb is if all the code for your function doesn't fit on your screen 
 ---
 
 ### Generalise
-Think about whether there are ways you can make your function usable in more situations. For example, is there anything you're hard-coding which you could set as an argument instead? Don't get carried away though, make sure you don't add complicated functionality you're never going to use!
+Think about whether there are ways you can make your function usable in more situations. For example, is there anything you're hard-coding which you could set as an argument instead?
 
 ### Vectorise by default
 R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as input and apply the transformation to each element. The `generalise_names()` function we looked at is a good example of this!
