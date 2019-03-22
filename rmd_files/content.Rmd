@@ -1,14 +1,3 @@
----
-output:
-  rmarkdown::github_document:
-          html_preview: true
-  ioslides_presentation:
-    widescreen: true
-    smaller: true
----
-
-# Writing functions in R
-
 ## What is a function?
 
 Functions are a way to package up bits of code to make them easy to reuse. Base R includes numerous built-in functions and there are thousands more R functions in packages available on CRAN and elsewhere.
