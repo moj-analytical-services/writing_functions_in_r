@@ -1,8 +1,5 @@
 ---
-output: 
-  rmarkdown::github_document: default
-  rmarkdown::html_document: default
-
+output: rmarkdown::github_document
 ---
 
 # Writing functions in R
@@ -77,7 +74,6 @@ add_two <- function(x){ # On this line we've named our function 'add_two', and h
   
   # This function takes the argument 'x', and adds 2 to it
   result <- x + 2
-  return(result) # The output of the function
   
 }
 
@@ -92,19 +88,6 @@ result <- add_two(3) # Alternatively the result can be saved as a new variable
 
 ```
 
-The return statement is not always necessary, as R will automatically return the variable on the last line of the function body. So this version of the function above would also work:
-
-```{r}
-
-add_two <- function(x){
-  
-  result <- x + 2
-  
-}
-
-result <- add_two(3)
-
-```
 
 #### Example 2
 
@@ -115,11 +98,10 @@ Functions can accept as many arguments as you like, but can only output one obje
 sum_squares <- function(x, y){
   
   result <- x^2 + y^2
-  return(result)
   
 }
 
-z <- sum_squares(3, 5)
+sum_squares(3, 5)
 
 ```
 
@@ -156,7 +138,7 @@ mod_x(x)
 
 ```
 
-As soon as a `return()` statement is encountered in a function, the function finishes and returns the variable in the `return()` statement. In the above example, `return()` is used twice as there is a condition with two possibilities. Either the input argument `x` is less than zero, in which case the function ends with the `return(-x)` statement, otherwise if `x` is not less than zero then the function continues to the `return(x)` statement.
+As soon as a `return()` statement is encountered in a function, the function finishes and returns the variable in the `return()` statement. In the above example, `return()` is used twice as there is a condition with two possibilities. Either the input argument `x` is less than zero, in which case the function ends with the `return(-x)` statement, otherwise if `x` is not less than zero then the function continues to the `return(x)` statement. Without the `return()` statement, a function written in R will automatically return whatever variable is on the last line of the function body.
 
 #### Example 4
 
