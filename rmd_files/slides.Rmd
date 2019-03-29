@@ -1,0 +1,10 @@
+---
+output:
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
+---
+
+# Writing functions in R
+```{r source_content, child = 'content.Rmd'}
+```

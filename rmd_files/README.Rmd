@@ -1,0 +1,26 @@
+---
+output: rmarkdown::github_document
+---
+
+# Writing functions in R
+
+This repository is for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session on writing functions in R:
+
+> Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this sesssion we'll cover why, when and how to write your own functions, sharing plenty of examples to help you get started.
+
+We are planning to use this material to develop a training session offered by the ASD R Training Group so if you'd be interested in attending or have any feedback on the content, please get in touch!
+
+All the notes for the session are available below.
+
+## Pre-material
+
+If you want to try running the code in the Rmarkdown during or after the session, you can clone this repository.
+
++ If you have used GitHub and the Analytical Platform before, follow the instructions in [section 4.2.1 of the Platform User Guidance](https://moj-analytical-services.github.io/platform_user_guidance/using-github-with-the-platform.html#step-1-navigate-to-your-platform-r-studio-and-make-a-copy-of-the-github-project-in-your-r-studio).
+
++ If you have not used GitHub with the analytical platform before, you might need to set this up using the instructions in [section 2.3 of the Platform User Guidance](https://moj-analytical-services.github.io/platform_user_guidance/using-github-with-the-platform.html), before following the instructions in section 4.2.1 as above.
+
+This isn't necessary for the session so don't worry if you're not able to do this!
+
+```{r source_content, child = 'content.Rmd'}
+```
