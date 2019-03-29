@@ -63,11 +63,11 @@ Here's an example of a very basic user-defined function:
 
 ```{r}
 
-# we've named our function 'add_two' and have included 'x' as an input variable (a function argument)
+# We've named our function 'add_two' and have included 'x' as an input variable (a function argument)
 add_two <- function(x){
   # This function takes the argument 'x', and adds 2 to it
   result <- x + 2
-  return(result) # The output of the function
+  return(x)
 }
 
 ```
@@ -83,23 +83,9 @@ result <- add_two(3)
 
 ```
 
----
+## Example 2: multiple inputs
 
-The return statement is not always necessary, as R will automatically return the variable on the last line of the function body. So this version of the function also works:
-
-```{r}
-
-add_two <- function(x){
-  result <- x + 2
-}
-
-result <- add_two(3)
-
-```
-
-## Example 2: function inputs & outputs
-
-Functions can accept as many arguments as you like, but can only output one object (if it is necessary to output more than one object, then the desired outputs can be combined together into a list, and the list can be returned).
+Functions can accept as many arguments as you like, but can only output one object (if it is necessary to output more than one object, then the desired outputs can be combined together into a list, and the list can be returned). Here's a function that requires two input variables:
 
 ```{r}
 
@@ -108,11 +94,13 @@ sum_squares <- function(x, y){
   return(result)
 }
 
-z <- sum_squares(3, 5)
+sum_squares(3, 5)
 
 ```
 
 Arguments can be specified by position or name. In the above example, the function accepts arguments called `x` and `y`, with the order specified as `x` then `y` in the function definition. Therefore when `sum_squares(3, 5)` is called, the arguments are interpreted as `x = 3` and `y = 5`. Alternatively, if we called `sum_squares(5, 3)` then the arguments would be interpreted as `x = 5` and `y = 3`.
+
+---
 
 For more complicated functions with lots of arguments, specifying the arguments by position becomes more error-prone. Therefore it is often desirable to specify the arguments by name, then the order of the arguments doesn't matter:
 
@@ -123,31 +111,28 @@ sum_squares(y = 5, x = 3)
 
 ```
 
-## Example 3: using return()
+## Example 3: conditional statements in functions
 
 Functions can return different outputs depending on some condition, using the `return()` command:
 
 ```{r}
 
 mod_x <- function(x){
-  
   if(x < 0){
     return(-x)
   }
   else{
     return(x)
   }
-  
 }
 
-x <- -5
-mod_x(x)
+mod_x(-5)
 
 ```
 
-As soon as a `return()` statement is encountered in a function, the function finishes and returns the variable in the `return()` statement. In the above example, `return()` is used twice as there is a condition with two possibilities. Either the input argument `x` is less than zero, in which case the function ends with the `return(-x)` statement, otherwise if `x` is not less than zero then the function continues to the `return(x)` statement.
+As soon as a `return()` statement is encountered in a function, the function finishes and returns the variable in the `return()` statement. In the above example, `return()` is used twice as there is a condition with two possibilities. Either the input argument `x` is less than zero, in which case the function ends with the `return(-x)` statement, otherwise if `x` is not less than zero then the function continues to the `return(x)` statement. Without a `return()` statement, a function written in R will automatically return whatever variable is on the last line of the function body.
 
-## Example 4
+## Example 4: functions without outputs
 
 Depending on the purpose of the function, it doesn't need to return an output at all:
 
@@ -170,7 +155,7 @@ odd_or_even(x=4)
 
 ## Example 5: errors and warnings
 
-Sometimes it can be useful to include helpful error messages in functions, by anticipating the sorts of variables that could input. What happens if you try to use a non-integer or a string as an argument in the above example?
+Sometimes it can be useful to include helpful error messages in functions, by anticipating the sorts of variables that could input. What happens if you try to use a non-integer or a string as an argument in the above example? Try the running the function with the following arguments:
 
 ```{r error = TRUE}
 odd_or_even(x=1.5)
@@ -181,7 +166,7 @@ odd_or_even(x=c(1,2,3))
 
 ---
 
-Here is an adapted version of the function, with some more informative error messages built in:
+Here is an adapted version of the function, with some more informative error messages built in using the `stop()` function:
 
 ```{r}
 
@@ -199,7 +184,7 @@ odd_or_even <- function(x){
   else if((x %% 2) == 1) {
     print("The number is odd.")
   }
-  else{
+  else if((x %% 2) != 0 & (x %% 2) != 1){
     stop("The number is not an integer.")
   }
 
@@ -218,7 +203,7 @@ odd_or_even(x=c(1,2,3))
 
 ```
 
-`stop()` halts execution of the function and prints an error message to the console; alternatively you can use `warning()` which prints a warning message to the console but does not stop execution of the function.
+`stop()` halts execution of the function and prints an error message to the console; alternatively you can use `warning()`, which prints a warning message to the console but does not stop execution of the function.
 
 ## Example 6: optional arguments
 
@@ -244,7 +229,7 @@ add_a_number(x = 6, y = 7)
 
 ## Example 7: arguments with default values
 
-Any value can be used as a default value for an argument. For example, we can generalise the sum_squares function above by allowing it to sum together two numbers raised to any power, but have a default power of 2:
+Any value can be used as a default value for an argument. For example, we can generalise the `sum_squares()` function by allowing it to sum together two numbers raised to any power, but have a default power of 2:
 
 ```{r}
 
@@ -297,25 +282,29 @@ plot_x_and_y(x, y, col='red', type='l')
 
 ```
 
-## Example 9
+## Example 9: a "real-world" example
 
 Here's a less trivial example - this function takes a vector of strings as the argument, ensures all letters in the string vector are lower-case, and makes use of "regular expressions" or "regex" to find and replace all spaces and punctuation marks with an underscore:
 
 ```{r}
 
 generalise_names <- function(names){
-  names <- tolower(names) # Convert any uppercase letters to lowercase
-  names <- stringr::str_trim(names) # Trim any blank spaces at the start or end of each string
-  names <- stringr::str_replace_all(names, " ", "_") # Replace spaces with an underscore
-  names <- stringr::str_replace_all(names, "[^A-Za-z0-9]", "_") # Replace anything that isn't a letter or number with an underscore
-  names <- stringr::str_replace_all(names, "([_])\\1+", "\\1") # Replace repeated underscores with a single underscore
-  names <- stringr::str_replace_all(names, "^\\_+|\\_+$", "") # Remove any underscores at the beginning or end of the string
-  
+  # Convert any uppercase letters to lowercase
+  names <- tolower(names)
+  # Trim any blank spaces at the start or end of each string
+  names <- stringr::str_trim(names)
+  # Replace spaces with an underscore
+  names <- stringr::str_replace_all(names, " ", "_")
+  # Replace anything that isn't a letter or number with an underscore
+  names <- stringr::str_replace_all(names, "[^A-Za-z0-9]", "_")
+  # Replace repeated underscores with a single underscore
+  names <- stringr::str_replace_all(names, "([_])\\1+", "\\1")
+  # Remove any underscores at the beginning or end of the string
+  names <- stringr::str_replace_all(names, "^\\_+|\\_+$", "")
   return(names)
 }
 
 names <- c("Option 1", "   Option (1)", "Option: 1", "option 1", "OPTION - 1")
-
 generalise_names(names)
 
 ```
@@ -364,6 +353,22 @@ The easiest way to store your functions is just to create a folder in your proje
 You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.
 
 Then just use `source("my_functions_script.R")` (with `"my_functions_script.R"` replaced with the name of your script) to run the code and make your functions available to you in the current session. As with loading libraries, it's best to do this at the top of your script.
+
+---
+
+Here's an example of calling a script that contains a new function, called `pick_a_colour`:
+
+```{r}
+source("functions.R")
+```
+
+Now the function is ready to use:
+
+```{r}
+# Create a list of colours to provide to the function
+colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pink")
+pick_a_colour(colours)
+```
 
 ## Writing a package
 An alternative is to make your own package to store your functions which you can then use like any other R package. There are a few advantages to this:
