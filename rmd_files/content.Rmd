@@ -67,7 +67,7 @@ Here's an example of a very basic user-defined function:
 add_two <- function(x){
   # This function takes the argument 'x', and adds 2 to it
   result <- x + 2
-  return(x)
+  return(result)
 }
 
 ```

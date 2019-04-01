@@ -89,7 +89,7 @@ Here's an example of a very basic user-defined function:
 add_two <- function(x){
   # This function takes the argument 'x', and adds 2 to it
   result <- x + 2
-  return(x)
+  return(result)
 }
 ```
 
@@ -100,7 +100,7 @@ Let's try using the function `add_two()`:
 add_two(3)
 ```
 
-    ## [1] 3
+    ## [1] 5
 
 ``` r
 # Alternatively the result can be saved as a new variable
@@ -448,7 +448,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Yellow"
+    ## [1] "Red"
 
 Writing a package
 -----------------
