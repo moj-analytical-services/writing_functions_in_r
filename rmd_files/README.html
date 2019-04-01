@@ -69,7 +69,7 @@ sum_x &lt;-<span class="st"> </span><span class="kw">sum</span>(x) <span class="
 </ul>
 <h1 id="examples-of-functions">Examples of functions</h1>
 <h2 id="example-1-a-basic-function">Example 1: a basic function</h2>
-<p>Here's an example of a very basic user-defined function, that adds two to a numerical variable:</p>
+<p>Here's an example of a very basic user-defined function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we've named our function 'add_two' and have included 'x' as an input variable (a function argument)</span>
 add_two &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   <span class="co"># This function takes the argument 'x', and adds 2 to it</span>
@@ -209,7 +209,7 @@ x &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">5</spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum_powers</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">5</span>, <span class="dt">z =</span> <span class="dv">3</span>)</code></pre></div>
 <pre><code>## [1] 152</code></pre>
 <h2 id="example-8-the-ellipsis-argument">Example 8: the ellipsis argument</h2>
-<p>Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function is called within a wrapper function. This requires the ellipsis construct <code>...</code>, which is designed to pass a variable number of arguments to a function. Here's an example:</p>
+<p>Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function is called within a wrapper function. This requires the ellipsis construct, <code>...</code>, which is designed to pass a variable number of arguments to a function. Here's an example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_x_and_y &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, ...){
   
   <span class="kw">plot</span>(x, y, ...)

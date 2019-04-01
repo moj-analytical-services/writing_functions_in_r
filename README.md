@@ -82,7 +82,7 @@ Examples of functions
 Example 1: a basic function
 ---------------------------
 
-Here's an example of a very basic user-defined function, that adds two to a numerical variable:
+Here's an example of a very basic user-defined function:
 
 ``` r
 # we've named our function 'add_two' and have included 'x' as an input variable (a function argument)
@@ -325,7 +325,7 @@ sum_powers(x = 3, y = 5, z = 3)
 Example 8: the ellipsis argument
 --------------------------------
 
-Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function is called within a wrapper function. This requires the ellipsis construct `...`, which is designed to pass a variable number of arguments to a function. Here's an example:
+Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function is called within a wrapper function. This requires the ellipsis construct, `...`, which is designed to pass a variable number of arguments to a function. Here's an example:
 
 ``` r
 plot_x_and_y <- function(x, y, ...){

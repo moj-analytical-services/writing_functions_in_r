@@ -141,7 +141,7 @@ sum_x &lt;- sum(x) # Sum the numbers contained in &#39;x&#39;, and save the resu
 
 </article></slide><slide class=""><hgroup><h2>Example 1: a basic function</h2></hgroup><article  id="example-1-a-basic-function" class="smaller ">
 
-<p>Here&#39;s an example of a very basic user-defined function, that adds two to a numerical variable:</p>
+<p>Here&#39;s an example of a very basic user-defined function:</p>
 
 <pre class = 'prettyprint lang-r'># we&#39;ve named our function &#39;add_two&#39; and have included &#39;x&#39; as an input variable (a function argument)
 add_two &lt;- function(x){
@@ -339,7 +339,7 @@ sum_powers(x = 3, y = 5)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Example 8: the ellipsis argument</h2></hgroup><article  id="example-8-the-ellipsis-argument" class="smaller ">
 
-<p>Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function is called within a wrapper function. This requires the ellipsis construct <code>...</code>, which is designed to pass a variable number of arguments to a function. Here&#39;s an example:</p>
+<p>Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function is called within a wrapper function. This requires the ellipsis construct, <code>...</code>, which is designed to pass a variable number of arguments to a function. Here&#39;s an example:</p>
 
 <pre class = 'prettyprint lang-r'>plot_x_and_y &lt;- function(x, y, ...){
   
