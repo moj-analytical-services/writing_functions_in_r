@@ -448,7 +448,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Red"
+    ## [1] "Yellow"
 
 Writing a package
 -----------------
