@@ -1,6 +1,6 @@
 ## What is a function?
 
-Functions are a way to package up bits of code to make them easy to reuse. Base R includes numerous built-in functions and there are thousands more R functions in packages available on CRAN and elsewhere.
+Functions are a way to bundle up bits of code to make them easy to reuse. Base R includes numerous built-in functions and there are thousands more R functions in packages available on CRAN and elsewhere.
 
 
 Here is an example of one of the built-in R functions, `sum()`:
@@ -15,8 +15,6 @@ sum_x <- sum(x) # Sum the numbers contained in 'x', and save the result as a new
 You can also write your own functions, called "user-defined functions".
 
 Functions in a package are the same thing as functions you define yourself, they're just stored in a different way.
-
-You can see the code underlying a function by typing its name (without brackets) in the console and hitting "enter".
 
 ## Why use functions?
 
@@ -369,6 +367,13 @@ Now the function is ready to use:
 colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pink")
 pick_a_colour(colours)
 ```
+---
+
+You can see the code underlying a function by typing its name (without brackets) in the console and hitting "enter":
+
+```{r}
+pick_a_colour
+```
 
 ## Writing a package
 An alternative is to make your own package to store your functions which you can then use like any other R package. There are a few advantages to this:
@@ -399,5 +404,4 @@ To find out more about writing packages, check out the links under further readi
 ### Misc
 + [Tidyverse style guide](https://style.tidyverse.org/) (has some guidance on choosing function and argument names)
 + [Scoping/environments](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)
-
 
