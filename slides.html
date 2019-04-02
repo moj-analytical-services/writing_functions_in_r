@@ -91,7 +91,7 @@
 
 </article></slide><slide class=""><hgroup><h2>What is a function?</h2></hgroup><article  id="what-is-a-function" class="smaller ">
 
-<p>Functions are a way to package up bits of code to make them easy to reuse. Base R includes numerous built-in functions and there are thousands more R functions in packages available on CRAN and elsewhere.</p>
+<p>Functions are a way to bundle up bits of code to make them easy to reuse. Base R includes numerous built-in functions and there are thousands more R functions in packages available on CRAN and elsewhere.</p>
 
 <p>Here is an example of one of the built-in R functions, <code>sum()</code>:</p>
 
@@ -101,8 +101,6 @@ sum_x &lt;- sum(x) # Sum the numbers contained in &#39;x&#39;, and save the resu
 <p>You can also write your own functions, called &quot;user-defined functions&quot;.</p>
 
 <p>Functions in a package are the same thing as functions you define yourself, they&#39;re just stored in a different way.</p>
-
-<p>You can see the code underlying a function by typing its name (without brackets) in the console and hitting &quot;enter&quot;.</p>
 
 </article></slide><slide class=""><hgroup><h2>Why use functions?</h2></hgroup><article  id="why-use-functions" class="smaller ">
 
@@ -448,7 +446,23 @@ generalise_names(names)</pre>
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >## [1] &quot;Green&quot;</pre>
+<pre >## [1] &quot;Red&quot;</pre>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
+
+<p>You can see the code underlying a function by typing its name (without brackets) in the console and hitting &quot;enter&quot;:</p>
+
+<pre class = 'prettyprint lang-r'>pick_a_colour</pre>
+
+<pre >## function(colours){
+##   
+##   # Generate a random number between 1 and the number of colours provided
+##   x &lt;- sample(1:length(colours), 1)
+##   
+##   # Print a randomly chosen colour
+##   print(colours[x])
+##   
+## }</pre>
 
 </article></slide><slide class=""><hgroup><h2>Writing a package</h2></hgroup><article  id="writing-a-package" class="smaller ">
 
@@ -492,7 +506,9 @@ pick_a_colour(colours)</pre>
 <ul>
 <li><a href='https://style.tidyverse.org/' title=''>Tidyverse style guide</a> (has some guidance on choosing function and argument names)</li>
 <li><a href='https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html' title=''>Scoping/environments</a></li>
-</ul></article></slide>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Any questions?</h2></hgroup><article  id="any-questions" class="smaller "></article></slide>
 
 
   <slide class="backdrop"></slide>

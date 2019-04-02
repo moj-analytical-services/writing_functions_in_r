@@ -8,3 +8,5 @@ output:
 # Writing functions in R
 ```{r source_content, child = 'content.Rmd'}
 ```
+
+# Any questions?

@@ -192,3 +192,6 @@ source("functions.R")
 colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pink")
 pick_a_colour(colours)
 
+## ------------------------------------------------------------------------
+pick_a_colour
+
