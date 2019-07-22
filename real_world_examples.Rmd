@@ -19,6 +19,10 @@ Here we are reading in the `Prosecutions and Convictions` dataset from s3 and st
 
 ```{r message=F, warning=F}
 cases <- s3tools::s3_path_to_full_df("alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv")
+
+# Filter for Magistrates Court to extract the prosecutions
+cases <- cases %>%
+  filter(`Court.Type` == "Magistrates Court")
 ```
 
 Here's a preview of the data stored in `cases`:
@@ -36,7 +40,7 @@ cases_grouped <- cases %>%
   adorn_totals("row")
 ```
 
-In the above code we are grouping the `cases` dataframe by the categories in the `Age.Range` column, then summarising the number of cases in each of those categories by summing the `Count` column. The bottom line uses a function from the `janitor` package to add a row containing the total number of cases in all categories. The resulting dataframe is saved as a variable called `cases_grouped`. Notice how the `dplyr` functions `group_by()` and `summarise()` require that the column names are not enclosed in quotation marks: this behaviour is known as non-standard evalution, and will be important later.
+In the above code we are grouping the `cases` dataframe by the categories in the `Age.Range` column, then summarising the number of prosecutions in each of those categories by summing the `Count` column. The bottom line uses a function from the `janitor` package to add a row containing the total number of prosecutions in all categories. The resulting dataframe is saved as a variable called `cases_grouped`. Notice how the `dplyr` functions `group_by()` and `summarise()` require that the column names are not enclosed in quotation marks: this behaviour is known as non-standard evalution, and will be important later.
 
 ```{r}
 cases_grouped
@@ -157,7 +161,7 @@ make_line_chart <- function(df, x_col, y_col){
 }
 ```
 
-Let's use the `sum_group()` and `make_line_chart()` functions to produce a plot of the number of cases in each year.
+Let's use the `sum_group()` and `make_line_chart()` functions to produce a plot of the number of prosecutions in each year.
 
 ```{r}
 
