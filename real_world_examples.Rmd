@@ -13,6 +13,7 @@ First of all we need to load a few packages. `s3tools` is an MoJ package designe
 library(s3tools)
 library(dplyr)
 library(janitor)
+library(stringr)
 ```
 
 Here we are reading in the `Prosecutions and Convictions` dataset from s3 and storing the dataframe as a variable called `cases`.
@@ -31,12 +32,111 @@ Here's a preview of the data stored in `cases`:
 head(cases)
 ```
 
+### Exercise 1
+
+Use the `generalise_names()` functions defined above to clean the column headings of this dataset (Hint: use the function `colnames()` to retrieve the column headings of the dataset as a vector).
+
+Solution:
+```{r}
+
+# Re-defining the function until we combine this Rmd file with content.Rmd
+generalise_names <- function(names){
+  names <- tolower(names)
+  names <- stringr::str_trim(names)
+  names <- stringr::str_replace_all(names, " ", "_")
+  names <- stringr::str_replace_all(names, "[^A-Za-z0-9]", "_")
+  names <- stringr::str_replace_all(names, "([_])\\1+", "\\1")
+  names <- stringr::str_replace_all(names, "^\\_+|\\_+$", "")
+  return(names)
+}
+
+colnames(cases) <- generalise_names(colnames(cases))
+
+head(cases)
+
+```
+
+There are some numeric indices in the columns that may be undesirable. We can write a function to remove these
+
+```{r}
+
+remove_indices_from_columns <- function(data){
+
+  # Remove 1 or 2 digits followed by a semicolon for columns that contain strings
+  data <- lapply(data, function(x) { if (is.character(x)) gsub("^\\d{1,2}:", "", x) else x })
+  # Remove 1 or 2 digits followed by a space
+  data <- lapply(data, function(x) { if (is.character(x)) gsub("^\\d{1,2}\\s", "", x) else x })  
+
+  return(data)
+  
+}
+
+cases[] <- remove_indices_from_columns(cases)
+
+head(cases)
+
+```
+
+For the final stage of data cleaning, we can make missing and unknown values more consistent using a function such as the following:
+
+```{r}
+
+clean_not_known <- function(data, not_known_phrase) {
+  
+  # Replace any missing (NA) values
+  data <- data %>% replace(., is.na(.), not_known_phrase)
+  
+  # Create a version of the dataframe with all strings converted to lower
+  # case and any white space at the start or end trimmed. This will make
+  # the following stage easier.
+  data_lowercase <- data
+  data_lowercase[] <- lapply(data_lowercase, tolower)
+  data_lowercase[] <- lapply(data_lowercase, stringr::str_trim)
+  
+  # Replace strings in the data that refer to a missing or unknown values
+  data[data_lowercase == "n/a"] <- not_known_phrase
+  data[data_lowercase == "not known"] <- not_known_phrase
+  data[data_lowercase == "unknown"] <- not_known_phrase
+  data[data_lowercase == "not stated"] <- not_known_phrase
+  
+  return(data)
+  
+}
+
+cases <- clean_not_known(cases, "Not known")
+
+head(cases)
+
+```
+
+### Exercise 2
+
+Write a wrapper function to apply `generalise_names()`, `remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
+
+Solution:
+```{r}
+
+clean_prosec_and_convic <- function(data) {
+  
+  # Clean the column headings
+  colnames(cases) <- generalise_names(colnames(cases))
+  # Remove numeric indices from columns
+  cases[] <- remove_indices_from_columns(cases)
+  # Make missing/unknown value entries more consistent
+  cases <- clean_not_known(cases, "Not known")
+  
+  return(cases)
+  
+}
+
+```
+
 Let's say we wanted to create a summary table showing the number of people prosecuted in different age bands. We could do:
 
 ```{r}
 cases_grouped <- cases %>%
-  group_by(Age.Range) %>%
-  summarise(counts = sum(Count)) %>% 
+  group_by(age_range) %>%
+  summarise(counts = sum(count)) %>% 
   adorn_totals("row")
 ```
 
@@ -64,7 +164,7 @@ sum_group <- function(df, group_cols, sum_col) {
 However trying to use this function results in an error.
 
 ```{r error = TRUE}
-cases_grouped <- sum_group(df = cases, group_cols = "Age.Range", sum_col = "Count")
+cases_grouped <- sum_group(df = cases, group_cols = "age_range", sum_col = "count")
 ```
 
 This is because of the non-standard evalutation (NSE) mentioned above. The `dplyr` functions don't recognise `group_cols` and `sum_col` as column names, because they can't see that these are variables containing the actual column names. While the NSE usually makes the `dplyr` functions more convenient to use, it makes them slightly trickier to use in user-defined functions. 
@@ -84,7 +184,7 @@ sum_group <- function(df, group_cols, sum_col) {
   
 }
 
-cases_grouped <- sum_group(df = cases, group_cols = "Age.Range", sum_col = "Count")
+cases_grouped <- sum_group(df = cases, group_cols = "age_range", sum_col = "count")
 
 cases_grouped
 
@@ -105,7 +205,7 @@ sum_group <- function(df, group_cols, sum_col) {
   
 }
 
-cases_grouped <- sum_group(df = cases, group_cols = "Age.Range", sum_col = "Count")
+cases_grouped <- sum_group(df = cases, group_cols = "age_range", sum_col = "count")
 
 cases_grouped
 
@@ -129,7 +229,7 @@ sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
 }
 
-cases_grouped <- sum_group(df = cases, group_cols = "Age.Range", sum_col = "Count", add_total=F)
+cases_grouped <- sum_group(df = cases, group_cols = "age_range", sum_col = "count", add_total=F)
 
 cases_grouped
 
@@ -140,8 +240,8 @@ The `sum_group()` function also allows us to add any number of grouping columns:
 ```{r}
 
 cases_grouped <- sum_group(df = cases, 
-                           group_cols = c("Age.Range", "Offence.Group"), 
-                           sum_col = "Count",
+                           group_cols = c("year", "offence_group"), 
+                           sum_col = "count",
                            add_total=T)
 
 head(cases_grouped)
@@ -166,10 +266,10 @@ Let's use the `sum_group()` and `make_line_chart()` functions to produce a plot 
 ```{r}
 
 time_series <- sum_group(df = cases, 
-                         group_cols = c("Year"), 
-                         sum_col = "Count")
+                         group_cols = c("year"), 
+                         sum_col = "count")
 
-make_line_chart(time_series, x="Year", y="counts")
+make_line_chart(time_series, x="year", y="counts")
 
 ```
 
@@ -177,12 +277,8 @@ make_line_chart(time_series, x="Year", y="counts")
 More ideas -
 
 - A graph where you can vary which offence is plotted and/or whether it plots “Offence Type” or “Offence Group” (though this probably would have to use NSE)
-- Data cleaning stuff, e.g. removing the “01: ” etc from the start of the categories (you could then reuse the function on each of the columns)
-- Your `generalised_names()` function would work well for cleaning the column names of the CSV
-- As an example of calling functions within functions is we could have a `clean_prosecutions_and_convictions()` function which uses some of the above
 - Function which pulls out the most recent year and quarter in the data?
-- A function which makes a table broken down by different variables. E.g. # defendants prosecuted by ethnicity & year; offence & year etc
-- Custom function which replaces not known values with NA or some other consistent value? E.g. ’04: Not known’, ’05: Not known’, ’12: Not known (Juvenile)’ etc
+
 
 
 
