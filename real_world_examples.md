@@ -82,6 +82,7 @@ retrieve the column headings of the dataset as a vector).
 Solution:
 
 ``` r
+# Re-defining the function until we combine this Rmd file with content.Rmd
 generalise_names <- function(names){
   names <- tolower(names)
   names <- stringr::str_trim(names)
@@ -189,8 +190,8 @@ head(cases)
     ## 5                  Found guilty    10
     ## 6  Proceedings terminated early     1
 
-For the final cleaning stage, we can make missing and unknown values
-more consistent using the following function:
+For the final stage of data cleaning, we can make missing and unknown
+values more consistent using a function such as the following:
 
 ``` r
 clean_not_known <- function(data, not_known_phrase) {
@@ -520,10 +521,69 @@ make_line_chart(time_series, x="year", y="counts")
 
 ![](real_world_examples_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
+Often processing data requires manipulating dates and times. For
+example, if we wanted to extract the prosecutions in a particular
+year/quarter based on a given date, we could use a function like:
+
+``` r
+extract_quarter <- function(data, date) {
+  
+  # Convert the format from a string to a date
+  date <- as.Date(date, format="%d-%b-%Y")
+  
+  # Get the year and quarter based on the date
+  this_year <- format(date, "%Y")
+  this_quarter <- quarters(date)
+  
+  data <- data %>%
+    filter(year == this_year,
+           quarter == this_quarter)
+  
+}
+
+cases_extract <- extract_quarter(cases, "31-Mar-2018")
+
+head(cases_extract)
+```
+
+    ##   year quarter   sex type_of_defendent  age_group age_range ethnicity
+    ## 1 2018      Q1  Male            Person  Juveniles     10-11     White
+    ## 2 2018      Q1  Male            Person  Juveniles     10-11     White
+    ## 3 2018      Q1  Male            Person  Juveniles     10-11     White
+    ## 4 2018      Q1  Male            Person  Juveniles     10-11     Black
+    ## 5 2018      Q1  Male            Person  Juveniles     10-11 Not known
+    ## 6 2018      Q1  Male            Person  Juveniles     10-11 Not known
+    ##          court_type       offence_type             offence_group
+    ## 1 Magistrates Court    Indictable only                   Robbery
+    ## 2 Magistrates Court Triable either way            Theft Offences
+    ## 3 Magistrates Court Triable either way Criminal damage and arson
+    ## 4 Magistrates Court Triable either way     Possession of weapons
+    ## 5 Magistrates Court    Indictable only                   Robbery
+    ## 6 Magistrates Court    Indictable only Criminal damage and arson
+    ##                         tried plea_at_the_crown_court
+    ## 1  Tried at magistrates court               Not known
+    ## 2                   Not tried               Not known
+    ## 3                   Not tried               Not known
+    ## 4  Tried at magistrates court               Not known
+    ## 5  Tried at magistrates court               Not known
+    ## 6  Tried at magistrates court               Not known
+    ##   convicted_not_convicted sentenced_not_sentenced
+    ## 1               Convicted               Sentenced
+    ## 2           Not convicted           Not sentenced
+    ## 3           Not convicted           Not sentenced
+    ## 4               Convicted               Sentenced
+    ## 5               Convicted               Sentenced
+    ## 6               Convicted               Sentenced
+    ##                         outcome count
+    ## 1                  Found guilty     1
+    ## 2  Proceedings terminated early     2
+    ## 3  Proceedings terminated early     1
+    ## 4                  Found guilty     1
+    ## 5                  Found guilty     1
+    ## 6                  Found guilty     1
+
 More ideas -
 
   - A graph where you can vary which offence is plotted and/or whether
     it plots “Offence Type” or “Offence Group” (though this probably
     would have to use NSE)
-  - Function which pulls out the most recent year and quarter in the
-    data?

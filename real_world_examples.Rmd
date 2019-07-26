@@ -274,10 +274,35 @@ make_line_chart(time_series, x="year", y="counts")
 ```
 
 
+Often processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions in a particular year/quarter based on a given date, we could use a function like:
+
+```{r}
+
+extract_quarter <- function(data, date) {
+  
+  # Convert the format from a string to a date
+  date <- as.Date(date, format="%d-%b-%Y")
+  
+  # Get the year and quarter based on the date
+  this_year <- format(date, "%Y")
+  this_quarter <- quarters(date)
+  
+  data <- data %>%
+    filter(year == this_year,
+           quarter == this_quarter)
+  
+}
+
+cases_extract <- extract_quarter(cases, "31-Mar-2018")
+
+head(cases_extract)
+
+```
+
+
 More ideas -
 
 - A graph where you can vary which offence is plotted and/or whether it plots “Offence Type” or “Offence Group” (though this probably would have to use NSE)
-- Function which pulls out the most recent year and quarter in the data?
 
 
 
