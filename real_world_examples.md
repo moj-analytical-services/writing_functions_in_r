@@ -3,14 +3,20 @@
 
 This section builds on material covered in the [Intro R
 Training](https://github.com/moj-analytical-services/IntroRTraining)
-course. The `dplyr` package is a commonly used R package for data
-manipulation, such as creating summary tables.
+course and makes use of the `dplyr` package, which is a commonly used R
+package for data manipulation. In the following examples we’ll see how
+user-defined functions can be used to help with cleaning, summarising,
+and plotting data. The data we’ll use is from the Criminal Justice
+System Statistics quarterly publication from December 2018, which can be
+found
+[here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
 
 First of all we need to load a few packages. `s3tools` is an MoJ package
 designed to interact with Amazon s3 - we will need this to help read in
 some data from an s3 bucket. `dplyr` is the package we’ll use to create
 summary tables from the data. `janitor` is another useful package that
-can be used to help clean data.
+can be used to help clean data. Finally `stringr` contains functions
+that can be used to manipulate strings.
 
 ``` r
 # Load packages
@@ -21,20 +27,20 @@ library(stringr)
 ```
 
 Here we are reading in the `Prosecutions and Convictions` dataset from
-s3 and storing the dataframe as a variable called `cases`.
+s3 and storing the dataframe as a variable called `prosecutions`.
 
 ``` r
-cases <- s3tools::s3_path_to_full_df("alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv")
+prosecutions <- s3tools::s3_path_to_full_df("alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv")
 
 # Filter for Magistrates Court to extract the prosecutions
-cases <- cases %>%
+prosecutions <- prosecutions %>%
   filter(`Court.Type` == "Magistrates Court")
 ```
 
-Here’s a preview of the data stored in `cases`:
+Here’s a preview of the data stored in `prosecutions`:
 
 ``` r
-head(cases)
+head(prosecutions)
 ```
 
     ##   Year Quarter      Sex Type.of.Defendent     Age.Group Age.Range
@@ -73,11 +79,13 @@ head(cases)
     ## 5             01: Sentenced                 07: Found guilty    10
     ## 6         02: Not sentenced 01: Proceedings terminated early     1
 
-### Exercise 1
+### Cleaning data
 
-Use the `generalise_names()` functions defined above to clean the column
-headings of this dataset (Hint: use the function `colnames()` to
-retrieve the column headings of the dataset as a vector).
+> #### Exercise 1
+> 
+> Use the `generalise_names()` function defined above to clean the
+> column headings of this dataset (Hint: use the function `colnames()`
+> to retrieve the column headings of the dataset as a vector).
 
 Solution:
 
@@ -93,9 +101,9 @@ generalise_names <- function(names){
   return(names)
 }
 
-colnames(cases) <- generalise_names(colnames(cases))
+colnames(prosecutions) <- generalise_names(colnames(prosecutions))
 
-head(cases)
+head(prosecutions)
 ```
 
     ##   year quarter      sex type_of_defendent     age_group age_range
@@ -149,9 +157,9 @@ remove_indices_from_columns <- function(data){
   
 }
 
-cases[] <- remove_indices_from_columns(cases)
+prosecutions[] <- remove_indices_from_columns(prosecutions)
 
-head(cases)
+head(prosecutions)
 ```
 
     ##   year quarter   sex type_of_defendent  age_group age_range ethnicity
@@ -216,9 +224,9 @@ clean_not_known <- function(data, not_known_phrase) {
   
 }
 
-cases <- clean_not_known(cases, "Not known")
+prosecutions <- clean_not_known(prosecutions, "Not known")
 
-head(cases)
+head(prosecutions)
 ```
 
     ##   year quarter   sex type_of_defendent  age_group age_range ethnicity
@@ -257,10 +265,11 @@ head(cases)
     ## 5                  Found guilty    10
     ## 6  Proceedings terminated early     1
 
-### Exercise 2
-
-Write a wrapper function to apply `generalise_names()`,
-`remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
+> #### Exercise 2
+> 
+> Write a wrapper function to apply `generalise_names()`,
+> `remove_indices_from_columns()`, and `clean_not_known()` to the
+> dataset.
 
 Solution:
 
@@ -268,40 +277,42 @@ Solution:
 clean_prosec_and_convic <- function(data) {
   
   # Clean the column headings
-  colnames(cases) <- generalise_names(colnames(cases))
+  colnames(data) <- generalise_names(colnames(data))
   # Remove numeric indices from columns
-  cases[] <- remove_indices_from_columns(cases)
+  data[] <- remove_indices_from_columns(data)
   # Make missing/unknown value entries more consistent
-  cases <- clean_not_known(cases, "Not known")
+  data <- clean_not_known(data, "Not known")
   
-  return(cases)
+  return(data)
   
 }
 ```
+
+### Summarising data
 
 Let’s say we wanted to create a summary table showing the number of
 people prosecuted in different age bands. We could do:
 
 ``` r
-cases_grouped <- cases %>%
-  group_by(age_range) %>%
-  summarise(counts = sum(count)) %>% 
-  adorn_totals("row")
+prosecutions_grouped <- prosecutions %>%
+  dplyr::group_by(age_range) %>%
+  dplyr::summarise(counts = sum(count)) %>% 
+  janitor::adorn_totals("row")
 ```
 
-In the above code we are grouping the `cases` dataframe by the
-categories in the `Age.Range` column, then summarising the number of
-prosecutions in each of those categories by summing the `Count` column.
+In the above code we are grouping the `prosecutions` dataframe by the
+categories in the `age_range` column, then summarising the number of
+prosecutions in each of those categories by summing the `count` column.
 The bottom line uses a function from the `janitor` package to add a row
 containing the total number of prosecutions in all categories. The
-resulting dataframe is saved as a variable called `cases_grouped`.
-Notice how the `dplyr` functions `group_by()` and `summarise()` require
-that the column names are not enclosed in quotation marks: this
-behaviour is known as non-standard evalution, and will be important
-later.
+resulting dataframe is saved as a variable called
+`prosecutions_grouped`. Notice how the `dplyr` functions `group_by()`
+and `summarise()` require that the column names are not enclosed in
+quotation marks: this behaviour is known as non-standard evalution, and
+will be important later.
 
 ``` r
-cases_grouped
+prosecutions_grouped
 ```
 
     ##                       age_range   counts
@@ -330,9 +341,9 @@ work:
 sum_group <- function(df, group_cols, sum_col) {
   
   summary <- df %>%
-    group_by(group_cols) %>%
-    summarise(counts = sum(sum_col)) %>% 
-    adorn_totals("row")
+    dplyr::group_by(group_cols) %>%
+    dplyr::summarise(counts = sum(sum_col)) %>% 
+    janitor::adorn_totals("row")
   
   return(summary)
   
@@ -342,7 +353,7 @@ sum_group <- function(df, group_cols, sum_col) {
 However trying to use this function results in an error.
 
 ``` r
-cases_grouped <- sum_group(df = cases, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
 ```
 
     ## Error: Column `group_cols` is unknown
@@ -363,17 +374,17 @@ names. The function below shows an example of how the functions
 sum_group <- function(df, group_cols, sum_col) {
   
   summary <- df %>%
-    group_by_at(group_cols) %>%
-    summarise_at(sum_col, sum) %>% 
-    adorn_totals("row")
+    dplyr::group_by_at(group_cols) %>%
+    dplyr::summarise_at(sum_col, sum) %>% 
+    janitor::adorn_totals("row")
   
   return(summary)
   
 }
 
-cases_grouped <- sum_group(df = cases, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
 
-cases_grouped
+prosecutions_grouped
 ```
 
     ##                       age_range    count
@@ -402,17 +413,17 @@ like so:
 sum_group <- function(df, group_cols, sum_col) {
   
   summary <- df %>%
-    group_by(!!as.name(group_cols)) %>%
-    summarise(counts = sum(!!as.name(sum_col))) %>% 
-    adorn_totals("row")
+    dplyr::group_by(!!as.name(group_cols)) %>%
+    dplyr::summarise(counts = sum(!!as.name(sum_col))) %>% 
+    janitor::adorn_totals("row")
   
   return(summary)
   
 }
 
-cases_grouped <- sum_group(df = cases, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
 
-cases_grouped
+prosecutions_grouped
 ```
 
     ##                       age_range   counts
@@ -438,20 +449,20 @@ We can make this function more general by making the total row optional:
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%
-    group_by_at(group_cols) %>%
-    summarise(counts = sum(!!as.name(sum_col)))
+    dplyr::group_by_at(group_cols) %>%
+    dplyr::summarise(counts = sum(!!as.name(sum_col)))
   
   if (add_total == T) {
-    summary <- summary %>% adorn_totals("row")
+    summary <- summary %>% janitor::adorn_totals("row")
   }
   
   return(summary)
   
 }
 
-cases_grouped <- sum_group(df = cases, group_cols = "age_range", sum_col = "count", add_total=F)
+prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count", add_total = F)
 
-cases_grouped
+prosecutions_grouped
 ```
 
     ## # A tibble: 14 x 2
@@ -476,12 +487,12 @@ The `sum_group()` function also allows us to add any number of grouping
 columns:
 
 ``` r
-cases_grouped <- sum_group(df = cases, 
-                           group_cols = c("year", "offence_group"), 
-                           sum_col = "count",
-                           add_total=T)
+prosecutions_grouped <- sum_group(df = prosecutions, 
+                                  group_cols = c("year", "offence_group"), 
+                                  sum_col = "count",
+                                  add_total = T)
 
-head(cases_grouped)
+head(prosecutions_grouped)
 ```
 
     ##  year                        offence_group counts
@@ -492,16 +503,18 @@ head(cases_grouped)
     ##  2008                Possession of weapons  17968
     ##  2008                Public order offences  10465
 
-Here’s another example: say we want to produce some plots, and want them
-all to have the same style. We can define the style of the plot in a
-function, then we only have to change the styling in one place if it
-needs changing. Here we’ve gone for a line chart with a red line.
+### Plotting data
+
+Let’s say we want to produce some plots, and want them all to have the
+same style. We can define the style of the plot in a function, then we
+only have to change the styling in one place if it needs changing. Here
+we’ve gone for a line chart with a red line.
 
 ``` r
 make_line_chart <- function(df, x_col, y_col){
   
-  x <- df %>% pull(x_col)
-  y <- df %>% pull(y_col)
+  x <- df %>% dplyr::pull(x_col)
+  y <- df %>% dplyr::pull(y_col)
   
   plot(x, y, col='red', type='l', xlab=x_col, ylab=y_col)
   
@@ -509,10 +522,10 @@ make_line_chart <- function(df, x_col, y_col){
 ```
 
 Let’s use the `sum_group()` and `make_line_chart()` functions to produce
-a plot of the number of prosecutions in each year.
+a plot of the total number of prosecutions in each year.
 
 ``` r
-time_series <- sum_group(df = cases, 
+time_series <- sum_group(df = prosecutions, 
                          group_cols = c("year"), 
                          sum_col = "count")
 
@@ -520,6 +533,8 @@ make_line_chart(time_series, x="year", y="counts")
 ```
 
 ![](real_world_examples_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+
+### Extracting a subset of the data
 
 Often processing data requires manipulating dates and times. For
 example, if we wanted to extract the prosecutions in a particular
@@ -536,14 +551,14 @@ extract_quarter <- function(data, date) {
   this_quarter <- quarters(date)
   
   data <- data %>%
-    filter(year == this_year,
-           quarter == this_quarter)
+    dplyr::filter(year == this_year,
+                  quarter == this_quarter)
   
 }
 
-cases_extract <- extract_quarter(cases, "31-Mar-2018")
+prosecutions_extract <- extract_quarter(prosecutions, "31-Mar-2018")
 
-head(cases_extract)
+head(prosecutions_extract)
 ```
 
     ##   year quarter   sex type_of_defendent  age_group age_range ethnicity
@@ -582,8 +597,8 @@ head(cases_extract)
     ## 5                  Found guilty     1
     ## 6                  Found guilty     1
 
-More ideas -
-
-  - A graph where you can vary which offence is plotted and/or whether
-    it plots “Offence Type” or “Offence Group” (though this probably
-    would have to use NSE)
+> More ideas -
+> 
+>   - A graph where you can vary which offence is plotted and/or whether
+>     it plots “Offence Type” or “Offence Group” (though this probably
+>     would have to use NSE)
