@@ -405,23 +405,23 @@ prosecutions_grouped
     ##                           Total 16686560
 
 If you still wanted to use the `group_by` and `summarise` functions in a
-user-defined function, then variables containing the column names can be
-enclosed by `!!as.name()` to convert them into straight column names,
+user-defined function, then variables containing the column names as
+strings can be enclosed by `!!as.name()` to convert them into names,
 like so:
 
 ``` r
-sum_group <- function(df, group_cols, sum_col) {
-  
+sum_group_alt1 <- function(df, group_cols, sum_col) {
+
   summary <- df %>%
     dplyr::group_by(!!as.name(group_cols)) %>%
-    dplyr::summarise(counts = sum(!!as.name(sum_col))) %>% 
+    dplyr::summarise(counts = sum(!!as.name(sum_col))) %>%
     janitor::adorn_totals("row")
-  
+
   return(summary)
-  
+
 }
 
-prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group_alt1(df = prosecutions, group_cols = "age_range", sum_col = "count")
 
 prosecutions_grouped
 ```
@@ -443,14 +443,52 @@ prosecutions_grouped
     ##            Not known (Juvenile)      150
     ##                           Total 16686560
 
-We can make this function more general by making the total row optional:
+Alternatively, this version of the function means the column names can
+be input as function arguments directly (rather than needing to enclose
+them in quote marks to turn them into strings).
+
+``` r
+sum_group_alt2 <- function(df, group_cols, sum_col) {
+
+  summary <- df %>%
+    dplyr::group_by(!!enquo(group_cols)) %>%
+    dplyr::summarise(counts = sum(!!enquo(sum_col))) %>%
+    janitor::adorn_totals("row")
+
+  return(summary)
+
+}
+
+prosecutions_grouped <- sum_group_alt2(df = prosecutions, group_cols = age_range, sum_col = count)
+
+prosecutions_grouped
+```
+
+    ##                       age_range   counts
+    ##                           10-11     3324
+    ##                           12-14   113960
+    ##                           15-17   570275
+    ##                           18-20  1302589
+    ##                           21-24  2131033
+    ##            25-29 (2017 onwards)   447108
+    ##             25+ (prior to 2017) 10209264
+    ##            30-39 (2017 onwards)   758230
+    ##            40-49 (2017 onwards)   477217
+    ##            50-59 (2017 onwards)   261626
+    ##              60+ (2017 onwards)   101554
+    ##   Companies, public bodies etc.   114771
+    ##               Not known (Adult)   195459
+    ##            Not known (Juvenile)      150
+    ##                           Total 16686560
+
+We can make the function more general by making the total row optional:
 
 ``` r
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%
     dplyr::group_by_at(group_cols) %>%
-    dplyr::summarise(counts = sum(!!as.name(sum_col)))
+    dplyr::summarise_at(sum_col, sum)
   
   if (add_total == T) {
     summary <- summary %>% janitor::adorn_totals("row")
@@ -466,7 +504,7 @@ prosecutions_grouped
 ```
 
     ## # A tibble: 14 x 2
-    ##    age_range                          counts
+    ##    age_range                           count
     ##    <chr>                               <int>
     ##  1 " 10-11"                             3324
     ##  2 " 12-14"                           113960
@@ -495,13 +533,13 @@ prosecutions_grouped <- sum_group(df = prosecutions,
 head(prosecutions_grouped)
 ```
 
-    ##  year                        offence_group counts
-    ##  2008            Criminal damage and arson  11278
-    ##  2008                        Drug offences  56953
-    ##  2008                       Fraud Offences  16262
-    ##  2008 Miscellaneous crimes against society  71652
-    ##  2008                Possession of weapons  17968
-    ##  2008                Public order offences  10465
+    ##  year                        offence_group count
+    ##  2008            Criminal damage and arson 11278
+    ##  2008                        Drug offences 56953
+    ##  2008                       Fraud Offences 16262
+    ##  2008 Miscellaneous crimes against society 71652
+    ##  2008                Possession of weapons 17968
+    ##  2008                Public order offences 10465
 
 ### Plotting data
 
@@ -526,13 +564,13 @@ a plot of the total number of prosecutions in each year.
 
 ``` r
 time_series <- sum_group(df = prosecutions, 
-                         group_cols = c("year"), 
+                         group_cols = "year", 
                          sum_col = "count")
 
-make_line_chart(time_series, x="year", y="counts")
+make_line_chart(time_series, x="year", y="count")
 ```
 
-![](real_world_examples_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](real_world_examples_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 ### Extracting a subset of the data
 

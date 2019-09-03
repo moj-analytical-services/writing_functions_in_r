@@ -59,7 +59,7 @@ head(prosecutions)
 
 ```
 
-There are some numeric indices in the columns that may be undesirable. We can write a function to remove these
+There are some numeric indices in the columns that may be undesirable. We can write a function to remove these:
 
 ```{r}
 
@@ -79,6 +79,8 @@ prosecutions[] <- remove_indices_from_columns(prosecutions)
 head(prosecutions)
 
 ```
+
+This function uses `lapply()` to apply a function to all columns in the dataframe. Here we've used an "anonymous function" as the second argument of `lapply()`, which is a single-use function that doesn't have a name.
 
 For the final stage of data cleaning, we can make missing and unknown values more consistent using a function such as the following:
 
@@ -195,47 +197,7 @@ prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", s
 prosecutions_grouped
 
 ```
-
-If you still wanted to use the `group_by` and `summarise` functions in a user-defined function, then variables containing the column names as strings can be enclosed by `!!as.name()` to convert them into names, like so:
-
-```{r}
-
-sum_group_alt1 <- function(df, group_cols, sum_col) {
-
-  summary <- df %>%
-    dplyr::group_by(!!as.name(group_cols)) %>%
-    dplyr::summarise(counts = sum(!!as.name(sum_col))) %>%
-    janitor::adorn_totals("row")
-
-  return(summary)
-
-}
-
-prosecutions_grouped <- sum_group_alt1(df = prosecutions, group_cols = "age_range", sum_col = "count")
-
-prosecutions_grouped
-
-```
-
-Alternatively, this version of the function means the column names can be input as function arguments directly (rather than needing to enclose them in quote marks to turn them into strings).
-
-```{r}
-sum_group_alt2 <- function(df, group_cols, sum_col) {
-
-  summary <- df %>%
-    dplyr::group_by(!!enquo(group_cols)) %>%
-    dplyr::summarise(counts = sum(!!enquo(sum_col))) %>%
-    janitor::adorn_totals("row")
-
-  return(summary)
-
-}
-
-prosecutions_grouped <- sum_group_alt2(df = prosecutions, group_cols = age_range, sum_col = count)
-
-prosecutions_grouped
-
-```
+The way that the tidyverse packages handle NSE is still evolving, so new methods of addressing this issue may be introduced in the future. See the appendix for some examples of alternative methods to tackle this problem.
 
 We can make the function more general by making the total row optional:
 
@@ -329,12 +291,5 @@ prosecutions_extract <- extract_quarter(prosecutions, "31-Mar-2018")
 head(prosecutions_extract)
 
 ```
-
-
-> More ideas -
->
-> - A graph where you can vary which offence is plotted and/or whether it plots “Offence Type” or “Offence Group” (though this probably would have to use NSE)
-
-
 
 
