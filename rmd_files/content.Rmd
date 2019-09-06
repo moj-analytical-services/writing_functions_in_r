@@ -282,13 +282,51 @@ plot_x_and_y(x, y, col='red', type='l')
 
 ```
 
-## Example 9: a "real-world" example
+# "Real-world" example functions
 
-Here's a less trivial example - this function takes a vector of strings as the argument, ensures all letters in the string vector are lower-case, and makes use of "regular expressions" or "regex" to find and replace all spaces and punctuation marks with an underscore:
+This section builds on material covered in the [Intro R Training](https://github.com/moj-analytical-services/IntroRTraining) course and makes use of the `dplyr` package, which is a commonly used R package for data manipulation. In the following examples we'll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we'll use is from the Criminal Justice System Statistics quarterly publication from December 2018, which can be found [here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
+
+---
+
+## Loading packages and data
+
+First of all we need to load a few packages. `s3tools` is an MoJ package designed to interact with Amazon s3 - we will need this to help read in some data from an s3 bucket. `dplyr` is the package we'll use to create summary tables from the data. Finally `stringr` contains functions that can be used to manipulate strings.
+
+```{r message=F, warning=F}
+# Load packages
+library(s3tools)
+library(dplyr)
+library(stringr)
+```
+
+Here we are reading in the `Prosecutions and Convictions` dataset from s3 and storing the dataframe as a variable called `prosecutions`.
+
+```{r message=F, warning=F}
+prosecutions <- s3tools::s3_path_to_full_df(
+  "alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv")
+
+# Filter for Magistrates Court to extract the prosecutions
+prosecutions <- prosecutions %>%
+  filter(`Court.Type` == "Magistrates Court")
+```
+
+---
+
+Here's a preview of the data stored in `prosecutions`:
+
+```{r}
+head(prosecutions)
+```
+
+
+## Cleaning data
+
+After reading in a dataframe it can often be helpful to standardise the column headings. Below is an example of a function that could be used for this purpose. It takes a vector of strings as the argument, ensures all letters in the string vector are lower-case, and makes use of "regular expressions" or "regex" to find and replace all spaces and punctuation marks with an underscore:
 
 ```{r}
 
 generalise_names <- function(names){
+  
   # Convert any uppercase letters to lowercase
   names <- tolower(names)
   # Trim any blank spaces at the start or end of each string
@@ -301,13 +339,275 @@ generalise_names <- function(names){
   names <- stringr::str_replace_all(names, "([_])\\1+", "\\1")
   # Remove any underscores at the beginning or end of the string
   names <- stringr::str_replace_all(names, "^\\_+|\\_+$", "")
+  
   return(names)
+  
 }
+
+```
+
+---
+
+Here is a demonstration of how functions such as this can be useful:
+
+```{r}
 
 names <- c("Option 1", "   Option (1)", "Option: 1", "option 1", "OPTION - 1")
 generalise_names(names)
 
 ```
+
+### Exercise 1
+
+Use the `generalise_names()` function defined above to clean the column headings of this dataset (Hint: use the function `colnames()` to retrieve the column headings of the dataset as a vector).
+
+---
+
+```{r, include=show_solution, purl=FALSE}
+
+# Solution
+
+colnames(prosecutions) <- generalise_names(colnames(prosecutions))
+head(prosecutions)
+
+```
+---
+
+There are some numeric indices in the columns that may be undesirable. We can write a function to remove these:
+
+```{r}
+
+remove_indices_from_columns <- function(data){
+
+  # Remove 1 or 2 digits followed by a semicolon for columns that contain strings
+  data <- lapply(data, function(x) { if (is.character(x)) gsub("^\\d{1,2}:", "", x) else x })
+  # Remove 1 or 2 digits followed by a space
+  data <- lapply(data, function(x) { if (is.character(x)) gsub("^\\d{1,2}\\s", "", x) else x })  
+
+  return(data)
+  
+}
+
+```
+
+---
+
+```{r}
+prosecutions[] <- remove_indices_from_columns(prosecutions)
+head(prosecutions)
+```
+
+This function uses `lapply()` to apply a function to all columns in the dataframe. Here we've used an "anonymous function" as the second argument of `lapply()`, which is a single-use function that doesn't have a name.
+
+---
+
+For the final stage of data cleaning, we can make missing and unknown values more consistent using a function such as the following:
+
+```{r}
+
+clean_not_known <- function(data, not_known_phrase) {
+  
+  # Replace any missing (NA) values
+  data <- data %>% replace(., is.na(.), not_known_phrase)
+  
+  # Create a version of the dataframe with all strings converted to lower
+  # case and any white space at the start or end trimmed. This will make
+  # the following stage easier.
+  data_lowercase <- data
+  data_lowercase[] <- lapply(data_lowercase, tolower)
+  data_lowercase[] <- lapply(data_lowercase, stringr::str_trim)
+  
+  # Replace strings in the data that refer to a missing or unknown values
+  data[data_lowercase == "n/a"] <- not_known_phrase
+  data[data_lowercase == "not known"] <- not_known_phrase
+  data[data_lowercase == "unknown"] <- not_known_phrase
+  data[data_lowercase == "not stated"] <- not_known_phrase
+  
+  return(data)
+  
+}
+
+```
+
+---
+
+```{r}
+prosecutions <- clean_not_known(prosecutions, "Not known")
+head(prosecutions)
+```
+
+---
+
+### Exercise 2
+
+Write a wrapper function to apply `generalise_names()`, `remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
+
+---
+
+```{r, include=show_solution, purl=FALSE}
+
+# Solution
+
+clean_prosec_and_convic <- function(data) {
+  
+  # Clean the column headings
+  colnames(data) <- generalise_names(colnames(data))
+  # Remove numeric indices from columns
+  data[] <- remove_indices_from_columns(data)
+  # Make missing/unknown value entries more consistent
+  data <- clean_not_known(data, "Not known")
+  
+  return(data)
+  
+}
+
+```
+
+## Summarising data
+
+Let's say we wanted to create a summary table showing the number of people prosecuted in different age bands. We could do:
+
+```{r}
+prosecutions_grouped <- prosecutions %>%
+  dplyr::group_by(age_range) %>%
+  dplyr::summarise(counts = sum(count))
+```
+
+In the above code we are grouping the `prosecutions` dataframe by the categories in the `age_range` column, then summarising the number of prosecutions in each of those categories by summing the `count` column.
+
+The resulting dataframe is saved as a variable called `prosecutions_grouped`.
+
+Notice how the `dplyr` functions `group_by()` and `summarise()` require that the column names are not enclosed in quotation marks: this behaviour is known as non-standard evalution, and will be important later.
+
+---
+
+```{r}
+prosecutions_grouped
+```
+
+---
+
+What if we wanted to create several different summary tables? We could write a function to avoid writing this out each time. Following the previous examples in this course, you might expect this function to work:
+
+```{r error = TRUE}
+sum_group <- function(df, group_cols, sum_col) {
+  
+  summary <- df %>%
+    dplyr::group_by(group_cols) %>%
+    dplyr::summarise(counts = sum(sum_col))
+  
+  return(summary)
+  
+}
+```
+
+However trying to use this function results in an error.
+
+```{r error = TRUE}
+prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
+```
+
+---
+
+This is because of the non-standard evalutation (NSE) mentioned above. The `dplyr` functions don't recognise `group_cols` and `sum_col` as column names, because they can't see that these are variables containing the actual column names. While the NSE usually makes the `dplyr` functions more convenient to use, it makes them slightly trickier to use in user-defined functions. 
+
+Fortunately to get around the NSE problem, functions have been added to the `dplyr` package that accept variables instead of straight column names. The function below shows an example of how the functions `group_by_at` and `summarise_at` can replace `group_by` and `summarise`.
+
+The way that the tidyverse packages handle NSE is still evolving, so new methods of addressing this issue may be introduced in the future. See the appendix for some examples of alternative methods to tackle this problem.
+
+```{r}
+
+sum_group <- function(df, group_cols, sum_col) {
+  
+  summary <- df %>%
+    dplyr::group_by_at(group_cols) %>%
+    dplyr::summarise_at(sum_col, sum)
+  
+  return(summary)
+  
+}
+
+```
+
+---
+
+```{r}
+prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped
+```
+
+---
+
+The `sum_group()` function also allows us to add any number of grouping columns:
+
+```{r}
+
+prosecutions_grouped <- sum_group(df = prosecutions, 
+                                  group_cols = c("year", "offence_group"), 
+                                  sum_col = "count")
+
+head(prosecutions_grouped)
+
+```
+
+## Plotting data
+
+Let's say we want to produce some plots, and want them all to have the same style. We can define the style of the plot in a function, then we only have to change the styling in one place if it needs changing. Here we've gone for a line chart with a red line.
+
+```{r}
+make_line_chart <- function(df, x_col, y_col){
+  
+  x <- df %>% dplyr::pull(x_col)
+  y <- df %>% dplyr::pull(y_col)
+  
+  plot(x, y, col='red', type='l', xlab=x_col, ylab=y_col)
+  
+}
+```
+
+---
+
+Let's use the `sum_group()` and `make_line_chart()` functions to produce a plot of the total number of prosecutions in each year.
+
+```{r}
+
+time_series <- sum_group(df = prosecutions, group_cols = "year", sum_col = "count")
+
+make_line_chart(time_series, x="year", y="count")
+
+```
+
+## Extracting a subset of the data
+
+Often processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions in a particular year/quarter based on a given date, we could use a function like:
+
+```{r}
+
+extract_quarter <- function(data, date) {
+  
+  # Convert the format from a string to a date
+  date <- as.Date(date, format="%d-%b-%Y")
+  
+  # Get the year and quarter based on the date
+  this_year <- format(date, "%Y")
+  this_quarter <- quarters(date)
+  
+  data <- data %>%
+    dplyr::filter(year == this_year,
+                  quarter == this_quarter)
+  
+}
+
+```
+
+---
+
+```{r}
+prosecutions_extract <- extract_quarter(prosecutions, "31-Mar-2018")
+head(prosecutions_extract)
+```
+
+# Hints and tips
 
 ## When to write a function
 
@@ -371,6 +671,7 @@ pick_a_colour(colours)
 ```
 
 ## Writing a package
+
 An alternative is to make your own package to store your functions which you can then use like any other R package. There are a few advantages to this:
 
 + It means you (and others) can access your functions from different projects
@@ -399,5 +700,4 @@ To find out more about writing packages, check out the links under further readi
 ### Misc
 + [Tidyverse style guide](https://style.tidyverse.org/) (has some guidance on choosing function and argument names)
 + [Scoping/environments](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)
-
 
