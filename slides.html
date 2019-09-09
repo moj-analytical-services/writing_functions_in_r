@@ -3381,75 +3381,59 @@ y &lt;- (1:10) * 2</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>&ldquo;Real-world&rdquo; example functions</h2></hgroup><article  class="smaller " id="real-world-example-functions">
 
-<p>This section builds on material covered in the <a href='https://github.com/moj-analytical-services/IntroRTraining' title=''>Intro R Training</a> course and makes use of the <code>dplyr</code> package, which is a commonly used R package for data manipulation. In the following examples we’ll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we’ll use is from the Criminal Justice System Statistics quarterly publication from December 2018, which can be found <a href='https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018' title=''>here</a>.</p>
+<p>This section builds on material covered in the <a href='https://github.com/moj-analytical-services/IntroRTraining' title=''>Intro R Training</a> course and makes use of the <code>dplyr</code> package, which is a commonly used R package for data manipulation. In the following examples we’ll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we’ll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found <a href='https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018' title=''>here</a>.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
 </article></slide><slide class=""><hgroup><h2>Loading packages and data</h2></hgroup><article  class="smaller " id="loading-packages-and-data">
 
-<p>First of all we need to load a few packages. <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we will need this to help read in some data from an s3 bucket. <code>dplyr</code> is the package we’ll use to create summary tables from the data. Finally <code>stringr</code> contains functions that can be used to manipulate strings.</p>
+<p>First of all we need to load a few packages: • <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we will need this to help read in some data from an s3 bucket.<br/>• <code>dplyr</code> is the package we’ll use to create summary tables from the data. • <code>stringr</code> provides functions that can be used to manipulate strings.<br/>• <code>purrr</code> provides functions to make the use of vectors and user-defined functions easier.</p>
 
 <pre class = 'prettyprint lang-r'># Load packages
 library(s3tools)
 library(dplyr)
-library(stringr)</pre>
+library(stringr)
+library(purrr)</pre>
 
-<p>Here we are reading in the <code>Prosecutions and Convictions</code> dataset from s3 and storing the dataframe as a variable called <code>prosecutions</code>.</p>
+<p>Here we are reading in a copy of the <code>Prosecutions and Convictions</code> dataset from s3 and storing the dataframe as a variable called <code>prosecutions_and_convictions</code>. In the second step we’re filtering the dataset to extract only the prosecutions and saving to another variable, named <code>prosecutions</code>.</p>
 
-<pre class = 'prettyprint lang-r'>prosecutions &lt;- s3tools::s3_path_to_full_df(
+<pre class = 'prettyprint lang-r'>prosecutions_and_convictions &lt;- s3tools::s3_path_to_full_df(
   &quot;alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv&quot;)
 
 # Filter for Magistrates Court to extract the prosecutions
-prosecutions &lt;- prosecutions %&gt;%
+prosecutions &lt;- prosecutions_and_convictions %&gt;%
   filter(`Court.Type` == &quot;Magistrates Court&quot;)</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
 <p>Here’s a preview of the data stored in <code>prosecutions</code>:</p>
 
-<pre class = 'prettyprint lang-r'>head(prosecutions)</pre>
+<pre class = 'prettyprint lang-r'>glimpse(prosecutions)</pre>
 
-<pre >##   Year Quarter      Sex Type.of.Defendent     Age.Group Age.Range
-## 1 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 2 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 3 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 4 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 5 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 6 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-##   Ethnicity        Court.Type          Offence.Type
-## 1       N/A Magistrates Court    01 Indictable only
-## 2       N/A Magistrates Court    01 Indictable only
-## 3       N/A Magistrates Court    01 Indictable only
-## 4       N/A Magistrates Court    01 Indictable only
-## 5       N/A Magistrates Court 02 Triable either way
-## 6       N/A Magistrates Court 02 Triable either way
-##                    Offence.Group                          Tried
-## 1             02 Sexual offences                   5: Not tried
-## 2                     03 Robbery 01: Tried at magistrates court
-## 3                     03 Robbery 01: Tried at magistrates court
-## 4       07 Possession of weapons 01: Tried at magistrates court
-## 5 01 Violence against the person 01: Tried at magistrates court
-## 6 01 Violence against the person                   5: Not tried
-##   Plea.at.the.Crown.Court Convicted..Not.convicted
-## 1                     N/A        02: Not convicted
-## 2                     N/A            01: Convicted
-## 3                     N/A        02: Not convicted
-## 4                     N/A            01: Convicted
-## 5                     N/A            01: Convicted
-## 6                     N/A        02: Not convicted
-##   Sentenced...Not.sentenced                          Outcome Count
-## 1         02: Not sentenced 01: Proceedings terminated early     1
-## 2             01: Sentenced                 07: Found guilty     6
-## 3         02: Not sentenced  03: Dismissed (found not guilty     1
-## 4             01: Sentenced                 07: Found guilty     1
-## 5             01: Sentenced                 07: Found guilty    10
-## 6         02: Not sentenced 01: Proceedings terminated early     1</pre>
+<pre >## Observations: 107,493
+## Variables: 16
+## $ Year                      &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 20…
+## $ Quarter                   &lt;chr&gt; &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q…
+## $ Sex                       &lt;chr&gt; &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;0…
+## $ Type.of.Defendent         &lt;chr&gt; &quot;01: Person&quot;, &quot;01: Person&quot;, &quot;01: Perso…
+## $ Age.Group                 &lt;chr&gt; &quot;01: Juveniles&quot;, &quot;01: Juveniles&quot;, &quot;01:…
+## $ Age.Range                 &lt;chr&gt; &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;01: 10-11&quot;,…
+## $ Ethnicity                 &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/…
+## $ Court.Type                &lt;chr&gt; &quot;Magistrates Court&quot;, &quot;Magistrates Cour…
+## $ Offence.Type              &lt;chr&gt; &quot;01 Indictable only&quot;, &quot;01 Indictable o…
+## $ Offence.Group             &lt;chr&gt; &quot;02 Sexual offences&quot;, &quot;03 Robbery&quot;, &quot;0…
+## $ Tried                     &lt;chr&gt; &quot;5: Not tried&quot;, &quot;01: Tried at magistra…
+## $ Plea.at.the.Crown.Court   &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/…
+## $ Convicted..Not.convicted  &lt;chr&gt; &quot;02: Not convicted&quot;, &quot;01: Convicted&quot;, …
+## $ Sentenced...Not.sentenced &lt;chr&gt; &quot;02: Not sentenced&quot;, &quot;01: Sentenced&quot;, …
+## $ Outcome                   &lt;chr&gt; &quot;01: Proceedings terminated early&quot;, &quot;0…
+## $ Count                     &lt;int&gt; 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15,…</pre>
 
 </article></slide><slide class=""><hgroup><h2>Cleaning data</h2></hgroup><article  class="smaller " id="cleaning-data">
 
 <p>After reading in a dataframe it can often be helpful to standardise the column headings. Below is an example of a function that could be used for this purpose. It takes a vector of strings as the argument, ensures all letters in the string vector are lower-case, and makes use of &ldquo;regular expressions&rdquo; or &ldquo;regex&rdquo; to find and replace all spaces and punctuation marks with an underscore:</p>
 
-<pre class = 'prettyprint lang-r'>generalise_names &lt;- function(names){
+<pre class = 'prettyprint lang-r'>generalise_names &lt;- function(names) {
   
   # Convert any uppercase letters to lowercase
   names &lt;- tolower(names)
@@ -3486,168 +3470,116 @@ generalise_names(names)</pre>
 <pre class = 'prettyprint lang-r'># Solution
 
 colnames(prosecutions) &lt;- generalise_names(colnames(prosecutions))
-head(prosecutions)</pre>
+glimpse(prosecutions)</pre>
 
-<pre >##   year quarter      sex type_of_defendent     age_group age_range
-## 1 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 2 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 3 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 4 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 5 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 6 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-##   ethnicity        court_type          offence_type
-## 1       N/A Magistrates Court    01 Indictable only
-## 2       N/A Magistrates Court    01 Indictable only
-## 3       N/A Magistrates Court    01 Indictable only
-## 4       N/A Magistrates Court    01 Indictable only
-## 5       N/A Magistrates Court 02 Triable either way
-## 6       N/A Magistrates Court 02 Triable either way
-##                    offence_group                          tried
-## 1             02 Sexual offences                   5: Not tried
-## 2                     03 Robbery 01: Tried at magistrates court
-## 3                     03 Robbery 01: Tried at magistrates court
-## 4       07 Possession of weapons 01: Tried at magistrates court
-## 5 01 Violence against the person 01: Tried at magistrates court
-## 6 01 Violence against the person                   5: Not tried
-##   plea_at_the_crown_court convicted_not_convicted sentenced_not_sentenced
-## 1                     N/A       02: Not convicted       02: Not sentenced
-## 2                     N/A           01: Convicted           01: Sentenced
-## 3                     N/A       02: Not convicted       02: Not sentenced
-## 4                     N/A           01: Convicted           01: Sentenced
-## 5                     N/A           01: Convicted           01: Sentenced
-## 6                     N/A       02: Not convicted       02: Not sentenced
-##                            outcome count
-## 1 01: Proceedings terminated early     1
-## 2                 07: Found guilty     6
-## 3  03: Dismissed (found not guilty     1
-## 4                 07: Found guilty     1
-## 5                 07: Found guilty    10
-## 6 01: Proceedings terminated early     1</pre>
+<pre >## Observations: 107,493
+## Variables: 16
+## $ year                    &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+## $ quarter                 &lt;chr&gt; &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;…
+## $ sex                     &lt;chr&gt; &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01:…
+## $ type_of_defendent       &lt;chr&gt; &quot;01: Person&quot;, &quot;01: Person&quot;, &quot;01: Person&quot;…
+## $ age_group               &lt;chr&gt; &quot;01: Juveniles&quot;, &quot;01: Juveniles&quot;, &quot;01: J…
+## $ age_range               &lt;chr&gt; &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;…
+## $ ethnicity               &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;…
+## $ court_type              &lt;chr&gt; &quot;Magistrates Court&quot;, &quot;Magistrates Court&quot;…
+## $ offence_type            &lt;chr&gt; &quot;01 Indictable only&quot;, &quot;01 Indictable onl…
+## $ offence_group           &lt;chr&gt; &quot;02 Sexual offences&quot;, &quot;03 Robbery&quot;, &quot;03 …
+## $ tried                   &lt;chr&gt; &quot;5: Not tried&quot;, &quot;01: Tried at magistrate…
+## $ plea_at_the_crown_court &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;…
+## $ convicted_not_convicted &lt;chr&gt; &quot;02: Not convicted&quot;, &quot;01: Convicted&quot;, &quot;0…
+## $ sentenced_not_sentenced &lt;chr&gt; &quot;02: Not sentenced&quot;, &quot;01: Sentenced&quot;, &quot;0…
+## $ outcome                 &lt;chr&gt; &quot;01: Proceedings terminated early&quot;, &quot;07:…
+## $ count                   &lt;int&gt; 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
-<p>There are some numeric indices in the columns that may be undesirable. We can write a function to remove these:</p>
+<p>In this dataframe, some of the columns contain values with a number along with a category; for example, the <code>age_group</code> column contains categories like &ldquo;01: Juveniles&rdquo; rather than just &ldquo;Juveniles&rdquo;. These numbers might be undesirable, so we can write a function to remove these:</p>
 
-<pre class = 'prettyprint lang-r'>remove_indices_from_columns &lt;- function(data){
-
-  # Remove 1 or 2 digits followed by a semicolon for columns that contain strings
-  data &lt;- lapply(data, function(x) { if (is.character(x)) gsub(&quot;^\\d{1,2}:&quot;, &quot;&quot;, x) else x })
-  # Remove 1 or 2 digits followed by a space
-  data &lt;- lapply(data, function(x) { if (is.character(x)) gsub(&quot;^\\d{1,2}\\s&quot;, &quot;&quot;, x) else x })  
-
-  return(data)
+<pre class = 'prettyprint lang-r'>remove_numbering &lt;- function(x) {
   
+  # Remove 1 or 2 digits followed by a semicolon
+  x &lt;- stringr::str_replace(x,&quot;^[:digit:]{1,2}[:blank:]*:[:blank:]*&quot;, &quot;&quot;)
+  # Remove 1 or 2 digits followed by a space
+  x &lt;- stringr::str_replace(x,&quot;^[:digit:]{1,2}[:blank:]*&quot;, &quot;&quot;)
+  
+  return(x)
 }</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
-<pre class = 'prettyprint lang-r'>prosecutions[] &lt;- remove_indices_from_columns(prosecutions)
-head(prosecutions)</pre>
+<p>Then we can use the <code>map_if()</code> function from <code>purrr</code> to apply the <code>remove_numbering()</code> function to all columns in the <code>prosecutions</code> dataframe, with the condition that the column must contain strings.</p>
 
-<pre >##   year quarter   sex type_of_defendent  age_group age_range ethnicity
-## 1 2008      Q1  Male            Person  Juveniles     10-11       N/A
-## 2 2008      Q1  Male            Person  Juveniles     10-11       N/A
-## 3 2008      Q1  Male            Person  Juveniles     10-11       N/A
-## 4 2008      Q1  Male            Person  Juveniles     10-11       N/A
-## 5 2008      Q1  Male            Person  Juveniles     10-11       N/A
-## 6 2008      Q1  Male            Person  Juveniles     10-11       N/A
-##          court_type       offence_type               offence_group
-## 1 Magistrates Court    Indictable only             Sexual offences
-## 2 Magistrates Court    Indictable only                     Robbery
-## 3 Magistrates Court    Indictable only                     Robbery
-## 4 Magistrates Court    Indictable only       Possession of weapons
-## 5 Magistrates Court Triable either way Violence against the person
-## 6 Magistrates Court Triable either way Violence against the person
-##                         tried plea_at_the_crown_court
-## 1                   Not tried                     N/A
-## 2  Tried at magistrates court                     N/A
-## 3  Tried at magistrates court                     N/A
-## 4  Tried at magistrates court                     N/A
-## 5  Tried at magistrates court                     N/A
-## 6                   Not tried                     N/A
-##   convicted_not_convicted sentenced_not_sentenced
-## 1           Not convicted           Not sentenced
-## 2               Convicted               Sentenced
-## 3           Not convicted           Not sentenced
-## 4               Convicted               Sentenced
-## 5               Convicted               Sentenced
-## 6           Not convicted           Not sentenced
-##                         outcome count
-## 1  Proceedings terminated early     1
-## 2                  Found guilty     6
-## 3   Dismissed (found not guilty     1
-## 4                  Found guilty     1
-## 5                  Found guilty    10
-## 6  Proceedings terminated early     1</pre>
+<pre class = 'prettyprint lang-r'>prosecutions_cleaned &lt;- purrr::map_if(prosecutions, is.character, remove_numbering) %&gt;% as.data.frame()
+glimpse(prosecutions)</pre>
 
-<p>This function uses <code>lapply()</code> to apply a function to all columns in the dataframe. Here we’ve used an &ldquo;anonymous function&rdquo; as the second argument of <code>lapply()</code>, which is a single-use function that doesn’t have a name.</p>
+<pre >## Observations: 107,493
+## Variables: 16
+## $ year                    &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+## $ quarter                 &lt;chr&gt; &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;…
+## $ sex                     &lt;chr&gt; &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01:…
+## $ type_of_defendent       &lt;chr&gt; &quot;01: Person&quot;, &quot;01: Person&quot;, &quot;01: Person&quot;…
+## $ age_group               &lt;chr&gt; &quot;01: Juveniles&quot;, &quot;01: Juveniles&quot;, &quot;01: J…
+## $ age_range               &lt;chr&gt; &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;…
+## $ ethnicity               &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;…
+## $ court_type              &lt;chr&gt; &quot;Magistrates Court&quot;, &quot;Magistrates Court&quot;…
+## $ offence_type            &lt;chr&gt; &quot;01 Indictable only&quot;, &quot;01 Indictable onl…
+## $ offence_group           &lt;chr&gt; &quot;02 Sexual offences&quot;, &quot;03 Robbery&quot;, &quot;03 …
+## $ tried                   &lt;chr&gt; &quot;5: Not tried&quot;, &quot;01: Tried at magistrate…
+## $ plea_at_the_crown_court &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;…
+## $ convicted_not_convicted &lt;chr&gt; &quot;02: Not convicted&quot;, &quot;01: Convicted&quot;, &quot;0…
+## $ sentenced_not_sentenced &lt;chr&gt; &quot;02: Not sentenced&quot;, &quot;01: Sentenced&quot;, &quot;0…
+## $ outcome                 &lt;chr&gt; &quot;01: Proceedings terminated early&quot;, &quot;07:…
+## $ count                   &lt;int&gt; 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
 <p>For the final stage of data cleaning, we can make missing and unknown values more consistent using a function such as the following:</p>
 
-<pre class = 'prettyprint lang-r'>clean_not_known &lt;- function(data, not_known_phrase) {
+<pre class = 'prettyprint lang-r'>clean_not_known &lt;- function(x,
+                            not_known_phrase = &quot;Not known&quot;,
+                            change_na = TRUE,
+                            values_to_change = c(&quot;n/a&quot;, &quot;not known&quot;, &quot;unknown&quot;, &quot;not stated&quot;)) {
   
   # Replace any missing (NA) values
-  data &lt;- data %&gt;% replace(., is.na(.), not_known_phrase)
+  if(change_na){
+    x &lt;- replace(x, is.na(x), not_known_phrase)
+  }
   
-  # Create a version of the dataframe with all strings converted to lower
-  # case and any white space at the start or end trimmed. This will make
-  # the following stage easier.
-  data_lowercase &lt;- data
-  data_lowercase[] &lt;- lapply(data_lowercase, tolower)
-  data_lowercase[] &lt;- lapply(data_lowercase, stringr::str_trim)
+  # Remove any white space that might cause the strings to not match
+  x &lt;- stringr::str_trim(x)
   
   # Replace strings in the data that refer to a missing or unknown values
-  data[data_lowercase == &quot;n/a&quot;] &lt;- not_known_phrase
-  data[data_lowercase == &quot;not known&quot;] &lt;- not_known_phrase
-  data[data_lowercase == &quot;unknown&quot;] &lt;- not_known_phrase
-  data[data_lowercase == &quot;not stated&quot;] &lt;- not_known_phrase
+  x &lt;- ifelse(tolower(x) %in% values_to_change, not_known_phrase, x)
   
-  return(data)
-  
+  return(x)
+
 }</pre>
+
+<p>In this function we’ve included some default values, so by default missing/NA values are replaced, and any strings that match &ldquo;n/a&rdquo;, &ldquo;not known&rdquo;, &ldquo;unknown&rdquo;, or &ldquo;not stated&rdquo; are replaced. The default replacement value is &ldquo;Not known&rdquo;.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
-<pre class = 'prettyprint lang-r'>prosecutions &lt;- clean_not_known(prosecutions, &quot;Not known&quot;)
-head(prosecutions)</pre>
+<pre class = 'prettyprint lang-r'>prosecutions &lt;- purrr::map_if(prosecutions, is.character, clean_not_known) %&gt;% as.data.frame()
+glimpse(prosecutions)</pre>
 
-<pre >##   year quarter   sex type_of_defendent  age_group age_range ethnicity
-## 1 2008      Q1  Male            Person  Juveniles     10-11 Not known
-## 2 2008      Q1  Male            Person  Juveniles     10-11 Not known
-## 3 2008      Q1  Male            Person  Juveniles     10-11 Not known
-## 4 2008      Q1  Male            Person  Juveniles     10-11 Not known
-## 5 2008      Q1  Male            Person  Juveniles     10-11 Not known
-## 6 2008      Q1  Male            Person  Juveniles     10-11 Not known
-##          court_type       offence_type               offence_group
-## 1 Magistrates Court    Indictable only             Sexual offences
-## 2 Magistrates Court    Indictable only                     Robbery
-## 3 Magistrates Court    Indictable only                     Robbery
-## 4 Magistrates Court    Indictable only       Possession of weapons
-## 5 Magistrates Court Triable either way Violence against the person
-## 6 Magistrates Court Triable either way Violence against the person
-##                         tried plea_at_the_crown_court
-## 1                   Not tried               Not known
-## 2  Tried at magistrates court               Not known
-## 3  Tried at magistrates court               Not known
-## 4  Tried at magistrates court               Not known
-## 5  Tried at magistrates court               Not known
-## 6                   Not tried               Not known
-##   convicted_not_convicted sentenced_not_sentenced
-## 1           Not convicted           Not sentenced
-## 2               Convicted               Sentenced
-## 3           Not convicted           Not sentenced
-## 4               Convicted               Sentenced
-## 5               Convicted               Sentenced
-## 6           Not convicted           Not sentenced
-##                         outcome count
-## 1  Proceedings terminated early     1
-## 2                  Found guilty     6
-## 3   Dismissed (found not guilty     1
-## 4                  Found guilty     1
-## 5                  Found guilty    10
-## 6  Proceedings terminated early     1</pre>
+<pre >## Observations: 107,493
+## Variables: 16
+## $ year                    &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+## $ quarter                 &lt;fct&gt; Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, …
+## $ sex                     &lt;fct&gt; 01: Male, 01: Male, 01: Male, 01: Male, …
+## $ type_of_defendent       &lt;fct&gt; 01: Person, 01: Person, 01: Person, 01: …
+## $ age_group               &lt;fct&gt; 01: Juveniles, 01: Juveniles, 01: Juveni…
+## $ age_range               &lt;fct&gt; 01: 10-11, 01: 10-11, 01: 10-11, 01: 10-…
+## $ ethnicity               &lt;fct&gt; Not known, Not known, Not known, Not kno…
+## $ court_type              &lt;fct&gt; Magistrates Court, Magistrates Court, Ma…
+## $ offence_type            &lt;fct&gt; 01 Indictable only, 01 Indictable only, …
+## $ offence_group           &lt;fct&gt; 02 Sexual offences, 03 Robbery, 03 Robbe…
+## $ tried                   &lt;fct&gt; 5: Not tried, 01: Tried at magistrates c…
+## $ plea_at_the_crown_court &lt;fct&gt; Not known, Not known, Not known, Not kno…
+## $ convicted_not_convicted &lt;fct&gt; 02: Not convicted, 01: Convicted, 02: No…
+## $ sentenced_not_sentenced &lt;fct&gt; 02: Not sentenced, 01: Sentenced, 02: No…
+## $ outcome                 &lt;fct&gt; 01: Proceedings terminated early, 07: Fo…
+## $ count                   &lt;int&gt; 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -3664,9 +3596,9 @@ clean_prosec_and_convic &lt;- function(data) {
   # Clean the column headings
   colnames(data) &lt;- generalise_names(colnames(data))
   # Remove numeric indices from columns
-  data[] &lt;- remove_indices_from_columns(data)
+  data &lt;- purrr::map_if(data, is.character, remove_numbering)
   # Make missing/unknown value entries more consistent
-  data &lt;- clean_not_known(data, &quot;Not known&quot;)
+  data &lt;- purrr::map_if(data, is.character, clean_not_known)
   
   return(data)
   
@@ -3691,22 +3623,22 @@ clean_prosec_and_convic &lt;- function(data) {
 <pre class = 'prettyprint lang-r'>prosecutions_grouped</pre>
 
 <pre >## # A tibble: 14 x 2
-##    age_range                          counts
-##    &lt;chr&gt;                               &lt;int&gt;
-##  1 &quot; 10-11&quot;                             3324
-##  2 &quot; 12-14&quot;                           113960
-##  3 &quot; 15-17&quot;                           570275
-##  4 &quot; 18-20&quot;                          1302589
-##  5 &quot; 21-24&quot;                          2131033
-##  6 &quot; 25-29 (2017 onwards)&quot;            447108
-##  7 &quot; 25+ (prior to 2017)&quot;           10209264
-##  8 &quot; 30-39 (2017 onwards)&quot;            758230
-##  9 &quot; 40-49 (2017 onwards)&quot;            477217
-## 10 &quot; 50-59 (2017 onwards)&quot;            261626
-## 11 &quot; 60+ (2017 onwards)&quot;              101554
-## 12 &quot; Companies, public bodies etc.&quot;   114771
-## 13 &quot; Not known (Adult)&quot;               195459
-## 14 &quot; Not known (Juvenile)&quot;               150</pre>
+##    age_range                           counts
+##    &lt;fct&gt;                                &lt;int&gt;
+##  1 01: 10-11                             3324
+##  2 02: 12-14                           113960
+##  3 03: 15-17                           570275
+##  4 04: 18-20                          1302589
+##  5 05: 21-24                          2131033
+##  6 06: 25+ (prior to 2017)           10209264
+##  7 07: 25-29 (2017 onwards)            447108
+##  8 08: 30-39 (2017 onwards)            758230
+##  9 09: 40-49 (2017 onwards)            477217
+## 10 10: 50-59 (2017 onwards)            261626
+## 11 11: 60+ (2017 onwards)              101554
+## 12 12: Not known (Juvenile)               150
+## 13 13: Not known (Adult)               195459
+## 14 14: Companies, public bodies etc.   114771</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -3752,22 +3684,22 @@ clean_prosec_and_convic &lt;- function(data) {
 prosecutions_grouped</pre>
 
 <pre >## # A tibble: 14 x 2
-##    age_range                           count
-##    &lt;chr&gt;                               &lt;int&gt;
-##  1 &quot; 10-11&quot;                             3324
-##  2 &quot; 12-14&quot;                           113960
-##  3 &quot; 15-17&quot;                           570275
-##  4 &quot; 18-20&quot;                          1302589
-##  5 &quot; 21-24&quot;                          2131033
-##  6 &quot; 25-29 (2017 onwards)&quot;            447108
-##  7 &quot; 25+ (prior to 2017)&quot;           10209264
-##  8 &quot; 30-39 (2017 onwards)&quot;            758230
-##  9 &quot; 40-49 (2017 onwards)&quot;            477217
-## 10 &quot; 50-59 (2017 onwards)&quot;            261626
-## 11 &quot; 60+ (2017 onwards)&quot;              101554
-## 12 &quot; Companies, public bodies etc.&quot;   114771
-## 13 &quot; Not known (Adult)&quot;               195459
-## 14 &quot; Not known (Juvenile)&quot;               150</pre>
+##    age_range                            count
+##    &lt;fct&gt;                                &lt;int&gt;
+##  1 01: 10-11                             3324
+##  2 02: 12-14                           113960
+##  3 03: 15-17                           570275
+##  4 04: 18-20                          1302589
+##  5 05: 21-24                          2131033
+##  6 06: 25+ (prior to 2017)           10209264
+##  7 07: 25-29 (2017 onwards)            447108
+##  8 08: 30-39 (2017 onwards)            758230
+##  9 09: 40-49 (2017 onwards)            477217
+## 10 10: 50-59 (2017 onwards)            261626
+## 11 11: 60+ (2017 onwards)              101554
+## 12 12: Not known (Juvenile)               150
+## 13 13: Not known (Adult)               195459
+## 14 14: Companies, public bodies etc.   114771</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -3777,25 +3709,22 @@ prosecutions_grouped</pre>
                                   group_cols = c(&quot;year&quot;, &quot;offence_group&quot;), 
                                   sum_col = &quot;count&quot;)
 
-head(prosecutions_grouped)</pre>
+glimpse(prosecutions_grouped)</pre>
 
-<pre >## # A tibble: 6 x 3
-## # Groups:   year [1]
-##    year offence_group                        count
-##   &lt;int&gt; &lt;chr&gt;                                &lt;int&gt;
-## 1  2008 Criminal damage and arson            11278
-## 2  2008 Drug offences                        56953
-## 3  2008 Fraud Offences                       16262
-## 4  2008 Miscellaneous crimes against society 71652
-## 5  2008 Possession of weapons                17968
-## 6  2008 Public order offences                10465</pre>
+<pre >## Observations: 133
+## Variables: 3
+## Groups: year [11]
+## $ year          &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 20…
+## $ offence_group &lt;fct&gt; 01 Violence against the person, 02 Sexual offences…
+## $ count         &lt;int&gt; 45119, 8353, 13096, 146304, 11278, 56953, 17968, 1…</pre>
 
 </article></slide><slide class=""><hgroup><h2>Plotting data</h2></hgroup><article  class="smaller " id="plotting-data">
 
 <p>Let’s say we want to produce some plots, and want them all to have the same style. We can define the style of the plot in a function, then we only have to change the styling in one place if it needs changing. Here we’ve gone for a line chart with a red line.</p>
 
-<pre class = 'prettyprint lang-r'>make_line_chart &lt;- function(df, x_col, y_col){
+<pre class = 'prettyprint lang-r'>make_line_chart &lt;- function(df, x_col, y_col) {
   
+  # The `pull()` function extracts the contents of a single column as a vector.
   x &lt;- df %&gt;% dplyr::pull(x_col)
   y &lt;- df %&gt;% dplyr::pull(y_col)
   
@@ -3835,43 +3764,26 @@ make_line_chart(time_series, x=&quot;year&quot;, y=&quot;count&quot;)</pre>
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
 <pre class = 'prettyprint lang-r'>prosecutions_extract &lt;- extract_quarter(prosecutions, &quot;31-Mar-2018&quot;)
-head(prosecutions_extract)</pre>
+glimpse(prosecutions_extract)</pre>
 
-<pre >##   year quarter   sex type_of_defendent  age_group age_range ethnicity
-## 1 2018      Q1  Male            Person  Juveniles     10-11     White
-## 2 2018      Q1  Male            Person  Juveniles     10-11     White
-## 3 2018      Q1  Male            Person  Juveniles     10-11     White
-## 4 2018      Q1  Male            Person  Juveniles     10-11     Black
-## 5 2018      Q1  Male            Person  Juveniles     10-11 Not known
-## 6 2018      Q1  Male            Person  Juveniles     10-11 Not known
-##          court_type       offence_type             offence_group
-## 1 Magistrates Court    Indictable only                   Robbery
-## 2 Magistrates Court Triable either way            Theft Offences
-## 3 Magistrates Court Triable either way Criminal damage and arson
-## 4 Magistrates Court Triable either way     Possession of weapons
-## 5 Magistrates Court    Indictable only                   Robbery
-## 6 Magistrates Court    Indictable only Criminal damage and arson
-##                         tried plea_at_the_crown_court
-## 1  Tried at magistrates court               Not known
-## 2                   Not tried               Not known
-## 3                   Not tried               Not known
-## 4  Tried at magistrates court               Not known
-## 5  Tried at magistrates court               Not known
-## 6  Tried at magistrates court               Not known
-##   convicted_not_convicted sentenced_not_sentenced
-## 1               Convicted               Sentenced
-## 2           Not convicted           Not sentenced
-## 3           Not convicted           Not sentenced
-## 4               Convicted               Sentenced
-## 5               Convicted               Sentenced
-## 6               Convicted               Sentenced
-##                         outcome count
-## 1                  Found guilty     1
-## 2  Proceedings terminated early     2
-## 3  Proceedings terminated early     1
-## 4                  Found guilty     1
-## 5                  Found guilty     1
-## 6                  Found guilty     1</pre>
+<pre >## Observations: 3,675
+## Variables: 16
+## $ year                    &lt;int&gt; 2018, 2018, 2018, 2018, 2018, 2018, 2018…
+## $ quarter                 &lt;fct&gt; Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, …
+## $ sex                     &lt;fct&gt; 01: Male, 01: Male, 01: Male, 01: Male, …
+## $ type_of_defendent       &lt;fct&gt; 01: Person, 01: Person, 01: Person, 01: …
+## $ age_group               &lt;fct&gt; 01: Juveniles, 01: Juveniles, 01: Juveni…
+## $ age_range               &lt;fct&gt; 01: 10-11, 01: 10-11, 01: 10-11, 01: 10-…
+## $ ethnicity               &lt;fct&gt; 01: White, 01: White, 01: White, 02: Bla…
+## $ court_type              &lt;fct&gt; Magistrates Court, Magistrates Court, Ma…
+## $ offence_type            &lt;fct&gt; 01 Indictable only, 02 Triable either wa…
+## $ offence_group           &lt;fct&gt; 03 Robbery, 04 Theft Offences, 05 Crimin…
+## $ tried                   &lt;fct&gt; 01: Tried at magistrates court, 5: Not t…
+## $ plea_at_the_crown_court &lt;fct&gt; Not known, Not known, Not known, Not kno…
+## $ convicted_not_convicted &lt;fct&gt; 01: Convicted, 02: Not convicted, 02: No…
+## $ sentenced_not_sentenced &lt;fct&gt; 01: Sentenced, 02: Not sentenced, 02: No…
+## $ outcome                 &lt;fct&gt; 07: Found guilty, 01: Proceedings termin…
+## $ count                   &lt;int&gt; 1, 2, 1, 1, 1, 1, 7, 11, 1, 5, 6, 1, 2, …</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Hints and tips</h2></hgroup><article  class="smaller " id="hints-and-tips">
 
@@ -3941,7 +3853,7 @@ head(prosecutions_extract)</pre>
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >## [1] &quot;Magenta&quot;</pre>
+<pre >## [1] &quot;Yellow&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2>Writing a package</h2></hgroup><article  class="smaller " id="writing-a-package">
 

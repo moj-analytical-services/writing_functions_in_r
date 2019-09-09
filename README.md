@@ -416,36 +416,43 @@ course and makes use of the `dplyr` package, which is a commonly used R
 package for data manipulation. In the following examples we’ll see how
 user-defined functions can be used to help with cleaning, summarising,
 and plotting data. The data we’ll use is from the Criminal Justice
-System Statistics quarterly publication from December 2018, which can be
-found
+System Statistics quarterly publication: December 2018 (published in May
+2019), which can be found
 [here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
 
 -----
 
 ## Loading packages and data
 
-First of all we need to load a few packages. `s3tools` is an MoJ package
-designed to interact with Amazon s3 - we will need this to help read in
-some data from an s3 bucket. `dplyr` is the package we’ll use to create
-summary tables from the data. Finally `stringr` contains functions that
-can be used to manipulate strings.
+First of all we need to load a few packages: • `s3tools` is an MoJ
+package designed to interact with Amazon s3 - we will need this to help
+read in some data from an s3 bucket.  
+• `dplyr` is the package we’ll use to create summary tables from the
+data. • `stringr` provides functions that can be used to manipulate
+strings.  
+• `purrr` provides functions to make the use of vectors and user-defined
+functions easier.
 
 ``` r
 # Load packages
 library(s3tools)
 library(dplyr)
 library(stringr)
+library(purrr)
 ```
 
-Here we are reading in the `Prosecutions and Convictions` dataset from
-s3 and storing the dataframe as a variable called `prosecutions`.
+Here we are reading in a copy of the `Prosecutions and Convictions`
+dataset from s3 and storing the dataframe as a variable called
+`prosecutions_and_convictions`. In the second step we’re filtering the
+dataset to extract only the prosecutions and saving to another variable,
+named `prosecutions`.
 
 ``` r
-prosecutions <- s3tools::s3_path_to_full_df(
+prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
   "alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv")
 
 # Filter for Magistrates Court to extract the prosecutions
-prosecutions <- prosecutions %>%
+prosecutions <- prosecutions_and_convictions %>%
   filter(`Court.Type` == "Magistrates Court")
 ```
 
@@ -454,44 +461,27 @@ prosecutions <- prosecutions %>%
 Here’s a preview of the data stored in `prosecutions`:
 
 ``` r
-head(prosecutions)
+glimpse(prosecutions)
 ```
 
-    ##   Year Quarter      Sex Type.of.Defendent     Age.Group Age.Range
-    ## 1 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-    ## 2 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-    ## 3 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-    ## 4 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-    ## 5 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-    ## 6 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-    ##   Ethnicity        Court.Type          Offence.Type
-    ## 1       N/A Magistrates Court    01 Indictable only
-    ## 2       N/A Magistrates Court    01 Indictable only
-    ## 3       N/A Magistrates Court    01 Indictable only
-    ## 4       N/A Magistrates Court    01 Indictable only
-    ## 5       N/A Magistrates Court 02 Triable either way
-    ## 6       N/A Magistrates Court 02 Triable either way
-    ##                    Offence.Group                          Tried
-    ## 1             02 Sexual offences                   5: Not tried
-    ## 2                     03 Robbery 01: Tried at magistrates court
-    ## 3                     03 Robbery 01: Tried at magistrates court
-    ## 4       07 Possession of weapons 01: Tried at magistrates court
-    ## 5 01 Violence against the person 01: Tried at magistrates court
-    ## 6 01 Violence against the person                   5: Not tried
-    ##   Plea.at.the.Crown.Court Convicted..Not.convicted
-    ## 1                     N/A        02: Not convicted
-    ## 2                     N/A            01: Convicted
-    ## 3                     N/A        02: Not convicted
-    ## 4                     N/A            01: Convicted
-    ## 5                     N/A            01: Convicted
-    ## 6                     N/A        02: Not convicted
-    ##   Sentenced...Not.sentenced                          Outcome Count
-    ## 1         02: Not sentenced 01: Proceedings terminated early     1
-    ## 2             01: Sentenced                 07: Found guilty     6
-    ## 3         02: Not sentenced  03: Dismissed (found not guilty     1
-    ## 4             01: Sentenced                 07: Found guilty     1
-    ## 5             01: Sentenced                 07: Found guilty    10
-    ## 6         02: Not sentenced 01: Proceedings terminated early     1
+    ## Observations: 107,493
+    ## Variables: 16
+    ## $ Year                      <int> 2008, 2008, 2008, 2008, 2008, 2008, 20…
+    ## $ Quarter                   <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q…
+    ## $ Sex                       <chr> "01: Male", "01: Male", "01: Male", "0…
+    ## $ Type.of.Defendent         <chr> "01: Person", "01: Person", "01: Perso…
+    ## $ Age.Group                 <chr> "01: Juveniles", "01: Juveniles", "01:…
+    ## $ Age.Range                 <chr> "01: 10-11", "01: 10-11", "01: 10-11",…
+    ## $ Ethnicity                 <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
+    ## $ Court.Type                <chr> "Magistrates Court", "Magistrates Cour…
+    ## $ Offence.Type              <chr> "01 Indictable only", "01 Indictable o…
+    ## $ Offence.Group             <chr> "02 Sexual offences", "03 Robbery", "0…
+    ## $ Tried                     <chr> "5: Not tried", "01: Tried at magistra…
+    ## $ Plea.at.the.Crown.Court   <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
+    ## $ Convicted..Not.convicted  <chr> "02: Not convicted", "01: Convicted", …
+    ## $ Sentenced...Not.sentenced <chr> "02: Not sentenced", "01: Sentenced", …
+    ## $ Outcome                   <chr> "01: Proceedings terminated early", "0…
+    ## $ Count                     <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15,…
 
 ## Cleaning data
 
@@ -503,7 +493,7 @@ all letters in the string vector are lower-case, and makes use of
 punctuation marks with an underscore:
 
 ``` r
-generalise_names <- function(names){
+generalise_names <- function(names) {
   
   # Convert any uppercase letters to lowercase
   names <- tolower(names)
@@ -544,69 +534,53 @@ retrieve the column headings of the dataset as a vector).
 
 -----
 
-There are some numeric indices in the columns that may be undesirable.
-We can write a function to remove these:
+In this dataframe, some of the columns contain values with a number
+along with a category; for example, the `age_group` column contains
+categories like “01: Juveniles” rather than just “Juveniles”. These
+numbers might be undesirable, so we can write a function to remove
+these:
 
 ``` r
-remove_indices_from_columns <- function(data){
-
-  # Remove 1 or 2 digits followed by a semicolon for columns that contain strings
-  data <- lapply(data, function(x) { if (is.character(x)) gsub("^\\d{1,2}:", "", x) else x })
-  # Remove 1 or 2 digits followed by a space
-  data <- lapply(data, function(x) { if (is.character(x)) gsub("^\\d{1,2}\\s", "", x) else x })  
-
-  return(data)
+remove_numbering <- function(x) {
   
+  # Remove 1 or 2 digits followed by a semicolon
+  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*", "")
+  # Remove 1 or 2 digits followed by a space
+  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*", "")
+  
+  return(x)
 }
 ```
 
 -----
 
+Then we can use the `map_if()` function from `purrr` to apply the
+`remove_numbering()` function to all columns in the `prosecutions`
+dataframe, with the condition that the column must contain strings.
+
 ``` r
-prosecutions[] <- remove_indices_from_columns(prosecutions)
-head(prosecutions)
+prosecutions_cleaned <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame()
+glimpse(prosecutions)
 ```
 
-    ##   year quarter   sex type_of_defendent  age_group age_range ethnicity
-    ## 1 2008      Q1  Male            Person  Juveniles     10-11       N/A
-    ## 2 2008      Q1  Male            Person  Juveniles     10-11       N/A
-    ## 3 2008      Q1  Male            Person  Juveniles     10-11       N/A
-    ## 4 2008      Q1  Male            Person  Juveniles     10-11       N/A
-    ## 5 2008      Q1  Male            Person  Juveniles     10-11       N/A
-    ## 6 2008      Q1  Male            Person  Juveniles     10-11       N/A
-    ##          court_type       offence_type               offence_group
-    ## 1 Magistrates Court    Indictable only             Sexual offences
-    ## 2 Magistrates Court    Indictable only                     Robbery
-    ## 3 Magistrates Court    Indictable only                     Robbery
-    ## 4 Magistrates Court    Indictable only       Possession of weapons
-    ## 5 Magistrates Court Triable either way Violence against the person
-    ## 6 Magistrates Court Triable either way Violence against the person
-    ##                         tried plea_at_the_crown_court
-    ## 1                   Not tried                     N/A
-    ## 2  Tried at magistrates court                     N/A
-    ## 3  Tried at magistrates court                     N/A
-    ## 4  Tried at magistrates court                     N/A
-    ## 5  Tried at magistrates court                     N/A
-    ## 6                   Not tried                     N/A
-    ##   convicted_not_convicted sentenced_not_sentenced
-    ## 1           Not convicted           Not sentenced
-    ## 2               Convicted               Sentenced
-    ## 3           Not convicted           Not sentenced
-    ## 4               Convicted               Sentenced
-    ## 5               Convicted               Sentenced
-    ## 6           Not convicted           Not sentenced
-    ##                         outcome count
-    ## 1  Proceedings terminated early     1
-    ## 2                  Found guilty     6
-    ## 3   Dismissed (found not guilty     1
-    ## 4                  Found guilty     1
-    ## 5                  Found guilty    10
-    ## 6  Proceedings terminated early     1
-
-This function uses `lapply()` to apply a function to all columns in the
-dataframe. Here we’ve used an “anonymous function” as the second
-argument of `lapply()`, which is a single-use function that doesn’t have
-a name.
+    ## Observations: 107,493
+    ## Variables: 16
+    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
+    ## $ sex                     <chr> "01: Male", "01: Male", "01: Male", "01:…
+    ## $ type_of_defendent       <chr> "01: Person", "01: Person", "01: Person"…
+    ## $ age_group               <chr> "01: Juveniles", "01: Juveniles", "01: J…
+    ## $ age_range               <chr> "01: 10-11", "01: 10-11", "01: 10-11", "…
+    ## $ ethnicity               <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
+    ## $ offence_type            <chr> "01 Indictable only", "01 Indictable onl…
+    ## $ offence_group           <chr> "02 Sexual offences", "03 Robbery", "03 …
+    ## $ tried                   <chr> "5: Not tried", "01: Tried at magistrate…
+    ## $ plea_at_the_crown_court <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
+    ## $ convicted_not_convicted <chr> "02: Not convicted", "01: Convicted", "0…
+    ## $ sentenced_not_sentenced <chr> "02: Not sentenced", "01: Sentenced", "0…
+    ## $ outcome                 <chr> "01: Proceedings terminated early", "07:…
+    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 
 -----
 
@@ -614,71 +588,57 @@ For the final stage of data cleaning, we can make missing and unknown
 values more consistent using a function such as the following:
 
 ``` r
-clean_not_known <- function(data, not_known_phrase) {
+clean_not_known <- function(x,
+                            not_known_phrase = "Not known",
+                            change_na = TRUE,
+                            values_to_change = c("n/a", "not known", "unknown", "not stated")) {
   
   # Replace any missing (NA) values
-  data <- data %>% replace(., is.na(.), not_known_phrase)
+  if(change_na){
+    x <- replace(x, is.na(x), not_known_phrase)
+  }
   
-  # Create a version of the dataframe with all strings converted to lower
-  # case and any white space at the start or end trimmed. This will make
-  # the following stage easier.
-  data_lowercase <- data
-  data_lowercase[] <- lapply(data_lowercase, tolower)
-  data_lowercase[] <- lapply(data_lowercase, stringr::str_trim)
+  # Remove any white space that might cause the strings to not match
+  x <- stringr::str_trim(x)
   
   # Replace strings in the data that refer to a missing or unknown values
-  data[data_lowercase == "n/a"] <- not_known_phrase
-  data[data_lowercase == "not known"] <- not_known_phrase
-  data[data_lowercase == "unknown"] <- not_known_phrase
-  data[data_lowercase == "not stated"] <- not_known_phrase
+  x <- ifelse(tolower(x) %in% values_to_change, not_known_phrase, x)
   
-  return(data)
-  
+  return(x)
+
 }
 ```
+
+In this function we’ve included some default values, so by default
+missing/NA values are replaced, and any strings that match “n/a”, “not
+known”, “unknown”, or “not stated” are replaced. The default replacement
+value is “Not known”.
 
 -----
 
 ``` r
-prosecutions <- clean_not_known(prosecutions, "Not known")
-head(prosecutions)
+prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame()
+glimpse(prosecutions)
 ```
 
-    ##   year quarter   sex type_of_defendent  age_group age_range ethnicity
-    ## 1 2008      Q1  Male            Person  Juveniles     10-11 Not known
-    ## 2 2008      Q1  Male            Person  Juveniles     10-11 Not known
-    ## 3 2008      Q1  Male            Person  Juveniles     10-11 Not known
-    ## 4 2008      Q1  Male            Person  Juveniles     10-11 Not known
-    ## 5 2008      Q1  Male            Person  Juveniles     10-11 Not known
-    ## 6 2008      Q1  Male            Person  Juveniles     10-11 Not known
-    ##          court_type       offence_type               offence_group
-    ## 1 Magistrates Court    Indictable only             Sexual offences
-    ## 2 Magistrates Court    Indictable only                     Robbery
-    ## 3 Magistrates Court    Indictable only                     Robbery
-    ## 4 Magistrates Court    Indictable only       Possession of weapons
-    ## 5 Magistrates Court Triable either way Violence against the person
-    ## 6 Magistrates Court Triable either way Violence against the person
-    ##                         tried plea_at_the_crown_court
-    ## 1                   Not tried               Not known
-    ## 2  Tried at magistrates court               Not known
-    ## 3  Tried at magistrates court               Not known
-    ## 4  Tried at magistrates court               Not known
-    ## 5  Tried at magistrates court               Not known
-    ## 6                   Not tried               Not known
-    ##   convicted_not_convicted sentenced_not_sentenced
-    ## 1           Not convicted           Not sentenced
-    ## 2               Convicted               Sentenced
-    ## 3           Not convicted           Not sentenced
-    ## 4               Convicted               Sentenced
-    ## 5               Convicted               Sentenced
-    ## 6           Not convicted           Not sentenced
-    ##                         outcome count
-    ## 1  Proceedings terminated early     1
-    ## 2                  Found guilty     6
-    ## 3   Dismissed (found not guilty     1
-    ## 4                  Found guilty     1
-    ## 5                  Found guilty    10
-    ## 6  Proceedings terminated early     1
+    ## Observations: 107,493
+    ## Variables: 16
+    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+    ## $ quarter                 <fct> Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, …
+    ## $ sex                     <fct> 01: Male, 01: Male, 01: Male, 01: Male, …
+    ## $ type_of_defendent       <fct> 01: Person, 01: Person, 01: Person, 01: …
+    ## $ age_group               <fct> 01: Juveniles, 01: Juveniles, 01: Juveni…
+    ## $ age_range               <fct> 01: 10-11, 01: 10-11, 01: 10-11, 01: 10-…
+    ## $ ethnicity               <fct> Not known, Not known, Not known, Not kno…
+    ## $ court_type              <fct> Magistrates Court, Magistrates Court, Ma…
+    ## $ offence_type            <fct> 01 Indictable only, 01 Indictable only, …
+    ## $ offence_group           <fct> 02 Sexual offences, 03 Robbery, 03 Robbe…
+    ## $ tried                   <fct> 5: Not tried, 01: Tried at magistrates c…
+    ## $ plea_at_the_crown_court <fct> Not known, Not known, Not known, Not kno…
+    ## $ convicted_not_convicted <fct> 02: Not convicted, 01: Convicted, 02: No…
+    ## $ sentenced_not_sentenced <fct> 02: Not sentenced, 01: Sentenced, 02: No…
+    ## $ outcome                 <fct> 01: Proceedings terminated early, 07: Fo…
+    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 
 -----
 
@@ -719,22 +679,22 @@ prosecutions_grouped
 ```
 
     ## # A tibble: 14 x 2
-    ##    age_range                          counts
-    ##    <chr>                               <int>
-    ##  1 " 10-11"                             3324
-    ##  2 " 12-14"                           113960
-    ##  3 " 15-17"                           570275
-    ##  4 " 18-20"                          1302589
-    ##  5 " 21-24"                          2131033
-    ##  6 " 25-29 (2017 onwards)"            447108
-    ##  7 " 25+ (prior to 2017)"           10209264
-    ##  8 " 30-39 (2017 onwards)"            758230
-    ##  9 " 40-49 (2017 onwards)"            477217
-    ## 10 " 50-59 (2017 onwards)"            261626
-    ## 11 " 60+ (2017 onwards)"              101554
-    ## 12 " Companies, public bodies etc."   114771
-    ## 13 " Not known (Adult)"               195459
-    ## 14 " Not known (Juvenile)"               150
+    ##    age_range                           counts
+    ##    <fct>                                <int>
+    ##  1 01: 10-11                             3324
+    ##  2 02: 12-14                           113960
+    ##  3 03: 15-17                           570275
+    ##  4 04: 18-20                          1302589
+    ##  5 05: 21-24                          2131033
+    ##  6 06: 25+ (prior to 2017)           10209264
+    ##  7 07: 25-29 (2017 onwards)            447108
+    ##  8 08: 30-39 (2017 onwards)            758230
+    ##  9 09: 40-49 (2017 onwards)            477217
+    ## 10 10: 50-59 (2017 onwards)            261626
+    ## 11 11: 60+ (2017 onwards)              101554
+    ## 12 12: Not known (Juvenile)               150
+    ## 13 13: Not known (Adult)               195459
+    ## 14 14: Companies, public bodies etc.   114771
 
 -----
 
@@ -802,22 +762,22 @@ prosecutions_grouped
 ```
 
     ## # A tibble: 14 x 2
-    ##    age_range                           count
-    ##    <chr>                               <int>
-    ##  1 " 10-11"                             3324
-    ##  2 " 12-14"                           113960
-    ##  3 " 15-17"                           570275
-    ##  4 " 18-20"                          1302589
-    ##  5 " 21-24"                          2131033
-    ##  6 " 25-29 (2017 onwards)"            447108
-    ##  7 " 25+ (prior to 2017)"           10209264
-    ##  8 " 30-39 (2017 onwards)"            758230
-    ##  9 " 40-49 (2017 onwards)"            477217
-    ## 10 " 50-59 (2017 onwards)"            261626
-    ## 11 " 60+ (2017 onwards)"              101554
-    ## 12 " Companies, public bodies etc."   114771
-    ## 13 " Not known (Adult)"               195459
-    ## 14 " Not known (Juvenile)"               150
+    ##    age_range                            count
+    ##    <fct>                                <int>
+    ##  1 01: 10-11                             3324
+    ##  2 02: 12-14                           113960
+    ##  3 03: 15-17                           570275
+    ##  4 04: 18-20                          1302589
+    ##  5 05: 21-24                          2131033
+    ##  6 06: 25+ (prior to 2017)           10209264
+    ##  7 07: 25-29 (2017 onwards)            447108
+    ##  8 08: 30-39 (2017 onwards)            758230
+    ##  9 09: 40-49 (2017 onwards)            477217
+    ## 10 10: 50-59 (2017 onwards)            261626
+    ## 11 11: 60+ (2017 onwards)              101554
+    ## 12 12: Not known (Juvenile)               150
+    ## 13 13: Not known (Adult)               195459
+    ## 14 14: Companies, public bodies etc.   114771
 
 -----
 
@@ -829,19 +789,15 @@ prosecutions_grouped <- sum_group(df = prosecutions,
                                   group_cols = c("year", "offence_group"), 
                                   sum_col = "count")
 
-head(prosecutions_grouped)
+glimpse(prosecutions_grouped)
 ```
 
-    ## # A tibble: 6 x 3
-    ## # Groups:   year [1]
-    ##    year offence_group                        count
-    ##   <int> <chr>                                <int>
-    ## 1  2008 Criminal damage and arson            11278
-    ## 2  2008 Drug offences                        56953
-    ## 3  2008 Fraud Offences                       16262
-    ## 4  2008 Miscellaneous crimes against society 71652
-    ## 5  2008 Possession of weapons                17968
-    ## 6  2008 Public order offences                10465
+    ## Observations: 133
+    ## Variables: 3
+    ## Groups: year [11]
+    ## $ year          <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 20…
+    ## $ offence_group <fct> 01 Violence against the person, 02 Sexual offences…
+    ## $ count         <int> 45119, 8353, 13096, 146304, 11278, 56953, 17968, 1…
 
 ## Plotting data
 
@@ -851,8 +807,9 @@ only have to change the styling in one place if it needs changing. Here
 we’ve gone for a line chart with a red line.
 
 ``` r
-make_line_chart <- function(df, x_col, y_col){
+make_line_chart <- function(df, x_col, y_col) {
   
+  # The `pull()` function extracts the contents of a single column as a vector.
   x <- df %>% dplyr::pull(x_col)
   y <- df %>% dplyr::pull(y_col)
   
@@ -901,44 +858,27 @@ extract_quarter <- function(data, date) {
 
 ``` r
 prosecutions_extract <- extract_quarter(prosecutions, "31-Mar-2018")
-head(prosecutions_extract)
+glimpse(prosecutions_extract)
 ```
 
-    ##   year quarter   sex type_of_defendent  age_group age_range ethnicity
-    ## 1 2018      Q1  Male            Person  Juveniles     10-11     White
-    ## 2 2018      Q1  Male            Person  Juveniles     10-11     White
-    ## 3 2018      Q1  Male            Person  Juveniles     10-11     White
-    ## 4 2018      Q1  Male            Person  Juveniles     10-11     Black
-    ## 5 2018      Q1  Male            Person  Juveniles     10-11 Not known
-    ## 6 2018      Q1  Male            Person  Juveniles     10-11 Not known
-    ##          court_type       offence_type             offence_group
-    ## 1 Magistrates Court    Indictable only                   Robbery
-    ## 2 Magistrates Court Triable either way            Theft Offences
-    ## 3 Magistrates Court Triable either way Criminal damage and arson
-    ## 4 Magistrates Court Triable either way     Possession of weapons
-    ## 5 Magistrates Court    Indictable only                   Robbery
-    ## 6 Magistrates Court    Indictable only Criminal damage and arson
-    ##                         tried plea_at_the_crown_court
-    ## 1  Tried at magistrates court               Not known
-    ## 2                   Not tried               Not known
-    ## 3                   Not tried               Not known
-    ## 4  Tried at magistrates court               Not known
-    ## 5  Tried at magistrates court               Not known
-    ## 6  Tried at magistrates court               Not known
-    ##   convicted_not_convicted sentenced_not_sentenced
-    ## 1               Convicted               Sentenced
-    ## 2           Not convicted           Not sentenced
-    ## 3           Not convicted           Not sentenced
-    ## 4               Convicted               Sentenced
-    ## 5               Convicted               Sentenced
-    ## 6               Convicted               Sentenced
-    ##                         outcome count
-    ## 1                  Found guilty     1
-    ## 2  Proceedings terminated early     2
-    ## 3  Proceedings terminated early     1
-    ## 4                  Found guilty     1
-    ## 5                  Found guilty     1
-    ## 6                  Found guilty     1
+    ## Observations: 3,675
+    ## Variables: 16
+    ## $ year                    <int> 2018, 2018, 2018, 2018, 2018, 2018, 2018…
+    ## $ quarter                 <fct> Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, …
+    ## $ sex                     <fct> 01: Male, 01: Male, 01: Male, 01: Male, …
+    ## $ type_of_defendent       <fct> 01: Person, 01: Person, 01: Person, 01: …
+    ## $ age_group               <fct> 01: Juveniles, 01: Juveniles, 01: Juveni…
+    ## $ age_range               <fct> 01: 10-11, 01: 10-11, 01: 10-11, 01: 10-…
+    ## $ ethnicity               <fct> 01: White, 01: White, 01: White, 02: Bla…
+    ## $ court_type              <fct> Magistrates Court, Magistrates Court, Ma…
+    ## $ offence_type            <fct> 01 Indictable only, 02 Triable either wa…
+    ## $ offence_group           <fct> 03 Robbery, 04 Theft Offences, 05 Crimin…
+    ## $ tried                   <fct> 01: Tried at magistrates court, 5: Not t…
+    ## $ plea_at_the_crown_court <fct> Not known, Not known, Not known, Not kno…
+    ## $ convicted_not_convicted <fct> 01: Convicted, 02: Not convicted, 02: No…
+    ## $ sentenced_not_sentenced <fct> 01: Sentenced, 02: Not sentenced, 02: No…
+    ## $ outcome                 <fct> 07: Found guilty, 01: Proceedings termin…
+    ## $ count                   <int> 1, 2, 1, 1, 1, 1, 7, 11, 1, 5, 6, 1, 2, …
 
 # Hints and tips
 
@@ -1041,7 +981,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Blue"
+    ## [1] "Green"
 
 ## Writing a package
 
@@ -1115,22 +1055,22 @@ prosecutions_grouped <- sum_group_alt1(df = prosecutions, group_cols = "age_rang
 prosecutions_grouped
 ```
 
-    ##                       age_range   counts
-    ##                           10-11     3324
-    ##                           12-14   113960
-    ##                           15-17   570275
-    ##                           18-20  1302589
-    ##                           21-24  2131033
-    ##            25-29 (2017 onwards)   447108
-    ##             25+ (prior to 2017) 10209264
-    ##            30-39 (2017 onwards)   758230
-    ##            40-49 (2017 onwards)   477217
-    ##            50-59 (2017 onwards)   261626
-    ##              60+ (2017 onwards)   101554
-    ##   Companies, public bodies etc.   114771
-    ##               Not known (Adult)   195459
-    ##            Not known (Juvenile)      150
-    ##                           Total 16686560
+    ##                          age_range   counts
+    ##                          01: 10-11     3324
+    ##                          02: 12-14   113960
+    ##                          03: 15-17   570275
+    ##                          04: 18-20  1302589
+    ##                          05: 21-24  2131033
+    ##            06: 25+ (prior to 2017) 10209264
+    ##           07: 25-29 (2017 onwards)   447108
+    ##           08: 30-39 (2017 onwards)   758230
+    ##           09: 40-49 (2017 onwards)   477217
+    ##           10: 50-59 (2017 onwards)   261626
+    ##             11: 60+ (2017 onwards)   101554
+    ##           12: Not known (Juvenile)      150
+    ##              13: Not known (Adult)   195459
+    ##  14: Companies, public bodies etc.   114771
+    ##                              Total 16686560
 
 Alternatively, this version of the function means the column names can
 be input as function arguments directly (rather than needing to enclose
@@ -1153,22 +1093,22 @@ prosecutions_grouped <- sum_group_alt2(df = prosecutions, group_cols = age_range
 prosecutions_grouped
 ```
 
-    ##                       age_range   counts
-    ##                           10-11     3324
-    ##                           12-14   113960
-    ##                           15-17   570275
-    ##                           18-20  1302589
-    ##                           21-24  2131033
-    ##            25-29 (2017 onwards)   447108
-    ##             25+ (prior to 2017) 10209264
-    ##            30-39 (2017 onwards)   758230
-    ##            40-49 (2017 onwards)   477217
-    ##            50-59 (2017 onwards)   261626
-    ##              60+ (2017 onwards)   101554
-    ##   Companies, public bodies etc.   114771
-    ##               Not known (Adult)   195459
-    ##            Not known (Juvenile)      150
-    ##                           Total 16686560
+    ##                          age_range   counts
+    ##                          01: 10-11     3324
+    ##                          02: 12-14   113960
+    ##                          03: 15-17   570275
+    ##                          04: 18-20  1302589
+    ##                          05: 21-24  2131033
+    ##            06: 25+ (prior to 2017) 10209264
+    ##           07: 25-29 (2017 onwards)   447108
+    ##           08: 30-39 (2017 onwards)   758230
+    ##           09: 40-49 (2017 onwards)   477217
+    ##           10: 50-59 (2017 onwards)   261626
+    ##             11: 60+ (2017 onwards)   101554
+    ##           12: Not known (Juvenile)      150
+    ##              13: Not known (Adult)   195459
+    ##  14: Companies, public bodies etc.   114771
+    ##                              Total 16686560
 
 ## Adding an optional total row
 

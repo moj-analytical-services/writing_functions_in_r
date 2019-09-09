@@ -813,63 +813,49 @@ body {
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">plot_x_and_y</span>(x, y, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>)</span></code></pre></div>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAIAAAD17khjAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAgAElEQVR4nO3de1zVdYL/8TeBCN7p4oVsSoXGuyjWeBc13TayJjQymijXFuYxzSzeuJWPX2g6A03Zsq3jSGZm98THzqpZ6knrUY5XKrkZWKYpoCmiK3jhFOf3h63rVHgFPt/zOa/nX3C+Su9H4/jqfL/nfI+fx+MRAACwyzWmBwAAgIZH4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACwUYHpA05kxY8ZHH31kegUAwIcEBwfn5uZ26NCh6f/RPhT4v//977///e/79OljeggAwFc8+OCDhw4dIvCSdOrUqWPHjklq165dcHBww/7w7t27R0ZGNuzPBACgPg0eskvnlGvwFRUVM2bMCAsLa9myZWhoaGhoaMuWLcPCwmbOnHno0CHT6wAA8DKOeAZfXFwcFRV1/PjxMWPGxMTEhISESKqqqiosLHzhhRdeffXVDz/8sEePHqZnAgDgNRwR+GnTpnXq1OnTTz/t3Lnzjw4dOHAgOjp62rRp77//vpFtAAB4I0ecov/kk0+efPLJn9ZdUufOnZ988slPPvmk6VcBAOC9HBH4wMDA6urq+o5WV1cHBgY25R4AALydIwJ/1113zZo1a+PGjT89tHHjxlmzZkVHRzf9KgAAvJcjrsHPnz9/7Nixo0ePvvHGG3v37h0SEuLxeI4dO1ZYWFhWVtavX7/nnnvO9EYAALyJIwLfoUOHvLy8119/feXKlUVFRXl5eX5+ftdee+2vfvWre+65Jy4urlmzZqY3AgDgTRwReEnNmjV79NFHH3300av5IV9++eXixYvrO1pSUlJRUXE1Px8A4HM2bdLhw/r1r03vuGxOCXyDCAoKOvse+p918uTJ8vLyptwDAPBipaVKS9Onn2rhQtNTroRTAn/ixInly5eXlZX16dNn/Pjx/v7+5w59/vnnixcv/s///M+L/pDOnTunpqbWd3Tu3LnNmzdvmLkAAItVVurPf9bSpZo2TW+8oaAg04OuhCMCf+jQocGDB3/99ddnv+3fv/8777wTFhZ29tsvv/xywYIFlxJ4AACuysmTeuEFPfusYmKUn6/27U0PunKOeJvc7NmzDx069Prrr5eVlb311luVlZVDhgz57LPPTO8CAPiMujotX65evZSXpy1btGiRV9ddDgn8+++//4c//CEuLi40NPSBBx747LPPevToMWrUqC1btpieBgDwAS6XBgzQ88/rtdf0zjvq1s30oAbgiFP0FRUVt95667lvr7322vfff//Xv/712LFjV69ebXAYAMByeXlKTlZFhebM0f33m17TkBzxDL5Tp07nLsCfFRwcvHLlyqioqH/+539ev369qWEAAGvt36/EREVH6957VVBgWd3lkMAPHTr0px8W17x58xUrVtx55505OTlGVgEA7FRVpbQ09e+vkBCVliopSQGOOJ/dsBwR+MmTJ7ds2XL37t0/ejwwMPCdd96ZMmVKr169jAwDAFiltlY5OerVS1VVKixUZqbatDG9qbE44r9ZRo8ePXr06J89FBAQcIGb0wEAcEk8HuXmKi1NXbtq7Vr16WN6UKNzROABAGhEGzYoOVn+/lqyRCNHml7TRAg8AMBeu3bpqae0bZvmzNHDD8vPz/SgpuOIa/AAADSw8nIlJioqSpGRKilRfLxP1V0EHgBgm5oaZWWpb18FBamkRKmp8skPIiHwAABbuN3KyVF4uPLytGOHsrPVrp3pTcZwDR4AYAWXS9OmqWNHrVmjiAjTa8wj8AAAL7dtm5KTdeSIsrJ0992m1zgFp+gBAF5r927FxmriRD30kPLzqfv5CDwAwAtVViotTYMHq2dPlZQoIUH+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/PFvv/3W9CirTJgwwc/P79FHHzU9xBJr1qwZMWJEq1at2rZtO3jw4I8++sj0Iu/28ccfjx079oYbbmjTps1tt9325ptvml7kfcrLy//t3/5t8ODBwcHBfn5+e/fu/dEv+Pbbbx9++OFrr722VatWd955565du0zMvAwE3hKzZ8/euXNnfHz8woULJ06cuHTp0kGDBp04ccL0LkusWrXqww8/DAwMND3EEosWLYqOjg4KCpo7d+6f//znyMjIgwcPmh7lxT777LOxY8ceO3YsOzt76dKlnTp1iouLe+ONN0zv8jJ79ux5++23r7vuusGDB//0qNvtHjdu3AcffPDss88uWbKkoqIiKirq0KFDTb/zMnhghZKSkvO/ff311yW99NJLpvbY5MSJEzfddNOLL77YsmXLRx55xPQcr/f1118HBQUlJSWZHmKP5ORkPz+/Q4cOnf3W7XbfdNNNd955p9lVXuf7778/+8Xzzz8v6euvvz7/6NKlSyVt2LDh7Lf79+8PDAycMWNGE4+8LDyDt8Stt956/rdRUVGSysrKzKyxy6xZszp37jxlyhTTQyyxZMmSurq6jIwMSXV1dabn2KC2ttbf379t27Znvw0ICGjbti3/bi/XNddcKIgrV6688cYbR40adfbbzp07jx49+m9/+1uTTLtCBN5OmzZtktSnTx/TQ7zejh07/vrXvy5cuNDPz8/0Fkt88sknffv2ff3112+66SZ/f/9bbrll/vz5Ho/H9C4vNnny5GbNmv3+97/fv3//t99+m5WV9cUXXyQlJZneZZWioqJevXqd/0ifPn327Nlz6tQpU5MuKsD0ADS8o0ePJicn9+/ff/z48aa3eLfvv/8+ISHhd7/7Xb9+/UxvsUd5eXl5eXlGRsa8efNuueWWt956a8aMGWfOnElPTzc9zVv169dvw4YNEyZMWLx4saQWLVq8+eabd911l+ldVjl69GhERMT5j4SEhHg8nmPHjgUHB5tadWEE3janTp2KiYmpqalxuVz+/v6m53i3559//ttvv509e7bpIVapq6s7ceLEsmXLfv3rX0saN27c3r17n3nmmZSUFP7EXpmSkpL777+/Z8+ef/nLX5o3b/72228/9NBDAQEBZ/8No0F4PB6vO41H4K1y5syZ++677/PPP9+4cWNYWJjpOd6toqIiIyMjOzv7+++/P3bs2NkHa2trjx071qpVq4AA/r9zha677rrdu3ffcccd5x4ZO3bsxo0b9+3b17VrV4PDvFdKSoqfn9/q1aubN28u6c477zxw4MDjjz9O4BvQtddeW1VVdf4jVVVVfn5+7dq1MzXporgGbw+32z1x4sRNmza99957/fv3Nz3H6+3bt6+mpuaxxx4L+V81NTVvvvlmSEiIy+Uyvc6Lnb2Qef5F97NfX/glTriAnTt39u7d+2zdzxo4cGB5efm5/zDF1evVq1dRUdH5jxQWFnbt2tWx5+dF4K3x3XffPfDAAx988MHq1at/9k2cuFw9e/bc+I+CgoL+6Z/+aePGjbfffrvpdV7svvvuk/Tee++de2TNmjXt27f/xS9+YW6Ud+vYsWN+fv7p06fPPbJly5bWrVu3bt3a4CrL3HPPPQcOHDh3R6aysrINGzbce++9ZlddGKcZLfHb3/72v/7rvxISEg4fPpybm3v2wbCwsB+9KgSXrk2bNmffbXiOv79/x44df/QgLtddd901atSoxMTEsrKym2+++a233tq0adPChQt5Bn/F/vCHP/zmN78ZN27cb3/72+bNmy9fvvzDDz988skneU3DZfF4PCtWrJC0c+dOSe+9994NN9zQqVOnoUOHSnrooYfmz58fFxc3d+7cVq1azZs3r02bNjNnzjQ8+sJMvgkfDedH79846/HHHze9yyrc6KahHD9+/PHHH+/QoUNgYGDv3r1feeUV04u83sqVK4cNG3bddde1bt26f//+L7744rnbtuASud3un/4tGh0dfe4XHDx4MC4url27di1atBg3blxRUZHBtZfCz8PbTwEAsA7nxAAAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AEAsBCBBwDAQgQeAAALEXgAACxE4AH8vJqamu7du99+++1ut/vsI+vWrbvmmmsWLFhgdhiAS+Hn8XhMbwDgUJ999tmgQYOmTZuWmZn57bff9u3b9/bbb1+5cqXpXQAujsADuJDnn39+xowZ69ate/bZZwsKCnbu3Hn99debHgXg4gg8gAvxeDzR0dEbNmyora1dv379mDFjTC8CcEm4Bg/gQvz8/B5++OEzZ87069ePugNehMADuJCDBw9OnTp1wIABO3fuzM7ONj0HwKUi8ADq5fF4HnnkkcDAwPXr10+dOjU1NTU/P9/0KACXhGvwAOr13HPPpaSkbNiwYeTIkbW1tYMGDTpz5syOHTuCg4NNTwNwETyDB/DzPvvssyeeeCI9PX3kyJGSAgMD33zzzb17906fPt30NAAXxzN4AAAsxDN4AAAsROABALAQgQcAwEIEHgAACxF4AAAsROABALAQgQcAwEIEHgAACxF4AAAsROABALAQgQcAwEIEHgAACxF4AAAsROABALAQgQcAwEIEHgAACxF4AAAsROABALAQgQcAwEIEHgAACxF4AAAsROABALAQgQcAwEIEHgAAC/1/u5TJ1R8BpTYAAAAASUVORK5CYII=" /><!-- --></p>
 <h1 id="real-world-example-functions">“Real-world” example functions</h1>
-<p>This section builds on material covered in the <a href="https://github.com/moj-analytical-services/IntroRTraining">Intro R Training</a> course and makes use of the <code>dplyr</code> package, which is a commonly used R package for data manipulation. In the following examples we’ll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we’ll use is from the Criminal Justice System Statistics quarterly publication from December 2018, which can be found <a href="https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018">here</a>.</p>
+<p>This section builds on material covered in the <a href="https://github.com/moj-analytical-services/IntroRTraining">Intro R Training</a> course and makes use of the <code>dplyr</code> package, which is a commonly used R package for data manipulation. In the following examples we’ll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we’ll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found <a href="https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018">here</a>.</p>
 <hr />
 <h2 id="loading-packages-and-data">Loading packages and data</h2>
-<p>First of all we need to load a few packages. <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we will need this to help read in some data from an s3 bucket. <code>dplyr</code> is the package we’ll use to create summary tables from the data. Finally <code>stringr</code> contains functions that can be used to manipulate strings.</p>
+<p>First of all we need to load a few packages: • <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we will need this to help read in some data from an s3 bucket.<br />
+• <code>dplyr</code> is the package we’ll use to create summary tables from the data. • <code>stringr</code> provides functions that can be used to manipulate strings.<br />
+• <code>purrr</code> provides functions to make the use of vectors and user-defined functions easier.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># Load packages</span></span>
 <span id="cb39-2"><a href="#cb39-2"></a><span class="kw">library</span>(s3tools)</span>
 <span id="cb39-3"><a href="#cb39-3"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb39-4"><a href="#cb39-4"></a><span class="kw">library</span>(stringr)</span></code></pre></div>
-<p>Here we are reading in the <code>Prosecutions and Convictions</code> dataset from s3 and storing the dataframe as a variable called <code>prosecutions</code>.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>prosecutions &lt;-<span class="st"> </span>s3tools<span class="op">::</span><span class="kw">s3_path_to_full_df</span>(</span>
+<span id="cb39-4"><a href="#cb39-4"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="kw">library</span>(purrr)</span></code></pre></div>
+<p>Here we are reading in a copy of the <code>Prosecutions and Convictions</code> dataset from s3 and storing the dataframe as a variable called <code>prosecutions_and_convictions</code>. In the second step we’re filtering the dataset to extract only the prosecutions and saving to another variable, named <code>prosecutions</code>.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>prosecutions_and_convictions &lt;-<span class="st"> </span>s3tools<span class="op">::</span><span class="kw">s3_path_to_full_df</span>(</span>
 <span id="cb40-2"><a href="#cb40-2"></a>  <span class="st">&quot;alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv&quot;</span>)</span>
 <span id="cb40-3"><a href="#cb40-3"></a></span>
 <span id="cb40-4"><a href="#cb40-4"></a><span class="co"># Filter for Magistrates Court to extract the prosecutions</span></span>
-<span id="cb40-5"><a href="#cb40-5"></a>prosecutions &lt;-<span class="st"> </span>prosecutions <span class="op">%&gt;%</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a>prosecutions &lt;-<span class="st"> </span>prosecutions_and_convictions <span class="op">%&gt;%</span></span>
 <span id="cb40-6"><a href="#cb40-6"></a><span class="st">  </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">Court.Type</span><span class="st">`</span> <span class="op">==</span><span class="st"> &quot;Magistrates Court&quot;</span>)</span></code></pre></div>
 <hr />
 <p>Here’s a preview of the data stored in <code>prosecutions</code>:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">head</span>(prosecutions)</span></code></pre></div>
-<pre><code>##   Year Quarter      Sex Type.of.Defendent     Age.Group Age.Range
-## 1 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 2 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 3 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 4 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 5 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-## 6 2008      Q1 01: Male        01: Person 01: Juveniles 01: 10-11
-##   Ethnicity        Court.Type          Offence.Type
-## 1       N/A Magistrates Court    01 Indictable only
-## 2       N/A Magistrates Court    01 Indictable only
-## 3       N/A Magistrates Court    01 Indictable only
-## 4       N/A Magistrates Court    01 Indictable only
-## 5       N/A Magistrates Court 02 Triable either way
-## 6       N/A Magistrates Court 02 Triable either way
-##                    Offence.Group                          Tried
-## 1             02 Sexual offences                   5: Not tried
-## 2                     03 Robbery 01: Tried at magistrates court
-## 3                     03 Robbery 01: Tried at magistrates court
-## 4       07 Possession of weapons 01: Tried at magistrates court
-## 5 01 Violence against the person 01: Tried at magistrates court
-## 6 01 Violence against the person                   5: Not tried
-##   Plea.at.the.Crown.Court Convicted..Not.convicted
-## 1                     N/A        02: Not convicted
-## 2                     N/A            01: Convicted
-## 3                     N/A        02: Not convicted
-## 4                     N/A            01: Convicted
-## 5                     N/A            01: Convicted
-## 6                     N/A        02: Not convicted
-##   Sentenced...Not.sentenced                          Outcome Count
-## 1         02: Not sentenced 01: Proceedings terminated early     1
-## 2             01: Sentenced                 07: Found guilty     6
-## 3         02: Not sentenced  03: Dismissed (found not guilty     1
-## 4             01: Sentenced                 07: Found guilty     1
-## 5             01: Sentenced                 07: Found guilty    10
-## 6         02: Not sentenced 01: Proceedings terminated early     1
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">glimpse</span>(prosecutions)</span></code></pre></div>
+<pre><code>## Observations: 107,493
+## Variables: 16
+## $ Year                      &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 20…
+## $ Quarter                   &lt;chr&gt; &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q…
+## $ Sex                       &lt;chr&gt; &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;0…
+## $ Type.of.Defendent         &lt;chr&gt; &quot;01: Person&quot;, &quot;01: Person&quot;, &quot;01: Perso…
+## $ Age.Group                 &lt;chr&gt; &quot;01: Juveniles&quot;, &quot;01: Juveniles&quot;, &quot;01:…
+## $ Age.Range                 &lt;chr&gt; &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;01: 10-11&quot;,…
+## $ Ethnicity                 &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/…
+## $ Court.Type                &lt;chr&gt; &quot;Magistrates Court&quot;, &quot;Magistrates Cour…
+## $ Offence.Type              &lt;chr&gt; &quot;01 Indictable only&quot;, &quot;01 Indictable o…
+## $ Offence.Group             &lt;chr&gt; &quot;02 Sexual offences&quot;, &quot;03 Robbery&quot;, &quot;0…
+## $ Tried                     &lt;chr&gt; &quot;5: Not tried&quot;, &quot;01: Tried at magistra…
+## $ Plea.at.the.Crown.Court   &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/…
+## $ Convicted..Not.convicted  &lt;chr&gt; &quot;02: Not convicted&quot;, &quot;01: Convicted&quot;, …
+## $ Sentenced...Not.sentenced &lt;chr&gt; &quot;02: Not sentenced&quot;, &quot;01: Sentenced&quot;, …
+## $ Outcome                   &lt;chr&gt; &quot;01: Proceedings terminated early&quot;, &quot;0…
+## $ Count                     &lt;int&gt; 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15,…
 </code></pre>
 <h2 id="cleaning-data">Cleaning data</h2>
 <p>After reading in a dataframe it can often be helpful to standardise the column headings. Below is an example of a function that could be used for this purpose. It takes a vector of strings as the argument, ensures all letters in the string vector are lower-case, and makes use of “regular expressions” or “regex” to find and replace all spaces and punctuation marks with an underscore:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>generalise_names &lt;-<span class="st"> </span><span class="cf">function</span>(names){</span>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>generalise_names &lt;-<span class="st"> </span><span class="cf">function</span>(names) {</span>
 <span id="cb43-2"><a href="#cb43-2"></a>  </span>
 <span id="cb43-3"><a href="#cb43-3"></a>  <span class="co"># Convert any uppercase letters to lowercase</span></span>
 <span id="cb43-4"><a href="#cb43-4"></a>  names &lt;-<span class="st"> </span><span class="kw">tolower</span>(names)</span>
@@ -897,118 +883,82 @@ body {
 <p>Use the <code>generalise_names()</code> function defined above to clean the column headings of this dataset (Hint: use the function <code>colnames()</code> to retrieve the column headings of the dataset as a vector).</p>
 <hr />
 <hr />
-<p>There are some numeric indices in the columns that may be undesirable. We can write a function to remove these:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>remove_indices_from_columns &lt;-<span class="st"> </span><span class="cf">function</span>(data){</span>
-<span id="cb46-2"><a href="#cb46-2"></a></span>
-<span id="cb46-3"><a href="#cb46-3"></a>  <span class="co"># Remove 1 or 2 digits followed by a semicolon for columns that contain strings</span></span>
-<span id="cb46-4"><a href="#cb46-4"></a>  data &lt;-<span class="st"> </span><span class="kw">lapply</span>(data, <span class="cf">function</span>(x) { <span class="cf">if</span> (<span class="kw">is.character</span>(x)) <span class="kw">gsub</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">d{1,2}:&quot;</span>, <span class="st">&quot;&quot;</span>, x) <span class="cf">else</span> x })</span>
+<p>In this dataframe, some of the columns contain values with a number along with a category; for example, the <code>age_group</code> column contains categories like “01: Juveniles” rather than just “Juveniles”. These numbers might be undesirable, so we can write a function to remove these:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>remove_numbering &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb46-2"><a href="#cb46-2"></a>  </span>
+<span id="cb46-3"><a href="#cb46-3"></a>  <span class="co"># Remove 1 or 2 digits followed by a semicolon</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a>  x &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace</span>(x,<span class="st">&quot;^[:digit:]{1,2}[:blank:]*:[:blank:]*&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
 <span id="cb46-5"><a href="#cb46-5"></a>  <span class="co"># Remove 1 or 2 digits followed by a space</span></span>
-<span id="cb46-6"><a href="#cb46-6"></a>  data &lt;-<span class="st"> </span><span class="kw">lapply</span>(data, <span class="cf">function</span>(x) { <span class="cf">if</span> (<span class="kw">is.character</span>(x)) <span class="kw">gsub</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">d{1,2}</span><span class="ch">\\</span><span class="st">s&quot;</span>, <span class="st">&quot;&quot;</span>, x) <span class="cf">else</span> x })  </span>
-<span id="cb46-7"><a href="#cb46-7"></a></span>
-<span id="cb46-8"><a href="#cb46-8"></a>  <span class="kw">return</span>(data)</span>
-<span id="cb46-9"><a href="#cb46-9"></a>  </span>
-<span id="cb46-10"><a href="#cb46-10"></a>}</span></code></pre></div>
+<span id="cb46-6"><a href="#cb46-6"></a>  x &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace</span>(x,<span class="st">&quot;^[:digit:]{1,2}[:blank:]*&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb46-7"><a href="#cb46-7"></a>  </span>
+<span id="cb46-8"><a href="#cb46-8"></a>  <span class="kw">return</span>(x)</span>
+<span id="cb46-9"><a href="#cb46-9"></a>}</span></code></pre></div>
 <hr />
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>prosecutions[] &lt;-<span class="st"> </span><span class="kw">remove_indices_from_columns</span>(prosecutions)</span>
-<span id="cb47-2"><a href="#cb47-2"></a><span class="kw">head</span>(prosecutions)</span></code></pre></div>
-<pre><code>##   year quarter   sex type_of_defendent  age_group age_range ethnicity
-## 1 2008      Q1  Male            Person  Juveniles     10-11       N/A
-## 2 2008      Q1  Male            Person  Juveniles     10-11       N/A
-## 3 2008      Q1  Male            Person  Juveniles     10-11       N/A
-## 4 2008      Q1  Male            Person  Juveniles     10-11       N/A
-## 5 2008      Q1  Male            Person  Juveniles     10-11       N/A
-## 6 2008      Q1  Male            Person  Juveniles     10-11       N/A
-##          court_type       offence_type               offence_group
-## 1 Magistrates Court    Indictable only             Sexual offences
-## 2 Magistrates Court    Indictable only                     Robbery
-## 3 Magistrates Court    Indictable only                     Robbery
-## 4 Magistrates Court    Indictable only       Possession of weapons
-## 5 Magistrates Court Triable either way Violence against the person
-## 6 Magistrates Court Triable either way Violence against the person
-##                         tried plea_at_the_crown_court
-## 1                   Not tried                     N/A
-## 2  Tried at magistrates court                     N/A
-## 3  Tried at magistrates court                     N/A
-## 4  Tried at magistrates court                     N/A
-## 5  Tried at magistrates court                     N/A
-## 6                   Not tried                     N/A
-##   convicted_not_convicted sentenced_not_sentenced
-## 1           Not convicted           Not sentenced
-## 2               Convicted               Sentenced
-## 3           Not convicted           Not sentenced
-## 4               Convicted               Sentenced
-## 5               Convicted               Sentenced
-## 6           Not convicted           Not sentenced
-##                         outcome count
-## 1  Proceedings terminated early     1
-## 2                  Found guilty     6
-## 3   Dismissed (found not guilty     1
-## 4                  Found guilty     1
-## 5                  Found guilty    10
-## 6  Proceedings terminated early     1
+<p>Then we can use the <code>map_if()</code> function from <code>purrr</code> to apply the <code>remove_numbering()</code> function to all columns in the <code>prosecutions</code> dataframe, with the condition that the column must contain strings.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>prosecutions_cleaned &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_if</span>(prosecutions, is.character, remove_numbering) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()</span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="kw">glimpse</span>(prosecutions)</span></code></pre></div>
+<pre><code>## Observations: 107,493
+## Variables: 16
+## $ year                    &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+## $ quarter                 &lt;chr&gt; &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;…
+## $ sex                     &lt;chr&gt; &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01:…
+## $ type_of_defendent       &lt;chr&gt; &quot;01: Person&quot;, &quot;01: Person&quot;, &quot;01: Person&quot;…
+## $ age_group               &lt;chr&gt; &quot;01: Juveniles&quot;, &quot;01: Juveniles&quot;, &quot;01: J…
+## $ age_range               &lt;chr&gt; &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;…
+## $ ethnicity               &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;…
+## $ court_type              &lt;chr&gt; &quot;Magistrates Court&quot;, &quot;Magistrates Court&quot;…
+## $ offence_type            &lt;chr&gt; &quot;01 Indictable only&quot;, &quot;01 Indictable onl…
+## $ offence_group           &lt;chr&gt; &quot;02 Sexual offences&quot;, &quot;03 Robbery&quot;, &quot;03 …
+## $ tried                   &lt;chr&gt; &quot;5: Not tried&quot;, &quot;01: Tried at magistrate…
+## $ plea_at_the_crown_court &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;…
+## $ convicted_not_convicted &lt;chr&gt; &quot;02: Not convicted&quot;, &quot;01: Convicted&quot;, &quot;0…
+## $ sentenced_not_sentenced &lt;chr&gt; &quot;02: Not sentenced&quot;, &quot;01: Sentenced&quot;, &quot;0…
+## $ outcome                 &lt;chr&gt; &quot;01: Proceedings terminated early&quot;, &quot;07:…
+## $ count                   &lt;int&gt; 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 </code></pre>
-<p>This function uses <code>lapply()</code> to apply a function to all columns in the dataframe. Here we’ve used an “anonymous function” as the second argument of <code>lapply()</code>, which is a single-use function that doesn’t have a name.</p>
 <hr />
 <p>For the final stage of data cleaning, we can make missing and unknown values more consistent using a function such as the following:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>clean_not_known &lt;-<span class="st"> </span><span class="cf">function</span>(data, not_known_phrase) {</span>
-<span id="cb49-2"><a href="#cb49-2"></a>  </span>
-<span id="cb49-3"><a href="#cb49-3"></a>  <span class="co"># Replace any missing (NA) values</span></span>
-<span id="cb49-4"><a href="#cb49-4"></a>  data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace</span>(., <span class="kw">is.na</span>(.), not_known_phrase)</span>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>clean_not_known &lt;-<span class="st"> </span><span class="cf">function</span>(x,</span>
+<span id="cb49-2"><a href="#cb49-2"></a>                            <span class="dt">not_known_phrase =</span> <span class="st">&quot;Not known&quot;</span>,</span>
+<span id="cb49-3"><a href="#cb49-3"></a>                            <span class="dt">change_na =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb49-4"><a href="#cb49-4"></a>                            <span class="dt">values_to_change =</span> <span class="kw">c</span>(<span class="st">&quot;n/a&quot;</span>, <span class="st">&quot;not known&quot;</span>, <span class="st">&quot;unknown&quot;</span>, <span class="st">&quot;not stated&quot;</span>)) {</span>
 <span id="cb49-5"><a href="#cb49-5"></a>  </span>
-<span id="cb49-6"><a href="#cb49-6"></a>  <span class="co"># Create a version of the dataframe with all strings converted to lower</span></span>
-<span id="cb49-7"><a href="#cb49-7"></a>  <span class="co"># case and any white space at the start or end trimmed. This will make</span></span>
-<span id="cb49-8"><a href="#cb49-8"></a>  <span class="co"># the following stage easier.</span></span>
-<span id="cb49-9"><a href="#cb49-9"></a>  data_lowercase &lt;-<span class="st"> </span>data</span>
-<span id="cb49-10"><a href="#cb49-10"></a>  data_lowercase[] &lt;-<span class="st"> </span><span class="kw">lapply</span>(data_lowercase, tolower)</span>
-<span id="cb49-11"><a href="#cb49-11"></a>  data_lowercase[] &lt;-<span class="st"> </span><span class="kw">lapply</span>(data_lowercase, stringr<span class="op">::</span>str_trim)</span>
-<span id="cb49-12"><a href="#cb49-12"></a>  </span>
-<span id="cb49-13"><a href="#cb49-13"></a>  <span class="co"># Replace strings in the data that refer to a missing or unknown values</span></span>
-<span id="cb49-14"><a href="#cb49-14"></a>  data[data_lowercase <span class="op">==</span><span class="st"> &quot;n/a&quot;</span>] &lt;-<span class="st"> </span>not_known_phrase</span>
-<span id="cb49-15"><a href="#cb49-15"></a>  data[data_lowercase <span class="op">==</span><span class="st"> &quot;not known&quot;</span>] &lt;-<span class="st"> </span>not_known_phrase</span>
-<span id="cb49-16"><a href="#cb49-16"></a>  data[data_lowercase <span class="op">==</span><span class="st"> &quot;unknown&quot;</span>] &lt;-<span class="st"> </span>not_known_phrase</span>
-<span id="cb49-17"><a href="#cb49-17"></a>  data[data_lowercase <span class="op">==</span><span class="st"> &quot;not stated&quot;</span>] &lt;-<span class="st"> </span>not_known_phrase</span>
-<span id="cb49-18"><a href="#cb49-18"></a>  </span>
-<span id="cb49-19"><a href="#cb49-19"></a>  <span class="kw">return</span>(data)</span>
-<span id="cb49-20"><a href="#cb49-20"></a>  </span>
-<span id="cb49-21"><a href="#cb49-21"></a>}</span></code></pre></div>
+<span id="cb49-6"><a href="#cb49-6"></a>  <span class="co"># Replace any missing (NA) values</span></span>
+<span id="cb49-7"><a href="#cb49-7"></a>  <span class="cf">if</span>(change_na){</span>
+<span id="cb49-8"><a href="#cb49-8"></a>    x &lt;-<span class="st"> </span><span class="kw">replace</span>(x, <span class="kw">is.na</span>(x), not_known_phrase)</span>
+<span id="cb49-9"><a href="#cb49-9"></a>  }</span>
+<span id="cb49-10"><a href="#cb49-10"></a>  </span>
+<span id="cb49-11"><a href="#cb49-11"></a>  <span class="co"># Remove any white space that might cause the strings to not match</span></span>
+<span id="cb49-12"><a href="#cb49-12"></a>  x &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_trim</span>(x)</span>
+<span id="cb49-13"><a href="#cb49-13"></a>  </span>
+<span id="cb49-14"><a href="#cb49-14"></a>  <span class="co"># Replace strings in the data that refer to a missing or unknown values</span></span>
+<span id="cb49-15"><a href="#cb49-15"></a>  x &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">tolower</span>(x) <span class="op">%in%</span><span class="st"> </span>values_to_change, not_known_phrase, x)</span>
+<span id="cb49-16"><a href="#cb49-16"></a>  </span>
+<span id="cb49-17"><a href="#cb49-17"></a>  <span class="kw">return</span>(x)</span>
+<span id="cb49-18"><a href="#cb49-18"></a></span>
+<span id="cb49-19"><a href="#cb49-19"></a>}</span></code></pre></div>
+<p>In this function we’ve included some default values, so by default missing/NA values are replaced, and any strings that match “n/a”, “not known”, “unknown”, or “not stated” are replaced. The default replacement value is “Not known”.</p>
 <hr />
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>prosecutions &lt;-<span class="st"> </span><span class="kw">clean_not_known</span>(prosecutions, <span class="st">&quot;Not known&quot;</span>)</span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="kw">head</span>(prosecutions)</span></code></pre></div>
-<pre><code>##   year quarter   sex type_of_defendent  age_group age_range ethnicity
-## 1 2008      Q1  Male            Person  Juveniles     10-11 Not known
-## 2 2008      Q1  Male            Person  Juveniles     10-11 Not known
-## 3 2008      Q1  Male            Person  Juveniles     10-11 Not known
-## 4 2008      Q1  Male            Person  Juveniles     10-11 Not known
-## 5 2008      Q1  Male            Person  Juveniles     10-11 Not known
-## 6 2008      Q1  Male            Person  Juveniles     10-11 Not known
-##          court_type       offence_type               offence_group
-## 1 Magistrates Court    Indictable only             Sexual offences
-## 2 Magistrates Court    Indictable only                     Robbery
-## 3 Magistrates Court    Indictable only                     Robbery
-## 4 Magistrates Court    Indictable only       Possession of weapons
-## 5 Magistrates Court Triable either way Violence against the person
-## 6 Magistrates Court Triable either way Violence against the person
-##                         tried plea_at_the_crown_court
-## 1                   Not tried               Not known
-## 2  Tried at magistrates court               Not known
-## 3  Tried at magistrates court               Not known
-## 4  Tried at magistrates court               Not known
-## 5  Tried at magistrates court               Not known
-## 6                   Not tried               Not known
-##   convicted_not_convicted sentenced_not_sentenced
-## 1           Not convicted           Not sentenced
-## 2               Convicted               Sentenced
-## 3           Not convicted           Not sentenced
-## 4               Convicted               Sentenced
-## 5               Convicted               Sentenced
-## 6           Not convicted           Not sentenced
-##                         outcome count
-## 1  Proceedings terminated early     1
-## 2                  Found guilty     6
-## 3   Dismissed (found not guilty     1
-## 4                  Found guilty     1
-## 5                  Found guilty    10
-## 6  Proceedings terminated early     1
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>prosecutions &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_if</span>(prosecutions, is.character, clean_not_known) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()</span>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="kw">glimpse</span>(prosecutions)</span></code></pre></div>
+<pre><code>## Observations: 107,493
+## Variables: 16
+## $ year                    &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+## $ quarter                 &lt;fct&gt; Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, …
+## $ sex                     &lt;fct&gt; 01: Male, 01: Male, 01: Male, 01: Male, …
+## $ type_of_defendent       &lt;fct&gt; 01: Person, 01: Person, 01: Person, 01: …
+## $ age_group               &lt;fct&gt; 01: Juveniles, 01: Juveniles, 01: Juveni…
+## $ age_range               &lt;fct&gt; 01: 10-11, 01: 10-11, 01: 10-11, 01: 10-…
+## $ ethnicity               &lt;fct&gt; Not known, Not known, Not known, Not kno…
+## $ court_type              &lt;fct&gt; Magistrates Court, Magistrates Court, Ma…
+## $ offence_type            &lt;fct&gt; 01 Indictable only, 01 Indictable only, …
+## $ offence_group           &lt;fct&gt; 02 Sexual offences, 03 Robbery, 03 Robbe…
+## $ tried                   &lt;fct&gt; 5: Not tried, 01: Tried at magistrates c…
+## $ plea_at_the_crown_court &lt;fct&gt; Not known, Not known, Not known, Not kno…
+## $ convicted_not_convicted &lt;fct&gt; 02: Not convicted, 01: Convicted, 02: No…
+## $ sentenced_not_sentenced &lt;fct&gt; 02: Not sentenced, 01: Sentenced, 02: No…
+## $ outcome                 &lt;fct&gt; 01: Proceedings terminated early, 07: Fo…
+## $ count                   &lt;int&gt; 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 </code></pre>
 <hr />
 <h3 id="exercise-2">Exercise 2</h3>
@@ -1025,22 +975,22 @@ body {
 <hr />
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>prosecutions_grouped</span></code></pre></div>
 <pre><code>## # A tibble: 14 x 2
-##    age_range                          counts
-##    &lt;chr&gt;                               &lt;int&gt;
-##  1 &quot; 10-11&quot;                             3324
-##  2 &quot; 12-14&quot;                           113960
-##  3 &quot; 15-17&quot;                           570275
-##  4 &quot; 18-20&quot;                          1302589
-##  5 &quot; 21-24&quot;                          2131033
-##  6 &quot; 25-29 (2017 onwards)&quot;            447108
-##  7 &quot; 25+ (prior to 2017)&quot;           10209264
-##  8 &quot; 30-39 (2017 onwards)&quot;            758230
-##  9 &quot; 40-49 (2017 onwards)&quot;            477217
-## 10 &quot; 50-59 (2017 onwards)&quot;            261626
-## 11 &quot; 60+ (2017 onwards)&quot;              101554
-## 12 &quot; Companies, public bodies etc.&quot;   114771
-## 13 &quot; Not known (Adult)&quot;               195459
-## 14 &quot; Not known (Juvenile)&quot;               150
+##    age_range                           counts
+##    &lt;fct&gt;                                &lt;int&gt;
+##  1 01: 10-11                             3324
+##  2 02: 12-14                           113960
+##  3 03: 15-17                           570275
+##  4 04: 18-20                          1302589
+##  5 05: 21-24                          2131033
+##  6 06: 25+ (prior to 2017)           10209264
+##  7 07: 25-29 (2017 onwards)            447108
+##  8 08: 30-39 (2017 onwards)            758230
+##  9 09: 40-49 (2017 onwards)            477217
+## 10 10: 50-59 (2017 onwards)            261626
+## 11 11: 60+ (2017 onwards)              101554
+## 12 12: Not known (Juvenile)               150
+## 13 13: Not known (Adult)               195459
+## 14 14: Companies, public bodies etc.   114771
 </code></pre>
 <hr />
 <p>What if we wanted to create several different summary tables? We could write a function to avoid writing this out each time. Following the previous examples in this course, you might expect this function to work:</p>
@@ -1074,22 +1024,22 @@ body {
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>prosecutions_grouped &lt;-<span class="st"> </span><span class="kw">sum_group</span>(<span class="dt">df =</span> prosecutions, <span class="dt">group_cols =</span> <span class="st">&quot;age_range&quot;</span>, <span class="dt">sum_col =</span> <span class="st">&quot;count&quot;</span>)</span>
 <span id="cb59-2"><a href="#cb59-2"></a>prosecutions_grouped</span></code></pre></div>
 <pre><code>## # A tibble: 14 x 2
-##    age_range                           count
-##    &lt;chr&gt;                               &lt;int&gt;
-##  1 &quot; 10-11&quot;                             3324
-##  2 &quot; 12-14&quot;                           113960
-##  3 &quot; 15-17&quot;                           570275
-##  4 &quot; 18-20&quot;                          1302589
-##  5 &quot; 21-24&quot;                          2131033
-##  6 &quot; 25-29 (2017 onwards)&quot;            447108
-##  7 &quot; 25+ (prior to 2017)&quot;           10209264
-##  8 &quot; 30-39 (2017 onwards)&quot;            758230
-##  9 &quot; 40-49 (2017 onwards)&quot;            477217
-## 10 &quot; 50-59 (2017 onwards)&quot;            261626
-## 11 &quot; 60+ (2017 onwards)&quot;              101554
-## 12 &quot; Companies, public bodies etc.&quot;   114771
-## 13 &quot; Not known (Adult)&quot;               195459
-## 14 &quot; Not known (Juvenile)&quot;               150
+##    age_range                            count
+##    &lt;fct&gt;                                &lt;int&gt;
+##  1 01: 10-11                             3324
+##  2 02: 12-14                           113960
+##  3 03: 15-17                           570275
+##  4 04: 18-20                          1302589
+##  5 05: 21-24                          2131033
+##  6 06: 25+ (prior to 2017)           10209264
+##  7 07: 25-29 (2017 onwards)            447108
+##  8 08: 30-39 (2017 onwards)            758230
+##  9 09: 40-49 (2017 onwards)            477217
+## 10 10: 50-59 (2017 onwards)            261626
+## 11 11: 60+ (2017 onwards)              101554
+## 12 12: Not known (Juvenile)               150
+## 13 13: Not known (Adult)               195459
+## 14 14: Companies, public bodies etc.   114771
 </code></pre>
 <hr />
 <p>The <code>sum_group()</code> function also allows us to add any number of grouping columns:</p>
@@ -1097,28 +1047,25 @@ body {
 <span id="cb61-2"><a href="#cb61-2"></a>                                  <span class="dt">group_cols =</span> <span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;offence_group&quot;</span>), </span>
 <span id="cb61-3"><a href="#cb61-3"></a>                                  <span class="dt">sum_col =</span> <span class="st">&quot;count&quot;</span>)</span>
 <span id="cb61-4"><a href="#cb61-4"></a></span>
-<span id="cb61-5"><a href="#cb61-5"></a><span class="kw">head</span>(prosecutions_grouped)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 3
-## # Groups:   year [1]
-##    year offence_group                        count
-##   &lt;int&gt; &lt;chr&gt;                                &lt;int&gt;
-## 1  2008 Criminal damage and arson            11278
-## 2  2008 Drug offences                        56953
-## 3  2008 Fraud Offences                       16262
-## 4  2008 Miscellaneous crimes against society 71652
-## 5  2008 Possession of weapons                17968
-## 6  2008 Public order offences                10465
+<span id="cb61-5"><a href="#cb61-5"></a><span class="kw">glimpse</span>(prosecutions_grouped)</span></code></pre></div>
+<pre><code>## Observations: 133
+## Variables: 3
+## Groups: year [11]
+## $ year          &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 20…
+## $ offence_group &lt;fct&gt; 01 Violence against the person, 02 Sexual offences…
+## $ count         &lt;int&gt; 45119, 8353, 13096, 146304, 11278, 56953, 17968, 1…
 </code></pre>
 <h2 id="plotting-data">Plotting data</h2>
 <p>Let’s say we want to produce some plots, and want them all to have the same style. We can define the style of the plot in a function, then we only have to change the styling in one place if it needs changing. Here we’ve gone for a line chart with a red line.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>make_line_chart &lt;-<span class="st"> </span><span class="cf">function</span>(df, x_col, y_col){</span>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>make_line_chart &lt;-<span class="st"> </span><span class="cf">function</span>(df, x_col, y_col) {</span>
 <span id="cb63-2"><a href="#cb63-2"></a>  </span>
-<span id="cb63-3"><a href="#cb63-3"></a>  x &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">pull</span>(x_col)</span>
-<span id="cb63-4"><a href="#cb63-4"></a>  y &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">pull</span>(y_col)</span>
-<span id="cb63-5"><a href="#cb63-5"></a>  </span>
-<span id="cb63-6"><a href="#cb63-6"></a>  <span class="kw">plot</span>(x, y, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">xlab=</span>x_col, <span class="dt">ylab=</span>y_col)</span>
-<span id="cb63-7"><a href="#cb63-7"></a>  </span>
-<span id="cb63-8"><a href="#cb63-8"></a>}</span></code></pre></div>
+<span id="cb63-3"><a href="#cb63-3"></a>  <span class="co"># The `pull()` function extracts the contents of a single column as a vector.</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a>  x &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">pull</span>(x_col)</span>
+<span id="cb63-5"><a href="#cb63-5"></a>  y &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">pull</span>(y_col)</span>
+<span id="cb63-6"><a href="#cb63-6"></a>  </span>
+<span id="cb63-7"><a href="#cb63-7"></a>  <span class="kw">plot</span>(x, y, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">xlab=</span>x_col, <span class="dt">ylab=</span>y_col)</span>
+<span id="cb63-8"><a href="#cb63-8"></a>  </span>
+<span id="cb63-9"><a href="#cb63-9"></a>}</span></code></pre></div>
 <hr />
 <p>Let’s use the <code>sum_group()</code> and <code>make_line_chart()</code> functions to produce a plot of the total number of prosecutions in each year.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>time_series &lt;-<span class="st"> </span><span class="kw">sum_group</span>(<span class="dt">df =</span> prosecutions, <span class="dt">group_cols =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">sum_col =</span> <span class="st">&quot;count&quot;</span>)</span>
@@ -1143,42 +1090,25 @@ body {
 <span id="cb65-14"><a href="#cb65-14"></a>}</span></code></pre></div>
 <hr />
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>prosecutions_extract &lt;-<span class="st"> </span><span class="kw">extract_quarter</span>(prosecutions, <span class="st">&quot;31-Mar-2018&quot;</span>)</span>
-<span id="cb66-2"><a href="#cb66-2"></a><span class="kw">head</span>(prosecutions_extract)</span></code></pre></div>
-<pre><code>##   year quarter   sex type_of_defendent  age_group age_range ethnicity
-## 1 2018      Q1  Male            Person  Juveniles     10-11     White
-## 2 2018      Q1  Male            Person  Juveniles     10-11     White
-## 3 2018      Q1  Male            Person  Juveniles     10-11     White
-## 4 2018      Q1  Male            Person  Juveniles     10-11     Black
-## 5 2018      Q1  Male            Person  Juveniles     10-11 Not known
-## 6 2018      Q1  Male            Person  Juveniles     10-11 Not known
-##          court_type       offence_type             offence_group
-## 1 Magistrates Court    Indictable only                   Robbery
-## 2 Magistrates Court Triable either way            Theft Offences
-## 3 Magistrates Court Triable either way Criminal damage and arson
-## 4 Magistrates Court Triable either way     Possession of weapons
-## 5 Magistrates Court    Indictable only                   Robbery
-## 6 Magistrates Court    Indictable only Criminal damage and arson
-##                         tried plea_at_the_crown_court
-## 1  Tried at magistrates court               Not known
-## 2                   Not tried               Not known
-## 3                   Not tried               Not known
-## 4  Tried at magistrates court               Not known
-## 5  Tried at magistrates court               Not known
-## 6  Tried at magistrates court               Not known
-##   convicted_not_convicted sentenced_not_sentenced
-## 1               Convicted               Sentenced
-## 2           Not convicted           Not sentenced
-## 3           Not convicted           Not sentenced
-## 4               Convicted               Sentenced
-## 5               Convicted               Sentenced
-## 6               Convicted               Sentenced
-##                         outcome count
-## 1                  Found guilty     1
-## 2  Proceedings terminated early     2
-## 3  Proceedings terminated early     1
-## 4                  Found guilty     1
-## 5                  Found guilty     1
-## 6                  Found guilty     1
+<span id="cb66-2"><a href="#cb66-2"></a><span class="kw">glimpse</span>(prosecutions_extract)</span></code></pre></div>
+<pre><code>## Observations: 3,675
+## Variables: 16
+## $ year                    &lt;int&gt; 2018, 2018, 2018, 2018, 2018, 2018, 2018…
+## $ quarter                 &lt;fct&gt; Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, …
+## $ sex                     &lt;fct&gt; 01: Male, 01: Male, 01: Male, 01: Male, …
+## $ type_of_defendent       &lt;fct&gt; 01: Person, 01: Person, 01: Person, 01: …
+## $ age_group               &lt;fct&gt; 01: Juveniles, 01: Juveniles, 01: Juveni…
+## $ age_range               &lt;fct&gt; 01: 10-11, 01: 10-11, 01: 10-11, 01: 10-…
+## $ ethnicity               &lt;fct&gt; 01: White, 01: White, 01: White, 02: Bla…
+## $ court_type              &lt;fct&gt; Magistrates Court, Magistrates Court, Ma…
+## $ offence_type            &lt;fct&gt; 01 Indictable only, 02 Triable either wa…
+## $ offence_group           &lt;fct&gt; 03 Robbery, 04 Theft Offences, 05 Crimin…
+## $ tried                   &lt;fct&gt; 01: Tried at magistrates court, 5: Not t…
+## $ plea_at_the_crown_court &lt;fct&gt; Not known, Not known, Not known, Not kno…
+## $ convicted_not_convicted &lt;fct&gt; 01: Convicted, 02: Not convicted, 02: No…
+## $ sentenced_not_sentenced &lt;fct&gt; 01: Sentenced, 02: Not sentenced, 02: No…
+## $ outcome                 &lt;fct&gt; 07: Found guilty, 01: Proceedings termin…
+## $ count                   &lt;int&gt; 1, 2, 1, 1, 1, 1, 7, 11, 1, 5, 6, 1, 2, …
 </code></pre>
 <h1 id="hints-and-tips">Hints and tips</h1>
 <h2 id="when-to-write-a-function">When to write a function</h2>
@@ -1215,7 +1145,7 @@ body {
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="co"># Create a list of colours to provide to the function</span></span>
 <span id="cb69-2"><a href="#cb69-2"></a>colours &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Magenta&quot;</span>, <span class="st">&quot;Cyan&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>, <span class="st">&quot;Pink&quot;</span>)</span>
 <span id="cb69-3"><a href="#cb69-3"></a><span class="kw">pick_a_colour</span>(colours)</span></code></pre></div>
-<pre><code>## [1] &quot;Blue&quot;
+<pre><code>## [1] &quot;Green&quot;
 </code></pre>
 <h2 id="writing-a-package">Writing a package</h2>
 <p>An alternative is to make your own package to store your functions which you can then use like any other R package. There are a few advantages to this:</p>
@@ -1264,22 +1194,22 @@ body {
 <span id="cb71-12"><a href="#cb71-12"></a>prosecutions_grouped &lt;-<span class="st"> </span><span class="kw">sum_group_alt1</span>(<span class="dt">df =</span> prosecutions, <span class="dt">group_cols =</span> <span class="st">&quot;age_range&quot;</span>, <span class="dt">sum_col =</span> <span class="st">&quot;count&quot;</span>)</span>
 <span id="cb71-13"><a href="#cb71-13"></a></span>
 <span id="cb71-14"><a href="#cb71-14"></a>prosecutions_grouped</span></code></pre></div>
-<pre><code>##                       age_range   counts
-##                           10-11     3324
-##                           12-14   113960
-##                           15-17   570275
-##                           18-20  1302589
-##                           21-24  2131033
-##            25-29 (2017 onwards)   447108
-##             25+ (prior to 2017) 10209264
-##            30-39 (2017 onwards)   758230
-##            40-49 (2017 onwards)   477217
-##            50-59 (2017 onwards)   261626
-##              60+ (2017 onwards)   101554
-##   Companies, public bodies etc.   114771
-##               Not known (Adult)   195459
-##            Not known (Juvenile)      150
-##                           Total 16686560
+<pre><code>##                          age_range   counts
+##                          01: 10-11     3324
+##                          02: 12-14   113960
+##                          03: 15-17   570275
+##                          04: 18-20  1302589
+##                          05: 21-24  2131033
+##            06: 25+ (prior to 2017) 10209264
+##           07: 25-29 (2017 onwards)   447108
+##           08: 30-39 (2017 onwards)   758230
+##           09: 40-49 (2017 onwards)   477217
+##           10: 50-59 (2017 onwards)   261626
+##             11: 60+ (2017 onwards)   101554
+##           12: Not known (Juvenile)      150
+##              13: Not known (Adult)   195459
+##  14: Companies, public bodies etc.   114771
+##                              Total 16686560
 </code></pre>
 <p>Alternatively, this version of the function means the column names can be input as function arguments directly (rather than needing to enclose them in quote marks to turn them into strings).</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>sum_group_alt2 &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col) {</span>
@@ -1296,22 +1226,22 @@ body {
 <span id="cb73-12"><a href="#cb73-12"></a>prosecutions_grouped &lt;-<span class="st"> </span><span class="kw">sum_group_alt2</span>(<span class="dt">df =</span> prosecutions, <span class="dt">group_cols =</span> age_range, <span class="dt">sum_col =</span> count)</span>
 <span id="cb73-13"><a href="#cb73-13"></a></span>
 <span id="cb73-14"><a href="#cb73-14"></a>prosecutions_grouped</span></code></pre></div>
-<pre><code>##                       age_range   counts
-##                           10-11     3324
-##                           12-14   113960
-##                           15-17   570275
-##                           18-20  1302589
-##                           21-24  2131033
-##            25-29 (2017 onwards)   447108
-##             25+ (prior to 2017) 10209264
-##            30-39 (2017 onwards)   758230
-##            40-49 (2017 onwards)   477217
-##            50-59 (2017 onwards)   261626
-##              60+ (2017 onwards)   101554
-##   Companies, public bodies etc.   114771
-##               Not known (Adult)   195459
-##            Not known (Juvenile)      150
-##                           Total 16686560
+<pre><code>##                          age_range   counts
+##                          01: 10-11     3324
+##                          02: 12-14   113960
+##                          03: 15-17   570275
+##                          04: 18-20  1302589
+##                          05: 21-24  2131033
+##            06: 25+ (prior to 2017) 10209264
+##           07: 25-29 (2017 onwards)   447108
+##           08: 30-39 (2017 onwards)   758230
+##           09: 40-49 (2017 onwards)   477217
+##           10: 50-59 (2017 onwards)   261626
+##             11: 60+ (2017 onwards)   101554
+##           12: Not known (Juvenile)      150
+##              13: Not known (Adult)   195459
+##  14: Companies, public bodies etc.   114771
+##                              Total 16686560
 </code></pre>
 <h2 id="adding-an-optional-total-row">Adding an optional total row</h2>
 <p>We can extend the <code>sum_group()</code> function by having the option to add a row with the total across all categories. Note that this requires the <code>janitor</code> package.</p>

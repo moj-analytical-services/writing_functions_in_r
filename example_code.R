@@ -183,24 +183,25 @@ plot_x_and_y(x, y, col='red', type='l')
 library(s3tools)
 library(dplyr)
 library(stringr)
+library(purrr)
 
 
 ## ----message=F, warning=F------------------------------------------------
-prosecutions <- s3tools::s3_path_to_full_df(
+prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
   "alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv")
 
 # Filter for Magistrates Court to extract the prosecutions
-prosecutions <- prosecutions %>%
+prosecutions <- prosecutions_and_convictions %>%
   filter(`Court.Type` == "Magistrates Court")
 
 
 ## ------------------------------------------------------------------------
-head(prosecutions)
+glimpse(prosecutions)
 
 
 ## ------------------------------------------------------------------------
 
-generalise_names <- function(names){
+generalise_names <- function(names) {
   
   # Convert any uppercase letters to lowercase
   names <- tolower(names)
@@ -232,53 +233,50 @@ generalise_names(names)
 
 ## ------------------------------------------------------------------------
 
-remove_indices_from_columns <- function(data){
-
-  # Remove 1 or 2 digits followed by a semicolon for columns that contain strings
-  data <- lapply(data, function(x) { if (is.character(x)) gsub("^\\d{1,2}:", "", x) else x })
-  # Remove 1 or 2 digits followed by a space
-  data <- lapply(data, function(x) { if (is.character(x)) gsub("^\\d{1,2}\\s", "", x) else x })  
-
-  return(data)
+remove_numbering <- function(x) {
   
+  # Remove 1 or 2 digits followed by a semicolon
+  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*", "")
+  # Remove 1 or 2 digits followed by a space
+  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*", "")
+  
+  return(x)
 }
 
 
 
 ## ------------------------------------------------------------------------
-prosecutions[] <- remove_indices_from_columns(prosecutions)
-head(prosecutions)
+prosecutions_cleaned <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame()
+glimpse(prosecutions)
 
 
 ## ------------------------------------------------------------------------
 
-clean_not_known <- function(data, not_known_phrase) {
+clean_not_known <- function(x,
+                            not_known_phrase = "Not known",
+                            change_na = TRUE,
+                            values_to_change = c("n/a", "not known", "unknown", "not stated")) {
   
   # Replace any missing (NA) values
-  data <- data %>% replace(., is.na(.), not_known_phrase)
+  if(change_na){
+    x <- replace(x, is.na(x), not_known_phrase)
+  }
   
-  # Create a version of the dataframe with all strings converted to lower
-  # case and any white space at the start or end trimmed. This will make
-  # the following stage easier.
-  data_lowercase <- data
-  data_lowercase[] <- lapply(data_lowercase, tolower)
-  data_lowercase[] <- lapply(data_lowercase, stringr::str_trim)
+  # Remove any white space that might cause the strings to not match
+  x <- stringr::str_trim(x)
   
   # Replace strings in the data that refer to a missing or unknown values
-  data[data_lowercase == "n/a"] <- not_known_phrase
-  data[data_lowercase == "not known"] <- not_known_phrase
-  data[data_lowercase == "unknown"] <- not_known_phrase
-  data[data_lowercase == "not stated"] <- not_known_phrase
+  x <- ifelse(tolower(x) %in% values_to_change, not_known_phrase, x)
   
-  return(data)
-  
+  return(x)
+
 }
 
 
 
 ## ------------------------------------------------------------------------
-prosecutions <- clean_not_known(prosecutions, "Not known")
-head(prosecutions)
+prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame()
+glimpse(prosecutions)
 
 
 
@@ -334,13 +332,14 @@ prosecutions_grouped <- sum_group(df = prosecutions,
                                   group_cols = c("year", "offence_group"), 
                                   sum_col = "count")
 
-head(prosecutions_grouped)
+glimpse(prosecutions_grouped)
 
 
 
 ## ------------------------------------------------------------------------
-make_line_chart <- function(df, x_col, y_col){
+make_line_chart <- function(df, x_col, y_col) {
   
+  # The `pull()` function extracts the contents of a single column as a vector.
   x <- df %>% dplyr::pull(x_col)
   y <- df %>% dplyr::pull(y_col)
   
@@ -378,7 +377,7 @@ extract_quarter <- function(data, date) {
 
 ## ------------------------------------------------------------------------
 prosecutions_extract <- extract_quarter(prosecutions, "31-Mar-2018")
-head(prosecutions_extract)
+glimpse(prosecutions_extract)
 
 
 ## ------------------------------------------------------------------------
