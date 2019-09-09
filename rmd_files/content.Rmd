@@ -290,9 +290,9 @@ This section builds on material covered in the [Intro R Training](https://github
 
 ## Loading packages and data
 
-First of all we need to load a few packages:
+First of all we need to load a few packages:  
 • `s3tools` is an MoJ package designed to interact with Amazon s3 - we will need this to help read in some data from an s3 bucket.  
-• `dplyr` is the package we'll use to create summary tables from the data.
+• `dplyr` is the package we'll use to create summary tables from the data.  
 • `stringr` provides functions that can be used to manipulate strings.  
 • `purrr` provides functions to make the use of vectors and user-defined functions easier.  
 

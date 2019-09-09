@@ -816,8 +816,10 @@ body {
 <p>This section builds on material covered in the <a href="https://github.com/moj-analytical-services/IntroRTraining">Intro R Training</a> course and makes use of the <code>dplyr</code> package, which is a commonly used R package for data manipulation. In the following examples we’ll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we’ll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found <a href="https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018">here</a>.</p>
 <hr />
 <h2 id="loading-packages-and-data">Loading packages and data</h2>
-<p>First of all we need to load a few packages: • <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we will need this to help read in some data from an s3 bucket.<br />
-• <code>dplyr</code> is the package we’ll use to create summary tables from the data. • <code>stringr</code> provides functions that can be used to manipulate strings.<br />
+<p>First of all we need to load a few packages:<br />
+• <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we will need this to help read in some data from an s3 bucket.<br />
+• <code>dplyr</code> is the package we’ll use to create summary tables from the data.<br />
+• <code>stringr</code> provides functions that can be used to manipulate strings.<br />
 • <code>purrr</code> provides functions to make the use of vectors and user-defined functions easier.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># Load packages</span></span>
 <span id="cb39-2"><a href="#cb39-2"></a><span class="kw">library</span>(s3tools)</span>
@@ -1145,7 +1147,7 @@ body {
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="co"># Create a list of colours to provide to the function</span></span>
 <span id="cb69-2"><a href="#cb69-2"></a>colours &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Magenta&quot;</span>, <span class="st">&quot;Cyan&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>, <span class="st">&quot;Pink&quot;</span>)</span>
 <span id="cb69-3"><a href="#cb69-3"></a><span class="kw">pick_a_colour</span>(colours)</span></code></pre></div>
-<pre><code>## [1] &quot;Green&quot;
+<pre><code>## [1] &quot;Pink&quot;
 </code></pre>
 <h2 id="writing-a-package">Writing a package</h2>
 <p>An alternative is to make your own package to store your functions which you can then use like any other R package. There are a few advantages to this:</p>

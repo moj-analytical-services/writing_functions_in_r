@@ -424,12 +424,12 @@ System Statistics quarterly publication: December 2018 (published in May
 
 ## Loading packages and data
 
-First of all we need to load a few packages: • `s3tools` is an MoJ
-package designed to interact with Amazon s3 - we will need this to help
-read in some data from an s3 bucket.  
+First of all we need to load a few packages:  
+• `s3tools` is an MoJ package designed to interact with Amazon s3 - we
+will need this to help read in some data from an s3 bucket.  
 • `dplyr` is the package we’ll use to create summary tables from the
-data. • `stringr` provides functions that can be used to manipulate
-strings.  
+data.  
+• `stringr` provides functions that can be used to manipulate strings.  
 • `purrr` provides functions to make the use of vectors and user-defined
 functions easier.
 
@@ -981,7 +981,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Green"
+    ## [1] "Pink"
 
 ## Writing a package
 
