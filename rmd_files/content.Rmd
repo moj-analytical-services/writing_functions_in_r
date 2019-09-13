@@ -302,6 +302,7 @@ library(s3tools)
 library(dplyr)
 library(stringr)
 library(purrr)
+library(lubridate)
 ```
 
 Here we are reading in a copy of the `Prosecutions and Convictions` dataset from s3 and storing the dataframe as a variable called `prosecutions_and_convictions`. In the second step we're filtering the dataset to extract only the prosecutions and saving to another variable, named `prosecutions`.
@@ -384,10 +385,8 @@ In this dataframe, some of the columns contain values with a number along with a
 
 remove_numbering <- function(x) {
   
-  # Remove 1 or 2 digits followed by a semicolon
-  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*", "")
-  # Remove 1 or 2 digits followed by a space
-  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]", "")
+  # Remove 1 or 2 digits followed by a semicolon or a space
+  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]", "")
   
   return(x)
 }
@@ -586,22 +585,31 @@ make_line_chart(time_series, x="year", y="count")
 
 ## Extracting a subset of the data
 
-Often processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions in a particular year/quarter based on a given date, we could use a function like:
+Often processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
 
 ```{r}
 
-extract_quarter <- function(data, date) {
+extract_year <- function(data, date) {
   
   # Convert the format from a string to a date
-  date <- as.Date(date, format="%d-%b-%Y")
+  if(is.character(date)){
+    date <- lubridate::dmy(date)
+  }
   
-  # Get the year and quarter based on the date
-  this_year <- format(date, "%Y")
-  this_quarter <- quarters(date)
+  # Find years and quarters for the past year based on the date
+  quarters_to_include <- date %m-% months(c(0, 3, 6, 9))
   
+  # Format the dates to years and quarters
+  years <- lubridate::year(quarters_to_include)
+  quarters <- quarters(quarters_to_include)
+
+  # Combine into a unique set of year-quarters
+  yearquarters <- str_c(years, " ", quarters)
+  
+  # Filter data based on these years and quarters
   data <- data %>%
-    dplyr::filter(year == this_year,
-                  quarter == this_quarter)
+    dplyr::mutate(year_quarter = paste(year, quarter)) %>%
+    dplyr::filter(year_quarter %in% yearquarters)
   
 }
 
@@ -610,9 +618,10 @@ extract_quarter <- function(data, date) {
 ---
 
 ```{r}
-prosecutions_extract <- extract_quarter(prosecutions, "31-Mar-2018")
+prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
 glimpse(prosecutions_extract)
 ```
+
 
 # Hints and tips
 
