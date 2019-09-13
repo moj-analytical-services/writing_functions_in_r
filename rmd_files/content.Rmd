@@ -387,7 +387,7 @@ remove_numbering <- function(x) {
   # Remove 1 or 2 digits followed by a semicolon
   x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*", "")
   # Remove 1 or 2 digits followed by a space
-  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*", "")
+  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]", "")
   
   return(x)
 }
@@ -396,10 +396,10 @@ remove_numbering <- function(x) {
 
 ---
 
-Then we can use the `map_if()` function from `purrr` to apply the `remove_numbering()` function to all columns in the `prosecutions` dataframe, with the condition that the column must contain strings.
+Then we can use the `map_if()` function from `purrr` to apply the `remove_numbering()` function to all columns in the `prosecutions` dataframe, with the condition that the column must contain strings. Since the `map_if()` function returns a list, we must convert our data back into a dataframe using the `as.data.frame()` function.
 
 ```{r}
-prosecutions_cleaned <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame()
+prosecutions <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame(stringsAsFactors=F)
 glimpse(prosecutions)
 ```
 
@@ -413,6 +413,8 @@ clean_not_known <- function(x,
                             not_known_phrase = "Not known",
                             change_na = TRUE,
                             values_to_change = c("n/a", "not known", "unknown", "not stated")) {
+  
+  
   
   # Replace any missing (NA) values
   if(change_na){
@@ -436,7 +438,7 @@ In this function we've included some default values, so by default missing/NA va
 ---
 
 ```{r}
-prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame()
+prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame(stringsAsFactors=F)
 glimpse(prosecutions)
 ```
 
@@ -457,9 +459,9 @@ clean_prosec_and_convic <- function(data) {
   # Clean the column headings
   colnames(data) <- generalise_names(colnames(data))
   # Remove numeric indices from columns
-  data <- purrr::map_if(data, is.character, remove_numbering)
+  data <- purrr::map_if(data, is.character, remove_numbering) %>% as.data.frame(stringsAsFactors=F)
   # Make missing/unknown value entries more consistent
-  data <- purrr::map_if(data, is.character, clean_not_known)
+  data <- purrr::map_if(data, is.character, clean_not_known) %>% as.data.frame(stringsAsFactors=F)
   
   return(data)
   
