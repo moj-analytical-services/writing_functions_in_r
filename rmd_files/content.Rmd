@@ -286,7 +286,6 @@ plot_x_and_y(x, y, col='red', type='l')
 
 This section builds on material covered in the [Intro R Training](https://github.com/moj-analytical-services/IntroRTraining) course and makes use of the `dplyr` package, which is a commonly used R package for data manipulation. In the following examples we'll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we'll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found [here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
 
----
 
 ## Loading packages and data
 
@@ -304,6 +303,8 @@ library(stringr)
 library(purrr)
 library(lubridate)
 ```
+
+---
 
 Here we are reading in a copy of the `Prosecutions and Convictions` dataset from s3 and storing the dataframe as a variable called `prosecutions_and_convictions`. In the second step we're filtering the dataset to extract only the prosecutions and saving to another variable, named `prosecutions`.
 
@@ -410,15 +411,10 @@ For the final stage of data cleaning, we can make missing and unknown values mor
 
 clean_not_known <- function(x,
                             not_known_phrase = "Not known",
-                            change_na = TRUE,
                             values_to_change = c("n/a", "not known", "unknown", "not stated")) {
   
-  
-  
   # Replace any missing (NA) values
-  if(change_na){
-    x <- replace(x, is.na(x), not_known_phrase)
-  }
+  x <- replace(x, is.na(x), not_known_phrase)
   
   # Remove any white space that might cause the strings to not match
   x <- stringr::str_trim(x)
@@ -445,6 +441,40 @@ glimpse(prosecutions)
 
 ### Exercise 2
 
+Modify `clean_not_known()` to make replacing missing (NA) values optional.
+
+---
+
+```{r, include=show_solution, purl=FALSE}
+
+# Solution
+
+clean_not_known <- function(x,
+                            not_known_phrase = "Not known",
+                            change_na = TRUE,
+                            values_to_change = c("n/a", "not known", "unknown", "not stated")) {
+  
+  # Replace any missing (NA) values
+  if(change_na){
+    x <- replace(x, is.na(x), not_known_phrase)
+  }
+  
+  # Remove any white space that might cause the strings to not match
+  x <- stringr::str_trim(x)
+  
+  # Replace strings in the data that refer to a missing or unknown values
+  x <- ifelse(tolower(x) %in% values_to_change, not_known_phrase, x)
+  
+  return(x)
+  
+}
+
+```
+
+---
+
+### Exercise 3
+
 Write a wrapper function to apply `generalise_names()`, `remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
 
 ---
@@ -467,6 +497,7 @@ clean_prosec_and_convic <- function(data) {
 }
 
 ```
+
 
 ## Summarising data
 
@@ -573,15 +604,22 @@ make_line_chart <- function(df, x_col, y_col) {
 
 ---
 
-Let's use the `sum_group()` and `make_line_chart()` functions to produce a plot of the total number of prosecutions in each year.
+### Exercise 4
 
-```{r}
+Use the `sum_group()` and `make_line_chart()` functions to produce a plot of the total number of prosecutions in each year.
+
+---
+
+```{r, include=show_solution, purl=FALSE}
+
+# Solution
 
 time_series <- sum_group(df = prosecutions, group_cols = "year", sum_col = "count")
 
 make_line_chart(time_series, x="year", y="count")
 
 ```
+
 
 ## Extracting a subset of the data
 
@@ -596,7 +634,7 @@ extract_year <- function(data, date) {
     date <- lubridate::dmy(date)
   }
   
-  # Find years and quarters for the past year based on the date
+  # Find end of quarter dates for the past year
   quarters_to_include <- date %m-% months(c(0, 3, 6, 9))
   
   # Format the dates to years and quarters

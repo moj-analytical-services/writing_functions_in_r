@@ -184,6 +184,7 @@ library(s3tools)
 library(dplyr)
 library(stringr)
 library(purrr)
+library(lubridate)
 
 
 ## ----message=F, warning=F------------------------------------------------
@@ -235,10 +236,8 @@ generalise_names(names)
 
 remove_numbering <- function(x) {
   
-  # Remove 1 or 2 digits followed by a semicolon
-  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*", "")
-  # Remove 1 or 2 digits followed by a space
-  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*", "")
+  # Remove 1 or 2 digits followed by a semicolon or a space
+  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]", "")
   
   return(x)
 }
@@ -246,7 +245,7 @@ remove_numbering <- function(x) {
 
 
 ## ------------------------------------------------------------------------
-prosecutions_cleaned <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame()
+prosecutions <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame(stringsAsFactors=F)
 glimpse(prosecutions)
 
 
@@ -254,13 +253,10 @@ glimpse(prosecutions)
 
 clean_not_known <- function(x,
                             not_known_phrase = "Not known",
-                            change_na = TRUE,
                             values_to_change = c("n/a", "not known", "unknown", "not stated")) {
   
   # Replace any missing (NA) values
-  if(change_na){
-    x <- replace(x, is.na(x), not_known_phrase)
-  }
+  x <- replace(x, is.na(x), not_known_phrase)
   
   # Remove any white space that might cause the strings to not match
   x <- stringr::str_trim(x)
@@ -275,8 +271,10 @@ clean_not_known <- function(x,
 
 
 ## ------------------------------------------------------------------------
-prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame()
+prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame(stringsAsFactors=F)
 glimpse(prosecutions)
+
+
 
 
 
@@ -348,35 +346,38 @@ make_line_chart <- function(df, x_col, y_col) {
 }
 
 
-## ------------------------------------------------------------------------
-
-time_series <- sum_group(df = prosecutions, group_cols = "year", sum_col = "count")
-
-make_line_chart(time_series, x="year", y="count")
-
 
 
 ## ------------------------------------------------------------------------
 
-extract_quarter <- function(data, date) {
+extract_year <- function(data, date) {
   
   # Convert the format from a string to a date
-  date <- as.Date(date, format="%d-%b-%Y")
+  if(is.character(date)){
+    date <- lubridate::dmy(date)
+  }
   
-  # Get the year and quarter based on the date
-  this_year <- format(date, "%Y")
-  this_quarter <- quarters(date)
+  # Find end of quarter dates for the past year
+  quarters_to_include <- date %m-% months(c(0, 3, 6, 9))
   
+  # Format the dates to years and quarters
+  years <- lubridate::year(quarters_to_include)
+  quarters <- quarters(quarters_to_include)
+
+  # Combine into a unique set of year-quarters
+  yearquarters <- str_c(years, " ", quarters)
+  
+  # Filter data based on these years and quarters
   data <- data %>%
-    dplyr::filter(year == this_year,
-                  quarter == this_quarter)
+    dplyr::mutate(year_quarter = paste(year, quarter)) %>%
+    dplyr::filter(year_quarter %in% yearquarters)
   
 }
 
 
 
 ## ------------------------------------------------------------------------
-prosecutions_extract <- extract_quarter(prosecutions, "31-Mar-2018")
+prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
 glimpse(prosecutions_extract)
 
 

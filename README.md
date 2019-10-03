@@ -420,8 +420,6 @@ System Statistics quarterly publication: December 2018 (published in May
 2019), which can be found
 [here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
 
------
-
 ## Loading packages and data
 
 First of all we need to load a few packages:  
@@ -439,7 +437,10 @@ library(s3tools)
 library(dplyr)
 library(stringr)
 library(purrr)
+library(lubridate)
 ```
+
+-----
 
 Here we are reading in a copy of the `Prosecutions and Convictions`
 dataset from s3 and storing the dataframe as a variable called
@@ -543,10 +544,8 @@ these:
 ``` r
 remove_numbering <- function(x) {
   
-  # Remove 1 or 2 digits followed by a semicolon
-  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*", "")
-  # Remove 1 or 2 digits followed by a space
-  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*", "")
+  # Remove 1 or 2 digits followed by a semicolon or a space
+  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]", "")
   
   return(x)
 }
@@ -557,9 +556,11 @@ remove_numbering <- function(x) {
 Then we can use the `map_if()` function from `purrr` to apply the
 `remove_numbering()` function to all columns in the `prosecutions`
 dataframe, with the condition that the column must contain strings.
+Since the `map_if()` function returns a list, we must convert our data
+back into a dataframe using the `as.data.frame()` function.
 
 ``` r
-prosecutions_cleaned <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame()
+prosecutions <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame(stringsAsFactors=F)
 glimpse(prosecutions)
 ```
 
@@ -567,19 +568,19 @@ glimpse(prosecutions)
     ## Variables: 16
     ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008…
     ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
-    ## $ sex                     <chr> "01: Male", "01: Male", "01: Male", "01:…
-    ## $ type_of_defendent       <chr> "01: Person", "01: Person", "01: Person"…
-    ## $ age_group               <chr> "01: Juveniles", "01: Juveniles", "01: J…
-    ## $ age_range               <chr> "01: 10-11", "01: 10-11", "01: 10-11", "…
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", …
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", …
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "…
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-…
     ## $ ethnicity               <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
     ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
-    ## $ offence_type            <chr> "01 Indictable only", "01 Indictable onl…
-    ## $ offence_group           <chr> "02 Sexual offences", "03 Robbery", "03 …
-    ## $ tried                   <chr> "5: Not tried", "01: Tried at magistrate…
+    ## $ offence_type            <chr> "Indictable only", "Indictable only", "I…
+    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery",…
+    ## $ tried                   <chr> "Not tried", "Tried at magistrates court…
     ## $ plea_at_the_crown_court <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
-    ## $ convicted_not_convicted <chr> "02: Not convicted", "01: Convicted", "0…
-    ## $ sentenced_not_sentenced <chr> "02: Not sentenced", "01: Sentenced", "0…
-    ## $ outcome                 <chr> "01: Proceedings terminated early", "07:…
+    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convi…
+    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sente…
+    ## $ outcome                 <chr> "Proceedings terminated early", "Found g…
     ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 
 -----
@@ -590,13 +591,10 @@ values more consistent using a function such as the following:
 ``` r
 clean_not_known <- function(x,
                             not_known_phrase = "Not known",
-                            change_na = TRUE,
                             values_to_change = c("n/a", "not known", "unknown", "not stated")) {
   
   # Replace any missing (NA) values
-  if(change_na){
-    x <- replace(x, is.na(x), not_known_phrase)
-  }
+  x <- replace(x, is.na(x), not_known_phrase)
   
   # Remove any white space that might cause the strings to not match
   x <- stringr::str_trim(x)
@@ -617,32 +615,41 @@ value is “Not known”.
 -----
 
 ``` r
-prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame()
+prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame(stringsAsFactors=F)
 glimpse(prosecutions)
 ```
 
     ## Observations: 107,493
     ## Variables: 16
     ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-    ## $ quarter                 <fct> Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, …
-    ## $ sex                     <fct> 01: Male, 01: Male, 01: Male, 01: Male, …
-    ## $ type_of_defendent       <fct> 01: Person, 01: Person, 01: Person, 01: …
-    ## $ age_group               <fct> 01: Juveniles, 01: Juveniles, 01: Juveni…
-    ## $ age_range               <fct> 01: 10-11, 01: 10-11, 01: 10-11, 01: 10-…
-    ## $ ethnicity               <fct> Not known, Not known, Not known, Not kno…
-    ## $ court_type              <fct> Magistrates Court, Magistrates Court, Ma…
-    ## $ offence_type            <fct> 01 Indictable only, 01 Indictable only, …
-    ## $ offence_group           <fct> 02 Sexual offences, 03 Robbery, 03 Robbe…
-    ## $ tried                   <fct> 5: Not tried, 01: Tried at magistrates c…
-    ## $ plea_at_the_crown_court <fct> Not known, Not known, Not known, Not kno…
-    ## $ convicted_not_convicted <fct> 02: Not convicted, 01: Convicted, 02: No…
-    ## $ sentenced_not_sentenced <fct> 02: Not sentenced, 01: Sentenced, 02: No…
-    ## $ outcome                 <fct> 01: Proceedings terminated early, 07: Fo…
+    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", …
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", …
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "…
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-…
+    ## $ ethnicity               <chr> "Not known", "Not known", "Not known", "…
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
+    ## $ offence_type            <chr> "Indictable only", "Indictable only", "I…
+    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery",…
+    ## $ tried                   <chr> "Not tried", "Tried at magistrates court…
+    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "…
+    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convi…
+    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sente…
+    ## $ outcome                 <chr> "Proceedings terminated early", "Found g…
     ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 
 -----
 
 ### Exercise 2
+
+Modify `clean_not_known()` to make replacing missing (NA) values
+optional.
+
+-----
+
+-----
+
+### Exercise 3
 
 Write a wrapper function to apply `generalise_names()`,
 `remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
@@ -679,22 +686,22 @@ prosecutions_grouped
 ```
 
     ## # A tibble: 14 x 2
-    ##    age_range                           counts
-    ##    <fct>                                <int>
-    ##  1 01: 10-11                             3324
-    ##  2 02: 12-14                           113960
-    ##  3 03: 15-17                           570275
-    ##  4 04: 18-20                          1302589
-    ##  5 05: 21-24                          2131033
-    ##  6 06: 25+ (prior to 2017)           10209264
-    ##  7 07: 25-29 (2017 onwards)            447108
-    ##  8 08: 30-39 (2017 onwards)            758230
-    ##  9 09: 40-49 (2017 onwards)            477217
-    ## 10 10: 50-59 (2017 onwards)            261626
-    ## 11 11: 60+ (2017 onwards)              101554
-    ## 12 12: Not known (Juvenile)               150
-    ## 13 13: Not known (Adult)               195459
-    ## 14 14: Companies, public bodies etc.   114771
+    ##    age_range                       counts
+    ##    <chr>                            <int>
+    ##  1 10-11                             3324
+    ##  2 12-14                           113960
+    ##  3 15-17                           570275
+    ##  4 18-20                          1302589
+    ##  5 21-24                          2131033
+    ##  6 25-29 (2017 onwards)            447108
+    ##  7 25+ (prior to 2017)           10209264
+    ##  8 30-39 (2017 onwards)            758230
+    ##  9 40-49 (2017 onwards)            477217
+    ## 10 50-59 (2017 onwards)            261626
+    ## 11 60+ (2017 onwards)              101554
+    ## 12 Companies, public bodies etc.   114771
+    ## 13 Not known (Adult)               195459
+    ## 14 Not known (Juvenile)               150
 
 -----
 
@@ -762,22 +769,22 @@ prosecutions_grouped
 ```
 
     ## # A tibble: 14 x 2
-    ##    age_range                            count
-    ##    <fct>                                <int>
-    ##  1 01: 10-11                             3324
-    ##  2 02: 12-14                           113960
-    ##  3 03: 15-17                           570275
-    ##  4 04: 18-20                          1302589
-    ##  5 05: 21-24                          2131033
-    ##  6 06: 25+ (prior to 2017)           10209264
-    ##  7 07: 25-29 (2017 onwards)            447108
-    ##  8 08: 30-39 (2017 onwards)            758230
-    ##  9 09: 40-49 (2017 onwards)            477217
-    ## 10 10: 50-59 (2017 onwards)            261626
-    ## 11 11: 60+ (2017 onwards)              101554
-    ## 12 12: Not known (Juvenile)               150
-    ## 13 13: Not known (Adult)               195459
-    ## 14 14: Companies, public bodies etc.   114771
+    ##    age_range                        count
+    ##    <chr>                            <int>
+    ##  1 10-11                             3324
+    ##  2 12-14                           113960
+    ##  3 15-17                           570275
+    ##  4 18-20                          1302589
+    ##  5 21-24                          2131033
+    ##  6 25-29 (2017 onwards)            447108
+    ##  7 25+ (prior to 2017)           10209264
+    ##  8 30-39 (2017 onwards)            758230
+    ##  9 40-49 (2017 onwards)            477217
+    ## 10 50-59 (2017 onwards)            261626
+    ## 11 60+ (2017 onwards)              101554
+    ## 12 Companies, public bodies etc.   114771
+    ## 13 Not known (Adult)               195459
+    ## 14 Not known (Juvenile)               150
 
 -----
 
@@ -796,8 +803,8 @@ glimpse(prosecutions_grouped)
     ## Variables: 3
     ## Groups: year [11]
     ## $ year          <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 20…
-    ## $ offence_group <fct> 01 Violence against the person, 02 Sexual offences…
-    ## $ count         <int> 45119, 8353, 13096, 146304, 11278, 56953, 17968, 1…
+    ## $ offence_group <chr> "Criminal damage and arson", "Drug offences", "Fra…
+    ## $ count         <int> 11278, 56953, 16262, 71652, 17968, 10465, 13096, 8…
 
 ## Plotting data
 
@@ -820,36 +827,41 @@ make_line_chart <- function(df, x_col, y_col) {
 
 -----
 
-Let’s use the `sum_group()` and `make_line_chart()` functions to produce
-a plot of the total number of prosecutions in each year.
+### Exercise 4
 
-``` r
-time_series <- sum_group(df = prosecutions, group_cols = "year", sum_col = "count")
+Use the `sum_group()` and `make_line_chart()` functions to produce a
+plot of the total number of prosecutions in each year.
 
-make_line_chart(time_series, x="year", y="count")
-```
-
-![](README_files/figure-gfm/unnamed-chunk-36-1.png)<!-- -->
+-----
 
 ## Extracting a subset of the data
 
 Often processing data requires manipulating dates and times. For
-example, if we wanted to extract the prosecutions in a particular
-year/quarter based on a given date, we could use a function like:
+example, if we wanted to extract the prosecutions from the year up to a
+particular date, we could use a function like:
 
 ``` r
-extract_quarter <- function(data, date) {
+extract_year <- function(data, date) {
   
   # Convert the format from a string to a date
-  date <- as.Date(date, format="%d-%b-%Y")
+  if(is.character(date)){
+    date <- lubridate::dmy(date)
+  }
   
-  # Get the year and quarter based on the date
-  this_year <- format(date, "%Y")
-  this_quarter <- quarters(date)
+  # Find end of quarter dates for the past year
+  quarters_to_include <- date %m-% months(c(0, 3, 6, 9))
   
+  # Format the dates to years and quarters
+  years <- lubridate::year(quarters_to_include)
+  quarters <- quarters(quarters_to_include)
+
+  # Combine into a unique set of year-quarters
+  yearquarters <- str_c(years, " ", quarters)
+  
+  # Filter data based on these years and quarters
   data <- data %>%
-    dplyr::filter(year == this_year,
-                  quarter == this_quarter)
+    dplyr::mutate(year_quarter = paste(year, quarter)) %>%
+    dplyr::filter(year_quarter %in% yearquarters)
   
 }
 ```
@@ -857,28 +869,29 @@ extract_quarter <- function(data, date) {
 -----
 
 ``` r
-prosecutions_extract <- extract_quarter(prosecutions, "31-Mar-2018")
+prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
 glimpse(prosecutions_extract)
 ```
 
-    ## Observations: 3,675
-    ## Variables: 16
-    ## $ year                    <int> 2018, 2018, 2018, 2018, 2018, 2018, 2018…
-    ## $ quarter                 <fct> Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, Q1, …
-    ## $ sex                     <fct> 01: Male, 01: Male, 01: Male, 01: Male, …
-    ## $ type_of_defendent       <fct> 01: Person, 01: Person, 01: Person, 01: …
-    ## $ age_group               <fct> 01: Juveniles, 01: Juveniles, 01: Juveni…
-    ## $ age_range               <fct> 01: 10-11, 01: 10-11, 01: 10-11, 01: 10-…
-    ## $ ethnicity               <fct> 01: White, 01: White, 01: White, 02: Bla…
-    ## $ court_type              <fct> Magistrates Court, Magistrates Court, Ma…
-    ## $ offence_type            <fct> 01 Indictable only, 02 Triable either wa…
-    ## $ offence_group           <fct> 03 Robbery, 04 Theft Offences, 05 Crimin…
-    ## $ tried                   <fct> 01: Tried at magistrates court, 5: Not t…
-    ## $ plea_at_the_crown_court <fct> Not known, Not known, Not known, Not kno…
-    ## $ convicted_not_convicted <fct> 01: Convicted, 02: Not convicted, 02: No…
-    ## $ sentenced_not_sentenced <fct> 01: Sentenced, 02: Not sentenced, 02: No…
-    ## $ outcome                 <fct> 07: Found guilty, 01: Proceedings termin…
-    ## $ count                   <int> 1, 2, 1, 1, 1, 1, 7, 11, 1, 5, 6, 1, 2, …
+    ## Observations: 14,929
+    ## Variables: 17
+    ## $ year                    <int> 2017, 2017, 2017, 2017, 2017, 2017, 2017…
+    ## $ quarter                 <chr> "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2"…
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", …
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", …
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "…
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-…
+    ## $ ethnicity               <chr> "White", "White", "White", "White", "Whi…
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
+    ## $ offence_type            <chr> "Indictable only", "Triable either way",…
+    ## $ offence_group           <chr> "Robbery", "Violence against the person"…
+    ## $ tried                   <chr> "Tried at magistrates court", "Tried at …
+    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "…
+    ## $ convicted_not_convicted <chr> "Convicted", "Convicted", "Not convicted…
+    ## $ sentenced_not_sentenced <chr> "Sentenced", "Sentenced", "Not sentenced…
+    ## $ outcome                 <chr> "Found guilty", "Found guilty", "Proceed…
+    ## $ count                   <int> 1, 1, 1, 1, 1, 1, 1, 1, 8, 7, 2, 2, 3, 1…
+    ## $ year_quarter            <chr> "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q…
 
 # Hints and tips
 
@@ -981,7 +994,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Pink"
+    ## [1] "Red"
 
 ## Writing a package
 
@@ -1055,22 +1068,22 @@ prosecutions_grouped <- sum_group_alt1(df = prosecutions, group_cols = "age_rang
 prosecutions_grouped
 ```
 
-    ##                          age_range   counts
-    ##                          01: 10-11     3324
-    ##                          02: 12-14   113960
-    ##                          03: 15-17   570275
-    ##                          04: 18-20  1302589
-    ##                          05: 21-24  2131033
-    ##            06: 25+ (prior to 2017) 10209264
-    ##           07: 25-29 (2017 onwards)   447108
-    ##           08: 30-39 (2017 onwards)   758230
-    ##           09: 40-49 (2017 onwards)   477217
-    ##           10: 50-59 (2017 onwards)   261626
-    ##             11: 60+ (2017 onwards)   101554
-    ##           12: Not known (Juvenile)      150
-    ##              13: Not known (Adult)   195459
-    ##  14: Companies, public bodies etc.   114771
-    ##                              Total 16686560
+    ##                      age_range   counts
+    ##                          10-11     3324
+    ##                          12-14   113960
+    ##                          15-17   570275
+    ##                          18-20  1302589
+    ##                          21-24  2131033
+    ##           25-29 (2017 onwards)   447108
+    ##            25+ (prior to 2017) 10209264
+    ##           30-39 (2017 onwards)   758230
+    ##           40-49 (2017 onwards)   477217
+    ##           50-59 (2017 onwards)   261626
+    ##             60+ (2017 onwards)   101554
+    ##  Companies, public bodies etc.   114771
+    ##              Not known (Adult)   195459
+    ##           Not known (Juvenile)      150
+    ##                          Total 16686560
 
 Alternatively, this version of the function means the column names can
 be input as function arguments directly (rather than needing to enclose
@@ -1093,22 +1106,22 @@ prosecutions_grouped <- sum_group_alt2(df = prosecutions, group_cols = age_range
 prosecutions_grouped
 ```
 
-    ##                          age_range   counts
-    ##                          01: 10-11     3324
-    ##                          02: 12-14   113960
-    ##                          03: 15-17   570275
-    ##                          04: 18-20  1302589
-    ##                          05: 21-24  2131033
-    ##            06: 25+ (prior to 2017) 10209264
-    ##           07: 25-29 (2017 onwards)   447108
-    ##           08: 30-39 (2017 onwards)   758230
-    ##           09: 40-49 (2017 onwards)   477217
-    ##           10: 50-59 (2017 onwards)   261626
-    ##             11: 60+ (2017 onwards)   101554
-    ##           12: Not known (Juvenile)      150
-    ##              13: Not known (Adult)   195459
-    ##  14: Companies, public bodies etc.   114771
-    ##                              Total 16686560
+    ##                      age_range   counts
+    ##                          10-11     3324
+    ##                          12-14   113960
+    ##                          15-17   570275
+    ##                          18-20  1302589
+    ##                          21-24  2131033
+    ##           25-29 (2017 onwards)   447108
+    ##            25+ (prior to 2017) 10209264
+    ##           30-39 (2017 onwards)   758230
+    ##           40-49 (2017 onwards)   477217
+    ##           50-59 (2017 onwards)   261626
+    ##             60+ (2017 onwards)   101554
+    ##  Companies, public bodies etc.   114771
+    ##              Not known (Adult)   195459
+    ##           Not known (Juvenile)      150
+    ##                          Total 16686560
 
 ## Adding an optional total row
 
