@@ -3746,7 +3746,7 @@ glimpse(prosecutions_grouped)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Plotting data</h2></hgroup><article  id="plotting-data" class="smaller ">
 
-<p>Let’s say we want to produce some plots, and want them all to have the same style. We can define the style of the plot in a function, then we only have to change the styling in one place if it needs changing. Here we’ve gone for a line chart with <code>ggplot2</code>’s classic theme.</p>
+<p>Let’s say we want to produce some plots, and want them all to have the same style. We can define the style of the plot in a function, then we only have to change the styling in one place if it needs changing. This function plots a breakdown of the number of prosecutions over time, with a default breakdown option of <code>&quot;offence_type&quot;</code>, and the plot is a line chart with <code>ggplot2</code>’s classic theme:</p>
 
 <pre class = 'prettyprint lang-r'>prosecutions_graph &lt;- function(df, breakdown = &quot;offence_type&quot;){
 
@@ -3934,7 +3934,7 @@ glimpse(prosecutions_extract)</pre>
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >## [1] &quot;Cyan&quot;</pre>
+<pre >## [1] &quot;Yellow&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2>Writing a package</h2></hgroup><article  id="writing-a-package" class="smaller ">
 

@@ -810,8 +810,10 @@ glimpse(prosecutions_grouped)
 
 Let’s say we want to produce some plots, and want them all to have the
 same style. We can define the style of the plot in a function, then we
-only have to change the styling in one place if it needs changing. Here
-we’ve gone for a line chart with `ggplot2`’s classic theme.
+only have to change the styling in one place if it needs changing. This
+function plots a breakdown of the number of prosecutions over time, with
+a default breakdown option of `"offence_type"`, and the plot is a line
+chart with `ggplot2`’s classic theme:
 
 ``` r
 prosecutions_graph <- function(df, breakdown = "offence_type"){
@@ -1016,7 +1018,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Blue"
+    ## [1] "Purple"
 
 ## Writing a package
 
