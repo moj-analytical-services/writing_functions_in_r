@@ -335,15 +335,34 @@ glimpse(prosecutions_grouped)
 
 
 ## ------------------------------------------------------------------------
-make_line_chart <- function(df, x_col, y_col) {
+
+prosecutions_graph <- function(df, breakdown = "offence_type"){
+
+  grouping_variables <- c(breakdown, "year")
   
-  # The `pull()` function extracts the contents of a single column as a vector.
-  x <- df %>% dplyr::pull(x_col)
-  y <- df %>% dplyr::pull(y_col)
-  
-  plot(x, y, col='red', type='l', xlab=x_col, ylab=y_col)
+  # Group and summarise data by year and breakdown variable ready to plot
+  df_grouped <- sum_group(df = df, 
+                          group_cols = grouping_variables, 
+                          sum_col = "count")
+
+  # Produce the plot
+  plot <- df_grouped %>%
+    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "count", group = breakdown, col = breakdown)) +
+    ggplot2::geom_line() +
+    ggplot2::scale_x_continuous(breaks = 0:2100) +
+    ggplot2::theme_grey()
+
+  return(plot)
   
 }
+
+
+
+## ----fig.width=10--------------------------------------------------------
+# call function
+prosecutions_graph(prosecutions, breakdown = "offence_type")
+
+
 
 
 

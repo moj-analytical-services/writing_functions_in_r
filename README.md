@@ -811,26 +811,48 @@ glimpse(prosecutions_grouped)
 Let’s say we want to produce some plots, and want them all to have the
 same style. We can define the style of the plot in a function, then we
 only have to change the styling in one place if it needs changing. Here
-we’ve gone for a line chart with a red line.
+we’ve gone for a line chart with `ggplot2`’s classic theme.
 
 ``` r
-make_line_chart <- function(df, x_col, y_col) {
+prosecutions_graph <- function(df, breakdown = "offence_type"){
+
+  grouping_variables <- c(breakdown, "year")
   
-  # The `pull()` function extracts the contents of a single column as a vector.
-  x <- df %>% dplyr::pull(x_col)
-  y <- df %>% dplyr::pull(y_col)
-  
-  plot(x, y, col='red', type='l', xlab=x_col, ylab=y_col)
+  # Group and summarise data by year and breakdown variable ready to plot
+  df_grouped <- sum_group(df = df, 
+                          group_cols = grouping_variables, 
+                          sum_col = "count")
+
+  # Produce the plot
+  plot <- df_grouped %>%
+    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "count", group = breakdown, col = breakdown)) +
+    ggplot2::geom_line() +
+    ggplot2::scale_x_continuous(breaks = 0:2100) +
+    ggplot2::theme_grey()
+
+  return(plot)
   
 }
 ```
 
 -----
 
+``` r
+# call function
+prosecutions_graph(prosecutions, breakdown = "offence_type")
+```
+
+![](README_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
+
+-----
+
 ### Exercise 4
 
-Use the `sum_group()` and `make_line_chart()` functions to produce a
-plot of the total number of prosecutions in each year.
+Modify the function `prosecutions_graph` to use `theme_grey()` as the
+theme, rather than `theme_classic()`. Produce a plot of with a breakdown
+by `"offence_group"`.
+
+-----
 
 -----
 
@@ -994,7 +1016,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Red"
+    ## [1] "Blue"
 
 ## Writing a package
 
