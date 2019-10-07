@@ -650,6 +650,11 @@ Think about whether there are ways you can make your function usable in more sit
 ### Vectorise by default
 R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as input and apply the transformation to each element. The `generalise_names()` function we looked at is a good example of this!
 
+### Get feedback
+A key measure of a good function (or any piece of code) is how easy it is for 
+someone else to understand, use and modify it. The best way to test this is to 
+get your code reviewed by someone else.
+
 ## How to organise your code
 
 Whenever you're working on something in R it's generally best to create an R project and version control your code on GitHub. There's information on how to do this in the Analytical Platform guidance.
