@@ -90,7 +90,7 @@ fizz_buzz <- function(x){
     return("buzz")
   }
   else{
-    return(as.numeric(x))
+    return(as.character(x))
   }
 }
 
