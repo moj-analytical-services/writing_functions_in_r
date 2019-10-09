@@ -169,7 +169,6 @@ fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5){
 
 fizz_buzz_custom_vec(1:15)
 fizz_buzz_custom_vec(c(1, 2, 3, 7, 15, 21), buzz = 7)
-fizz_buzz_custom_vec(1:21, buzz = 7)
 
 
 ```
