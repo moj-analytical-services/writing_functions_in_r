@@ -723,6 +723,11 @@ Writing a function is easy, writing a really good function can be a lot harder! 
 ### Give your function a good name
 The name of a function should give you a good idea of what it does. Generally function names should be concise and use verbs rather than nouns.
 
+### Pass variables into the function as arguments
+While functions can access objects which haven't been passed in as an argument, this
+is generally bad practice as it makes code much harder to understand and modify;
+and makes the function itself harder to reuse.
+
 ### Document your code
 You should have comments explaining what your function does, what each argument is, and what it returns.
 
@@ -736,6 +741,11 @@ Think about whether there are ways you can make your function usable in more sit
 
 ### Vectorise by default
 R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as input and apply the transformation to each element. The `generalise_names()` function we looked at is a good example of this!
+
+### Get feedback
+A key measure of a good function (or any piece of code) is how easy it is for 
+someone else to understand, use and modify it. The best way to test this is to 
+get your code reviewed by someone else.
 
 ## How to organise your code
 
