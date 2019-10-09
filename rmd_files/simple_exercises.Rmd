@@ -81,15 +81,14 @@ To coerce a number to character type, use `as.character()`.
 
 
 ```{r fizz_buzz_solution}
-fizz_buzz <- function(x){
-  if (x %% 3 == 0 & x %% 5 == 0){
+fizz_buzz <- function(x) {
+  if (x %% 3 == 0 & x %% 5 == 0) {
     return("fizz buzz")
-  } else if(x %% 3 == 0){
+  } else if (x %% 3 == 0) {
     return("fizz")
-  } else if(x %% 5 == 0){
+  } else if (x %% 5 == 0) {
     return("buzz")
-  }
-  else{
+  } else {
     return(as.character(x))
   }
 }
@@ -146,16 +145,15 @@ when you don't specify the `fizz` or `buzz` arguments, and second when you set
 `buzz = 7` for values 1, 2, 3, 7, 15 and 21.
 
 ```{r fizz_buzz_custom_solution}
-fizz_buzz_custom <- function(x, fizz = 3, buzz = 5){
-  if (x %% fizz == 0 & x %% buzz == 0){
+fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
+  if (x %% fizz == 0 & x %% buzz == 0) {
     return("fizz buzz")
-  } else if(x %% fizz == 0){
+  } else if (x %% fizz == 0) {
     return("fizz")
-  } else if(x %% buzz == 0){
+  } else if (x %% buzz == 0) {
     return("buzz")
-  }
-  else{
-    return(as.numeric(x))
+  } else {
+    return(as.character(x))
   }
 }
 
