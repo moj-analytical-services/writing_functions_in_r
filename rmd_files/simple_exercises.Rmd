@@ -38,7 +38,7 @@ my_mean(7.5, 16)
 
 ```
 
-## 1.3 fizz_buzz()
+## 1.3.1 fizz_buzz()
 
 Now try using an if else statement inside a function.
 
@@ -101,7 +101,7 @@ fizz_buzz(5)
 fizz_buzz(15)
 ```
 
-### 1.3.1 fizz_buzz_vec()
+### 1.3.2 fizz_buzz_vec()
 
 Most functions in R are vectorised. This means they're able to apply an operation
 to every element of a vector at the same time.
