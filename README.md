@@ -184,17 +184,41 @@ sum_squares(y = 5, x = 3)
 
     ## [1] 34
 
+## Exercises
+
+Let’s start with some simple exercises to get familiar with the syntax
+of writing functions.
+
+### 1.1 hello\_world()
+
+Create a function called `hello_world` which prints “Hello world\!” to
+the console, & call the function.
+
+**Hint: use the `print()` function.**
+
+### 1.2 my\_mean()
+
+Create a function called `my_mean` which takes two arguments, `x` and
+`y`, and calculates their mean.
+
+Call the function to find the mean of 7.5 and 16.
+
+**Hint:** include a `return()` statement if you want your function to
+print the result to the console.
+
+-----
+
 ## Example 3: conditional statements in functions
 
 Functions can return different outputs depending on some condition,
-using the `return()` command:
+using the `return()` command. In this function the condition is `x < 0`,
+and the condition evaluates to either `TRUE` or `FALSE`:
 
 ``` r
 mod_x <- function(x){
-  if(x < 0){
+  if (x < 0) {
     return(-x)
-  }
-  else{
+  } else {
     return(x)
   }
 }
@@ -369,6 +393,95 @@ sum_powers(x = 3, y = 5, z = 3)
 
     ## [1] 152
 
+## Exercises
+
+### 1.3.1 fizz\_buzz()
+
+Now try using an if else statement inside a function.
+
+Create a function called `fizz_buzz` which takes a number as input and:
+
+  - If the number is divisible by both 3 and 5, returns “fizz buzz”
+  - If the number is divisible by just 3, returns “fizz”
+  - If the number is divisible by just 5, returns “buzz”
+  - Otherwise the number is returned (coerced to character type)
+
+To check your function works, try it out with values 1, 2, 3, 5 & 15.
+
+-----
+
+**Hints:** This exercise is very similar to example 4.
+
+The stucture of an if else statement is -
+
+    if (condition_1) {
+      code
+    } else if (condition_2) {
+      code
+    } else {
+      code
+    }
+
+To test whether a number is divisible by another number, you can use the
+modulo operator `%%`, which calculates the remainder:
+
+``` r
+1 %% 3 == 0
+```
+
+    ## [1] FALSE
+
+``` r
+3 %% 3 == 0
+```
+
+    ## [1] TRUE
+
+To coerce a number to character type, use `as.character()`.
+
+-----
+
+-----
+
+-----
+
+### 1.3.2 fizz\_buzz\_vec()
+
+Most functions in R are vectorised. This means they’re able to apply an
+operation to every element of a vector at the same time.
+
+It’s best practice to vectorise your own functions too as this will help
+you to combine them with other functions.
+
+Create a new version of the `fizz_buzz()` function called
+`fizz_buzz_vec` which instead accepts a vector of numbers.
+
+Test it out on a vector of the numbers 1 to 15.
+
+**Hint:** if else statements aren’t vectorised so you’ll need to switch
+to using `case_when()` from the Tidyverse package `dplyr`. Run
+`?case_when` to bring up the help file.
+
+*If you get stuck on this exercise you can still complete exercise
+1.3.3.*
+
+-----
+
+-----
+
+### 1.3.3 fizz\_buzz\_custom()
+
+Create version of `fizz_buzz()` or `fizz_buzz_vec()` called
+`fizz_buzz_custom` or `fizz_buzz_custom_vec` where the values for when
+to say “fizz” and “buzz” can be changed by setting arguments `fizz` and
+`buzz`, but the default values are still 3 and 5.
+
+Test your new function out, first by checking you get the same results
+as above when you don’t specify the `fizz` or `buzz` arguments, and
+second when you set `buzz = 7` for values 1, 2, 3, 7, 15 and 21.
+
+-----
+
 ## Example 8: the ellipsis argument
 
 Sometimes being able to pass an arbitrary number of arguments can be
@@ -395,7 +508,7 @@ The function can be called with only the required arguments:
 plot_x_and_y(x, y)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
 
 -----
 
@@ -406,7 +519,7 @@ the plot function:
 plot_x_and_y(x, y, col='red', type='l')
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
 # “Real-world” example functions
 
@@ -844,7 +957,7 @@ prosecutions_graph <- function(df, breakdown = "offence_type"){
 prosecutions_graph(prosecutions, breakdown = "offence_type")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
 
 -----
 
@@ -952,6 +1065,12 @@ The name of a function should give you a good idea of what it does.
 Generally function names should be concise and use verbs rather than
 nouns.
 
+### Pass variables into the function as arguments
+
+While functions can access objects which haven’t been passed in as an
+argument, this is generally bad practice as it makes code much harder to
+understand and modify; and makes the function itself harder to reuse.
+
 ### Document your code
 
 You should have comments explaining what your function does, what each
@@ -977,6 +1096,12 @@ R is designed to work well with vectors (e.g. columns of a dataframe).
 Where possible you should write your function so it can take a vector as
 input and apply the transformation to each element. The
 `generalise_names()` function we looked at is a good example of this\!
+
+### Get feedback
+
+A key measure of a good function (or any piece of code) is how easy it
+is for someone else to understand, use and modify it. The best way to
+test this is to get your code reviewed by someone else.
 
 ## How to organise your code
 
@@ -1018,7 +1143,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Purple"
+    ## [1] "Magenta"
 
 ## Writing a package
 
