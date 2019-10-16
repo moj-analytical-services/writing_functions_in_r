@@ -1,3 +1,18 @@
+## Learning outcomes
+
+### By the end of this session you should know:
+
+* How to write a basic function.
+* The circumstances when you might want to consider writing a function.
+* Why using functions is beneficial.
+* The best practice for writing functions.
+* Where to go for more information on some of the topics touched on in this course.
+
+
+### A note on the examples given in this course:
+During this session we'll show lots of examples of functions. Depending on how experienced you are with using R, some of these examples may introduce new concepts that are not the focus of this course. It is not required that you have prior knowledge of these concepts, as they are included only to demonstrate possible uses for functions when undertaking typical programming tasks in DASD. One of the purposes of the examples is to provide a resource that can be referred back to in the future.
+
+
 ## What is a function?
 
 Functions are a way to package up bits of code to make them easy to reuse. Base R includes numerous built-in functions and there are thousands more R functions in packages available on CRAN and elsewhere.
@@ -55,9 +70,9 @@ A function is made up of three components:
    
 + And the function **environment** (where the function was created) - this determines what variables and other functions it has access to - you can find out more about environments  [here](https://r4ds.had.co.nz/functions.html#environment).
 
-# Examples of functions
+# Examples of basic functions
 
-## Example 1: a basic function
+## Example 1: a very basic function
 
 Here's an example of a very basic user-defined function:
 
@@ -492,10 +507,10 @@ This section builds on material covered in the [Intro R Training](https://github
 ## Loading packages and data
 
 First of all we need to load a few packages:  
-• `s3tools` is an MoJ package designed to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.  
-• `dplyr` is the package we'll use to create summary tables from the data.  
-• `stringr` provides functions that can be used to manipulate strings.  
-• `purrr` provides functions to make the use of vectors and user-defined functions easier.  
+* `s3tools` is an MoJ package designed to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.
+* `dplyr` is the package we'll use to create summary tables from the data.
+* `stringr` provides functions that can be used to manipulate strings.
+* `purrr` provides functions to make the use of vectors and user-defined functions easier.
 
 ```{r message=F, warning=F}
 # Load packages

@@ -1,21 +1,39 @@
 
 # Writing functions in R
 
-This repository is for the April 2019 [Coffee &
+This repository is for Writing Functions in R course offered by the DASD
+R Training Group. It was also used for the April 2019 [Coffee &
 Coding](https://github.com/moj-analytical-services/Coffee-and-Coding)
-session on writing functions in R:
+session.
 
-> Knowing how to write your own functions is a great skill to add to
-> your R toolbox. Writing functions can save you time, reduce the risk
-> of errors, and make your code easier to understand. In this sesssion
-> we’ll cover why, when and how to write your own functions, sharing
-> plenty of examples to help you get started.
+Knowing how to write your own functions is a great skill to add to your
+R toolbox. Writing functions can save you time, reduce the risk of
+errors, and make your code easier to understand. In this course we cover
+why, when and how to write your own functions, with plenty of examples
+and exercises to help you get started.
 
-We are planning to use this material to develop a training session
-offered by the ASD R Training Group so if you’d be interested in
-attending or have any feedback on the content, please get in touch\!
+The session is intended to be accessible to anyone who has attended the
+[Introduction to
+R](https://github.com/moj-analytical-services/IntroRTraining) training
+session and used R a little in their work.
 
-All the notes for the session are available below.
+All the notes for the training session are available below. If you have
+any feedback on the content, please get in touch\!
+
+## Contents
+
+  - [Pre-material](#pre-material)
+  - [Learning outcomes](#learning-outcomes)
+  - [What is a function?](#what-is-a-function)
+  - [Why use functions?](#why-use-functions)
+  - [How to write a function](#how-to-write-a-function)
+  - [Examples of basic functions](#examples-of-basic-functions)
+  - [“Real-world” example functions](#real-world-example-functions)
+  - [When to write a function](#when-to-write-a-function)
+  - [Best practice](#best-practice)
+  - [How to organise your code](#how-to-organise-your-code)
+  - [Writing a package](#writing-a-package)
+  - [Further reading](#further-reading)
 
 ## Pre-material
 
@@ -37,6 +55,29 @@ script example\_code.R.
 
 This isn’t necessary for the session so don’t worry if you’re not able
 to do this\!
+
+## Learning outcomes
+
+### By the end of this session you should know:
+
+  - How to write a basic function.
+  - The circumstances when you might want to consider writing a
+    function.
+  - Why using functions is beneficial.
+  - The best practice for writing functions.
+  - Where to go for more information on some of the topics touched on in
+    this course.
+
+### A note on the examples given in this course:
+
+During this session we’ll show lots of examples of functions. Depending
+on how experienced you are with using R, some of these examples may
+introduce new concepts that are not the focus of this course. It is not
+required that you have prior knowledge of these concepts, as they are
+included only to demonstrate possible uses for functions when
+undertaking typical programming tasks in DASD. One of the purposes of
+the examples is to provide a resource that can be referred back to in
+the future.
 
 ## What is a function?
 
@@ -111,9 +152,9 @@ A function is made up of three components:
     - you can find out more about environments
     [here](https://r4ds.had.co.nz/functions.html#environment).
 
-# Examples of functions
+# Examples of basic functions
 
-## Example 1: a basic function
+## Example 1: a very basic function
 
 Here’s an example of a very basic user-defined function:
 
@@ -508,7 +549,7 @@ The function can be called with only the required arguments:
 plot_x_and_y(x, y)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
 
 -----
 
@@ -519,7 +560,7 @@ the plot function:
 plot_x_and_y(x, y, col='red', type='l')
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
 # “Real-world” example functions
 
@@ -536,13 +577,12 @@ System Statistics quarterly publication: December 2018 (published in May
 ## Loading packages and data
 
 First of all we need to load a few packages:  
-• `s3tools` is an MoJ package designed to interact with Amazon s3 -
-we’ll need this to help read in some data from an s3 bucket.  
-• `dplyr` is the package we’ll use to create summary tables from the
-data.  
-• `stringr` provides functions that can be used to manipulate strings.  
-• `purrr` provides functions to make the use of vectors and user-defined
-functions easier.
+\* `s3tools` is an MoJ package designed to interact with Amazon s3 -
+we’ll need this to help read in some data from an s3 bucket. \*
+`dplyr` is the package we’ll use to create summary tables from the data.
+\* `stringr` provides functions that can be used to manipulate strings.
+\* `purrr` provides functions to make the use of vectors and
+user-defined functions easier.
 
 ``` r
 # Load packages
@@ -580,22 +620,22 @@ glimpse(prosecutions)
 
     ## Observations: 107,493
     ## Variables: 16
-    ## $ Year                      [3m[38;5;246m<int>[39m[23m 2008, 2008, 2008, 2008, 2008, 2008, 20…
-    ## $ Quarter                   [3m[38;5;246m<chr>[39m[23m "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q…
-    ## $ Sex                       [3m[38;5;246m<chr>[39m[23m "01: Male", "01: Male", "01: Male", "0…
-    ## $ Type.of.Defendent         [3m[38;5;246m<chr>[39m[23m "01: Person", "01: Person", "01: Perso…
-    ## $ Age.Group                 [3m[38;5;246m<chr>[39m[23m "01: Juveniles", "01: Juveniles", "01:…
-    ## $ Age.Range                 [3m[38;5;246m<chr>[39m[23m "01: 10-11", "01: 10-11", "01: 10-11",…
-    ## $ Ethnicity                 [3m[38;5;246m<chr>[39m[23m "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
-    ## $ Court.Type                [3m[38;5;246m<chr>[39m[23m "Magistrates Court", "Magistrates Cour…
-    ## $ Offence.Type              [3m[38;5;246m<chr>[39m[23m "01 Indictable only", "01 Indictable o…
-    ## $ Offence.Group             [3m[38;5;246m<chr>[39m[23m "02 Sexual offences", "03 Robbery", "0…
-    ## $ Tried                     [3m[38;5;246m<chr>[39m[23m "5: Not tried", "01: Tried at magistra…
-    ## $ Plea.at.the.Crown.Court   [3m[38;5;246m<chr>[39m[23m "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
-    ## $ Convicted..Not.convicted  [3m[38;5;246m<chr>[39m[23m "02: Not convicted", "01: Convicted", …
-    ## $ Sentenced...Not.sentenced [3m[38;5;246m<chr>[39m[23m "02: Not sentenced", "01: Sentenced", …
-    ## $ Outcome                   [3m[38;5;246m<chr>[39m[23m "01: Proceedings terminated early", "0…
-    ## $ Count                     [3m[38;5;246m<int>[39m[23m 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15,…
+    ## $ Year                      <int> 2008, 2008, 2008, 2008, 2008, 2008, 20…
+    ## $ Quarter                   <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q…
+    ## $ Sex                       <chr> "01: Male", "01: Male", "01: Male", "0…
+    ## $ Type.of.Defendent         <chr> "01: Person", "01: Person", "01: Perso…
+    ## $ Age.Group                 <chr> "01: Juveniles", "01: Juveniles", "01:…
+    ## $ Age.Range                 <chr> "01: 10-11", "01: 10-11", "01: 10-11",…
+    ## $ Ethnicity                 <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
+    ## $ Court.Type                <chr> "Magistrates Court", "Magistrates Cour…
+    ## $ Offence.Type              <chr> "01 Indictable only", "01 Indictable o…
+    ## $ Offence.Group             <chr> "02 Sexual offences", "03 Robbery", "0…
+    ## $ Tried                     <chr> "5: Not tried", "01: Tried at magistra…
+    ## $ Plea.at.the.Crown.Court   <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
+    ## $ Convicted..Not.convicted  <chr> "02: Not convicted", "01: Convicted", …
+    ## $ Sentenced...Not.sentenced <chr> "02: Not sentenced", "01: Sentenced", …
+    ## $ Outcome                   <chr> "01: Proceedings terminated early", "0…
+    ## $ Count                     <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15,…
 
 ## Cleaning data
 
@@ -677,22 +717,22 @@ glimpse(prosecutions)
 
     ## Observations: 107,493
     ## Variables: 16
-    ## $ year                    [3m[38;5;246m<int>[39m[23m 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-    ## $ quarter                 [3m[38;5;246m<chr>[39m[23m "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
-    ## $ sex                     [3m[38;5;246m<chr>[39m[23m "Male", "Male", "Male", "Male", "Male", …
-    ## $ type_of_defendent       [3m[38;5;246m<chr>[39m[23m "Person", "Person", "Person", "Person", …
-    ## $ age_group               [3m[38;5;246m<chr>[39m[23m "Juveniles", "Juveniles", "Juveniles", "…
-    ## $ age_range               [3m[38;5;246m<chr>[39m[23m "10-11", "10-11", "10-11", "10-11", "10-…
-    ## $ ethnicity               [3m[38;5;246m<chr>[39m[23m "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
-    ## $ court_type              [3m[38;5;246m<chr>[39m[23m "Magistrates Court", "Magistrates Court"…
-    ## $ offence_type            [3m[38;5;246m<chr>[39m[23m "Indictable only", "Indictable only", "I…
-    ## $ offence_group           [3m[38;5;246m<chr>[39m[23m "Sexual offences", "Robbery", "Robbery",…
-    ## $ tried                   [3m[38;5;246m<chr>[39m[23m "Not tried", "Tried at magistrates court…
-    ## $ plea_at_the_crown_court [3m[38;5;246m<chr>[39m[23m "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
-    ## $ convicted_not_convicted [3m[38;5;246m<chr>[39m[23m "Not convicted", "Convicted", "Not convi…
-    ## $ sentenced_not_sentenced [3m[38;5;246m<chr>[39m[23m "Not sentenced", "Sentenced", "Not sente…
-    ## $ outcome                 [3m[38;5;246m<chr>[39m[23m "Proceedings terminated early", "Found g…
-    ## $ count                   [3m[38;5;246m<int>[39m[23m 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
+    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", …
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", …
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "…
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-…
+    ## $ ethnicity               <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
+    ## $ offence_type            <chr> "Indictable only", "Indictable only", "I…
+    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery",…
+    ## $ tried                   <chr> "Not tried", "Tried at magistrates court…
+    ## $ plea_at_the_crown_court <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
+    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convi…
+    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sente…
+    ## $ outcome                 <chr> "Proceedings terminated early", "Found g…
+    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 
 -----
 
@@ -732,22 +772,22 @@ glimpse(prosecutions)
 
     ## Observations: 107,493
     ## Variables: 16
-    ## $ year                    [3m[38;5;246m<int>[39m[23m 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-    ## $ quarter                 [3m[38;5;246m<chr>[39m[23m "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
-    ## $ sex                     [3m[38;5;246m<chr>[39m[23m "Male", "Male", "Male", "Male", "Male", …
-    ## $ type_of_defendent       [3m[38;5;246m<chr>[39m[23m "Person", "Person", "Person", "Person", …
-    ## $ age_group               [3m[38;5;246m<chr>[39m[23m "Juveniles", "Juveniles", "Juveniles", "…
-    ## $ age_range               [3m[38;5;246m<chr>[39m[23m "10-11", "10-11", "10-11", "10-11", "10-…
-    ## $ ethnicity               [3m[38;5;246m<chr>[39m[23m "Not known", "Not known", "Not known", "…
-    ## $ court_type              [3m[38;5;246m<chr>[39m[23m "Magistrates Court", "Magistrates Court"…
-    ## $ offence_type            [3m[38;5;246m<chr>[39m[23m "Indictable only", "Indictable only", "I…
-    ## $ offence_group           [3m[38;5;246m<chr>[39m[23m "Sexual offences", "Robbery", "Robbery",…
-    ## $ tried                   [3m[38;5;246m<chr>[39m[23m "Not tried", "Tried at magistrates court…
-    ## $ plea_at_the_crown_court [3m[38;5;246m<chr>[39m[23m "Not known", "Not known", "Not known", "…
-    ## $ convicted_not_convicted [3m[38;5;246m<chr>[39m[23m "Not convicted", "Convicted", "Not convi…
-    ## $ sentenced_not_sentenced [3m[38;5;246m<chr>[39m[23m "Not sentenced", "Sentenced", "Not sente…
-    ## $ outcome                 [3m[38;5;246m<chr>[39m[23m "Proceedings terminated early", "Found g…
-    ## $ count                   [3m[38;5;246m<int>[39m[23m 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
+    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", …
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", …
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "…
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-…
+    ## $ ethnicity               <chr> "Not known", "Not known", "Not known", "…
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
+    ## $ offence_type            <chr> "Indictable only", "Indictable only", "I…
+    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery",…
+    ## $ tried                   <chr> "Not tried", "Tried at magistrates court…
+    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "…
+    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convi…
+    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sente…
+    ## $ outcome                 <chr> "Proceedings terminated early", "Found g…
+    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 
 -----
 
@@ -955,7 +995,7 @@ prosecutions_graph <- function(df, breakdown = "offence_type"){
 prosecutions_graph(prosecutions, breakdown = "offence_type")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-65-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
 
 -----
 
@@ -1141,7 +1181,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Magenta"
+    ## [1] "Pink"
 
 ## Writing a package
 
@@ -1278,16 +1318,7 @@ row with the total across all categories. Note that this requires the
 
 ``` r
 library(janitor)
-```
 
-    ## 
-    ## Attaching package: 'janitor'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     chisq.test, fisher.test
-
-``` r
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%
