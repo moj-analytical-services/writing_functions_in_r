@@ -685,7 +685,7 @@ body {
 <p>Let’s start with some simple exercises to get familiar with the syntax of writing functions.</p>
 <h3 id="11-hello_world">1.1 hello_world()</h3>
 <p>Create a function called <code>hello_world</code> which prints “Hello world!” to the console, &amp; call the function.</p>
-<p><strong>Hint: use the <code>print()</code> function.</strong></p>
+<p><strong>Hint:</strong> use the <code>print()</code> function.</p>
 <h3 id="12-my_mean">1.2 my_mean()</h3>
 <p>Create a function called <code>my_mean</code> which takes two arguments, <code>x</code> and <code>y</code>, and calculates their mean.</p>
 <p>Call the function to find the mean of 7.5 and 16.</p>
@@ -871,7 +871,7 @@ body {
 <p>This section builds on material covered in the <a href="https://github.com/moj-analytical-services/IntroRTraining">Intro R Training</a> course and makes use of the <code>dplyr</code> package, which is a commonly used R package for data manipulation. In the following examples we’ll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we’ll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found <a href="https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018">here</a>.</p>
 <h2 id="loading-packages-and-data">Loading packages and data</h2>
 <p>First of all we need to load a few packages:<br />
-• <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we will need this to help read in some data from an s3 bucket.<br />
+• <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we’ll need this to help read in some data from an s3 bucket.<br />
 • <code>dplyr</code> is the package we’ll use to create summary tables from the data.<br />
 • <code>stringr</code> provides functions that can be used to manipulate strings.<br />
 • <code>purrr</code> provides functions to make the use of vectors and user-defined functions easier.</p>
@@ -894,22 +894,22 @@ body {
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">glimpse</span>(prosecutions)</span></code></pre></div>
 <pre><code>## Observations: 107,493
 ## Variables: 16
-## $ Year                      &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 20…
-## $ Quarter                   &lt;chr&gt; &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q…
-## $ Sex                       &lt;chr&gt; &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;0…
-## $ Type.of.Defendent         &lt;chr&gt; &quot;01: Person&quot;, &quot;01: Person&quot;, &quot;01: Perso…
-## $ Age.Group                 &lt;chr&gt; &quot;01: Juveniles&quot;, &quot;01: Juveniles&quot;, &quot;01:…
-## $ Age.Range                 &lt;chr&gt; &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;01: 10-11&quot;,…
-## $ Ethnicity                 &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/…
-## $ Court.Type                &lt;chr&gt; &quot;Magistrates Court&quot;, &quot;Magistrates Cour…
-## $ Offence.Type              &lt;chr&gt; &quot;01 Indictable only&quot;, &quot;01 Indictable o…
-## $ Offence.Group             &lt;chr&gt; &quot;02 Sexual offences&quot;, &quot;03 Robbery&quot;, &quot;0…
-## $ Tried                     &lt;chr&gt; &quot;5: Not tried&quot;, &quot;01: Tried at magistra…
-## $ Plea.at.the.Crown.Court   &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/…
-## $ Convicted..Not.convicted  &lt;chr&gt; &quot;02: Not convicted&quot;, &quot;01: Convicted&quot;, …
-## $ Sentenced...Not.sentenced &lt;chr&gt; &quot;02: Not sentenced&quot;, &quot;01: Sentenced&quot;, …
-## $ Outcome                   &lt;chr&gt; &quot;01: Proceedings terminated early&quot;, &quot;0…
-## $ Count                     &lt;int&gt; 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15,…
+## $ Year                      [3m[38;5;246m&lt;int&gt;[39m[23m 2008, 2008, 2008, 2008, 2008, 2008, 20…
+## $ Quarter                   [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q…
+## $ Sex                       [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;0…
+## $ Type.of.Defendent         [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;01: Person&quot;, &quot;01: Person&quot;, &quot;01: Perso…
+## $ Age.Group                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;01: Juveniles&quot;, &quot;01: Juveniles&quot;, &quot;01:…
+## $ Age.Range                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;01: 10-11&quot;,…
+## $ Ethnicity                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/…
+## $ Court.Type                [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Magistrates Court&quot;, &quot;Magistrates Cour…
+## $ Offence.Type              [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;01 Indictable only&quot;, &quot;01 Indictable o…
+## $ Offence.Group             [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;02 Sexual offences&quot;, &quot;03 Robbery&quot;, &quot;0…
+## $ Tried                     [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;5: Not tried&quot;, &quot;01: Tried at magistra…
+## $ Plea.at.the.Crown.Court   [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/…
+## $ Convicted..Not.convicted  [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;02: Not convicted&quot;, &quot;01: Convicted&quot;, …
+## $ Sentenced...Not.sentenced [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;02: Not sentenced&quot;, &quot;01: Sentenced&quot;, …
+## $ Outcome                   [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;01: Proceedings terminated early&quot;, &quot;0…
+## $ Count                     [3m[38;5;246m&lt;int&gt;[39m[23m 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15,…
 </code></pre>
 <h2 id="cleaning-data">Cleaning data</h2>
 <p>After reading in a dataframe it can often be helpful to standardise the column headings. Below is an example of a function that could be used for this purpose. It takes a vector of strings as the argument, ensures all letters in the string vector are lower-case, and makes use of “regular expressions” or “regex” to find and replace all spaces and punctuation marks with an underscore:</p>
@@ -950,27 +950,27 @@ body {
 <span id="cb51-6"><a href="#cb51-6"></a>  <span class="kw">return</span>(x)</span>
 <span id="cb51-7"><a href="#cb51-7"></a>}</span></code></pre></div>
 <hr />
-<p>Then we can use the <code>map_if()</code> function from <code>purrr</code> to apply the <code>remove_numbering()</code> function to all columns in the <code>prosecutions</code> dataframe, with the condition that the column must contain strings. Since the <code>map_if()</code> function returns a list, we must convert our data back into a dataframe using the <code>as.data.frame()</code> function.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>prosecutions &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_if</span>(prosecutions, is.character, remove_numbering) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>(<span class="dt">stringsAsFactors=</span>F)</span>
+<p>Then we can use the <code>modify_if()</code> function from <code>purrr</code> to apply the <code>remove_numbering()</code> function to all columns in the <code>prosecutions</code> dataframe, with the condition that the column must contain strings.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>prosecutions &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">modify_if</span>(prosecutions, is.character, remove_numbering)</span>
 <span id="cb52-2"><a href="#cb52-2"></a><span class="kw">glimpse</span>(prosecutions)</span></code></pre></div>
 <pre><code>## Observations: 107,493
 ## Variables: 16
-## $ year                    &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-## $ quarter                 &lt;chr&gt; &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;…
-## $ sex                     &lt;chr&gt; &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, …
-## $ type_of_defendent       &lt;chr&gt; &quot;Person&quot;, &quot;Person&quot;, &quot;Person&quot;, &quot;Person&quot;, …
-## $ age_group               &lt;chr&gt; &quot;Juveniles&quot;, &quot;Juveniles&quot;, &quot;Juveniles&quot;, &quot;…
-## $ age_range               &lt;chr&gt; &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-…
-## $ ethnicity               &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;…
-## $ court_type              &lt;chr&gt; &quot;Magistrates Court&quot;, &quot;Magistrates Court&quot;…
-## $ offence_type            &lt;chr&gt; &quot;Indictable only&quot;, &quot;Indictable only&quot;, &quot;I…
-## $ offence_group           &lt;chr&gt; &quot;Sexual offences&quot;, &quot;Robbery&quot;, &quot;Robbery&quot;,…
-## $ tried                   &lt;chr&gt; &quot;Not tried&quot;, &quot;Tried at magistrates court…
-## $ plea_at_the_crown_court &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;…
-## $ convicted_not_convicted &lt;chr&gt; &quot;Not convicted&quot;, &quot;Convicted&quot;, &quot;Not convi…
-## $ sentenced_not_sentenced &lt;chr&gt; &quot;Not sentenced&quot;, &quot;Sentenced&quot;, &quot;Not sente…
-## $ outcome                 &lt;chr&gt; &quot;Proceedings terminated early&quot;, &quot;Found g…
-## $ count                   &lt;int&gt; 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
+## $ year                    [3m[38;5;246m&lt;int&gt;[39m[23m 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+## $ quarter                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;…
+## $ sex                     [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, …
+## $ type_of_defendent       [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Person&quot;, &quot;Person&quot;, &quot;Person&quot;, &quot;Person&quot;, …
+## $ age_group               [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Juveniles&quot;, &quot;Juveniles&quot;, &quot;Juveniles&quot;, &quot;…
+## $ age_range               [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-…
+## $ ethnicity               [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;…
+## $ court_type              [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Magistrates Court&quot;, &quot;Magistrates Court&quot;…
+## $ offence_type            [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Indictable only&quot;, &quot;Indictable only&quot;, &quot;I…
+## $ offence_group           [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Sexual offences&quot;, &quot;Robbery&quot;, &quot;Robbery&quot;,…
+## $ tried                   [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Not tried&quot;, &quot;Tried at magistrates court…
+## $ plea_at_the_crown_court [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;…
+## $ convicted_not_convicted [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Not convicted&quot;, &quot;Convicted&quot;, &quot;Not convi…
+## $ sentenced_not_sentenced [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Not sentenced&quot;, &quot;Sentenced&quot;, &quot;Not sente…
+## $ outcome                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Proceedings terminated early&quot;, &quot;Found g…
+## $ count                   [3m[38;5;246m&lt;int&gt;[39m[23m 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 </code></pre>
 <hr />
 <p>For the final stage of data cleaning, we can make missing and unknown values more consistent using a function such as the following:</p>
@@ -992,26 +992,26 @@ body {
 <span id="cb54-16"><a href="#cb54-16"></a>}</span></code></pre></div>
 <p>In this function we’ve included some default values, so by default missing/NA values are replaced, and any strings that match “n/a”, “not known”, “unknown”, or “not stated” are replaced. The default replacement value is “Not known”.</p>
 <hr />
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>prosecutions &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_if</span>(prosecutions, is.character, clean_not_known) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>(<span class="dt">stringsAsFactors=</span>F)</span>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>prosecutions &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">modify_if</span>(prosecutions, is.character, clean_not_known)</span>
 <span id="cb55-2"><a href="#cb55-2"></a><span class="kw">glimpse</span>(prosecutions)</span></code></pre></div>
 <pre><code>## Observations: 107,493
 ## Variables: 16
-## $ year                    &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-## $ quarter                 &lt;chr&gt; &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;…
-## $ sex                     &lt;chr&gt; &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, …
-## $ type_of_defendent       &lt;chr&gt; &quot;Person&quot;, &quot;Person&quot;, &quot;Person&quot;, &quot;Person&quot;, …
-## $ age_group               &lt;chr&gt; &quot;Juveniles&quot;, &quot;Juveniles&quot;, &quot;Juveniles&quot;, &quot;…
-## $ age_range               &lt;chr&gt; &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-…
-## $ ethnicity               &lt;chr&gt; &quot;Not known&quot;, &quot;Not known&quot;, &quot;Not known&quot;, &quot;…
-## $ court_type              &lt;chr&gt; &quot;Magistrates Court&quot;, &quot;Magistrates Court&quot;…
-## $ offence_type            &lt;chr&gt; &quot;Indictable only&quot;, &quot;Indictable only&quot;, &quot;I…
-## $ offence_group           &lt;chr&gt; &quot;Sexual offences&quot;, &quot;Robbery&quot;, &quot;Robbery&quot;,…
-## $ tried                   &lt;chr&gt; &quot;Not tried&quot;, &quot;Tried at magistrates court…
-## $ plea_at_the_crown_court &lt;chr&gt; &quot;Not known&quot;, &quot;Not known&quot;, &quot;Not known&quot;, &quot;…
-## $ convicted_not_convicted &lt;chr&gt; &quot;Not convicted&quot;, &quot;Convicted&quot;, &quot;Not convi…
-## $ sentenced_not_sentenced &lt;chr&gt; &quot;Not sentenced&quot;, &quot;Sentenced&quot;, &quot;Not sente…
-## $ outcome                 &lt;chr&gt; &quot;Proceedings terminated early&quot;, &quot;Found g…
-## $ count                   &lt;int&gt; 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
+## $ year                    [3m[38;5;246m&lt;int&gt;[39m[23m 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+## $ quarter                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;…
+## $ sex                     [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, …
+## $ type_of_defendent       [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Person&quot;, &quot;Person&quot;, &quot;Person&quot;, &quot;Person&quot;, …
+## $ age_group               [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Juveniles&quot;, &quot;Juveniles&quot;, &quot;Juveniles&quot;, &quot;…
+## $ age_range               [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-11&quot;, &quot;10-…
+## $ ethnicity               [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Not known&quot;, &quot;Not known&quot;, &quot;Not known&quot;, &quot;…
+## $ court_type              [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Magistrates Court&quot;, &quot;Magistrates Court&quot;…
+## $ offence_type            [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Indictable only&quot;, &quot;Indictable only&quot;, &quot;I…
+## $ offence_group           [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Sexual offences&quot;, &quot;Robbery&quot;, &quot;Robbery&quot;,…
+## $ tried                   [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Not tried&quot;, &quot;Tried at magistrates court…
+## $ plea_at_the_crown_court [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Not known&quot;, &quot;Not known&quot;, &quot;Not known&quot;, &quot;…
+## $ convicted_not_convicted [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Not convicted&quot;, &quot;Convicted&quot;, &quot;Not convi…
+## $ sentenced_not_sentenced [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Not sentenced&quot;, &quot;Sentenced&quot;, &quot;Not sente…
+## $ outcome                 [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Proceedings terminated early&quot;, &quot;Found g…
+## $ count                   [3m[38;5;246m&lt;int&gt;[39m[23m 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 </code></pre>
 <hr />
 <h3 id="exercise-2">Exercise 2</h3>
@@ -1329,21 +1329,27 @@ body {
 </code></pre>
 <h2 id="adding-an-optional-total-row">Adding an optional total row</h2>
 <p>We can extend the <code>sum_group()</code> function by having the option to add a row with the total across all categories. Note that this requires the <code>janitor</code> package.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="kw">library</span>(janitor)</span>
-<span id="cb80-2"><a href="#cb80-2"></a></span>
-<span id="cb80-3"><a href="#cb80-3"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col, <span class="dt">add_total=</span>F) {</span>
-<span id="cb80-4"><a href="#cb80-4"></a>  </span>
-<span id="cb80-5"><a href="#cb80-5"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
-<span id="cb80-6"><a href="#cb80-6"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by_at</span>(group_cols) <span class="op">%&gt;%</span></span>
-<span id="cb80-7"><a href="#cb80-7"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise_at</span>(sum_col, sum)</span>
-<span id="cb80-8"><a href="#cb80-8"></a>  </span>
-<span id="cb80-9"><a href="#cb80-9"></a>  <span class="cf">if</span> (add_total <span class="op">==</span><span class="st"> </span>T) {</span>
-<span id="cb80-10"><a href="#cb80-10"></a>    summary &lt;-<span class="st"> </span>summary <span class="op">%&gt;%</span><span class="st"> </span>janitor<span class="op">::</span><span class="kw">adorn_totals</span>(<span class="st">&quot;row&quot;</span>)</span>
-<span id="cb80-11"><a href="#cb80-11"></a>  }</span>
-<span id="cb80-12"><a href="#cb80-12"></a>  </span>
-<span id="cb80-13"><a href="#cb80-13"></a>  <span class="kw">return</span>(summary)</span>
-<span id="cb80-14"><a href="#cb80-14"></a>  </span>
-<span id="cb80-15"><a href="#cb80-15"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="kw">library</span>(janitor)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;
+
+## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test
+</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col, <span class="dt">add_total=</span>F) {</span>
+<span id="cb82-2"><a href="#cb82-2"></a>  </span>
+<span id="cb82-3"><a href="#cb82-3"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
+<span id="cb82-4"><a href="#cb82-4"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by_at</span>(group_cols) <span class="op">%&gt;%</span></span>
+<span id="cb82-5"><a href="#cb82-5"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise_at</span>(sum_col, sum)</span>
+<span id="cb82-6"><a href="#cb82-6"></a>  </span>
+<span id="cb82-7"><a href="#cb82-7"></a>  <span class="cf">if</span> (add_total <span class="op">==</span><span class="st"> </span>T) {</span>
+<span id="cb82-8"><a href="#cb82-8"></a>    summary &lt;-<span class="st"> </span>summary <span class="op">%&gt;%</span><span class="st"> </span>janitor<span class="op">::</span><span class="kw">adorn_totals</span>(<span class="st">&quot;row&quot;</span>)</span>
+<span id="cb82-9"><a href="#cb82-9"></a>  }</span>
+<span id="cb82-10"><a href="#cb82-10"></a>  </span>
+<span id="cb82-11"><a href="#cb82-11"></a>  <span class="kw">return</span>(summary)</span>
+<span id="cb82-12"><a href="#cb82-12"></a>  </span>
+<span id="cb82-13"><a href="#cb82-13"></a>}</span></code></pre></div>
 
 </body>
 </html>

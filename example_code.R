@@ -261,7 +261,7 @@ remove_numbering <- function(x) {
 
 
 ## ------------------------------------------------------------------------
-prosecutions <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame(stringsAsFactors=F)
+prosecutions <- purrr::modify_if(prosecutions, is.character, remove_numbering)
 glimpse(prosecutions)
 
 
@@ -287,7 +287,7 @@ clean_not_known <- function(x,
 
 
 ## ------------------------------------------------------------------------
-prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame(stringsAsFactors=F)
+prosecutions <- purrr::modify_if(prosecutions, is.character, clean_not_known)
 glimpse(prosecutions)
 
 

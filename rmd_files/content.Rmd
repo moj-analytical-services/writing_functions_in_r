@@ -120,7 +120,7 @@ functions.
 Create a function called `hello_world` which prints "Hello world!" to the 
 console, & call the function.
 
-**Hint: use the `print()` function.**
+**Hint:** use the `print()` function.
 
 ### 1.2 my_mean()
 Create a function called `my_mean` which takes two arguments, `x` and `y`, and
@@ -492,7 +492,7 @@ This section builds on material covered in the [Intro R Training](https://github
 ## Loading packages and data
 
 First of all we need to load a few packages:  
-• `s3tools` is an MoJ package designed to interact with Amazon s3 - we will need this to help read in some data from an s3 bucket.  
+• `s3tools` is an MoJ package designed to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.  
 • `dplyr` is the package we'll use to create summary tables from the data.  
 • `stringr` provides functions that can be used to manipulate strings.  
 • `purrr` provides functions to make the use of vectors and user-defined functions easier.  
@@ -598,10 +598,10 @@ remove_numbering <- function(x) {
 
 ---
 
-Then we can use the `map_if()` function from `purrr` to apply the `remove_numbering()` function to all columns in the `prosecutions` dataframe, with the condition that the column must contain strings. Since the `map_if()` function returns a list, we must convert our data back into a dataframe using the `as.data.frame()` function.
+Then we can use the `modify_if()` function from `purrr` to apply the `remove_numbering()` function to all columns in the `prosecutions` dataframe, with the condition that the column must contain strings.
 
 ```{r}
-prosecutions <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame(stringsAsFactors=F)
+prosecutions <- purrr::modify_if(prosecutions, is.character, remove_numbering)
 glimpse(prosecutions)
 ```
 
@@ -635,7 +635,7 @@ In this function we've included some default values, so by default missing/NA va
 ---
 
 ```{r}
-prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame(stringsAsFactors=F)
+prosecutions <- purrr::modify_if(prosecutions, is.character, clean_not_known)
 glimpse(prosecutions)
 ```
 
@@ -690,9 +690,9 @@ clean_prosec_and_convic <- function(data) {
   # Clean the column headings
   colnames(data) <- generalise_names(colnames(data))
   # Remove numeric indices from columns
-  data <- purrr::map_if(data, is.character, remove_numbering) %>% as.data.frame(stringsAsFactors=F)
+  data <- purrr::modify_if(data, is.character, remove_numbering)
   # Make missing/unknown value entries more consistent
-  data <- purrr::map_if(data, is.character, clean_not_known) %>% as.data.frame(stringsAsFactors=F)
+  data <- purrr::modify_if(data, is.character, clean_not_known)
   
   return(data)
   

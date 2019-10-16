@@ -194,7 +194,7 @@ of writing functions.
 Create a function called `hello_world` which prints “Hello world\!” to
 the console, & call the function.
 
-**Hint: use the `print()` function.**
+**Hint:** use the `print()` function.
 
 ### 1.2 my\_mean()
 
@@ -508,7 +508,7 @@ The function can be called with only the required arguments:
 plot_x_and_y(x, y)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
 
 -----
 
@@ -519,7 +519,7 @@ the plot function:
 plot_x_and_y(x, y, col='red', type='l')
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
 
 # “Real-world” example functions
 
@@ -536,8 +536,8 @@ System Statistics quarterly publication: December 2018 (published in May
 ## Loading packages and data
 
 First of all we need to load a few packages:  
-• `s3tools` is an MoJ package designed to interact with Amazon s3 - we
-will need this to help read in some data from an s3 bucket.  
+• `s3tools` is an MoJ package designed to interact with Amazon s3 -
+we’ll need this to help read in some data from an s3 bucket.  
 • `dplyr` is the package we’ll use to create summary tables from the
 data.  
 • `stringr` provides functions that can be used to manipulate strings.  
@@ -580,22 +580,22 @@ glimpse(prosecutions)
 
     ## Observations: 107,493
     ## Variables: 16
-    ## $ Year                      <int> 2008, 2008, 2008, 2008, 2008, 2008, 20…
-    ## $ Quarter                   <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q…
-    ## $ Sex                       <chr> "01: Male", "01: Male", "01: Male", "0…
-    ## $ Type.of.Defendent         <chr> "01: Person", "01: Person", "01: Perso…
-    ## $ Age.Group                 <chr> "01: Juveniles", "01: Juveniles", "01:…
-    ## $ Age.Range                 <chr> "01: 10-11", "01: 10-11", "01: 10-11",…
-    ## $ Ethnicity                 <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
-    ## $ Court.Type                <chr> "Magistrates Court", "Magistrates Cour…
-    ## $ Offence.Type              <chr> "01 Indictable only", "01 Indictable o…
-    ## $ Offence.Group             <chr> "02 Sexual offences", "03 Robbery", "0…
-    ## $ Tried                     <chr> "5: Not tried", "01: Tried at magistra…
-    ## $ Plea.at.the.Crown.Court   <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
-    ## $ Convicted..Not.convicted  <chr> "02: Not convicted", "01: Convicted", …
-    ## $ Sentenced...Not.sentenced <chr> "02: Not sentenced", "01: Sentenced", …
-    ## $ Outcome                   <chr> "01: Proceedings terminated early", "0…
-    ## $ Count                     <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15,…
+    ## $ Year                      [3m[38;5;246m<int>[39m[23m 2008, 2008, 2008, 2008, 2008, 2008, 20…
+    ## $ Quarter                   [3m[38;5;246m<chr>[39m[23m "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q…
+    ## $ Sex                       [3m[38;5;246m<chr>[39m[23m "01: Male", "01: Male", "01: Male", "0…
+    ## $ Type.of.Defendent         [3m[38;5;246m<chr>[39m[23m "01: Person", "01: Person", "01: Perso…
+    ## $ Age.Group                 [3m[38;5;246m<chr>[39m[23m "01: Juveniles", "01: Juveniles", "01:…
+    ## $ Age.Range                 [3m[38;5;246m<chr>[39m[23m "01: 10-11", "01: 10-11", "01: 10-11",…
+    ## $ Ethnicity                 [3m[38;5;246m<chr>[39m[23m "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
+    ## $ Court.Type                [3m[38;5;246m<chr>[39m[23m "Magistrates Court", "Magistrates Cour…
+    ## $ Offence.Type              [3m[38;5;246m<chr>[39m[23m "01 Indictable only", "01 Indictable o…
+    ## $ Offence.Group             [3m[38;5;246m<chr>[39m[23m "02 Sexual offences", "03 Robbery", "0…
+    ## $ Tried                     [3m[38;5;246m<chr>[39m[23m "5: Not tried", "01: Tried at magistra…
+    ## $ Plea.at.the.Crown.Court   [3m[38;5;246m<chr>[39m[23m "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
+    ## $ Convicted..Not.convicted  [3m[38;5;246m<chr>[39m[23m "02: Not convicted", "01: Convicted", …
+    ## $ Sentenced...Not.sentenced [3m[38;5;246m<chr>[39m[23m "02: Not sentenced", "01: Sentenced", …
+    ## $ Outcome                   [3m[38;5;246m<chr>[39m[23m "01: Proceedings terminated early", "0…
+    ## $ Count                     [3m[38;5;246m<int>[39m[23m 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15,…
 
 ## Cleaning data
 
@@ -666,35 +666,33 @@ remove_numbering <- function(x) {
 
 -----
 
-Then we can use the `map_if()` function from `purrr` to apply the
+Then we can use the `modify_if()` function from `purrr` to apply the
 `remove_numbering()` function to all columns in the `prosecutions`
 dataframe, with the condition that the column must contain strings.
-Since the `map_if()` function returns a list, we must convert our data
-back into a dataframe using the `as.data.frame()` function.
 
 ``` r
-prosecutions <- purrr::map_if(prosecutions, is.character, remove_numbering) %>% as.data.frame(stringsAsFactors=F)
+prosecutions <- purrr::modify_if(prosecutions, is.character, remove_numbering)
 glimpse(prosecutions)
 ```
 
     ## Observations: 107,493
     ## Variables: 16
-    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
-    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", …
-    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", …
-    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "…
-    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-…
-    ## $ ethnicity               <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
-    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
-    ## $ offence_type            <chr> "Indictable only", "Indictable only", "I…
-    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery",…
-    ## $ tried                   <chr> "Not tried", "Tried at magistrates court…
-    ## $ plea_at_the_crown_court <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
-    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convi…
-    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sente…
-    ## $ outcome                 <chr> "Proceedings terminated early", "Found g…
-    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
+    ## $ year                    [3m[38;5;246m<int>[39m[23m 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+    ## $ quarter                 [3m[38;5;246m<chr>[39m[23m "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
+    ## $ sex                     [3m[38;5;246m<chr>[39m[23m "Male", "Male", "Male", "Male", "Male", …
+    ## $ type_of_defendent       [3m[38;5;246m<chr>[39m[23m "Person", "Person", "Person", "Person", …
+    ## $ age_group               [3m[38;5;246m<chr>[39m[23m "Juveniles", "Juveniles", "Juveniles", "…
+    ## $ age_range               [3m[38;5;246m<chr>[39m[23m "10-11", "10-11", "10-11", "10-11", "10-…
+    ## $ ethnicity               [3m[38;5;246m<chr>[39m[23m "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
+    ## $ court_type              [3m[38;5;246m<chr>[39m[23m "Magistrates Court", "Magistrates Court"…
+    ## $ offence_type            [3m[38;5;246m<chr>[39m[23m "Indictable only", "Indictable only", "I…
+    ## $ offence_group           [3m[38;5;246m<chr>[39m[23m "Sexual offences", "Robbery", "Robbery",…
+    ## $ tried                   [3m[38;5;246m<chr>[39m[23m "Not tried", "Tried at magistrates court…
+    ## $ plea_at_the_crown_court [3m[38;5;246m<chr>[39m[23m "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
+    ## $ convicted_not_convicted [3m[38;5;246m<chr>[39m[23m "Not convicted", "Convicted", "Not convi…
+    ## $ sentenced_not_sentenced [3m[38;5;246m<chr>[39m[23m "Not sentenced", "Sentenced", "Not sente…
+    ## $ outcome                 [3m[38;5;246m<chr>[39m[23m "Proceedings terminated early", "Found g…
+    ## $ count                   [3m[38;5;246m<int>[39m[23m 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 
 -----
 
@@ -728,28 +726,28 @@ value is “Not known”.
 -----
 
 ``` r
-prosecutions <- purrr::map_if(prosecutions, is.character, clean_not_known) %>% as.data.frame(stringsAsFactors=F)
+prosecutions <- purrr::modify_if(prosecutions, is.character, clean_not_known)
 glimpse(prosecutions)
 ```
 
     ## Observations: 107,493
     ## Variables: 16
-    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
-    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", …
-    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", …
-    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "…
-    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-…
-    ## $ ethnicity               <chr> "Not known", "Not known", "Not known", "…
-    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
-    ## $ offence_type            <chr> "Indictable only", "Indictable only", "I…
-    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery",…
-    ## $ tried                   <chr> "Not tried", "Tried at magistrates court…
-    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "…
-    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convi…
-    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sente…
-    ## $ outcome                 <chr> "Proceedings terminated early", "Found g…
-    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
+    ## $ year                    [3m[38;5;246m<int>[39m[23m 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+    ## $ quarter                 [3m[38;5;246m<chr>[39m[23m "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
+    ## $ sex                     [3m[38;5;246m<chr>[39m[23m "Male", "Male", "Male", "Male", "Male", …
+    ## $ type_of_defendent       [3m[38;5;246m<chr>[39m[23m "Person", "Person", "Person", "Person", …
+    ## $ age_group               [3m[38;5;246m<chr>[39m[23m "Juveniles", "Juveniles", "Juveniles", "…
+    ## $ age_range               [3m[38;5;246m<chr>[39m[23m "10-11", "10-11", "10-11", "10-11", "10-…
+    ## $ ethnicity               [3m[38;5;246m<chr>[39m[23m "Not known", "Not known", "Not known", "…
+    ## $ court_type              [3m[38;5;246m<chr>[39m[23m "Magistrates Court", "Magistrates Court"…
+    ## $ offence_type            [3m[38;5;246m<chr>[39m[23m "Indictable only", "Indictable only", "I…
+    ## $ offence_group           [3m[38;5;246m<chr>[39m[23m "Sexual offences", "Robbery", "Robbery",…
+    ## $ tried                   [3m[38;5;246m<chr>[39m[23m "Not tried", "Tried at magistrates court…
+    ## $ plea_at_the_crown_court [3m[38;5;246m<chr>[39m[23m "Not known", "Not known", "Not known", "…
+    ## $ convicted_not_convicted [3m[38;5;246m<chr>[39m[23m "Not convicted", "Convicted", "Not convi…
+    ## $ sentenced_not_sentenced [3m[38;5;246m<chr>[39m[23m "Not sentenced", "Sentenced", "Not sente…
+    ## $ outcome                 [3m[38;5;246m<chr>[39m[23m "Proceedings terminated early", "Found g…
+    ## $ count                   [3m[38;5;246m<int>[39m[23m 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
 
 -----
 
@@ -957,7 +955,7 @@ prosecutions_graph <- function(df, breakdown = "offence_type"){
 prosecutions_graph(prosecutions, breakdown = "offence_type")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-65-1.png)<!-- -->
 
 -----
 
@@ -1280,7 +1278,16 @@ row with the total across all categories. Note that this requires the
 
 ``` r
 library(janitor)
+```
 
+    ## 
+    ## Attaching package: 'janitor'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     chisq.test, fisher.test
+
+``` r
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%
