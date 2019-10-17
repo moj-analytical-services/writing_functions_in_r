@@ -131,11 +131,11 @@ sum_squares(y = 5, x = 3)
 Let's start with some simple exercises to get familiar with the syntax of writing
 functions.
 
-##### 1.1 hello_world()
+#### 1.1 hello_world()
 Create a function called `hello_world` which prints "Hello world!" to the 
 console, & call the function.
 
-##### 1.2 my_mean()
+#### 1.2 my_mean()
 Create a function called `my_mean` which takes two arguments, `x` and `y`, and
 calculates their mean. Call the function to find the mean of 7.5 and 16.
 
@@ -304,7 +304,7 @@ sum_powers(x = 3, y = 5, z = 3)
 ```
 
 ## Exercises
-##### 2.1 fizz_buzz()
+#### 2.1 fizz_buzz()
 Now try using an if else statement inside a function. Create a function called `fizz_buzz` which takes a number as input and:
 
 * If the number is divisible by both 3 and 5, returns "fizz buzz"
@@ -358,7 +358,7 @@ fizz_buzz(15) # "fizz buzz"
 
 ---
 
-##### 2.2 fizz_buzz_vec()
+#### 2.2 fizz_buzz_vec()
 
 Most functions in R are vectorised. This means they can apply an operation
 to every element of a vector at the same time. It's best practice to vectorise 
@@ -395,7 +395,7 @@ fizz_buzz_vec(1:15)
 
 ---
 
-##### 2.3 fizz_buzz_custom()
+#### 2.3 fizz_buzz_custom()
 
 Create version of `fizz_buzz()` or `fizz_buzz_vec()` called `fizz_buzz_custom` or
 `fizz_buzz_custom_vec` where the values for when to say "fizz" and "buzz" can be
@@ -485,6 +485,7 @@ This section builds on material covered in the [Intro R Training](https://github
 ## Loading packages and data
 
 First of all we need to load a few packages:  
+
 * `s3tools` is an MoJ package designed to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.
 * `dplyr` is the package we'll use to create summary tables from the data.
 * `stringr` provides functions that can be used to manipulate strings.
@@ -926,10 +927,9 @@ and makes the function itself harder to reuse.
 ### Document your code
 You should have comments explaining what your function does, what each argument is, and what it returns.
 
+---
 ### Keep it short
 A rule of thumb is if all the code for your function doesn't fit on your screen at the same time, it's probably too complicated. Consider splitting it up into multiple functions.
-
----
 
 ### Generalise
 Think about whether there are ways you can make your function usable in more situations. For example, is there anything you're hard-coding which you could set as an argument instead?
@@ -989,21 +989,21 @@ A few examples of packages written by people in MoJ are:
 To find out more about writing packages, check out the links under further reading.
 
 ## Further reading
-##### On functions
+#### On functions
 + [Functions chapter](https://r4ds.had.co.nz/functions.html) of Hadley's R for Data Science book
 + [DataCamp writing functions in R course](https://www.datacamp.com/courses/writing-functions-in-r)
 + [Functions chapter](https://adv-r.hadley.nz/functions.html) of Hadley's Advanced R book
 + [Tidy Evaluation](https://tidyeval.tidyverse.org/introduction.html) (useful for writing functions which behave like Tidyverse functions) 
 
-##### On packages
+#### On packages
 + [Writing an R package from scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
 + Hadley's [R packages](http://r-pkgs.had.co.nz/) book
 
-##### On loops and the purrr package
+#### On loops and the purrr package
 + [Iteration chapter](https://r4ds.had.co.nz/iteration.html#dealing-with-failure) of Hadley's R for Data Science book
 + Jenny Bryan's [purrr tutorial](https://jennybc.github.io/purrr-tutorial/index.html)
 
-##### Misc
+#### Misc
 + [Tidyverse style guide](https://style.tidyverse.org/) (has some guidance on choosing function and argument names)
 + [Scoping/environments](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)
 
