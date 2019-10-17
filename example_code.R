@@ -296,6 +296,8 @@ glimpse(prosecutions)
 
 
 ## ------------------------------------------------------------------------
+# Note: if are running this code from 'example_code.R', then exercise 1 must be completed first
+
 prosecutions_grouped <- prosecutions %>%
   dplyr::group_by(age_range) %>%
   dplyr::summarise(counts = sum(count))
@@ -417,6 +419,8 @@ glimpse(prosecutions_extract)
 
 
 ## ------------------------------------------------------------------------
+# Note: if you are running this code from 'example_code.R', then
+# you should replace it with `source("rmd_files/functions.R")`
 source("functions.R")
 
 

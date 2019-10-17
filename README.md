@@ -79,6 +79,10 @@ undertaking typical programming tasks in DASD. One of the purposes of
 the examples is to provide a resource that can be referred back to in
 the future.
 
+If you would like to follow along with the code run during this session
+(recommended if you indend to do the exercises) then open the script
+“example\_code.R” in RStudio.
+
 ## What is a function?
 
 Functions are a way to package up bits of code to make them easy to
@@ -813,6 +817,8 @@ Let’s say we wanted to create a summary table showing the number of
 people prosecuted in different age bands. We could do:
 
 ``` r
+# Note: if are running this code from 'example_code.R', then exercise 1 must be completed first
+
 prosecutions_grouped <- prosecutions %>%
   dplyr::group_by(age_range) %>%
   dplyr::summarise(counts = sum(count))
@@ -1114,13 +1120,13 @@ understand and modify; and makes the function itself harder to reuse.
 You should have comments explaining what your function does, what each
 argument is, and what it returns.
 
+-----
+
 ### Keep it short
 
 A rule of thumb is if all the code for your function doesn’t fit on your
 screen at the same time, it’s probably too complicated. Consider
 splitting it up into multiple functions.
-
------
 
 ### Generalise
 
@@ -1159,7 +1165,7 @@ You could either put each function in its own R script with the same
 name, or you could group related functions into clearly named scripts.
 
 Then just use `source("my_functions_script.R")` (with
-`"my_functions_script.R"` replaced with the name of your script) to run
+`my_functions_script.R` replaced with the name of your script) to run
 the code and make your functions available to you in the current
 session. As with loading libraries, it’s best to do this at the top of
 your script.
@@ -1170,6 +1176,8 @@ Here’s an example of calling a script that contains a new function,
 called `pick_a_colour`:
 
 ``` r
+# Note: if you are running this code from 'example_code.R', then
+# you should replace it with `source("rmd_files/functions.R")`
 source("functions.R")
 ```
 
@@ -1181,7 +1189,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Pink"
+    ## [1] "Magenta"
 
 ## Writing a package
 
