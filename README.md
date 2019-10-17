@@ -37,24 +37,27 @@ any feedback on the content, please get in touch\!
 
 ## Pre-material
 
-If you want to try running the example code during or after the session,
-you can clone this repository.
+A few days before the session, please make sure that -
 
-  - If you have used GitHub and the Analytical Platform before, follow
-    the instructions in [section 4.2.1 of the Platform User
-    Guidance](https://moj-analytical-services.github.io/platform_user_guidance/using-github-with-the-platform.html#step-1-navigate-to-your-platform-r-studio-and-make-a-copy-of-the-github-project-in-your-r-studio).
+  - You have access to RStudio on the Analytical Platform
+  - You have access to the [alpha-everyone
+    bucket](https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/82/)
+  - You have cloned this repository: + If you have used GitHub and the
+    Analytical Platform before, follow the instructions in
+    [section 3.2.1 of the Platform User
+    Guidance](https://moj-analytical-services.github.io/platform_user_guidance/github.html#r-studio).
+    + If you have not used GitHub with the Analytical Platform before,
+    you might need to set this up using the instructions in [section 1.5
+    of the Platform User
+    Guidance](https://moj-analytical-services.github.io/platform_user_guidance/introduction.html#configure-git-and-github),
+    before following the instructions in section 3.2.1 as above.
 
-  - If you have not used GitHub with the analytical platform before, you
-    might need to set this up using the instructions in [section 2.3 of
-    the Platform User
-    Guidance](https://moj-analytical-services.github.io/platform_user_guidance/using-github-with-the-platform.html),
-    before following the instructions in section 4.2.1 as above.
+If you have any problems with the above please get in touch with the
+course organisers or ask for help on either the \#analytical\_platform
+or \#intro\_r channel on [ASD slack](https://asdslack.slack.com).
 
 All the examples in the presentation/README are available in the R
 script example\_code.R.
-
-This isn’t necessary for the session so don’t worry if you’re not able
-to do this\!
 
 ## Learning outcomes
 
@@ -230,19 +233,16 @@ sum_squares(y = 5, x = 3)
 Let’s start with some simple exercises to get familiar with the syntax
 of writing functions.
 
-### 1.1 hello\_world()
+##### 1.1 hello\_world()
 
 Create a function called `hello_world` which prints “Hello world\!” to
 the console, & call the function.
 
-**Hint:** use the `print()` function.
-
-### 1.2 my\_mean()
+##### 1.2 my\_mean()
 
 Create a function called `my_mean` which takes two arguments, `x` and
-`y`, and calculates their mean.
-
-Call the function to find the mean of 7.5 and 16.
+`y`, and calculates their mean. Call the function to find the mean of
+7.5 and 16.
 
 **Hint:** include a `return()` statement if you want your function to
 print the result to the console.
@@ -285,21 +285,22 @@ Depending on the purpose of the function, it doesn’t need to return an
 output at all:
 
 ``` r
-odd_or_even <- function(x){
-  
-  if((x %% 2) == 0){
+odd_or_even <- function(x) {
+  if ((x %% 2) == 0) {
     print("The number is even.")
   }
-  else if((x %% 2) == 1) {
+  else if ((x %% 2) == 1) {
     print("The number is odd.")
   }
-
+  
 }
 
-odd_or_even(x=4)
+odd_or_even(x = 4)
 ```
 
     ## [1] "The number is even."
+
+\*Note:
 
 ## Example 5: errors and warnings
 
@@ -436,24 +437,27 @@ sum_powers(x = 3, y = 5, z = 3)
 
 ## Exercises
 
-### 1.3.1 fizz\_buzz()
+##### 2.1 fizz\_buzz()
 
-Now try using an if else statement inside a function.
-
-Create a function called `fizz_buzz` which takes a number as input and:
+Now try using an if else statement inside a function. Create a function
+called `fizz_buzz` which takes a number as input and:
 
   - If the number is divisible by both 3 and 5, returns “fizz buzz”
   - If the number is divisible by just 3, returns “fizz”
   - If the number is divisible by just 5, returns “buzz”
-  - Otherwise the number is returned (coerced to character type)
+  - Otherwise the number is returned (coerced to character type using
+    `as.character()`)
 
-To check your function works, try it out with values 1, 2, 3, 5 & 15.
+Try it out with values 1, 2, 3, 5 & 15.
 
 -----
 
-**Hints:** This exercise is very similar to example 4.
+**Hints:**
 
-The stucture of an if else statement is -
+  - This exercise is very similar to example 4. The structure of an if
+    else statement is -
+
+<!-- end list -->
 
     if (condition_1) {
       code
@@ -463,54 +467,37 @@ The stucture of an if else statement is -
       code
     }
 
-To test whether a number is divisible by another number, you can use the
-modulo operator `%%`, which calculates the remainder:
-
-``` r
-1 %% 3 == 0
-```
-
-    ## [1] FALSE
-
-``` r
-3 %% 3 == 0
-```
-
-    ## [1] TRUE
-
-To coerce a number to character type, use `as.character()`.
+  - To test whether a number is divisible by another number, you can use
+    the modulo operator `%%`, which calculates the remainder. E.g. `1
+    %% 3 == 0` evaluates to `FALSE`.
 
 -----
 
 -----
 
------
+##### 2.2 fizz\_buzz\_vec()
 
-### 1.3.2 fizz\_buzz\_vec()
-
-Most functions in R are vectorised. This means they’re able to apply an
-operation to every element of a vector at the same time.
-
-It’s best practice to vectorise your own functions too as this will help
-you to combine them with other functions.
+Most functions in R are vectorised. This means they can apply an
+operation to every element of a vector at the same time. It’s best
+practice to vectorise your own functions too as this will help you to
+apply them to data sets and combine them with other functions.
 
 Create a new version of the `fizz_buzz()` function called
-`fizz_buzz_vec` which instead accepts a vector of numbers.
-
-Test it out on a vector of the numbers 1 to 15.
+`fizz_buzz_vec` which instead accepts a vector of numbers. Test it out
+on a vector of the numbers 1 to 15.
 
 **Hint:** if else statements aren’t vectorised so you’ll need to switch
 to using `case_when()` from the Tidyverse package `dplyr`. Run
 `?case_when` to bring up the help file.
 
-*If you get stuck on this exercise you can still complete exercise
-1.3.3.*
+*This exercise is a bit tricky - if you get stuck, you can still
+complete exercise 2.3.*
 
 -----
 
 -----
 
-### 1.3.3 fizz\_buzz\_custom()
+##### 2.3 fizz\_buzz\_custom()
 
 Create version of `fizz_buzz()` or `fizz_buzz_vec()` called
 `fizz_buzz_custom` or `fizz_buzz_custom_vec` where the values for when
@@ -520,6 +507,8 @@ to say “fizz” and “buzz” can be changed by setting arguments `fizz` and
 Test your new function out, first by checking you get the same results
 as above when you don’t specify the `fizz` or `buzz` arguments, and
 second when you set `buzz = 7` for values 1, 2, 3, 7, 15 and 21.
+
+-----
 
 -----
 
@@ -549,7 +538,7 @@ The function can be called with only the required arguments:
 plot_x_and_y(x, y)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
 
 -----
 
@@ -560,9 +549,9 @@ the plot function:
 plot_x_and_y(x, y, col='red', type='l')
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
 
-# “Real-world” example functions
+## \# “Real-world” example functions
 
 This section builds on material covered in the [Intro R
 Training](https://github.com/moj-analytical-services/IntroRTraining)
@@ -995,7 +984,7 @@ prosecutions_graph <- function(df, breakdown = "offence_type"){
 prosecutions_graph(prosecutions, breakdown = "offence_type")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
 
 -----
 
@@ -1181,7 +1170,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Pink"
+    ## [1] "Green"
 
 ## Writing a package
 
@@ -1206,8 +1195,10 @@ further reading.
 
 ## Further reading
 
-### On functions
+##### On functions
 
+  - [Functions chapter](https://r4ds.had.co.nz/functions.html) of
+    Hadley’s R for Data Science book
   - [DataCamp writing functions in R
     course](https://www.datacamp.com/courses/writing-functions-in-r)
   - [Functions chapter](https://adv-r.hadley.nz/functions.html) of
@@ -1215,13 +1206,21 @@ further reading.
   - [Tidy Evaluation](https://tidyeval.tidyverse.org/introduction.html)
     (useful for writing functions which behave like Tidyverse functions)
 
-### On packages
+##### On packages
 
   - [Writing an R package from
     scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
   - Hadley’s [R packages](http://r-pkgs.had.co.nz/) book
 
-### Misc
+##### On loops and the purrr package
+
+  - [Iteration
+    chapter](https://r4ds.had.co.nz/iteration.html#dealing-with-failure)
+    of Hadley’s R for Data Science book
+  - Jenny Bryan’s [purrr
+    tutorial](https://jennybc.github.io/purrr-tutorial/index.html)
+
+##### Misc
 
   - [Tidyverse style guide](https://style.tidyverse.org/) (has some
     guidance on choosing function and argument names)

@@ -71,18 +71,17 @@ mod_x(-5)
 
 ## ------------------------------------------------------------------------
 
-odd_or_even <- function(x){
-  
-  if((x %% 2) == 0){
+odd_or_even <- function(x) {
+  if ((x %% 2) == 0) {
     print("The number is even.")
   }
-  else if((x %% 2) == 1) {
+  else if ((x %% 2) == 1) {
     print("The number is odd.")
   }
-
+  
 }
 
-odd_or_even(x=4)
+odd_or_even(x = 4)
 
 
 
@@ -154,11 +153,6 @@ sum_powers <- function(x, y, z = 2){
 sum_powers(x = 3, y = 5)
 sum_powers(x = 3, y = 5, z = 3)
 
-
-
-## ------------------------------------------------------------------------
-1 %% 3 == 0
-3 %% 3 == 0
 
 
 
