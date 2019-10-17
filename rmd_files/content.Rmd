@@ -131,17 +131,13 @@ sum_squares(y = 5, x = 3)
 Let's start with some simple exercises to get familiar with the syntax of writing
 functions.
 
-### 1.1 hello_world()
+##### 1.1 hello_world()
 Create a function called `hello_world` which prints "Hello world!" to the 
 console, & call the function.
 
-**Hint:** use the `print()` function.
-
-### 1.2 my_mean()
+##### 1.2 my_mean()
 Create a function called `my_mean` which takes two arguments, `x` and `y`, and
-calculates their mean.
-
-Call the function to find the mean of 7.5 and 16.
+calculates their mean. Call the function to find the mean of 7.5 and 16.
 
 **Hint:** include a `return()` statement if you want your function to print the 
 result to the console.
@@ -199,20 +195,21 @@ Depending on the purpose of the function, it doesn't need to return an output at
 
 ```{r}
 
-odd_or_even <- function(x){
-  
-  if((x %% 2) == 0){
+odd_or_even <- function(x) {
+  if ((x %% 2) == 0) {
     print("The number is even.")
   }
-  else if((x %% 2) == 1) {
+  else if ((x %% 2) == 1) {
     print("The number is odd.")
   }
-
+  
 }
 
-odd_or_even(x=4)
+odd_or_even(x = 4)
 
 ```
+
+*Note: 
 
 ## Example 5: errors and warnings
 
@@ -307,26 +304,21 @@ sum_powers(x = 3, y = 5, z = 3)
 ```
 
 ## Exercises
-
-### 1.3.1 fizz_buzz()
-
-Now try using an if else statement inside a function.
-
-Create a function called `fizz_buzz` which takes a number as input and:
+##### 2.1 fizz_buzz()
+Now try using an if else statement inside a function. Create a function called `fizz_buzz` which takes a number as input and:
 
 * If the number is divisible by both 3 and 5, returns "fizz buzz"
 * If the number is divisible by just 3, returns "fizz"
 * If the number is divisible by just 5, returns "buzz"
-* Otherwise the number is returned (coerced to character type)
+* Otherwise the number is returned (coerced to character type using `as.character()`)
 
-To check your function works, try it out with values 1, 2, 3, 5 & 15.
+Try it out with values 1, 2, 3, 5 & 15.
 
 ---
 
 **Hints:** 
-This exercise is very similar to example 4.
 
-The stucture of an if else statement is - 
+* This exercise is very similar to example 4. The structure of an if else statement is -
 ```
 if (condition_1) {
   code
@@ -336,20 +328,13 @@ if (condition_1) {
   code
 }
 ```
-
-To test whether a number is divisible by another number, you can use the modulo
-operator `%%`, which calculates the remainder:
-```{r}
-1 %% 3 == 0
-3 %% 3 == 0
-```
-
-To coerce a number to character type, use `as.character()`.
+* To test whether a number is divisible by another number, you can use the modulo
+operator `%%`, which calculates the remainder. E.g. `1 %% 3 == 0` evaluates to `FALSE`.
 
 ---
 
-```{r, include=show_solution, purl=FALSE}
-# 1.3.1 fizz_buzz() solution
+```{r, include=show_solution, purl=FALSE, eval = FALSE}
+# 2.1 fizz_buzz() solution
 
 fizz_buzz <- function(x) {
   if (x %% 3 == 0 & x %% 5 == 0) {
@@ -363,44 +348,37 @@ fizz_buzz <- function(x) {
   }
 }
 
+fizz_buzz(1)  # "1"
+fizz_buzz(2)  # "2"
+fizz_buzz(3)  # "fizz"
+fizz_buzz(5)  # "buzz"
+fizz_buzz(15) # "fizz buzz"
+
 ```
 
 ---
 
-```{r, include=show_solution, purl=FALSE}
-fizz_buzz(1)
-fizz_buzz(2)
-fizz_buzz(3)
-fizz_buzz(5)
-fizz_buzz(15)
-```
+##### 2.2 fizz_buzz_vec()
 
----
-
-### 1.3.2 fizz_buzz_vec()
-
-Most functions in R are vectorised. This means they're able to apply an operation
-to every element of a vector at the same time.
-
-It's best practice to vectorise your own functions too as this will help you to
+Most functions in R are vectorised. This means they can apply an operation
+to every element of a vector at the same time. It's best practice to vectorise 
+your own functions too as this will help you to apply them to data sets and
 combine them with other functions.
 
 Create a new version of the `fizz_buzz()` function called `fizz_buzz_vec` which
-instead accepts a vector of numbers.
-
-Test it out on a vector of the numbers 1 to 15.
+instead accepts a vector of numbers. Test it out on a vector of the numbers 1 to 15.
 
 **Hint:** 
 if else statements aren't vectorised so you'll need to switch to using 
 `case_when()` from the Tidyverse package `dplyr`. Run `?case_when` to bring up 
 the help file.
 
-*If you get stuck on this exercise you can still complete exercise 1.3.3.*
+*This exercise is a bit tricky - if you get stuck, you can still complete exercise 2.3.*
 
 ---
 
 ```{r, include=show_solution, purl=FALSE}
-# 1.3.2 fizz_buzz_vec() solution
+# 2.2 fizz_buzz_vec() solution
 
 fizz_buzz_vec <- function(x){
   dplyr::case_when(
@@ -417,7 +395,7 @@ fizz_buzz_vec(1:15)
 
 ---
 
-### 1.3.3 fizz_buzz_custom()
+##### 2.3 fizz_buzz_custom()
 
 Create version of `fizz_buzz()` or `fizz_buzz_vec()` called `fizz_buzz_custom` or
 `fizz_buzz_custom_vec` where the values for when to say "fizz" and "buzz" can be
@@ -431,7 +409,7 @@ when you don't specify the `fizz` or `buzz` arguments, and second when you set
 ---
 
 ```{r, include=show_solution, purl=FALSE}
-# 1.3.3 fizz_buzz_custom() solution
+# 2.3 fizz_buzz_custom() solution
 
 fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
   if (x %% fizz == 0 & x %% buzz == 0) {
@@ -445,7 +423,6 @@ fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
   }
 }
 
-
 fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5){
   dplyr::case_when(
     x %% fizz == 0 && x %% buzz == 0 ~ "fizz buzz",
@@ -454,10 +431,11 @@ fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5){
     TRUE ~ as.character(x)
   )
 }
-
+```
+---
+```{r, include=show_solution, purl=FALSE}
 fizz_buzz_custom_vec(1:15)
 fizz_buzz_custom_vec(c(1, 2, 3, 7, 15, 21), buzz = 7)
-
 
 ```
 
