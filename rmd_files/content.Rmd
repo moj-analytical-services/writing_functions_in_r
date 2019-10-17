@@ -478,7 +478,7 @@ plot_x_and_y(x, y, col='red', type='l')
 ```
 
 # "Real-world" example functions
-
+---
 This section builds on material covered in the [Intro R Training](https://github.com/moj-analytical-services/IntroRTraining) course and makes use of the `dplyr` package, which is a commonly used R package for data manipulation. In the following examples we'll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we'll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found [here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
 
 
@@ -989,17 +989,21 @@ A few examples of packages written by people in MoJ are:
 To find out more about writing packages, check out the links under further reading.
 
 ## Further reading
-
-### On functions
+##### On functions
++ [Functions chapter](https://r4ds.had.co.nz/functions.html) of Hadley's R for Data Science book
 + [DataCamp writing functions in R course](https://www.datacamp.com/courses/writing-functions-in-r)
 + [Functions chapter](https://adv-r.hadley.nz/functions.html) of Hadley's Advanced R book
 + [Tidy Evaluation](https://tidyeval.tidyverse.org/introduction.html) (useful for writing functions which behave like Tidyverse functions) 
 
-### On packages
+##### On packages
 + [Writing an R package from scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
 + Hadley's [R packages](http://r-pkgs.had.co.nz/) book
 
-### Misc
+##### On loops and the purrr package
++ [Iteration chapter](https://r4ds.had.co.nz/iteration.html#dealing-with-failure) of Hadley's R for Data Science book
++ Jenny Bryan's [purrr tutorial](https://jennybc.github.io/purrr-tutorial/index.html)
+
+##### Misc
 + [Tidyverse style guide](https://style.tidyverse.org/) (has some guidance on choosing function and argument names)
 + [Scoping/environments](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)
 
