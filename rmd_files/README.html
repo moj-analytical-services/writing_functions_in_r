@@ -711,9 +711,9 @@ body {
 </code></pre>
 <h2 id="exercises">Exercises</h2>
 <p>Let’s start with some simple exercises to get familiar with the syntax of writing functions.</p>
-<h5 id="11-hello_world">1.1 hello_world()</h5>
+<h4 id="11-hello_world">1.1 hello_world()</h4>
 <p>Create a function called <code>hello_world</code> which prints “Hello world!” to the console, &amp; call the function.</p>
-<h5 id="12-my_mean">1.2 my_mean()</h5>
+<h4 id="12-my_mean">1.2 my_mean()</h4>
 <p>Create a function called <code>my_mean</code> which takes two arguments, <code>x</code> and <code>y</code>, and calculates their mean. Call the function to find the mean of 7.5 and 16.</p>
 <p><strong>Hint:</strong> include a <code>return()</code> statement if you want your function to print the result to the console.</p>
 <hr />
@@ -830,7 +830,7 @@ body {
 <pre><code>## [1] 152
 </code></pre>
 <h2 id="exercises-1">Exercises</h2>
-<h5 id="21-fizz_buzz">2.1 fizz_buzz()</h5>
+<h4 id="21-fizz_buzz">2.1 fizz_buzz()</h4>
 <p>Now try using an if else statement inside a function. Create a function called <code>fizz_buzz</code> which takes a number as input and:</p>
 <ul>
 <li>If the number is divisible by both 3 and 5, returns “fizz buzz”</li>
@@ -859,14 +859,14 @@ body {
 </ul>
 <hr />
 <hr />
-<h5 id="22-fizz_buzz_vec">2.2 fizz_buzz_vec()</h5>
+<h4 id="22-fizz_buzz_vec">2.2 fizz_buzz_vec()</h4>
 <p>Most functions in R are vectorised. This means they can apply an operation to every element of a vector at the same time. It’s best practice to vectorise your own functions too as this will help you to apply them to data sets and combine them with other functions.</p>
 <p>Create a new version of the <code>fizz_buzz()</code> function called <code>fizz_buzz_vec</code> which instead accepts a vector of numbers. Test it out on a vector of the numbers 1 to 15.</p>
 <p><strong>Hint:</strong> if else statements aren’t vectorised so you’ll need to switch to using <code>case_when()</code> from the Tidyverse package <code>dplyr</code>. Run <code>?case_when</code> to bring up the help file.</p>
 <p><em>This exercise is a bit tricky - if you get stuck, you can still complete exercise 2.3.</em></p>
 <hr />
 <hr />
-<h5 id="23-fizz_buzz_custom">2.3 fizz_buzz_custom()</h5>
+<h4 id="23-fizz_buzz_custom">2.3 fizz_buzz_custom()</h4>
 <p>Create version of <code>fizz_buzz()</code> or <code>fizz_buzz_vec()</code> called <code>fizz_buzz_custom</code> or <code>fizz_buzz_custom_vec</code> where the values for when to say “fizz” and “buzz” can be changed by setting arguments <code>fizz</code> and <code>buzz</code>, but the default values are still 3 and 5.</p>
 <p>Test your new function out, first by checking you get the same results as above when you don’t specify the <code>fizz</code> or <code>buzz</code> arguments, and second when you set <code>buzz = 7</code> for values 1, 2, 3, 7, 15 and 21.</p>
 <hr />
@@ -892,8 +892,15 @@ body {
 <h2 id="-real-world-example-functions"># “Real-world” example functions</h2>
 <p>This section builds on material covered in the <a href="https://github.com/moj-analytical-services/IntroRTraining">Intro R Training</a> course and makes use of the <code>dplyr</code> package, which is a commonly used R package for data manipulation. In the following examples we’ll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we’ll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found <a href="https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018">here</a>.</p>
 <h2 id="loading-packages-and-data">Loading packages and data</h2>
-<p>First of all we need to load a few packages:<br />
-* <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we’ll need this to help read in some data from an s3 bucket. * <code>dplyr</code> is the package we’ll use to create summary tables from the data. * <code>stringr</code> provides functions that can be used to manipulate strings. * <code>purrr</code> provides functions to make the use of vectors and user-defined functions easier.</p>
+<p>First of all we need to load a few packages:</p>
+<ul>
+<li><code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we’ll need this to help read in some data from an s3 bucket.</li>
+<li><code>dplyr</code> is the package we’ll use to create summary tables from the data.</li>
+<li><code>stringr</code> provides functions that can be used to manipulate strings.</li>
+<li><code>purrr</code> provides functions to make the use of vectors and user-defined functions easier.</li>
+</ul>
+<!-- end list -->
+
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># Load packages</span></span>
 <span id="cb40-2"><a href="#cb40-2"></a><span class="kw">library</span>(s3tools)</span>
 <span id="cb40-3"><a href="#cb40-3"></a><span class="kw">library</span>(dplyr)</span>
@@ -1225,23 +1232,6 @@ body {
 <p>While functions can access objects which haven’t been passed in as an argument, this is generally bad practice as it makes code much harder to understand and modify; and makes the function itself harder to reuse.</p>
 <h3 id="document-your-code">Document your code</h3>
 <p>You should have comments explaining what your function does, what each argument is, and what it returns.</p>
-<h3 id="keep-it-short">Keep it short</h3>
-<p>A rule of thumb is if all the code for your function doesn’t fit on your screen at the same time, it’s probably too complicated. Consider splitting it up into multiple functions.</p>
-<hr />
-<h3 id="generalise">Generalise</h3>
-<p>Think about whether there are ways you can make your function usable in more situations. For example, is there anything you’re hard-coding which you could set as an argument instead?</p>
-<h3 id="vectorise-by-default">Vectorise by default</h3>
-<p>R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as input and apply the transformation to each element. The <code>generalise_names()</code> function we looked at is a good example of this!</p>
-<h3 id="get-feedback">Get feedback</h3>
-<p>A key measure of a good function (or any piece of code) is how easy it is for someone else to understand, use and modify it. The best way to test this is to get your code reviewed by someone else.</p>
-<h2 id="how-to-organise-your-code">How to organise your code</h2>
-<p>Whenever you’re working on something in R it’s generally best to create an R project and version control your code on GitHub. There’s information on how to do this in the Analytical Platform guidance.</p>
-<p>It’s also best to keep your functions separate from the rest of your code to make them easier to find.</p>
-<h3 id="storing-your-functions-in-your-project">Storing your functions in your project</h3>
-<p>The easiest way to store your functions is just to create a folder in your project called “functions” and save your functions there.</p>
-<p>You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.</p>
-<p>Then just use <code>source(&quot;my_functions_script.R&quot;)</code> (with <code>&quot;my_functions_script.R&quot;</code> replaced with the name of your script) to run the code and make your functions available to you in the current session. As with loading libraries, it’s best to do this at the top of your script.</p>
-<hr />
 <p>Here’s an example of calling a script that contains a new function, called <code>pick_a_colour</code>:</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="kw">source</span>(<span class="st">&quot;functions.R&quot;</span>)</span></code></pre></div>
 <p>Now the function is ready to use:</p>
@@ -1264,24 +1254,24 @@ body {
 </ul>
 <p>To find out more about writing packages, check out the links under further reading.</p>
 <h2 id="further-reading">Further reading</h2>
-<h5 id="on-functions">On functions</h5>
+<h4 id="on-functions">On functions</h4>
 <ul>
 <li><a href="https://r4ds.had.co.nz/functions.html">Functions chapter</a> of Hadley’s R for Data Science book</li>
 <li><a href="https://www.datacamp.com/courses/writing-functions-in-r">DataCamp writing functions in R course</a></li>
 <li><a href="https://adv-r.hadley.nz/functions.html">Functions chapter</a> of Hadley’s Advanced R book</li>
 <li><a href="https://tidyeval.tidyverse.org/introduction.html">Tidy Evaluation</a> (useful for writing functions which behave like Tidyverse functions)</li>
 </ul>
-<h5 id="on-packages">On packages</h5>
+<h4 id="on-packages">On packages</h4>
 <ul>
 <li><a href="https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/">Writing an R package from scratch</a></li>
 <li>Hadley’s <a href="http://r-pkgs.had.co.nz/">R packages</a> book</li>
 </ul>
-<h5 id="on-loops-and-the-purrr-package">On loops and the purrr package</h5>
+<h4 id="on-loops-and-the-purrr-package">On loops and the purrr package</h4>
 <ul>
 <li><a href="https://r4ds.had.co.nz/iteration.html#dealing-with-failure">Iteration chapter</a> of Hadley’s R for Data Science book</li>
 <li>Jenny Bryan’s <a href="https://jennybc.github.io/purrr-tutorial/index.html">purrr tutorial</a></li>
 </ul>
-<h5 id="misc">Misc</h5>
+<h4 id="misc">Misc</h4>
 <ul>
 <li><a href="https://style.tidyverse.org/">Tidyverse style guide</a> (has some guidance on choosing function and argument names)</li>
 <li><a href="https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html">Scoping/environments</a></li>

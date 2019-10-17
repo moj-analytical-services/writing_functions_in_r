@@ -233,12 +233,12 @@ sum_squares(y = 5, x = 3)
 Let’s start with some simple exercises to get familiar with the syntax
 of writing functions.
 
-##### 1.1 hello\_world()
+#### 1.1 hello\_world()
 
 Create a function called `hello_world` which prints “Hello world\!” to
 the console, & call the function.
 
-##### 1.2 my\_mean()
+#### 1.2 my\_mean()
 
 Create a function called `my_mean` which takes two arguments, `x` and
 `y`, and calculates their mean. Call the function to find the mean of
@@ -437,7 +437,7 @@ sum_powers(x = 3, y = 5, z = 3)
 
 ## Exercises
 
-##### 2.1 fizz\_buzz()
+#### 2.1 fizz\_buzz()
 
 Now try using an if else statement inside a function. Create a function
 called `fizz_buzz` which takes a number as input and:
@@ -475,7 +475,7 @@ Try it out with values 1, 2, 3, 5 & 15.
 
 -----
 
-##### 2.2 fizz\_buzz\_vec()
+#### 2.2 fizz\_buzz\_vec()
 
 Most functions in R are vectorised. This means they can apply an
 operation to every element of a vector at the same time. It’s best
@@ -497,7 +497,7 @@ complete exercise 2.3.*
 
 -----
 
-##### 2.3 fizz\_buzz\_custom()
+#### 2.3 fizz\_buzz\_custom()
 
 Create version of `fizz_buzz()` or `fizz_buzz_vec()` called
 `fizz_buzz_custom` or `fizz_buzz_custom_vec` where the values for when
@@ -565,13 +565,17 @@ System Statistics quarterly publication: December 2018 (published in May
 
 ## Loading packages and data
 
-First of all we need to load a few packages:  
-\* `s3tools` is an MoJ package designed to interact with Amazon s3 -
-we’ll need this to help read in some data from an s3 bucket. \*
-`dplyr` is the package we’ll use to create summary tables from the data.
-\* `stringr` provides functions that can be used to manipulate strings.
-\* `purrr` provides functions to make the use of vectors and
-user-defined functions easier.
+First of all we need to load a few packages:
+
+  - `s3tools` is an MoJ package designed to interact with Amazon s3 -
+    we’ll need this to help read in some data from an s3 bucket.
+  - `dplyr` is the package we’ll use to create summary tables from the
+    data.
+  - `stringr` provides functions that can be used to manipulate strings.
+  - `purrr` provides functions to make the use of vectors and
+    user-defined functions easier.
+
+<!-- end list -->
 
 ``` r
 # Load packages
@@ -1103,58 +1107,6 @@ understand and modify; and makes the function itself harder to reuse.
 You should have comments explaining what your function does, what each
 argument is, and what it returns.
 
-### Keep it short
-
-A rule of thumb is if all the code for your function doesn’t fit on your
-screen at the same time, it’s probably too complicated. Consider
-splitting it up into multiple functions.
-
------
-
-### Generalise
-
-Think about whether there are ways you can make your function usable in
-more situations. For example, is there anything you’re hard-coding which
-you could set as an argument instead?
-
-### Vectorise by default
-
-R is designed to work well with vectors (e.g. columns of a dataframe).
-Where possible you should write your function so it can take a vector as
-input and apply the transformation to each element. The
-`generalise_names()` function we looked at is a good example of this\!
-
-### Get feedback
-
-A key measure of a good function (or any piece of code) is how easy it
-is for someone else to understand, use and modify it. The best way to
-test this is to get your code reviewed by someone else.
-
-## How to organise your code
-
-Whenever you’re working on something in R it’s generally best to create
-an R project and version control your code on GitHub. There’s
-information on how to do this in the Analytical Platform guidance.
-
-It’s also best to keep your functions separate from the rest of your
-code to make them easier to find.
-
-### Storing your functions in your project
-
-The easiest way to store your functions is just to create a folder in
-your project called “functions” and save your functions there.
-
-You could either put each function in its own R script with the same
-name, or you could group related functions into clearly named scripts.
-
-Then just use `source("my_functions_script.R")` (with
-`"my_functions_script.R"` replaced with the name of your script) to run
-the code and make your functions available to you in the current
-session. As with loading libraries, it’s best to do this at the top of
-your script.
-
------
-
 Here’s an example of calling a script that contains a new function,
 called `pick_a_colour`:
 
@@ -1195,7 +1147,7 @@ further reading.
 
 ## Further reading
 
-##### On functions
+#### On functions
 
   - [Functions chapter](https://r4ds.had.co.nz/functions.html) of
     Hadley’s R for Data Science book
@@ -1206,13 +1158,13 @@ further reading.
   - [Tidy Evaluation](https://tidyeval.tidyverse.org/introduction.html)
     (useful for writing functions which behave like Tidyverse functions)
 
-##### On packages
+#### On packages
 
   - [Writing an R package from
     scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
   - Hadley’s [R packages](http://r-pkgs.had.co.nz/) book
 
-##### On loops and the purrr package
+#### On loops and the purrr package
 
   - [Iteration
     chapter](https://r4ds.had.co.nz/iteration.html#dealing-with-failure)
@@ -1220,7 +1172,7 @@ further reading.
   - Jenny Bryan’s [purrr
     tutorial](https://jennybc.github.io/purrr-tutorial/index.html)
 
-##### Misc
+#### Misc
 
   - [Tidyverse style guide](https://style.tidyverse.org/) (has some
     guidance on choosing function and argument names)

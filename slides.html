@@ -3229,11 +3229,11 @@ sum_squares(3, 5)</pre>
 
 <p>Let’s start with some simple exercises to get familiar with the syntax of writing functions.</p>
 
-<h5>1.1 hello_world()</h5>
+<h4>1.1 hello_world()</h4>
 
 <p>Create a function called <code>hello_world</code> which prints &ldquo;Hello world!&rdquo; to the console, &amp; call the function.</p>
 
-<h5>1.2 my_mean()</h5>
+<h4>1.2 my_mean()</h4>
 
 <p>Create a function called <code>my_mean</code> which takes two arguments, <code>x</code> and <code>y</code>, and calculates their mean. Call the function to find the mean of 7.5 and 16.</p>
 
@@ -3406,7 +3406,7 @@ sum_powers(x = 3, y = 5)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Exercises</h2></hgroup><article  class="smaller " id="exercises-1">
 
-<h5>2.1 fizz_buzz()</h5>
+<h4>2.1 fizz_buzz()</h4>
 
 <p>Now try using an if else statement inside a function. Create a function called <code>fizz_buzz</code> which takes a number as input and:</p>
 
@@ -3463,7 +3463,7 @@ fizz_buzz(15) # &quot;fizz buzz&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
-<h5>2.2 fizz_buzz_vec()</h5>
+<h4>2.2 fizz_buzz_vec()</h4>
 
 <p>Most functions in R are vectorised. This means they can apply an operation to every element of a vector at the same time. It’s best practice to vectorise your own functions too as this will help you to apply them to data sets and combine them with other functions.</p>
 
@@ -3494,7 +3494,7 @@ fizz_buzz_vec(1:15)</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
-<h5>2.3 fizz_buzz_custom()</h5>
+<h4>2.3 fizz_buzz_custom()</h4>
 
 <p>Create version of <code>fizz_buzz()</code> or <code>fizz_buzz_vec()</code> called <code>fizz_buzz_custom</code> or <code>fizz_buzz_custom_vec</code> where the values for when to say &ldquo;fizz&rdquo; and &ldquo;buzz&rdquo; can be changed by setting arguments <code>fizz</code> and <code>buzz</code>, but the default values are still 3 and 5.</p>
 
@@ -3571,7 +3571,14 @@ y &lt;- (1:10) * 2</pre>
 
 </article></slide><slide class=""><hgroup><h2>Loading packages and data</h2></hgroup><article  class="smaller " id="loading-packages-and-data">
 
-<p>First of all we need to load a few packages:<br/>* <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we’ll need this to help read in some data from an s3 bucket. * <code>dplyr</code> is the package we’ll use to create summary tables from the data. * <code>stringr</code> provides functions that can be used to manipulate strings. * <code>purrr</code> provides functions to make the use of vectors and user-defined functions easier.</p>
+<p>First of all we need to load a few packages:</p>
+
+<ul>
+<li><code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we’ll need this to help read in some data from an s3 bucket.</li>
+<li><code>dplyr</code> is the package we’ll use to create summary tables from the data.</li>
+<li><code>stringr</code> provides functions that can be used to manipulate strings.</li>
+<li><code>purrr</code> provides functions to make the use of vectors and user-defined functions easier.</li>
+</ul>
 
 <pre class = 'prettyprint lang-r'># Load packages
 library(s3tools)
@@ -4084,40 +4091,6 @@ glimpse(prosecutions_extract)</pre>
 
 <p>You should have comments explaining what your function does, what each argument is, and what it returns.</p>
 
-<h3>Keep it short</h3>
-
-<p>A rule of thumb is if all the code for your function doesn’t fit on your screen at the same time, it’s probably too complicated. Consider splitting it up into multiple functions.</p>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-<h3>Generalise</h3>
-
-<p>Think about whether there are ways you can make your function usable in more situations. For example, is there anything you’re hard-coding which you could set as an argument instead?</p>
-
-<h3>Vectorise by default</h3>
-
-<p>R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as input and apply the transformation to each element. The <code>generalise_names()</code> function we looked at is a good example of this!</p>
-
-<h3>Get feedback</h3>
-
-<p>A key measure of a good function (or any piece of code) is how easy it is for someone else to understand, use and modify it. The best way to test this is to get your code reviewed by someone else.</p>
-
-</article></slide><slide class=""><hgroup><h2>How to organise your code</h2></hgroup><article  class="smaller " id="how-to-organise-your-code">
-
-<p>Whenever you’re working on something in R it’s generally best to create an R project and version control your code on GitHub. There’s information on how to do this in the Analytical Platform guidance.</p>
-
-<p>It’s also best to keep your functions separate from the rest of your code to make them easier to find.</p>
-
-<h3>Storing your functions in your project</h3>
-
-<p>The easiest way to store your functions is just to create a folder in your project called &ldquo;functions&rdquo; and save your functions there.</p>
-
-<p>You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.</p>
-
-<p>Then just use <code>source(&quot;my_functions_script.R&quot;)</code> (with <code>&quot;my_functions_script.R&quot;</code> replaced with the name of your script) to run the code and make your functions available to you in the current session. As with loading libraries, it’s best to do this at the top of your script.</p>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
 <p>Here’s an example of calling a script that contains a new function, called <code>pick_a_colour</code>:</p>
 
 <pre class = 'prettyprint lang-r'>source(&quot;functions.R&quot;)</pre>
@@ -4128,7 +4101,7 @@ glimpse(prosecutions_extract)</pre>
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >## [1] &quot;Yellow&quot;</pre>
+<pre >## [1] &quot;Cyan&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2>Writing a package</h2></hgroup><article  class="smaller " id="writing-a-package">
 
@@ -4152,7 +4125,7 @@ pick_a_colour(colours)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Further reading</h2></hgroup><article  class="smaller " id="further-reading">
 
-<h5>On functions</h5>
+<h4>On functions</h4>
 
 <ul>
 <li><a href='https://r4ds.had.co.nz/functions.html' title=''>Functions chapter</a> of Hadley’s R for Data Science book</li>
@@ -4161,21 +4134,21 @@ pick_a_colour(colours)</pre>
 <li><a href='https://tidyeval.tidyverse.org/introduction.html' title=''>Tidy Evaluation</a> (useful for writing functions which behave like Tidyverse functions)</li>
 </ul>
 
-<h5>On packages</h5>
+<h4>On packages</h4>
 
 <ul>
 <li><a href='https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/' title=''>Writing an R package from scratch</a></li>
 <li>Hadley’s <a href='http://r-pkgs.had.co.nz/' title=''>R packages</a> book</li>
 </ul>
 
-<h5>On loops and the purrr package</h5>
+<h4>On loops and the purrr package</h4>
 
 <ul>
 <li><a href='https://r4ds.had.co.nz/iteration.html#dealing-with-failure' title=''>Iteration chapter</a> of Hadley’s R for Data Science book</li>
 <li>Jenny Bryan’s <a href='https://jennybc.github.io/purrr-tutorial/index.html' title=''>purrr tutorial</a></li>
 </ul>
 
-<h5>Misc</h5>
+<h4>Misc</h4>
 
 <ul>
 <li><a href='https://style.tidyverse.org/' title=''>Tidyverse style guide</a> (has some guidance on choosing function and argument names)</li>
