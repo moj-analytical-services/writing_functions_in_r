@@ -1007,9 +1007,9 @@ prosecutions_graph(prosecutions, breakdown = "offence_type")
 
 ### Exercise 4
 
-Modify the function `prosecutions_graph` to use `theme_grey()` as the
-theme, rather than `theme_classic()`. Produce a plot of with a breakdown
-by `"offence_group"`.
+Modify the function `prosecutions_graph` to use `theme_classic()` as the
+theme, rather than `theme_grey()`. Produce a plot of with a breakdown by
+`"offence_group"`.
 
 -----
 
@@ -1189,7 +1189,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Magenta"
+    ## [1] "Cyan"
 
 ## Writing a package
 
@@ -1326,7 +1326,16 @@ row with the total across all categories. Note that this requires the
 
 ``` r
 library(janitor)
+```
 
+    ## 
+    ## Attaching package: 'janitor'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     chisq.test, fisher.test
+
+``` r
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%

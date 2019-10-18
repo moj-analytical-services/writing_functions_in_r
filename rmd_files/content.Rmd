@@ -846,7 +846,7 @@ prosecutions_graph(prosecutions, breakdown = "offence_type")
 
 ### Exercise 4
 
-Modify the function `prosecutions_graph` to use `theme_grey()` as the theme, rather than `theme_classic()`. Produce a plot of with a breakdown by `"offence_group"`.
+Modify the function `prosecutions_graph` to use `theme_classic()` as the theme, rather than `theme_grey()`. Produce a plot of with a breakdown by `"offence_group"`.
 
 ---
 
@@ -867,7 +867,7 @@ prosecutions_graph <- function(df, breakdown = "offence_type"){
     ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "count", group = breakdown, col = breakdown)) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous(breaks = 0:2100) +
-    ggplot2::theme_grey()
+    ggplot2::theme_classic()
 
   return(plot)
   
