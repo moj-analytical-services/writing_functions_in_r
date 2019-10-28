@@ -43,8 +43,6 @@ If you want to try running the example code during or after the session, you can
 
 All the examples in the presentation/README are available in the R script example_code.R.
 
-This isn't necessary for the session so don't worry if you're not able to do this!
-
 ```{r source_content, child = 'content.Rmd'}
 ```
 

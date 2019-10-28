@@ -15,7 +15,7 @@ and exercises to help you get started.
 The session is intended to be accessible to anyone who has attended the
 [Introduction to
 R](https://github.com/moj-analytical-services/IntroRTraining) training
-session and used R a little in their work.
+session and uses R a little in their work.
 
 All the notes for the training session are available below. If you have
 any feedback on the content, please get in touch\!
@@ -52,9 +52,6 @@ you can clone this repository.
 
 All the examples in the presentation/README are available in the R
 script example\_code.R.
-
-This isn’t necessary for the session so don’t worry if you’re not able
-to do this\!
 
 ## Learning outcomes
 
@@ -160,12 +157,12 @@ A function is made up of three components:
 
 ## Example 1: a very basic function
 
-Here’s an example of a very basic user-defined function:
+Here’s an example of a very basic user-defined function, called
+`add_two()`, that takes `x` as an argument:
 
 ``` r
-# We've named our function 'add_two' and have included 'x' as an input variable (a function argument)
+# This function takes the argument 'x', and adds 2 to it
 add_two <- function(x){
-  # This function takes the argument 'x', and adds 2 to it
   result <- x + 2
   return(result)
 }
@@ -193,6 +190,7 @@ desired outputs can be combined together into a list, and the list can
 be returned). Here’s a function that requires two input variables:
 
 ``` r
+# This function sums the squares of two numbers
 sum_squares <- function(x, y){
   result <- x^2 + y^2
   return(result)
@@ -260,6 +258,7 @@ using the `return()` command. In this function the condition is `x < 0`,
 and the condition evaluates to either `TRUE` or `FALSE`:
 
 ``` r
+# This function returns the absolute value of a number
 mod_x <- function(x){
   if (x < 0) {
     return(-x)
@@ -289,6 +288,7 @@ Depending on the purpose of the function, it doesn’t need to return an
 output at all:
 
 ``` r
+# This function lets you know whether a number is odd or even
 odd_or_even <- function(x){
   
   if((x %% 2) == 0){
@@ -338,6 +338,7 @@ Here is an adapted version of the function, with some more informative
 error messages built in using the `stop()` function:
 
 ``` r
+# This function lets you know whether a number is odd or even
 odd_or_even <- function(x){
   
   if (length(x) > 1){
@@ -388,10 +389,12 @@ function.
 
 ## Example 6: optional arguments
 
-Here’s an example of how to include optional arguments:
+Here’s an example of how to include optional arguments, where in this
+case the optional argument is called `y`:
 
 ``` r
-add_a_number <- function(x, y = NULL){ # y is the optional input, with a default value of NULL
+# This function either returns the sum of two numbers, or returns the argument if only one is supplied
+add_a_number <- function(x, y = NULL){
   
   if(!is.null(y)){
     return(x + y)
@@ -420,6 +423,7 @@ we can generalise the `sum_squares()` function by allowing it to sum
 together two numbers raised to any power, but have a default power of 2:
 
 ``` r
+# This function returns the sum of two numbers raised to a particular power (with a default of 2)
 sum_powers <- function(x, y, z = 2){
   
   result <- x ^ z + y ^ z
@@ -444,7 +448,8 @@ sum_powers(x = 3, y = 5, z = 3)
 
 Now try using an if else statement inside a function.
 
-Create a function called `fizz_buzz` which takes a number as input and:
+Create a function called `fizz_buzz()` which takes a number as input
+and:
 
   - If the number is divisible by both 3 and 5, returns “fizz buzz”
   - If the number is divisible by just 3, returns “fizz”
@@ -499,7 +504,7 @@ It’s best practice to vectorise your own functions too as this will help
 you to combine them with other functions.
 
 Create a new version of the `fizz_buzz()` function called
-`fizz_buzz_vec` which instead accepts a vector of numbers.
+`fizz_buzz_vec()` which instead accepts a vector of numbers.
 
 Test it out on a vector of the numbers 1 to 15.
 
@@ -517,9 +522,9 @@ to using `case_when()` from the Tidyverse package `dplyr`. Run
 ### 1.3.3 fizz\_buzz\_custom()
 
 Create version of `fizz_buzz()` or `fizz_buzz_vec()` called
-`fizz_buzz_custom` or `fizz_buzz_custom_vec` where the values for when
-to say “fizz” and “buzz” can be changed by setting arguments `fizz` and
-`buzz`, but the default values are still 3 and 5.
+`fizz_buzz_custom()` or `fizz_buzz_custom_vec()` where the values for
+when to say “fizz” and “buzz” can be changed by setting arguments `fizz`
+and `buzz`, but the default values are still 3 and 5.
 
 Test your new function out, first by checking you get the same results
 as above when you don’t specify the `fizz` or `buzz` arguments, and
@@ -535,6 +540,7 @@ function. This requires the ellipsis construct, `...`, which is designed
 to pass a variable number of arguments to a function. Here’s an example:
 
 ``` r
+# This function produces a plot of x vs y
 plot_x_and_y <- function(x, y, ...){
   
   plot(x, y, ...)
@@ -581,12 +587,13 @@ System Statistics quarterly publication: December 2018 (published in May
 ## Loading packages and data
 
 First of all we need to load a few packages:  
-\* `s3tools` is an MoJ package designed to interact with Amazon s3 -
-we’ll need this to help read in some data from an s3 bucket. \*
-`dplyr` is the package we’ll use to create summary tables from the data.
-\* `stringr` provides functions that can be used to manipulate strings.
-\* `purrr` provides functions to make the use of vectors and
-user-defined functions easier.
+• `s3tools` is an MoJ package designed to interact with Amazon s3 -
+we’ll need this to help read in some data from an s3 bucket.  
+• `dplyr` is the package we’ll use to create summary tables from the
+data.  
+• `stringr` provides functions that can be used to manipulate strings.  
+• `purrr` provides functions to make the use of vectors and user-defined
+functions easier.
 
 ``` r
 # Load packages
@@ -651,6 +658,7 @@ all letters in the string vector are lower-case, and makes use of
 punctuation marks with an underscore:
 
 ``` r
+# This function standardises strings contained in a vector
 generalise_names <- function(names) {
   
   # Convert any uppercase letters to lowercase
@@ -692,19 +700,19 @@ retrieve the column headings of the dataset as a vector).
 
 -----
 
-In this dataframe, some of the columns contain values with a number
-along with a category; for example, the `age_group` column contains
-categories like “01: Juveniles” rather than just “Juveniles”. These
-numbers might be undesirable, so we can write a function to remove
-these:
+In this dataset, some of the columns contain values with a number along
+with a category; for example, the `age_group` column contains categories
+like “01: Juveniles” rather than just “Juveniles”. These numbers might
+be undesirable, so we can write a function to remove these:
 
 ``` r
+# This function identifies and removes 1 or 2 digits followed by a semicolon or a space
 remove_numbering <- function(x) {
-  
-  # Remove 1 or 2 digits followed by a semicolon or a space
+
   x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]", "")
   
   return(x)
+  
 }
 ```
 
@@ -817,7 +825,7 @@ Let’s say we wanted to create a summary table showing the number of
 people prosecuted in different age bands. We could do:
 
 ``` r
-# Note: if are running this code from 'example_code.R', then exercise 1 must be completed first
+# Note: if you are running this code from 'example_code.R', then Exercise 1 must be completed first
 
 prosecutions_grouped <- prosecutions %>%
   dplyr::group_by(age_range) %>%
@@ -832,9 +840,9 @@ The resulting dataframe is saved as a variable called
 `prosecutions_grouped`.
 
 Notice how the `dplyr` functions `group_by()` and `summarise()` require
-that the column names are not enclosed in quotation marks: this
-behaviour is known as non-standard evalution, and will be important
-later.
+that the column names are not enclosed in quotation marks, meaning that
+they are not passed as strings: this behaviour is known as non-standard
+evalution, and will be important later.
 
 -----
 
@@ -868,6 +876,7 @@ previous examples in this course, you might expect this function to
 work:
 
 ``` r
+# This function produces a summary table based on a dataset
 sum_group <- function(df, group_cols, sum_col) {
   
   summary <- df %>%
@@ -889,7 +898,7 @@ prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", s
 
 -----
 
-This is because of the non-standard evalutation (NSE) mentioned above.
+This is because of the non-standard evaluation (NSE) mentioned above.
 The `dplyr` functions don’t recognise `group_cols` and `sum_col` as
 column names, because they can’t see that these are variables containing
 the actual column names. While the NSE usually makes the `dplyr`
@@ -901,12 +910,8 @@ the `dplyr` package that accept variables instead of straight column
 names. The function below shows an example of how the functions
 `group_by_at` and `summarise_at` can replace `group_by` and `summarise`.
 
-The way that the tidyverse packages handle NSE is still evolving, so new
-methods of addressing this issue may be introduced in the future. See
-the appendix for some examples of alternative methods to tackle this
-problem.
-
 ``` r
+# This function produces a summary table based on a dataset
 sum_group <- function(df, group_cols, sum_col) {
   
   summary <- df %>%
@@ -917,6 +922,11 @@ sum_group <- function(df, group_cols, sum_col) {
   
 }
 ```
+
+The way that the Tidyverse packages handle NSE is still evolving, so new
+methods of addressing this issue may be introduced in the future. See
+the appendix for some examples of alternative methods to tackle this
+problem.
 
 -----
 
@@ -970,9 +980,10 @@ same style. We can define the style of the plot in a function, then we
 only have to change the styling in one place if it needs changing. This
 function plots a breakdown of the number of prosecutions over time, with
 a default breakdown option of `"offence_type"`, and the plot is a line
-chart with `ggplot2`’s classic theme:
+chart with `ggplot2`’s grey theme:
 
 ``` r
+# This function produces a plot of the number of prosecutions over time
 prosecutions_graph <- function(df, breakdown = "offence_type"){
 
   grouping_variables <- c(breakdown, "year")
@@ -1022,15 +1033,14 @@ example, if we wanted to extract the prosecutions from the year up to a
 particular date, we could use a function like:
 
 ``` r
-extract_year <- function(data, date) {
+# This function extracts the prosecutions from a particular year
+extract_year <- function(data, end_date) {
   
-  # Convert the format from a string to a date
-  if(is.character(date)){
-    date <- lubridate::dmy(date)
-  }
+  # Ensure the date is a date-time object
+  if (is.character(end_date)) { end_date <- lubridate::dmy(end_date) }
   
   # Find end of quarter dates for the past year
-  quarters_to_include <- date %m-% months(c(0, 3, 6, 9))
+  quarters_to_include <- end_date %m-% months(c(0, 3, 6, 9))
   
   # Format the dates to years and quarters
   years <- lubridate::year(quarters_to_include)
@@ -1111,9 +1121,9 @@ nouns.
 
 ### Pass variables into the function as arguments
 
-While functions can access objects which haven’t been passed in as an
+While functions can access objects that haven’t been passed in as an
 argument, this is generally bad practice as it makes code much harder to
-understand and modify; and makes the function itself harder to reuse.
+understand and modify, and makes the function itself harder to reuse.
 
 ### Document your code
 
@@ -1131,7 +1141,7 @@ splitting it up into multiple functions.
 ### Generalise
 
 Think about whether there are ways you can make your function usable in
-more situations. For example, is there anything you’re hard-coding which
+more situations. For example, is there anything you’re hard-coding that
 you could set as an argument instead?
 
 ### Vectorise by default
@@ -1189,17 +1199,17 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Cyan"
+    ## [1] "Blue"
 
 ## Writing a package
 
-An alternative is to make your own package to store your functions which
-you can then use like any other R package. There are a few advantages to
-this:
+An alternative is to make your own package to store your functions,
+which you can then use like any other R package. There are a few
+advantages to this:
 
   - It means you (and others) can access your functions from different
     projects
-  - There are certain requirements for making R packages which enforce
+  - There are certain requirements for making R packages that enforce
     good practice, such as including documentation
 
 This comes at the cost of slightly higher overheads.
@@ -1326,16 +1336,7 @@ row with the total across all categories. Note that this requires the
 
 ``` r
 library(janitor)
-```
 
-    ## 
-    ## Attaching package: 'janitor'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     chisq.test, fisher.test
-
-``` r
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%

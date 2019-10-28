@@ -14,14 +14,11 @@ function_name <- function(arg1, arg2){
 
 
 ## ------------------------------------------------------------------------
-
-# We've named our function 'add_two' and have included 'x' as an input variable (a function argument)
+# This function takes the argument 'x', and adds 2 to it
 add_two <- function(x){
-  # This function takes the argument 'x', and adds 2 to it
   result <- x + 2
   return(result)
 }
-
 
 
 ## ------------------------------------------------------------------------
@@ -32,9 +29,9 @@ add_two(3)
 result <- add_two(3) 
 
 
-
 ## ------------------------------------------------------------------------
 
+# This function sums the squares of two numbers
 sum_squares <- function(x, y){
   result <- x^2 + y^2
   return(result)
@@ -57,6 +54,7 @@ sum_squares(y = 5, x = 3)
 
 ## ------------------------------------------------------------------------
 
+# This function returns the absolute value of a number
 mod_x <- function(x){
   if (x < 0) {
     return(-x)
@@ -70,7 +68,7 @@ mod_x(-5)
 
 
 ## ------------------------------------------------------------------------
-
+# This function lets you know whether a number is odd or even
 odd_or_even <- function(x){
   
   if((x %% 2) == 0){
@@ -94,7 +92,7 @@ odd_or_even(x=c(1,2,3))
 
 
 ## ------------------------------------------------------------------------
-
+# This function lets you know whether a number is odd or even
 odd_or_even <- function(x){
   
   if (length(x) > 1){
@@ -125,8 +123,8 @@ odd_or_even(x=c(1,2,3))
 
 
 ## ------------------------------------------------------------------------
-
-add_a_number <- function(x, y = NULL){ # y is the optional input, with a default value of NULL
+# This function either returns the sum of two numbers, or returns the argument if only one is supplied
+add_a_number <- function(x, y = NULL){
   
   if(!is.null(y)){
     return(x + y)
@@ -143,7 +141,7 @@ add_a_number(x = 6, y = 7)
 
 
 ## ------------------------------------------------------------------------
-
+# This function returns the sum of two numbers raised to a particular power (with a default of 2)
 sum_powers <- function(x, y, z = 2){
   
   result <- x ^ z + y ^ z
@@ -170,7 +168,7 @@ sum_powers(x = 3, y = 5, z = 3)
 
 
 ## ------------------------------------------------------------------------
-
+# This function produces a plot of x vs y
 plot_x_and_y <- function(x, y, ...){
   
   plot(x, y, ...)
@@ -217,7 +215,7 @@ glimpse(prosecutions)
 
 
 ## ------------------------------------------------------------------------
-
+# This function standardises strings contained in a vector
 generalise_names <- function(names) {
   
   # Convert any uppercase letters to lowercase
@@ -249,13 +247,13 @@ generalise_names(names)
 
 
 ## ------------------------------------------------------------------------
-
+# This function identifies and removes 1 or 2 digits followed by a semicolon or a space
 remove_numbering <- function(x) {
-  
-  # Remove 1 or 2 digits followed by a semicolon or a space
+
   x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]", "")
   
   return(x)
+  
 }
 
 
@@ -296,7 +294,7 @@ glimpse(prosecutions)
 
 
 ## ------------------------------------------------------------------------
-# Note: if are running this code from 'example_code.R', then exercise 1 must be completed first
+# Note: if you are running this code from 'example_code.R', then Exercise 1 must be completed first
 
 prosecutions_grouped <- prosecutions %>%
   dplyr::group_by(age_range) %>%
@@ -308,6 +306,7 @@ prosecutions_grouped
 
 
 ## ----error = TRUE--------------------------------------------------------
+# This function produces a summary table based on a dataset
 sum_group <- function(df, group_cols, sum_col) {
   
   summary <- df %>%
@@ -324,7 +323,7 @@ prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", s
 
 
 ## ------------------------------------------------------------------------
-
+# This function produces a summary table based on a dataset
 sum_group <- function(df, group_cols, sum_col) {
   
   summary <- df %>%
@@ -353,7 +352,7 @@ glimpse(prosecutions_grouped)
 
 
 ## ------------------------------------------------------------------------
-
+# This function produces a plot of the number of prosecutions over time
 prosecutions_graph <- function(df, breakdown = "offence_type"){
 
   grouping_variables <- c(breakdown, "year")
@@ -386,16 +385,14 @@ prosecutions_graph(prosecutions, breakdown = "offence_type")
 
 
 ## ------------------------------------------------------------------------
-
-extract_year <- function(data, date) {
+# This function extracts the prosecutions from a particular year
+extract_year <- function(data, end_date) {
   
-  # Convert the format from a string to a date
-  if(is.character(date)){
-    date <- lubridate::dmy(date)
-  }
+  # Ensure the date is a date-time object
+  if (is.character(end_date)) { end_date <- lubridate::dmy(end_date) }
   
   # Find end of quarter dates for the past year
-  quarters_to_include <- date %m-% months(c(0, 3, 6, 9))
+  quarters_to_include <- end_date %m-% months(c(0, 3, 6, 9))
   
   # Format the dates to years and quarters
   years <- lubridate::year(quarters_to_include)

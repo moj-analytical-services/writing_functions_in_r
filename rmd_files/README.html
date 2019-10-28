@@ -603,7 +603,7 @@ body {
 <h1 id="writing-functions-in-r">Writing functions in R</h1>
 <p>This repository is for Writing Functions in R course offered by the DASD R Training Group. It was also used for the April 2019 <a href="https://github.com/moj-analytical-services/Coffee-and-Coding">Coffee &amp; Coding</a> session.</p>
 <p>Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we cover why, when and how to write your own functions, with plenty of examples and exercises to help you get started.</p>
-<p>The session is intended to be accessible to anyone who has attended the <a href="https://github.com/moj-analytical-services/IntroRTraining">Introduction to R</a> training session and used R a little in their work.</p>
+<p>The session is intended to be accessible to anyone who has attended the <a href="https://github.com/moj-analytical-services/IntroRTraining">Introduction to R</a> training session and uses R a little in their work.</p>
 <p>All the notes for the training session are available below. If you have any feedback on the content, please get in touch!</p>
 <h2 id="contents">Contents</h2>
 <ul>
@@ -627,7 +627,6 @@ body {
 <li><p>If you have not used GitHub with the analytical platform before, you might need to set this up using the instructions in <a href="https://moj-analytical-services.github.io/platform_user_guidance/using-github-with-the-platform.html">section 2.3 of the Platform User Guidance</a>, before following the instructions in section 4.2.1 as above.</p></li>
 </ul>
 <p>All the examples in the presentation/README are available in the R script example_code.R.</p>
-<p>This isn’t necessary for the session so don’t worry if you’re not able to do this!</p>
 <h2 id="learning-outcomes">Learning outcomes</h2>
 <h3 id="by-the-end-of-this-session-you-should-know">By the end of this session you should know:</h3>
 <ul>
@@ -673,13 +672,12 @@ body {
 </ul>
 <h1 id="examples-of-basic-functions">Examples of basic functions</h1>
 <h2 id="example-1-a-very-basic-function">Example 1: a very basic function</h2>
-<p>Here’s an example of a very basic user-defined function:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># We&#39;ve named our function &#39;add_two&#39; and have included &#39;x&#39; as an input variable (a function argument)</span></span>
+<p>Here’s an example of a very basic user-defined function, called <code>add_two()</code>, that takes <code>x</code> as an argument:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># This function takes the argument &#39;x&#39;, and adds 2 to it</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>add_two &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="co"># This function takes the argument &#39;x&#39;, and adds 2 to it</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  result &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="kw">return</span>(result)</span>
-<span id="cb3-6"><a href="#cb3-6"></a>}</span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3"></a>  result &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="kw">return</span>(result)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>}</span></code></pre></div>
 <p>Let’s try using the function <code>add_two()</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Calling the function by itself prints the result to the console</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">add_two</span>(<span class="dv">3</span>)</span></code></pre></div>
@@ -689,12 +687,13 @@ body {
 <span id="cb6-2"><a href="#cb6-2"></a>result &lt;-<span class="st"> </span><span class="kw">add_two</span>(<span class="dv">3</span>) </span></code></pre></div>
 <h2 id="example-2-multiple-inputs">Example 2: multiple inputs</h2>
 <p>Functions can accept as many arguments as you like, but can only output one object (if it is necessary to output more than one object, then the desired outputs can be combined together into a list, and the list can be returned). Here’s a function that requires two input variables:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>sum_squares &lt;-<span class="st"> </span><span class="cf">function</span>(x, y){</span>
-<span id="cb7-2"><a href="#cb7-2"></a>  result &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="kw">return</span>(result)</span>
-<span id="cb7-4"><a href="#cb7-4"></a>}</span>
-<span id="cb7-5"><a href="#cb7-5"></a></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">sum_squares</span>(<span class="dv">3</span>, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># This function sums the squares of two numbers</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>sum_squares &lt;-<span class="st"> </span><span class="cf">function</span>(x, y){</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  result &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="kw">return</span>(result)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>}</span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">sum_squares</span>(<span class="dv">3</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 34
 </code></pre>
 <p>Arguments can be specified by position or name. In the above example, the function accepts arguments called <code>x</code> and <code>y</code>, with the order specified as <code>x</code> then <code>y</code> in the function definition. Therefore when <code>sum_squares(3, 5)</code> is called, the arguments are interpreted as <code>x = 3</code> and <code>y = 5</code>. Alternatively, if we called <code>sum_squares(5, 3)</code> then the arguments would be interpreted as <code>x = 5</code> and <code>y = 3</code>.</p>
@@ -718,32 +717,34 @@ body {
 <hr />
 <h2 id="example-3-conditional-statements-in-functions">Example 3: conditional statements in functions</h2>
 <p>Functions can return different outputs depending on some condition, using the <code>return()</code> command. In this function the condition is <code>x &lt; 0</code>, and the condition evaluates to either <code>TRUE</code> or <code>FALSE</code>:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>mod_x &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb13-3"><a href="#cb13-3"></a>    <span class="kw">return</span>(<span class="op">-</span>x)</span>
-<span id="cb13-4"><a href="#cb13-4"></a>  } <span class="cf">else</span> {</span>
-<span id="cb13-5"><a href="#cb13-5"></a>    <span class="kw">return</span>(x)</span>
-<span id="cb13-6"><a href="#cb13-6"></a>  }</span>
-<span id="cb13-7"><a href="#cb13-7"></a>}</span>
-<span id="cb13-8"><a href="#cb13-8"></a></span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="kw">mod_x</span>(<span class="op">-</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># This function returns the absolute value of a number</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>mod_x &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="kw">return</span>(<span class="op">-</span>x)</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  } <span class="cf">else</span> {</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="kw">return</span>(x)</span>
+<span id="cb13-7"><a href="#cb13-7"></a>  }</span>
+<span id="cb13-8"><a href="#cb13-8"></a>}</span>
+<span id="cb13-9"><a href="#cb13-9"></a></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="kw">mod_x</span>(<span class="op">-</span><span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 5
 </code></pre>
 <p>As soon as a <code>return()</code> statement is encountered in a function, the function finishes and returns the variable in the <code>return()</code> statement. In the above example, <code>return()</code> is used twice as there is a condition with two possibilities. Either the input argument <code>x</code> is less than zero, in which case the function ends with the <code>return(-x)</code> statement, otherwise if <code>x</code> is not less than zero then the function continues to the <code>return(x)</code> statement. Without a <code>return()</code> statement, a function written in R will automatically return whatever variable is on the last line of the function body.</p>
 <h2 id="example-4-functions-without-outputs">Example 4: functions without outputs</h2>
 <p>Depending on the purpose of the function, it doesn’t need to return an output at all:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>odd_or_even &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
-<span id="cb15-2"><a href="#cb15-2"></a>  </span>
-<span id="cb15-3"><a href="#cb15-3"></a>  <span class="cf">if</span>((x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){</span>
-<span id="cb15-4"><a href="#cb15-4"></a>    <span class="kw">print</span>(<span class="st">&quot;The number is even.&quot;</span>)</span>
-<span id="cb15-5"><a href="#cb15-5"></a>  }</span>
-<span id="cb15-6"><a href="#cb15-6"></a>  <span class="cf">else</span> <span class="cf">if</span>((x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</span>
-<span id="cb15-7"><a href="#cb15-7"></a>    <span class="kw">print</span>(<span class="st">&quot;The number is odd.&quot;</span>)</span>
-<span id="cb15-8"><a href="#cb15-8"></a>  }</span>
-<span id="cb15-9"><a href="#cb15-9"></a></span>
-<span id="cb15-10"><a href="#cb15-10"></a>}</span>
-<span id="cb15-11"><a href="#cb15-11"></a></span>
-<span id="cb15-12"><a href="#cb15-12"></a><span class="kw">odd_or_even</span>(<span class="dt">x=</span><span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># This function lets you know whether a number is odd or even</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>odd_or_even &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  </span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="cf">if</span>((x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="kw">print</span>(<span class="st">&quot;The number is even.&quot;</span>)</span>
+<span id="cb15-6"><a href="#cb15-6"></a>  }</span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="cf">else</span> <span class="cf">if</span>((x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</span>
+<span id="cb15-8"><a href="#cb15-8"></a>    <span class="kw">print</span>(<span class="st">&quot;The number is odd.&quot;</span>)</span>
+<span id="cb15-9"><a href="#cb15-9"></a>  }</span>
+<span id="cb15-10"><a href="#cb15-10"></a></span>
+<span id="cb15-11"><a href="#cb15-11"></a>}</span>
+<span id="cb15-12"><a href="#cb15-12"></a></span>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="kw">odd_or_even</span>(<span class="dt">x=</span><span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;The number is even.&quot;
 </code></pre>
 <h2 id="example-5-errors-and-warnings">Example 5: errors and warnings</h2>
@@ -763,25 +764,26 @@ body {
 </code></pre>
 <hr />
 <p>Here is an adapted version of the function, with some more informative error messages built in using the <code>stop()</code> function:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>odd_or_even &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
-<span id="cb21-2"><a href="#cb21-2"></a>  </span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>){</span>
-<span id="cb21-4"><a href="#cb21-4"></a>    <span class="kw">stop</span>(<span class="st">&quot;The argument is not a single number.&quot;</span>)</span>
-<span id="cb21-5"><a href="#cb21-5"></a>  }</span>
-<span id="cb21-6"><a href="#cb21-6"></a>  <span class="cf">else</span> <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.numeric</span>(x)){</span>
-<span id="cb21-7"><a href="#cb21-7"></a>    <span class="kw">stop</span>(<span class="st">&quot;The argument is not a number.&quot;</span>)</span>
-<span id="cb21-8"><a href="#cb21-8"></a>  }</span>
-<span id="cb21-9"><a href="#cb21-9"></a>  <span class="cf">else</span> <span class="cf">if</span>((x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){</span>
-<span id="cb21-10"><a href="#cb21-10"></a>    <span class="kw">print</span>(<span class="st">&quot;The number is even.&quot;</span>)</span>
-<span id="cb21-11"><a href="#cb21-11"></a>  }</span>
-<span id="cb21-12"><a href="#cb21-12"></a>  <span class="cf">else</span> <span class="cf">if</span>((x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</span>
-<span id="cb21-13"><a href="#cb21-13"></a>    <span class="kw">print</span>(<span class="st">&quot;The number is odd.&quot;</span>)</span>
-<span id="cb21-14"><a href="#cb21-14"></a>  }</span>
-<span id="cb21-15"><a href="#cb21-15"></a>  <span class="cf">else</span> <span class="cf">if</span>((x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>){</span>
-<span id="cb21-16"><a href="#cb21-16"></a>    <span class="kw">stop</span>(<span class="st">&quot;The number is not an integer.&quot;</span>)</span>
-<span id="cb21-17"><a href="#cb21-17"></a>  }</span>
-<span id="cb21-18"><a href="#cb21-18"></a></span>
-<span id="cb21-19"><a href="#cb21-19"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># This function lets you know whether a number is odd or even</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>odd_or_even &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
+<span id="cb21-3"><a href="#cb21-3"></a>  </span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>){</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="kw">stop</span>(<span class="st">&quot;The argument is not a single number.&quot;</span>)</span>
+<span id="cb21-6"><a href="#cb21-6"></a>  }</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="cf">else</span> <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.numeric</span>(x)){</span>
+<span id="cb21-8"><a href="#cb21-8"></a>    <span class="kw">stop</span>(<span class="st">&quot;The argument is not a number.&quot;</span>)</span>
+<span id="cb21-9"><a href="#cb21-9"></a>  }</span>
+<span id="cb21-10"><a href="#cb21-10"></a>  <span class="cf">else</span> <span class="cf">if</span>((x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){</span>
+<span id="cb21-11"><a href="#cb21-11"></a>    <span class="kw">print</span>(<span class="st">&quot;The number is even.&quot;</span>)</span>
+<span id="cb21-12"><a href="#cb21-12"></a>  }</span>
+<span id="cb21-13"><a href="#cb21-13"></a>  <span class="cf">else</span> <span class="cf">if</span>((x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</span>
+<span id="cb21-14"><a href="#cb21-14"></a>    <span class="kw">print</span>(<span class="st">&quot;The number is odd.&quot;</span>)</span>
+<span id="cb21-15"><a href="#cb21-15"></a>  }</span>
+<span id="cb21-16"><a href="#cb21-16"></a>  <span class="cf">else</span> <span class="cf">if</span>((x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>){</span>
+<span id="cb21-17"><a href="#cb21-17"></a>    <span class="kw">stop</span>(<span class="st">&quot;The number is not an integer.&quot;</span>)</span>
+<span id="cb21-18"><a href="#cb21-18"></a>  }</span>
+<span id="cb21-19"><a href="#cb21-19"></a></span>
+<span id="cb21-20"><a href="#cb21-20"></a>}</span></code></pre></div>
 <hr />
 <p>Now try passing some incompatible arguments to the function:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">odd_or_even</span>(<span class="dt">x=</span><span class="fl">1.5</span>)</span></code></pre></div>
@@ -795,19 +797,20 @@ body {
 </code></pre>
 <p><code>stop()</code> halts execution of the function and prints an error message to the console; alternatively you can use <code>warning()</code>, which prints a warning message to the console but does not stop execution of the function.</p>
 <h2 id="example-6-optional-arguments">Example 6: optional arguments</h2>
-<p>Here’s an example of how to include optional arguments:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>add_a_number &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">y =</span> <span class="ot">NULL</span>){ <span class="co"># y is the optional input, with a default value of NULL</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>  </span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="cf">if</span>(<span class="op">!</span><span class="kw">is.null</span>(y)){</span>
-<span id="cb28-4"><a href="#cb28-4"></a>    <span class="kw">return</span>(x <span class="op">+</span><span class="st"> </span>y)</span>
-<span id="cb28-5"><a href="#cb28-5"></a>  }</span>
-<span id="cb28-6"><a href="#cb28-6"></a>  <span class="cf">else</span>{</span>
-<span id="cb28-7"><a href="#cb28-7"></a>    <span class="kw">return</span>(x)</span>
-<span id="cb28-8"><a href="#cb28-8"></a>  }</span>
-<span id="cb28-9"><a href="#cb28-9"></a>  </span>
-<span id="cb28-10"><a href="#cb28-10"></a>}</span>
-<span id="cb28-11"><a href="#cb28-11"></a></span>
-<span id="cb28-12"><a href="#cb28-12"></a><span class="kw">add_a_number</span>(<span class="dt">x =</span> <span class="dv">6</span>)</span></code></pre></div>
+<p>Here’s an example of how to include optional arguments, where in this case the optional argument is called <code>y</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># This function either returns the sum of two numbers, or returns the argument if only one is supplied</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>add_a_number &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">y =</span> <span class="ot">NULL</span>){</span>
+<span id="cb28-3"><a href="#cb28-3"></a>  </span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="cf">if</span>(<span class="op">!</span><span class="kw">is.null</span>(y)){</span>
+<span id="cb28-5"><a href="#cb28-5"></a>    <span class="kw">return</span>(x <span class="op">+</span><span class="st"> </span>y)</span>
+<span id="cb28-6"><a href="#cb28-6"></a>  }</span>
+<span id="cb28-7"><a href="#cb28-7"></a>  <span class="cf">else</span>{</span>
+<span id="cb28-8"><a href="#cb28-8"></a>    <span class="kw">return</span>(x)</span>
+<span id="cb28-9"><a href="#cb28-9"></a>  }</span>
+<span id="cb28-10"><a href="#cb28-10"></a>  </span>
+<span id="cb28-11"><a href="#cb28-11"></a>}</span>
+<span id="cb28-12"><a href="#cb28-12"></a></span>
+<span id="cb28-13"><a href="#cb28-13"></a><span class="kw">add_a_number</span>(<span class="dt">x =</span> <span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## [1] 6
 </code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">add_a_number</span>(<span class="dt">x =</span> <span class="dv">6</span>, <span class="dt">y =</span> <span class="dv">7</span>)</span></code></pre></div>
@@ -815,14 +818,15 @@ body {
 </code></pre>
 <h2 id="example-7-arguments-with-default-values">Example 7: arguments with default values</h2>
 <p>Any value can be used as a default value for an argument. For example, we can generalise the <code>sum_squares()</code> function by allowing it to sum together two numbers raised to any power, but have a default power of 2:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>sum_powers &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, <span class="dt">z =</span> <span class="dv">2</span>){</span>
-<span id="cb32-2"><a href="#cb32-2"></a>  </span>
-<span id="cb32-3"><a href="#cb32-3"></a>  result &lt;-<span class="st"> </span>x <span class="op">^</span><span class="st"> </span>z <span class="op">+</span><span class="st"> </span>y <span class="op">^</span><span class="st"> </span>z</span>
-<span id="cb32-4"><a href="#cb32-4"></a>  <span class="kw">return</span>(result)</span>
-<span id="cb32-5"><a href="#cb32-5"></a>  </span>
-<span id="cb32-6"><a href="#cb32-6"></a>}</span>
-<span id="cb32-7"><a href="#cb32-7"></a></span>
-<span id="cb32-8"><a href="#cb32-8"></a><span class="kw">sum_powers</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># This function returns the sum of two numbers raised to a particular power (with a default of 2)</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>sum_powers &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, <span class="dt">z =</span> <span class="dv">2</span>){</span>
+<span id="cb32-3"><a href="#cb32-3"></a>  </span>
+<span id="cb32-4"><a href="#cb32-4"></a>  result &lt;-<span class="st"> </span>x <span class="op">^</span><span class="st"> </span>z <span class="op">+</span><span class="st"> </span>y <span class="op">^</span><span class="st"> </span>z</span>
+<span id="cb32-5"><a href="#cb32-5"></a>  <span class="kw">return</span>(result)</span>
+<span id="cb32-6"><a href="#cb32-6"></a>  </span>
+<span id="cb32-7"><a href="#cb32-7"></a>}</span>
+<span id="cb32-8"><a href="#cb32-8"></a></span>
+<span id="cb32-9"><a href="#cb32-9"></a><span class="kw">sum_powers</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 34
 </code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">sum_powers</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">5</span>, <span class="dt">z =</span> <span class="dv">3</span>)</span></code></pre></div>
@@ -831,7 +835,7 @@ body {
 <h2 id="exercises-1">Exercises</h2>
 <h3 id="131-fizz_buzz">1.3.1 fizz_buzz()</h3>
 <p>Now try using an if else statement inside a function.</p>
-<p>Create a function called <code>fizz_buzz</code> which takes a number as input and:</p>
+<p>Create a function called <code>fizz_buzz()</code> which takes a number as input and:</p>
 <ul>
 <li>If the number is divisible by both 3 and 5, returns “fizz buzz”</li>
 <li>If the number is divisible by just 3, returns “fizz”</li>
@@ -864,26 +868,27 @@ body {
 <h3 id="132-fizz_buzz_vec">1.3.2 fizz_buzz_vec()</h3>
 <p>Most functions in R are vectorised. This means they’re able to apply an operation to every element of a vector at the same time.</p>
 <p>It’s best practice to vectorise your own functions too as this will help you to combine them with other functions.</p>
-<p>Create a new version of the <code>fizz_buzz()</code> function called <code>fizz_buzz_vec</code> which instead accepts a vector of numbers.</p>
+<p>Create a new version of the <code>fizz_buzz()</code> function called <code>fizz_buzz_vec()</code> which instead accepts a vector of numbers.</p>
 <p>Test it out on a vector of the numbers 1 to 15.</p>
 <p><strong>Hint:</strong> if else statements aren’t vectorised so you’ll need to switch to using <code>case_when()</code> from the Tidyverse package <code>dplyr</code>. Run <code>?case_when</code> to bring up the help file.</p>
 <p><em>If you get stuck on this exercise you can still complete exercise 1.3.3.</em></p>
 <hr />
 <hr />
 <h3 id="133-fizz_buzz_custom">1.3.3 fizz_buzz_custom()</h3>
-<p>Create version of <code>fizz_buzz()</code> or <code>fizz_buzz_vec()</code> called <code>fizz_buzz_custom</code> or <code>fizz_buzz_custom_vec</code> where the values for when to say “fizz” and “buzz” can be changed by setting arguments <code>fizz</code> and <code>buzz</code>, but the default values are still 3 and 5.</p>
+<p>Create version of <code>fizz_buzz()</code> or <code>fizz_buzz_vec()</code> called <code>fizz_buzz_custom()</code> or <code>fizz_buzz_custom_vec()</code> where the values for when to say “fizz” and “buzz” can be changed by setting arguments <code>fizz</code> and <code>buzz</code>, but the default values are still 3 and 5.</p>
 <p>Test your new function out, first by checking you get the same results as above when you don’t specify the <code>fizz</code> or <code>buzz</code> arguments, and second when you set <code>buzz = 7</code> for values 1, 2, 3, 7, 15 and 21.</p>
 <hr />
 <h2 id="example-8-the-ellipsis-argument">Example 8: the ellipsis argument</h2>
 <p>Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function is called within a wrapper function. This requires the ellipsis construct, <code>...</code>, which is designed to pass a variable number of arguments to a function. Here’s an example:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>plot_x_and_y &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, ...){</span>
-<span id="cb41-2"><a href="#cb41-2"></a>  </span>
-<span id="cb41-3"><a href="#cb41-3"></a>  <span class="kw">plot</span>(x, y, ...)</span>
-<span id="cb41-4"><a href="#cb41-4"></a>  </span>
-<span id="cb41-5"><a href="#cb41-5"></a>}</span>
-<span id="cb41-6"><a href="#cb41-6"></a></span>
-<span id="cb41-7"><a href="#cb41-7"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
-<span id="cb41-8"><a href="#cb41-8"></a>y &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># This function produces a plot of x vs y</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>plot_x_and_y &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, ...){</span>
+<span id="cb41-3"><a href="#cb41-3"></a>  </span>
+<span id="cb41-4"><a href="#cb41-4"></a>  <span class="kw">plot</span>(x, y, ...)</span>
+<span id="cb41-5"><a href="#cb41-5"></a>  </span>
+<span id="cb41-6"><a href="#cb41-6"></a>}</span>
+<span id="cb41-7"><a href="#cb41-7"></a></span>
+<span id="cb41-8"><a href="#cb41-8"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb41-9"><a href="#cb41-9"></a>y &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
 <hr />
 <p>The function can be called with only the required arguments:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">plot_x_and_y</span>(x, y)</span></code></pre></div>
@@ -896,7 +901,10 @@ body {
 <p>This section builds on material covered in the <a href="https://github.com/moj-analytical-services/IntroRTraining">Intro R Training</a> course and makes use of the <code>dplyr</code> package, which is a commonly used R package for data manipulation. In the following examples we’ll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we’ll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found <a href="https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018">here</a>.</p>
 <h2 id="loading-packages-and-data">Loading packages and data</h2>
 <p>First of all we need to load a few packages:<br />
-* <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we’ll need this to help read in some data from an s3 bucket. * <code>dplyr</code> is the package we’ll use to create summary tables from the data. * <code>stringr</code> provides functions that can be used to manipulate strings. * <code>purrr</code> provides functions to make the use of vectors and user-defined functions easier.</p>
+• <code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we’ll need this to help read in some data from an s3 bucket.<br />
+• <code>dplyr</code> is the package we’ll use to create summary tables from the data.<br />
+• <code>stringr</code> provides functions that can be used to manipulate strings.<br />
+• <code>purrr</code> provides functions to make the use of vectors and user-defined functions easier.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># Load packages</span></span>
 <span id="cb44-2"><a href="#cb44-2"></a><span class="kw">library</span>(s3tools)</span>
 <span id="cb44-3"><a href="#cb44-3"></a><span class="kw">library</span>(dplyr)</span>
@@ -935,24 +943,25 @@ body {
 </code></pre>
 <h2 id="cleaning-data">Cleaning data</h2>
 <p>After reading in a dataframe it can often be helpful to standardise the column headings. Below is an example of a function that could be used for this purpose. It takes a vector of strings as the argument, ensures all letters in the string vector are lower-case, and makes use of “regular expressions” or “regex” to find and replace all spaces and punctuation marks with an underscore:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>generalise_names &lt;-<span class="st"> </span><span class="cf">function</span>(names) {</span>
-<span id="cb48-2"><a href="#cb48-2"></a>  </span>
-<span id="cb48-3"><a href="#cb48-3"></a>  <span class="co"># Convert any uppercase letters to lowercase</span></span>
-<span id="cb48-4"><a href="#cb48-4"></a>  names &lt;-<span class="st"> </span><span class="kw">tolower</span>(names)</span>
-<span id="cb48-5"><a href="#cb48-5"></a>  <span class="co"># Trim any blank spaces at the start or end of each string</span></span>
-<span id="cb48-6"><a href="#cb48-6"></a>  names &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_trim</span>(names)</span>
-<span id="cb48-7"><a href="#cb48-7"></a>  <span class="co"># Replace spaces with an underscore</span></span>
-<span id="cb48-8"><a href="#cb48-8"></a>  names &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(names, <span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>)</span>
-<span id="cb48-9"><a href="#cb48-9"></a>  <span class="co"># Replace anything that isn&#39;t a letter or number with an underscore</span></span>
-<span id="cb48-10"><a href="#cb48-10"></a>  names &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(names, <span class="st">&quot;[^A-Za-z0-9]&quot;</span>, <span class="st">&quot;_&quot;</span>)</span>
-<span id="cb48-11"><a href="#cb48-11"></a>  <span class="co"># Replace repeated underscores with a single underscore</span></span>
-<span id="cb48-12"><a href="#cb48-12"></a>  names &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(names, <span class="st">&quot;([_])</span><span class="ch">\\</span><span class="st">1+&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>)</span>
-<span id="cb48-13"><a href="#cb48-13"></a>  <span class="co"># Remove any underscores at the beginning or end of the string</span></span>
-<span id="cb48-14"><a href="#cb48-14"></a>  names &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(names, <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">_+|</span><span class="ch">\\</span><span class="st">_+$&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
-<span id="cb48-15"><a href="#cb48-15"></a>  </span>
-<span id="cb48-16"><a href="#cb48-16"></a>  <span class="kw">return</span>(names)</span>
-<span id="cb48-17"><a href="#cb48-17"></a>  </span>
-<span id="cb48-18"><a href="#cb48-18"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># This function standardises strings contained in a vector</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a>generalise_names &lt;-<span class="st"> </span><span class="cf">function</span>(names) {</span>
+<span id="cb48-3"><a href="#cb48-3"></a>  </span>
+<span id="cb48-4"><a href="#cb48-4"></a>  <span class="co"># Convert any uppercase letters to lowercase</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>  names &lt;-<span class="st"> </span><span class="kw">tolower</span>(names)</span>
+<span id="cb48-6"><a href="#cb48-6"></a>  <span class="co"># Trim any blank spaces at the start or end of each string</span></span>
+<span id="cb48-7"><a href="#cb48-7"></a>  names &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_trim</span>(names)</span>
+<span id="cb48-8"><a href="#cb48-8"></a>  <span class="co"># Replace spaces with an underscore</span></span>
+<span id="cb48-9"><a href="#cb48-9"></a>  names &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(names, <span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>)</span>
+<span id="cb48-10"><a href="#cb48-10"></a>  <span class="co"># Replace anything that isn&#39;t a letter or number with an underscore</span></span>
+<span id="cb48-11"><a href="#cb48-11"></a>  names &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(names, <span class="st">&quot;[^A-Za-z0-9]&quot;</span>, <span class="st">&quot;_&quot;</span>)</span>
+<span id="cb48-12"><a href="#cb48-12"></a>  <span class="co"># Replace repeated underscores with a single underscore</span></span>
+<span id="cb48-13"><a href="#cb48-13"></a>  names &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(names, <span class="st">&quot;([_])</span><span class="ch">\\</span><span class="st">1+&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>)</span>
+<span id="cb48-14"><a href="#cb48-14"></a>  <span class="co"># Remove any underscores at the beginning or end of the string</span></span>
+<span id="cb48-15"><a href="#cb48-15"></a>  names &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(names, <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">_+|</span><span class="ch">\\</span><span class="st">_+$&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb48-16"><a href="#cb48-16"></a>  </span>
+<span id="cb48-17"><a href="#cb48-17"></a>  <span class="kw">return</span>(names)</span>
+<span id="cb48-18"><a href="#cb48-18"></a>  </span>
+<span id="cb48-19"><a href="#cb48-19"></a>}</span></code></pre></div>
 <hr />
 <p>Here is a demonstration of how functions such as this can be useful:</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Option 1&quot;</span>, <span class="st">&quot;   Option (1)&quot;</span>, <span class="st">&quot;Option: 1&quot;</span>, <span class="st">&quot;option 1&quot;</span>, <span class="st">&quot;OPTION - 1&quot;</span>)</span>
@@ -963,14 +972,15 @@ body {
 <p>Use the <code>generalise_names()</code> function defined above to clean the column headings of this dataset (Hint: use the function <code>colnames()</code> to retrieve the column headings of the dataset as a vector).</p>
 <hr />
 <hr />
-<p>In this dataframe, some of the columns contain values with a number along with a category; for example, the <code>age_group</code> column contains categories like “01: Juveniles” rather than just “Juveniles”. These numbers might be undesirable, so we can write a function to remove these:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>remove_numbering &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
-<span id="cb51-2"><a href="#cb51-2"></a>  </span>
-<span id="cb51-3"><a href="#cb51-3"></a>  <span class="co"># Remove 1 or 2 digits followed by a semicolon or a space</span></span>
+<p>In this dataset, some of the columns contain values with a number along with a category; for example, the <code>age_group</code> column contains categories like “01: Juveniles” rather than just “Juveniles”. These numbers might be undesirable, so we can write a function to remove these:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="co"># This function identifies and removes 1 or 2 digits followed by a semicolon or a space</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>remove_numbering &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb51-3"><a href="#cb51-3"></a></span>
 <span id="cb51-4"><a href="#cb51-4"></a>  x &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace</span>(x,<span class="st">&quot;^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
 <span id="cb51-5"><a href="#cb51-5"></a>  </span>
 <span id="cb51-6"><a href="#cb51-6"></a>  <span class="kw">return</span>(x)</span>
-<span id="cb51-7"><a href="#cb51-7"></a>}</span></code></pre></div>
+<span id="cb51-7"><a href="#cb51-7"></a>  </span>
+<span id="cb51-8"><a href="#cb51-8"></a>}</span></code></pre></div>
 <hr />
 <p>Then we can use the <code>modify_if()</code> function from <code>purrr</code> to apply the <code>remove_numbering()</code> function to all columns in the <code>prosecutions</code> dataframe, with the condition that the column must contain strings.</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>prosecutions &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">modify_if</span>(prosecutions, is.character, remove_numbering)</span>
@@ -1045,14 +1055,14 @@ body {
 <hr />
 <h2 id="summarising-data">Summarising data</h2>
 <p>Let’s say we wanted to create a summary table showing the number of people prosecuted in different age bands. We could do:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># Note: if are running this code from &#39;example_code.R&#39;, then exercise 1 must be completed first</span></span>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># Note: if you are running this code from &#39;example_code.R&#39;, then Exercise 1 must be completed first</span></span>
 <span id="cb57-2"><a href="#cb57-2"></a></span>
 <span id="cb57-3"><a href="#cb57-3"></a>prosecutions_grouped &lt;-<span class="st"> </span>prosecutions <span class="op">%&gt;%</span></span>
 <span id="cb57-4"><a href="#cb57-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(age_range) <span class="op">%&gt;%</span></span>
 <span id="cb57-5"><a href="#cb57-5"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(<span class="dt">counts =</span> <span class="kw">sum</span>(count))</span></code></pre></div>
 <p>In the above code we are grouping the <code>prosecutions</code> dataframe by the categories in the <code>age_range</code> column, then summarising the number of prosecutions in each of those categories by summing the <code>count</code> column.</p>
 <p>The resulting dataframe is saved as a variable called <code>prosecutions_grouped</code>.</p>
-<p>Notice how the <code>dplyr</code> functions <code>group_by()</code> and <code>summarise()</code> require that the column names are not enclosed in quotation marks: this behaviour is known as non-standard evalution, and will be important later.</p>
+<p>Notice how the <code>dplyr</code> functions <code>group_by()</code> and <code>summarise()</code> require that the column names are not enclosed in quotation marks, meaning that they are not passed as strings: this behaviour is known as non-standard evalution, and will be important later.</p>
 <hr />
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>prosecutions_grouped</span></code></pre></div>
 <pre><code>## # A tibble: 14 x 2
@@ -1075,32 +1085,34 @@ body {
 </code></pre>
 <hr />
 <p>What if we wanted to create several different summary tables? We could write a function to avoid writing this out each time. Following the previous examples in this course, you might expect this function to work:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col) {</span>
-<span id="cb60-2"><a href="#cb60-2"></a>  </span>
-<span id="cb60-3"><a href="#cb60-3"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
-<span id="cb60-4"><a href="#cb60-4"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(group_cols) <span class="op">%&gt;%</span></span>
-<span id="cb60-5"><a href="#cb60-5"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(<span class="dt">counts =</span> <span class="kw">sum</span>(sum_col))</span>
-<span id="cb60-6"><a href="#cb60-6"></a>  </span>
-<span id="cb60-7"><a href="#cb60-7"></a>  <span class="kw">return</span>(summary)</span>
-<span id="cb60-8"><a href="#cb60-8"></a>  </span>
-<span id="cb60-9"><a href="#cb60-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="co"># This function produces a summary table based on a dataset</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col) {</span>
+<span id="cb60-3"><a href="#cb60-3"></a>  </span>
+<span id="cb60-4"><a href="#cb60-4"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(group_cols) <span class="op">%&gt;%</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(<span class="dt">counts =</span> <span class="kw">sum</span>(sum_col))</span>
+<span id="cb60-7"><a href="#cb60-7"></a>  </span>
+<span id="cb60-8"><a href="#cb60-8"></a>  <span class="kw">return</span>(summary)</span>
+<span id="cb60-9"><a href="#cb60-9"></a>  </span>
+<span id="cb60-10"><a href="#cb60-10"></a>}</span></code></pre></div>
 <p>However trying to use this function results in an error.</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>prosecutions_grouped &lt;-<span class="st"> </span><span class="kw">sum_group</span>(<span class="dt">df =</span> prosecutions, <span class="dt">group_cols =</span> <span class="st">&quot;age_range&quot;</span>, <span class="dt">sum_col =</span> <span class="st">&quot;count&quot;</span>)</span></code></pre></div>
 <pre><code>## Error: Column `group_cols` is unknown
 </code></pre>
 <hr />
-<p>This is because of the non-standard evalutation (NSE) mentioned above. The <code>dplyr</code> functions don’t recognise <code>group_cols</code> and <code>sum_col</code> as column names, because they can’t see that these are variables containing the actual column names. While the NSE usually makes the <code>dplyr</code> functions more convenient to use, it makes them slightly trickier to use in user-defined functions.</p>
+<p>This is because of the non-standard evaluation (NSE) mentioned above. The <code>dplyr</code> functions don’t recognise <code>group_cols</code> and <code>sum_col</code> as column names, because they can’t see that these are variables containing the actual column names. While the NSE usually makes the <code>dplyr</code> functions more convenient to use, it makes them slightly trickier to use in user-defined functions.</p>
 <p>Fortunately to get around the NSE problem, functions have been added to the <code>dplyr</code> package that accept variables instead of straight column names. The function below shows an example of how the functions <code>group_by_at</code> and <code>summarise_at</code> can replace <code>group_by</code> and <code>summarise</code>.</p>
-<p>The way that the tidyverse packages handle NSE is still evolving, so new methods of addressing this issue may be introduced in the future. See the appendix for some examples of alternative methods to tackle this problem.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col) {</span>
-<span id="cb63-2"><a href="#cb63-2"></a>  </span>
-<span id="cb63-3"><a href="#cb63-3"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
-<span id="cb63-4"><a href="#cb63-4"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by_at</span>(group_cols) <span class="op">%&gt;%</span></span>
-<span id="cb63-5"><a href="#cb63-5"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise_at</span>(sum_col, sum)</span>
-<span id="cb63-6"><a href="#cb63-6"></a>  </span>
-<span id="cb63-7"><a href="#cb63-7"></a>  <span class="kw">return</span>(summary)</span>
-<span id="cb63-8"><a href="#cb63-8"></a>  </span>
-<span id="cb63-9"><a href="#cb63-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="co"># This function produces a summary table based on a dataset</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col) {</span>
+<span id="cb63-3"><a href="#cb63-3"></a>  </span>
+<span id="cb63-4"><a href="#cb63-4"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
+<span id="cb63-5"><a href="#cb63-5"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by_at</span>(group_cols) <span class="op">%&gt;%</span></span>
+<span id="cb63-6"><a href="#cb63-6"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise_at</span>(sum_col, sum)</span>
+<span id="cb63-7"><a href="#cb63-7"></a>  </span>
+<span id="cb63-8"><a href="#cb63-8"></a>  <span class="kw">return</span>(summary)</span>
+<span id="cb63-9"><a href="#cb63-9"></a>  </span>
+<span id="cb63-10"><a href="#cb63-10"></a>}</span></code></pre></div>
+<p>The way that the Tidyverse packages handle NSE is still evolving, so new methods of addressing this issue may be introduced in the future. See the appendix for some examples of alternative methods to tackle this problem.</p>
 <hr />
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>prosecutions_grouped &lt;-<span class="st"> </span><span class="kw">sum_group</span>(<span class="dt">df =</span> prosecutions, <span class="dt">group_cols =</span> <span class="st">&quot;age_range&quot;</span>, <span class="dt">sum_col =</span> <span class="st">&quot;count&quot;</span>)</span>
 <span id="cb64-2"><a href="#cb64-2"></a>prosecutions_grouped</span></code></pre></div>
@@ -1137,26 +1149,27 @@ body {
 ## $ count         &lt;int&gt; 11278, 56953, 16262, 71652, 17968, 10465, 13096, 8…
 </code></pre>
 <h2 id="plotting-data">Plotting data</h2>
-<p>Let’s say we want to produce some plots, and want them all to have the same style. We can define the style of the plot in a function, then we only have to change the styling in one place if it needs changing. This function plots a breakdown of the number of prosecutions over time, with a default breakdown option of <code>&quot;offence_type&quot;</code>, and the plot is a line chart with <code>ggplot2</code>’s classic theme:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>prosecutions_graph &lt;-<span class="st"> </span><span class="cf">function</span>(df, <span class="dt">breakdown =</span> <span class="st">&quot;offence_type&quot;</span>){</span>
-<span id="cb68-2"><a href="#cb68-2"></a></span>
-<span id="cb68-3"><a href="#cb68-3"></a>  grouping_variables &lt;-<span class="st"> </span><span class="kw">c</span>(breakdown, <span class="st">&quot;year&quot;</span>)</span>
-<span id="cb68-4"><a href="#cb68-4"></a>  </span>
-<span id="cb68-5"><a href="#cb68-5"></a>  <span class="co"># Group and summarise data by year and breakdown variable ready to plot</span></span>
-<span id="cb68-6"><a href="#cb68-6"></a>  df_grouped &lt;-<span class="st"> </span><span class="kw">sum_group</span>(<span class="dt">df =</span> df, </span>
-<span id="cb68-7"><a href="#cb68-7"></a>                          <span class="dt">group_cols =</span> grouping_variables, </span>
-<span id="cb68-8"><a href="#cb68-8"></a>                          <span class="dt">sum_col =</span> <span class="st">&quot;count&quot;</span>)</span>
-<span id="cb68-9"><a href="#cb68-9"></a></span>
-<span id="cb68-10"><a href="#cb68-10"></a>  <span class="co"># Produce the plot</span></span>
-<span id="cb68-11"><a href="#cb68-11"></a>  plot &lt;-<span class="st"> </span>df_grouped <span class="op">%&gt;%</span></span>
-<span id="cb68-12"><a href="#cb68-12"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(ggplot2<span class="op">::</span><span class="kw">aes_string</span>(<span class="dt">x =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;count&quot;</span>, <span class="dt">group =</span> breakdown, <span class="dt">col =</span> breakdown)) <span class="op">+</span></span>
-<span id="cb68-13"><a href="#cb68-13"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw">geom_line</span>() <span class="op">+</span></span>
-<span id="cb68-14"><a href="#cb68-14"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2100</span>) <span class="op">+</span></span>
-<span id="cb68-15"><a href="#cb68-15"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw">theme_grey</span>()</span>
-<span id="cb68-16"><a href="#cb68-16"></a></span>
-<span id="cb68-17"><a href="#cb68-17"></a>  <span class="kw">return</span>(plot)</span>
-<span id="cb68-18"><a href="#cb68-18"></a>  </span>
-<span id="cb68-19"><a href="#cb68-19"></a>}</span></code></pre></div>
+<p>Let’s say we want to produce some plots, and want them all to have the same style. We can define the style of the plot in a function, then we only have to change the styling in one place if it needs changing. This function plots a breakdown of the number of prosecutions over time, with a default breakdown option of <code>&quot;offence_type&quot;</code>, and the plot is a line chart with <code>ggplot2</code>’s grey theme:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="co"># This function produces a plot of the number of prosecutions over time</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a>prosecutions_graph &lt;-<span class="st"> </span><span class="cf">function</span>(df, <span class="dt">breakdown =</span> <span class="st">&quot;offence_type&quot;</span>){</span>
+<span id="cb68-3"><a href="#cb68-3"></a></span>
+<span id="cb68-4"><a href="#cb68-4"></a>  grouping_variables &lt;-<span class="st"> </span><span class="kw">c</span>(breakdown, <span class="st">&quot;year&quot;</span>)</span>
+<span id="cb68-5"><a href="#cb68-5"></a>  </span>
+<span id="cb68-6"><a href="#cb68-6"></a>  <span class="co"># Group and summarise data by year and breakdown variable ready to plot</span></span>
+<span id="cb68-7"><a href="#cb68-7"></a>  df_grouped &lt;-<span class="st"> </span><span class="kw">sum_group</span>(<span class="dt">df =</span> df, </span>
+<span id="cb68-8"><a href="#cb68-8"></a>                          <span class="dt">group_cols =</span> grouping_variables, </span>
+<span id="cb68-9"><a href="#cb68-9"></a>                          <span class="dt">sum_col =</span> <span class="st">&quot;count&quot;</span>)</span>
+<span id="cb68-10"><a href="#cb68-10"></a></span>
+<span id="cb68-11"><a href="#cb68-11"></a>  <span class="co"># Produce the plot</span></span>
+<span id="cb68-12"><a href="#cb68-12"></a>  plot &lt;-<span class="st"> </span>df_grouped <span class="op">%&gt;%</span></span>
+<span id="cb68-13"><a href="#cb68-13"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(ggplot2<span class="op">::</span><span class="kw">aes_string</span>(<span class="dt">x =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;count&quot;</span>, <span class="dt">group =</span> breakdown, <span class="dt">col =</span> breakdown)) <span class="op">+</span></span>
+<span id="cb68-14"><a href="#cb68-14"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb68-15"><a href="#cb68-15"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2100</span>) <span class="op">+</span></span>
+<span id="cb68-16"><a href="#cb68-16"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw">theme_grey</span>()</span>
+<span id="cb68-17"><a href="#cb68-17"></a></span>
+<span id="cb68-18"><a href="#cb68-18"></a>  <span class="kw">return</span>(plot)</span>
+<span id="cb68-19"><a href="#cb68-19"></a>  </span>
+<span id="cb68-20"><a href="#cb68-20"></a>}</span></code></pre></div>
 <hr />
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="co"># call function</span></span>
 <span id="cb69-2"><a href="#cb69-2"></a><span class="kw">prosecutions_graph</span>(prosecutions, <span class="dt">breakdown =</span> <span class="st">&quot;offence_type&quot;</span>)</span></code></pre></div>
@@ -1168,29 +1181,28 @@ body {
 <hr />
 <h2 id="extracting-a-subset-of-the-data">Extracting a subset of the data</h2>
 <p>Often processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>extract_year &lt;-<span class="st"> </span><span class="cf">function</span>(data, date) {</span>
-<span id="cb70-2"><a href="#cb70-2"></a>  </span>
-<span id="cb70-3"><a href="#cb70-3"></a>  <span class="co"># Convert the format from a string to a date</span></span>
-<span id="cb70-4"><a href="#cb70-4"></a>  <span class="cf">if</span>(<span class="kw">is.character</span>(date)){</span>
-<span id="cb70-5"><a href="#cb70-5"></a>    date &lt;-<span class="st"> </span>lubridate<span class="op">::</span><span class="kw">dmy</span>(date)</span>
-<span id="cb70-6"><a href="#cb70-6"></a>  }</span>
-<span id="cb70-7"><a href="#cb70-7"></a>  </span>
-<span id="cb70-8"><a href="#cb70-8"></a>  <span class="co"># Find end of quarter dates for the past year</span></span>
-<span id="cb70-9"><a href="#cb70-9"></a>  quarters_to_include &lt;-<span class="st"> </span>date <span class="op">%m-%</span><span class="st"> </span><span class="kw">months</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>))</span>
-<span id="cb70-10"><a href="#cb70-10"></a>  </span>
-<span id="cb70-11"><a href="#cb70-11"></a>  <span class="co"># Format the dates to years and quarters</span></span>
-<span id="cb70-12"><a href="#cb70-12"></a>  years &lt;-<span class="st"> </span>lubridate<span class="op">::</span><span class="kw">year</span>(quarters_to_include)</span>
-<span id="cb70-13"><a href="#cb70-13"></a>  quarters &lt;-<span class="st"> </span><span class="kw">quarters</span>(quarters_to_include)</span>
-<span id="cb70-14"><a href="#cb70-14"></a></span>
-<span id="cb70-15"><a href="#cb70-15"></a>  <span class="co"># Combine into a unique set of year-quarters</span></span>
-<span id="cb70-16"><a href="#cb70-16"></a>  yearquarters &lt;-<span class="st"> </span><span class="kw">str_c</span>(years, <span class="st">&quot; &quot;</span>, quarters)</span>
-<span id="cb70-17"><a href="#cb70-17"></a>  </span>
-<span id="cb70-18"><a href="#cb70-18"></a>  <span class="co"># Filter data based on these years and quarters</span></span>
-<span id="cb70-19"><a href="#cb70-19"></a>  data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
-<span id="cb70-20"><a href="#cb70-20"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">year_quarter =</span> <span class="kw">paste</span>(year, quarter)) <span class="op">%&gt;%</span></span>
-<span id="cb70-21"><a href="#cb70-21"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">filter</span>(year_quarter <span class="op">%in%</span><span class="st"> </span>yearquarters)</span>
-<span id="cb70-22"><a href="#cb70-22"></a>  </span>
-<span id="cb70-23"><a href="#cb70-23"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co"># This function extracts the prosecutions from a particular year</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a>extract_year &lt;-<span class="st"> </span><span class="cf">function</span>(data, end_date) {</span>
+<span id="cb70-3"><a href="#cb70-3"></a>  </span>
+<span id="cb70-4"><a href="#cb70-4"></a>  <span class="co"># Ensure the date is a date-time object</span></span>
+<span id="cb70-5"><a href="#cb70-5"></a>  <span class="cf">if</span> (<span class="kw">is.character</span>(end_date)) { end_date &lt;-<span class="st"> </span>lubridate<span class="op">::</span><span class="kw">dmy</span>(end_date) }</span>
+<span id="cb70-6"><a href="#cb70-6"></a>  </span>
+<span id="cb70-7"><a href="#cb70-7"></a>  <span class="co"># Find end of quarter dates for the past year</span></span>
+<span id="cb70-8"><a href="#cb70-8"></a>  quarters_to_include &lt;-<span class="st"> </span>end_date <span class="op">%m-%</span><span class="st"> </span><span class="kw">months</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>))</span>
+<span id="cb70-9"><a href="#cb70-9"></a>  </span>
+<span id="cb70-10"><a href="#cb70-10"></a>  <span class="co"># Format the dates to years and quarters</span></span>
+<span id="cb70-11"><a href="#cb70-11"></a>  years &lt;-<span class="st"> </span>lubridate<span class="op">::</span><span class="kw">year</span>(quarters_to_include)</span>
+<span id="cb70-12"><a href="#cb70-12"></a>  quarters &lt;-<span class="st"> </span><span class="kw">quarters</span>(quarters_to_include)</span>
+<span id="cb70-13"><a href="#cb70-13"></a></span>
+<span id="cb70-14"><a href="#cb70-14"></a>  <span class="co"># Combine into a unique set of year-quarters</span></span>
+<span id="cb70-15"><a href="#cb70-15"></a>  yearquarters &lt;-<span class="st"> </span><span class="kw">str_c</span>(years, <span class="st">&quot; &quot;</span>, quarters)</span>
+<span id="cb70-16"><a href="#cb70-16"></a>  </span>
+<span id="cb70-17"><a href="#cb70-17"></a>  <span class="co"># Filter data based on these years and quarters</span></span>
+<span id="cb70-18"><a href="#cb70-18"></a>  data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb70-19"><a href="#cb70-19"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">year_quarter =</span> <span class="kw">paste</span>(year, quarter)) <span class="op">%&gt;%</span></span>
+<span id="cb70-20"><a href="#cb70-20"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">filter</span>(year_quarter <span class="op">%in%</span><span class="st"> </span>yearquarters)</span>
+<span id="cb70-21"><a href="#cb70-21"></a>  </span>
+<span id="cb70-22"><a href="#cb70-22"></a>}</span></code></pre></div>
 <hr />
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>prosecutions_extract &lt;-<span class="st"> </span><span class="kw">extract_year</span>(prosecutions, <span class="st">&quot;31-Mar-2018&quot;</span>)</span>
 <span id="cb71-2"><a href="#cb71-2"></a><span class="kw">glimpse</span>(prosecutions_extract)</span></code></pre></div>
@@ -1227,14 +1239,14 @@ body {
 <h3 id="give-your-function-a-good-name">Give your function a good name</h3>
 <p>The name of a function should give you a good idea of what it does. Generally function names should be concise and use verbs rather than nouns.</p>
 <h3 id="pass-variables-into-the-function-as-arguments">Pass variables into the function as arguments</h3>
-<p>While functions can access objects which haven’t been passed in as an argument, this is generally bad practice as it makes code much harder to understand and modify; and makes the function itself harder to reuse.</p>
+<p>While functions can access objects that haven’t been passed in as an argument, this is generally bad practice as it makes code much harder to understand and modify, and makes the function itself harder to reuse.</p>
 <h3 id="document-your-code">Document your code</h3>
 <p>You should have comments explaining what your function does, what each argument is, and what it returns.</p>
 <hr />
 <h3 id="keep-it-short">Keep it short</h3>
 <p>A rule of thumb is if all the code for your function doesn’t fit on your screen at the same time, it’s probably too complicated. Consider splitting it up into multiple functions.</p>
 <h3 id="generalise">Generalise</h3>
-<p>Think about whether there are ways you can make your function usable in more situations. For example, is there anything you’re hard-coding which you could set as an argument instead?</p>
+<p>Think about whether there are ways you can make your function usable in more situations. For example, is there anything you’re hard-coding that you could set as an argument instead?</p>
 <h3 id="vectorise-by-default">Vectorise by default</h3>
 <p>R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as input and apply the transformation to each element. The <code>generalise_names()</code> function we looked at is a good example of this!</p>
 <h3 id="get-feedback">Get feedback</h3>
@@ -1255,13 +1267,13 @@ body {
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="co"># Create a list of colours to provide to the function</span></span>
 <span id="cb74-2"><a href="#cb74-2"></a>colours &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Magenta&quot;</span>, <span class="st">&quot;Cyan&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>, <span class="st">&quot;Pink&quot;</span>)</span>
 <span id="cb74-3"><a href="#cb74-3"></a><span class="kw">pick_a_colour</span>(colours)</span></code></pre></div>
-<pre><code>## [1] &quot;Cyan&quot;
+<pre><code>## [1] &quot;Blue&quot;
 </code></pre>
 <h2 id="writing-a-package">Writing a package</h2>
-<p>An alternative is to make your own package to store your functions which you can then use like any other R package. There are a few advantages to this:</p>
+<p>An alternative is to make your own package to store your functions, which you can then use like any other R package. There are a few advantages to this:</p>
 <ul>
 <li>It means you (and others) can access your functions from different projects</li>
-<li>There are certain requirements for making R packages which enforce good practice, such as including documentation</li>
+<li>There are certain requirements for making R packages that enforce good practice, such as including documentation</li>
 </ul>
 <p>This comes at the cost of slightly higher overheads.</p>
 <p>A few examples of packages written by people in MoJ are:</p>
@@ -1355,27 +1367,21 @@ body {
 </code></pre>
 <h2 id="adding-an-optional-total-row">Adding an optional total row</h2>
 <p>We can extend the <code>sum_group()</code> function by having the option to add a row with the total across all categories. Note that this requires the <code>janitor</code> package.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="kw">library</span>(janitor)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;janitor&#39;
-
-## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     chisq.test, fisher.test
-</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col, <span class="dt">add_total=</span>F) {</span>
-<span id="cb82-2"><a href="#cb82-2"></a>  </span>
-<span id="cb82-3"><a href="#cb82-3"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
-<span id="cb82-4"><a href="#cb82-4"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by_at</span>(group_cols) <span class="op">%&gt;%</span></span>
-<span id="cb82-5"><a href="#cb82-5"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise_at</span>(sum_col, sum)</span>
-<span id="cb82-6"><a href="#cb82-6"></a>  </span>
-<span id="cb82-7"><a href="#cb82-7"></a>  <span class="cf">if</span> (add_total <span class="op">==</span><span class="st"> </span>T) {</span>
-<span id="cb82-8"><a href="#cb82-8"></a>    summary &lt;-<span class="st"> </span>summary <span class="op">%&gt;%</span><span class="st"> </span>janitor<span class="op">::</span><span class="kw">adorn_totals</span>(<span class="st">&quot;row&quot;</span>)</span>
-<span id="cb82-9"><a href="#cb82-9"></a>  }</span>
-<span id="cb82-10"><a href="#cb82-10"></a>  </span>
-<span id="cb82-11"><a href="#cb82-11"></a>  <span class="kw">return</span>(summary)</span>
-<span id="cb82-12"><a href="#cb82-12"></a>  </span>
-<span id="cb82-13"><a href="#cb82-13"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="kw">library</span>(janitor)</span>
+<span id="cb80-2"><a href="#cb80-2"></a></span>
+<span id="cb80-3"><a href="#cb80-3"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col, <span class="dt">add_total=</span>F) {</span>
+<span id="cb80-4"><a href="#cb80-4"></a>  </span>
+<span id="cb80-5"><a href="#cb80-5"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
+<span id="cb80-6"><a href="#cb80-6"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by_at</span>(group_cols) <span class="op">%&gt;%</span></span>
+<span id="cb80-7"><a href="#cb80-7"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise_at</span>(sum_col, sum)</span>
+<span id="cb80-8"><a href="#cb80-8"></a>  </span>
+<span id="cb80-9"><a href="#cb80-9"></a>  <span class="cf">if</span> (add_total <span class="op">==</span><span class="st"> </span>T) {</span>
+<span id="cb80-10"><a href="#cb80-10"></a>    summary &lt;-<span class="st"> </span>summary <span class="op">%&gt;%</span><span class="st"> </span>janitor<span class="op">::</span><span class="kw">adorn_totals</span>(<span class="st">&quot;row&quot;</span>)</span>
+<span id="cb80-11"><a href="#cb80-11"></a>  }</span>
+<span id="cb80-12"><a href="#cb80-12"></a>  </span>
+<span id="cb80-13"><a href="#cb80-13"></a>  <span class="kw">return</span>(summary)</span>
+<span id="cb80-14"><a href="#cb80-14"></a>  </span>
+<span id="cb80-15"><a href="#cb80-15"></a>}</span></code></pre></div>
 
 </body>
 </html>
