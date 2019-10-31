@@ -304,7 +304,7 @@ sum_powers(x = 3, y = 5, z = 3)
 
 ## Exercises
 
-#### 2.1 fizz_buzz()
+### 2.1 fizz_buzz()
 Now try using an if else statement inside a function. Create a function called `fizz_buzz` which takes a number as input and:
 
 * If the number is divisible by both 3 and 5, returns "fizz buzz"
@@ -358,7 +358,7 @@ fizz_buzz(15) # "fizz buzz"
 
 ---
 
-#### 2.2 fizz_buzz_vec()
+### 2.2 fizz_buzz_vec()
 
 Most functions in R are vectorised. This means they can apply an operation
 to every element of a vector at the same time. It's best practice to vectorise 
@@ -395,7 +395,7 @@ fizz_buzz_vec(1:15)
 
 ---
 
-#### 2.3 fizz_buzz_custom()
+### 2.3 fizz_buzz_custom()
 
 Create version of `fizz_buzz()` or `fizz_buzz_vec()` called `fizz_buzz_custom()` or
 `fizz_buzz_custom_vec()` where the values for when to say "fizz" and "buzz" can be
@@ -432,13 +432,14 @@ fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5){
   )
 }
 ```
+
 ---
+
 ```{r, include=show_solution, purl=FALSE}
 fizz_buzz_custom_vec(1:15)
 fizz_buzz_custom_vec(c(1, 2, 3, 7, 15, 21), buzz = 7)
 
 ```
-
 
 ## Example 8: the ellipsis argument
 
@@ -565,7 +566,7 @@ generalise_names(names)
 
 ---
 
-### Exercise 1
+### Exercise 3
 
 Use the `generalise_names()` function defined above to clean the column headings of this dataset (Hint: use the function `colnames()` to retrieve the column headings of the dataset as a vector).
 
@@ -640,7 +641,7 @@ glimpse(prosecutions)
 
 ---
 
-### Exercise 2
+### Exercise 4
 
 Modify `clean_not_known()` to make replacing missing (NA) values optional.
 
@@ -674,7 +675,7 @@ clean_not_known <- function(x,
 
 ---
 
-### Exercise 3
+### Exercise 5
 
 Write a wrapper function to apply `generalise_names()`, `remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
 
@@ -827,7 +828,7 @@ prosecutions_graph(prosecutions, breakdown = "offence_type")
 
 ---
 
-### Exercise 4
+### Exercise 6
 
 Modify the function `prosecutions_graph` to use `theme_classic()` as the theme, rather than `theme_grey()`. Produce a plot of with a breakdown by `"offence_group"`.
 
@@ -895,7 +896,6 @@ extract_year <- function(data, end_date) {
     dplyr::filter(year_quarter %in% yearquarters)
   
   return(data)
-  
 }
 
 ```
