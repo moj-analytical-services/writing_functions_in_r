@@ -476,6 +476,7 @@ Or the function can be called with any optional arguments accepted by the plot f
 plot_x_and_y(x, y, col='red', type='l')
 
 ```
+
 # "Real-world" example functions
 
 ## "Real-world" example functions
