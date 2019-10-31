@@ -175,7 +175,7 @@ Functions can return different outputs depending on some condition, using the `r
 ```{r}
 
 # This function returns the absolute value of a number
-mod_x <- function(x){
+mod_x <- function(x) {
   if (x < 0) {
     return(-x)
   } else {
@@ -187,37 +187,36 @@ mod_x(-5)
 
 ```
 
-As soon as a `return()` statement is encountered in a function, the function finishes and returns the variable in the `return()` statement. In the above example, `return()` is used twice as there is a condition with two possibilities. Either the input argument `x` is less than zero, in which case the function ends with the `return(-x)` statement, otherwise if `x` is not less than zero then the function continues to the `return(x)` statement. Without a `return()` statement, a function written in R will automatically return whatever variable is on the last line of the function body.
+As soon as a `return()` statement is encountered in a function, the function finishes and returns the variable in the `return()` statement. In the above example, `return()` is used twice as there is a condition with two possibilities. Either the input argument `x` is less than zero, in which case the function ends with the `return(-x)` statement, otherwise if `x` is not less than zero then the function continues to the `return(x)` statement. Without a `return()` statement, a function written in R will return the last line of code to run.
 
 ## Example 4: functions without outputs
 
-Depending on the purpose of the function, it doesn't need to return an output at all:
+Depending on the purpose of the function, it doesn't need to return an output at all. Instead in can have a "side effect", such as printing a value to the console:
 
 ```{r}
 # This function lets you know whether a number is odd or even
-odd_or_even <- function(x){
-  
-  if((x %% 2) == 0){
+odd_or_even <- function(x) {
+  if ((x %% 2) == 0) {
     print("The number is even.")
   }
   else if ((x %% 2) == 1) {
     print("The number is odd.")
   }
-  
 }
 
 odd_or_even(x = 4)
 
 ```
+**Note:** It's best practice for your function to either return a value or have a side effect, but not both.
 
 ## Example 5: errors and warnings
 
-Sometimes it can be useful to include helpful error messages in functions, by anticipating the sorts of variables that could input. What happens if you try to use a non-integer or a string as an argument in the above example? Try the running the function with the following arguments:
+Sometimes it can be useful to include helpful error messages in functions, e.g. by anticipating the sorts of variables that could input. What happens if you try to use a non-integer or a string as an argument in the above example? Try the running the function with the following arguments:
 
 ```{r error = TRUE}
-odd_or_even(x=1.5)
-odd_or_even(x="a")
-odd_or_even(x=c(1,2,3))
+odd_or_even(x = 1.5)
+odd_or_even(x = "a")
+odd_or_even(x = c(1, 2, 3))
 
 ```
 
@@ -254,9 +253,9 @@ odd_or_even <- function(x){
 Now try passing some incompatible arguments to the function:
 
 ```{r error = TRUE}
-odd_or_even(x=1.5)
-odd_or_even(x="a")
-odd_or_even(x=c(1,2,3))
+odd_or_even(x = 1.5)
+odd_or_even(x = "a")
+odd_or_even(x = c(1, 2, 3))
 
 ```
 
@@ -276,7 +275,6 @@ add_a_number <- function(x, y = NULL){
   else{
     return(x)
   }
-  
 }
 
 add_a_number(x = 6)
