@@ -170,7 +170,7 @@ my_mean(7.5, 16)
 
 ## Example 3: conditional statements in functions
 
-Functions can return different outputs depending on some condition, using the `return()` command. In this function the condition is `x < 0`, and the condition evaluates to either `TRUE` or `FALSE`:
+Functions can return different outputs depending on some condition. In this function the condition is `x < 0`, and the condition evaluates to either `TRUE` or `FALSE`:
 
 ```{r}
 
