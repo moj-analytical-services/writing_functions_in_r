@@ -130,11 +130,11 @@ sum_squares(y = 5, x = 3)
 Let's start with some simple exercises to get familiar with the syntax of writing
 functions.
 
-#### 1.1 hello_world()
+### 1.1 hello_world()
 Create a function called `hello_world` which prints "Hello world!" to the 
 console, & call the function.
 
-#### 1.2 my_mean()
+### 1.2 my_mean()
 Create a function called `my_mean` which takes two arguments, `x` and `y`, and
 calculates their mean. Call the function to find the mean of 7.5 and 16.
 
@@ -209,8 +209,6 @@ odd_or_even <- function(x){
 odd_or_even(x = 4)
 
 ```
-
-*Note: 
 
 ## Example 5: errors and warnings
 
@@ -478,9 +476,10 @@ Or the function can be called with any optional arguments accepted by the plot f
 plot_x_and_y(x, y, col='red', type='l')
 
 ```
-
 # "Real-world" example functions
----
+
+## "Real-world" example functions
+
 This section builds on material covered in the [Intro R Training](https://github.com/moj-analytical-services/IntroRTraining) course and makes use of the `dplyr` package, which is a commonly used R package for data manipulation. In the following examples we'll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we'll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found [here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
 
 
