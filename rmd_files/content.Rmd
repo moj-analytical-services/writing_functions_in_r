@@ -70,7 +70,7 @@ A function is made up of three components:
    
 + The function **body** (everything between the curly brackets) - this is where we put the code.
    
-+ And the function **environment** (where the function was created) - this determines what variables and other functions it has access to - you can find out more about environments  [here](https://r4ds.had.co.nz/functions.html#environment).
++ And the function **environment** (where the function was created) - this determines what variables and other functions it has access to - you can find out more about environments [here](https://r4ds.had.co.nz/functions.html#environment).
 
 # Examples of basic functions
 
@@ -132,7 +132,7 @@ functions.
 
 ### 1.1 hello_world()
 Create a function called `hello_world` which prints "Hello world!" to the 
-console, & call the function.
+console, and call the function.
 
 ### 1.2 my_mean()
 Create a function called `my_mean` which takes two arguments, `x` and `y`, and
@@ -212,7 +212,7 @@ odd_or_even(x = 4)
 
 ## Example 5: errors and warnings
 
-Sometimes it can be useful to include helpful error messages in functions, by anticipating the sorts of variables that could input. What happens if you try to use a non-integer or a string as an argument in the above example? Try the running the function with the following arguments:
+Sometimes it can be useful to include helpful error messages in functions, by anticipating the sorts of variables that could be input. What happens if you try to use a non-integer or a string as an argument in the above example? Try the running the function with the following arguments:
 
 ```{r error = TRUE}
 odd_or_even(x=1.5)
@@ -223,7 +223,7 @@ odd_or_even(x=c(1,2,3))
 
 ---
 
-Here is an adapted version of the function, with some more informative error messages built in using the `stop()` function:
+Here's an adapted version of the function, with some more informative error messages built in using the `stop()` function:
 
 ```{r}
 # This function lets you know whether a number is odd or even
@@ -260,7 +260,7 @@ odd_or_even(x=c(1,2,3))
 
 ```
 
-`stop()` halts execution of the function and prints an error message to the console; alternatively you can use `warning()`, which prints a warning message to the console but does not stop execution of the function.
+`stop()` halts execution of the function and prints an error message to the console; alternatively you can use `warning()`, which prints a warning message to the console but does not stop the execution of the function.
 
 ## Example 6: optional arguments
 
@@ -286,7 +286,7 @@ add_a_number(x = 6, y = 7)
 
 ## Example 7: arguments with default values
 
-Any value can be used as a default value for an argument. For example, we can generalise the `sum_squares()` function by allowing it to sum together two numbers raised to any power, but have a default power of 2:
+Any value can be used as a default value for an argument. For example, we can generalise the `sum_squares()` function by allowing it to sum together two numbers raised to any power, but with a default power of 2:
 
 ```{r}
 # This function returns the sum of two numbers raised to a particular power (with a default of 2)
@@ -476,6 +476,7 @@ Or the function can be called with any optional arguments accepted by the plot f
 plot_x_and_y(x, y, col='red', type='l')
 
 ```
+
 # "Real-world" example functions
 
 ## "Real-world" example functions
@@ -561,6 +562,8 @@ names <- c("Option 1", "   Option (1)", "Option: 1", "option 1", "OPTION - 1")
 generalise_names(names)
 
 ```
+
+---
 
 ### Exercise 1
 
@@ -867,7 +870,7 @@ prosecutions_graph(prosecutions, breakdown = "offence_group")
 
 ## Extracting a subset of the data
 
-Often processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
+Sometimes processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
 
 ```{r}
 # This function extracts the prosecutions from a particular year
@@ -890,6 +893,8 @@ extract_year <- function(data, end_date) {
   data <- data %>%
     dplyr::mutate(year_quarter = paste(year, quarter)) %>%
     dplyr::filter(year_quarter %in% yearquarters)
+  
+  return(data)
   
 }
 
@@ -939,7 +944,7 @@ A rule of thumb is if all the code for your function doesn't fit on your screen 
 Think about whether there are ways you can make your function usable in more situations. For example, is there anything you're hard-coding that you could set as an argument instead?
 
 ### Vectorise by default
-R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as input and apply the transformation to each element. The `generalise_names()` function we looked at is a good example of this!
+R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as an input and apply the transformation to each element. The `generalise_names()` function we looked at is a good example of this!
 
 ### Get feedback
 A key measure of a good function (or any piece of code) is how easy it is for 
@@ -948,7 +953,7 @@ get your code reviewed by someone else.
 
 ## How to organise your code
 
-Whenever you're working on something in R it's generally best to create an R project and version control your code on GitHub. There's information on how to do this in the Analytical Platform guidance.
+Whenever you're working on something in R it's generally best to create an R project and version control your code on GitHub. There's information on how to do this in the [Analytical Platform guidance](https://moj-analytical-services.github.io/platform_user_guidance/github.html).
 
 It's also best to keep your functions separate from the rest of your code to make them easier to find.
 
@@ -965,8 +970,8 @@ Then just use `source("my_functions_script.R")` (with `my_functions_script.R` re
 Here's an example of calling a script that contains a new function, called `pick_a_colour`:
 
 ```{r}
-# Note: if you are running this code from 'example_code.R', then
-# you should replace it with `source("rmd_files/functions.R")`
+# Note: if you are running this code from 'example_code.R', then you
+# should replace the following with `source("rmd_files/functions.R")`
 source("functions.R")
 ```
 
