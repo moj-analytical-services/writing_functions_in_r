@@ -585,7 +585,7 @@ In this dataset, some of the columns contain values with a number along with a c
 # This function identifies and removes 1 or 2 digits followed by a semicolon or a space
 remove_numbering <- function(x) {
 
-  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]", "")
+  x <- stringr::str_replace(x, "^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]", "")
   
   return(x)
   
@@ -618,7 +618,7 @@ clean_not_known <- function(x,
   # Remove any white space that might cause the strings to not match
   x <- stringr::str_trim(x)
   
-  # Replace strings in the data that refer to a missing or unknown values
+  # Replace strings in the data that refer to a missing or unknown value
   x <- ifelse(tolower(x) %in% values_to_change, not_known_phrase, x)
   
   return(x)
@@ -749,7 +749,7 @@ prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", s
 
 This is because of the non-standard evaluation (NSE) mentioned above. The `dplyr` functions don't recognise `group_cols` and `sum_col` as column names, because they can't see that these are variables containing the actual column names. While the NSE usually makes the `dplyr` functions more convenient to use, it makes them slightly trickier to use in user-defined functions. 
 
-Fortunately to get around the NSE problem, functions have been added to the `dplyr` package that accept variables instead of straight column names. The function below shows an example of how the functions `group_by_at` and `summarise_at` can replace `group_by` and `summarise`.
+Fortunately to get around the NSE problem, functions have been added to the `dplyr` package that accept variables instead of straight column names. The function below shows an example of how the functions `group_by_at()` and `summarise_at()` can replace `group_by()` and `summarise()`.
 
 ```{r}
 # This function produces a summary table based on a dataset
@@ -798,7 +798,7 @@ prosecutions_graph <- function(df, breakdown = "offence_type") {
 
   grouping_variables <- c(breakdown, "year")
   
-  # Group and summarise data by year and breakdown variable ready to plot
+  # Group and summarise data by year and breakdown variable
   df_grouped <- sum_group(df = df, 
                           group_cols = grouping_variables, 
                           sum_col = "count")
@@ -819,7 +819,7 @@ prosecutions_graph <- function(df, breakdown = "offence_type") {
 ---
 
 ```{r fig.width=10}
-# call function
+# Call function
 prosecutions_graph(prosecutions, breakdown = "offence_type")
 ```
 
