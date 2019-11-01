@@ -2,27 +2,52 @@
 output: rmarkdown::github_document
 ---
 
+```{r setup, include=FALSE}
+# This variable determines whether or not exercise solutions are included
+show_solution <- FALSE
+```
+
 # Writing functions in R
 
-This repository is for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session on writing functions in R:
+This repository is for Writing Functions in R course offered by the DASD R Training Group. It was also used for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session.
 
-> Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this sesssion we'll cover why, when and how to write your own functions, sharing plenty of examples to help you get started.
+Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we cover why, when and how to write your own functions, with plenty of examples and exercises to help you get started.
 
-We are planning to use this material to develop a training session offered by the ASD R Training Group so if you'd be interested in attending or have any feedback on the content, please get in touch!
+The session is intended to be accessible to anyone who has attended the [Introduction to R](https://github.com/moj-analytical-services/IntroRTraining) training session and used R a little in their work.
 
-All the notes for the session are available below.
+All the notes for the training session are available below. If you have any feedback on the content, please get in touch!
+
+## Contents
+
+* [Pre-material](#pre-material)
+* [Learning outcomes](#learning-outcomes)
+* [What is a function?](#what-is-a-function)
+* [Why use functions?](#why-use-functions)
+* [How to write a function](#how-to-write-a-function)
+* [Examples of basic functions](#examples-of-basic-functions)
+* ["Real-world" example functions](#real-world-example-functions)
+* [When to write a function](#when-to-write-a-function)
+* [Best practice](#best-practice)
+* [How to organise your code](#how-to-organise-your-code)
+* [Writing a package](#writing-a-package)
+* [Further reading](#further-reading)
+
 
 ## Pre-material
 
-If you want to try running the example code during or after the session, you can clone this repository.
+A few days before the session, please make sure that -
 
-+ If you have used GitHub and the Analytical Platform before, follow the instructions in [section 4.2.1 of the Platform User Guidance](https://moj-analytical-services.github.io/platform_user_guidance/using-github-with-the-platform.html#step-1-navigate-to-your-platform-r-studio-and-make-a-copy-of-the-github-project-in-your-r-studio).
+1. You have access to RStudio on the Analytical Platform
+2. You have access to the [alpha-everyone s3 bucket](https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/82/)
+3. You have followed the steps in [section 1.5 of the Platform User Guidance](https://moj-analytical-services.github.io/platform_user_guidance/introduction.html#configure-git-and-github) to configure Git and GitHub (this only needs doing once)
+4. You have cloned this repository (instructions are in [section 3.2.1 of the Platform User Guidance](https://moj-analytical-services.github.io/platform_user_guidance/github.html#r-studio))
 
-+ If you have not used GitHub with the analytical platform before, you might need to set this up using the instructions in [section 2.3 of the Platform User Guidance](https://moj-analytical-services.github.io/platform_user_guidance/using-github-with-the-platform.html), before following the instructions in section 4.2.1 as above.
+If you have any problems with the above please get in touch with the course organisers or ask for help on either the #analytical_platform or #intro_r channel on [ASD slack](https://asdslack.slack.com).
 
 All the examples in the presentation/README are available in the R script example_code.R.
 
-This isn't necessary for the session so don't worry if you're not able to do this!
-
 ```{r source_content, child = 'content.Rmd'}
+```
+
+```{r source_content, child = 'appendix.Rmd'}
 ```

@@ -1,0 +1,68 @@
+---
+output: rmarkdown::github_document
+---
+
+# Appendix
+
+## Additional NSE examples
+
+Below are more examples of how to handle `dplyr()`'s non-standard evaluation. If you wanted to use the `group_by()` and `summarise()` functions in a user-defined function, then one option is to have variables containing the column names as strings, and including these variables as function arguments. In the function these variables can be enclosed by `!!as.name()` to convert them into names, like so:
+
+```{r}
+
+sum_group_alt1 <- function(df, group_cols, sum_col) {
+
+  summary <- df %>%
+    dplyr::group_by(!!as.name(group_cols)) %>%
+    dplyr::summarise(counts = sum(!!as.name(sum_col)))
+
+  return(summary)
+
+}
+
+prosecutions_grouped <- sum_group_alt1(df = prosecutions, group_cols = "age_range", sum_col = "count")
+
+prosecutions_grouped
+
+```
+
+Alternatively, this version of the function means the column names can be input as function arguments directly (rather than needing to enclose them in quote marks to turn them into strings).
+
+```{r}
+sum_group_alt2 <- function(df, group_cols, sum_col) {
+
+  summary <- df %>%
+    dplyr::group_by(!!enquo(group_cols)) %>%
+    dplyr::summarise(counts = sum(!!enquo(sum_col)))
+
+  return(summary)
+
+}
+
+prosecutions_grouped <- sum_group_alt2(df = prosecutions, group_cols = age_range, sum_col = count)
+
+prosecutions_grouped
+
+```
+
+## Adding an optional total row
+
+We can extend the `sum_group()` function by having the option to add a row with the total across all categories. Note that this requires the `janitor` package.
+
+```{r}
+library(janitor)
+
+sum_group <- function(df, group_cols, sum_col, add_total=F) {
+  
+  summary <- df %>%
+    dplyr::group_by_at(group_cols) %>%
+    dplyr::summarise_at(sum_col, sum)
+  
+  if (add_total == T) {
+    summary <- summary %>% janitor::adorn_totals("row")
+  }
+  
+  return(summary)
+  
+}
+

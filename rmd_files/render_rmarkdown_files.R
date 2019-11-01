@@ -15,3 +15,8 @@ knitr::purl("rmd_files/content.Rmd")
 
 # give it a more sensible name
 file.rename("content.R", "example_code.R")
+
+# copy files that content.R and README.md call to the main folder
+file.copy("rmd_files/functions.R", ".")
+
+file.copy("rmd_files/README_files", ".", recursive = TRUE)
