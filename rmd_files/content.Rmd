@@ -9,10 +9,13 @@
 * Where to go for more information on some of the topics touched on in this course.
 
 
-### A note on the examples given in this course:
-During this session we'll show lots of examples of functions. Depending on how experienced you are with using R, some of these examples may introduce new concepts that are not the focus of this course. It is not required that you have prior knowledge of these concepts, as they are included only to demonstrate possible uses for functions when undertaking typical programming tasks in DASD. One of the purposes of the examples is to provide a resource that can be referred back to in the future.
+### Before we start
+To follow along with the code run during this session and participate in the exercises, open the script "example_code.R" in RStudio. You may also want to have the course [read me](https://github.com/moj-analytical-services/writing_functions_in_r) open as a reference.
 
-If you would like to follow along with the code run during this session (recommended if you intend to do the exercises) then open the script "example_code.R" in RStudio.
+---
+
+### A note on the examples given in this course
+During this session we'll show lots of examples of functions. Depending on how experienced you are with using R, some of these examples may introduce new concepts that are not the focus of this course. It is not required that you have prior knowledge of these concepts, as they are included only to demonstrate possible uses for functions when undertaking typical programming tasks in DASD. One of the purposes of the examples is to provide a resource that can be referred back to in the future.
 
 
 ## What is a function?
