@@ -55,7 +55,7 @@ You can use functions to make your code better structured and easier to read - d
 The syntax for creating a function is:
 
 ```{r}
-function_name <- function(arg1, arg2){
+function_name <- function(arg1, arg2) {
         # function body, e.g. 
         print(paste(arg1, arg2))
 }
@@ -80,7 +80,7 @@ Here's an example of a very basic user-defined function, called `add_two()`, tha
 
 ```{r}
 # This function takes the argument 'x', and adds 2 to it
-add_two <- function(x){
+add_two <- function(x) {
   result <- x + 2
   return(result)
 }
@@ -103,7 +103,7 @@ Functions can accept as many arguments as you like, but can only output one obje
 ```{r}
 
 # This function sums the squares of two numbers
-sum_squares <- function(x, y){
+sum_squares <- function(x, y) {
   result <- x^2 + y^2
   return(result)
 }
@@ -146,7 +146,7 @@ result to the console.
 ```{r, include=show_solution, purl=FALSE}
 # 1.1 hello_world() solution
 
-hello_world <- function(){
+hello_world <- function() {
   print("Hello world!")
 }
 
@@ -159,7 +159,6 @@ hello_world()
 
 my_mean <- function(x, y) {
   z <- (x + y) / 2
-  
   return(z)
 }
 
@@ -175,7 +174,7 @@ Functions can return different outputs depending on some condition. In this func
 ```{r}
 
 # This function returns the absolute value of a number
-mod_x <- function(x){
+mod_x <- function(x) {
   if (x < 0) {
     return(-x)
   } else {
@@ -195,12 +194,11 @@ Depending on the purpose of the function, it doesn't need to return an output at
 
 ```{r}
 # This function lets you know whether a number is odd or even
-odd_or_even <- function(x){
+odd_or_even <- function(x) {
   
-  if((x %% 2) == 0){
+  if ((x %% 2) == 0) {
     print("The number is even.")
-  }
-  else if ((x %% 2) == 1) {
+  } else if ((x %% 2) == 1) {
     print("The number is odd.")
   }
   
@@ -227,21 +225,21 @@ Here's an adapted version of the function, with some more informative error mess
 
 ```{r}
 # This function lets you know whether a number is odd or even
-odd_or_even <- function(x){
+odd_or_even <- function(x) {
   
-  if (length(x) > 1){
+  if (length(x) > 1) {
     stop("The argument is not a single number.")
   }
-  else if (!is.numeric(x)){
+  else if (!is.numeric(x)) {
     stop("The argument is not a number.")
   }
-  else if((x %% 2) == 0){
+  else if ((x %% 2) == 0) {
     print("The number is even.")
   }
-  else if((x %% 2) == 1) {
+  else if ((x %% 2) == 1) {
     print("The number is odd.")
   }
-  else if((x %% 2) != 0 & (x %% 2) != 1){
+  else if ((x %% 2) != 0 & (x %% 2) != 1) {
     stop("The number is not an integer.")
   }
 
@@ -268,12 +266,11 @@ Here's an example of how to include optional arguments, where in this case the o
 
 ```{r}
 # This function either returns the sum of two numbers, or returns the argument if only one is supplied
-add_a_number <- function(x, y = NULL){
+add_a_number <- function(x, y = NULL) {
   
-  if(!is.null(y)){
+  if (!is.null(y)) {
     return(x + y)
-  }
-  else{
+  } else {
     return(x)
   }
   
@@ -290,7 +287,7 @@ Any value can be used as a default value for an argument. For example, we can ge
 
 ```{r}
 # This function returns the sum of two numbers raised to a particular power (with a default of 2)
-sum_powers <- function(x, y, z = 2){
+sum_powers <- function(x, y, z = 2) {
   
   result <- x ^ z + y ^ z
   return(result)
@@ -380,7 +377,7 @@ the help file.
 ```{r, include=show_solution, purl=FALSE}
 # 2.2 fizz_buzz_vec() solution
 
-fizz_buzz_vec <- function(x){
+fizz_buzz_vec <- function(x) {
   dplyr::case_when(
     x %% 3 == 0 & x %% 5 == 0 ~ "fizz buzz",
     x %% 3 == 0 ~ "fizz",
@@ -423,7 +420,7 @@ fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
   }
 }
 
-fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5){
+fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5) {
   dplyr::case_when(
     x %% fizz == 0 && x %% buzz == 0 ~ "fizz buzz",
     x %% fizz == 0 ~ "fizz",
@@ -447,7 +444,7 @@ Sometimes being able to pass an arbitrary number of arguments can be useful, esp
 
 ```{r}
 # This function produces a plot of x vs y
-plot_x_and_y <- function(x, y, ...){
+plot_x_and_y <- function(x, y, ...) {
   
   plot(x, y, ...)
   
@@ -797,7 +794,7 @@ Let's say we want to produce some plots, and want them all to have the same styl
 
 ```{r}
 # This function produces a plot of the number of prosecutions over time
-prosecutions_graph <- function(df, breakdown = "offence_type"){
+prosecutions_graph <- function(df, breakdown = "offence_type") {
 
   grouping_variables <- c(breakdown, "year")
   
@@ -837,7 +834,7 @@ Modify the function `prosecutions_graph` to use `theme_classic()` as the theme, 
 ```{r, include=show_solution, purl=FALSE}
 # Solution
 
-prosecutions_graph <- function(df, breakdown = "offence_type"){
+prosecutions_graph <- function(df, breakdown = "offence_type") {
 
   grouping_variables <- c(breakdown, "year")
   
@@ -967,7 +964,7 @@ Then just use `source("my_functions_script.R")` (with `my_functions_script.R` re
 
 ---
 
-Here's an example of calling a script that contains a new function, called `pick_a_colour`:
+Here's an example of calling a script that contains a new function, called `pick_a_colour()`:
 
 ```{r}
 # Note: if you are running this code from 'example_code.R', then you
