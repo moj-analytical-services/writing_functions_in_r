@@ -582,7 +582,7 @@ generalise_names(names)
 
 ### Exercise 3
 
-Use the `generalise_names()` function defined above to clean the column headings of this dataset (Hint: use the function `colnames()` to retrieve the column headings of the dataset as a vector).
+Use the `generalise_names()` function defined above to clean the column headings of the `prosecutions` dataset (Hint: use the function `colnames()` to retrieve the column headings of the dataset as a vector).
 
 ---
 
@@ -599,7 +599,7 @@ glimpse(prosecutions)
 In this dataset, some of the columns contain values with a number along with a category; for example, the `age_group` column contains categories like "01: Juveniles" rather than just "Juveniles". These numbers might be undesirable, so we can write a function to remove these:
 
 ```{r}
-# This function identifies and removes 1 or 2 digits followed by a semicolon or a space
+# This function identifies and removes 1 or 2 digits followed by a colon or a space
 remove_numbering <- function(x) {
 
   x <- stringr::str_replace(x, "^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]", "")
@@ -659,11 +659,16 @@ glimpse(prosecutions)
 
 Modify `clean_not_known()` to make replacing missing (NA) values optional.
 
+
+### Exercise 5
+
+Write a wrapper function to apply `generalise_names()`, `remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
+
 ---
 
 ```{r, include=show_solution, purl=FALSE}
 
-# Solution
+# Solution to Exercise 4
 
 clean_not_known <- function(x,
                             not_known_phrase = "Not known",
@@ -689,17 +694,11 @@ clean_not_known <- function(x,
 
 ---
 
-### Exercise 5
-
-Write a wrapper function to apply `generalise_names()`, `remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
-
----
-
 ```{r, include=show_solution, purl=FALSE}
 
-# Solution
+# Solution to Exercise 5
 
-clean_prosec_and_convic <- function(data) {
+clean_dataset <- function(data) {
   
   # Clean the column headings
   colnames(data) <- generalise_names(colnames(data))
@@ -984,8 +983,6 @@ Then just use `source("my_functions_script.R")` (with `my_functions_script.R` re
 Here's an example of calling a script that contains a new function, called `pick_a_colour()`:
 
 ```{r}
-# Note: if you are running this code from 'example_code.R', then you
-# should replace the following with `source("rmd_files/functions.R")`
 source("functions.R")
 ```
 
