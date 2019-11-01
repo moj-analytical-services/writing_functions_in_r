@@ -12,7 +12,7 @@
 ### A note on the examples given in this course:
 During this session we'll show lots of examples of functions. Depending on how experienced you are with using R, some of these examples may introduce new concepts that are not the focus of this course. It is not required that you have prior knowledge of these concepts, as they are included only to demonstrate possible uses for functions when undertaking typical programming tasks in DASD. One of the purposes of the examples is to provide a resource that can be referred back to in the future.
 
-If you would like to follow along with the code run during this session (recommended if you indend to do the exercises) then open the script "example_code.R" in RStudio.
+If you would like to follow along with the code run during this session (recommended if you intend to do the exercises) then open the script "example_code.R" in RStudio.
 
 
 ## What is a function?
@@ -43,7 +43,7 @@ Generally functions are used to automate common tasks, to avoid copying and past
 
 ### Abstraction
 
-One of the benefits of functions is they abstract away the details of *how* the code works. To use a function, all you need to understand is *what* the function is designed to do. You'll need to understand how your function works when you're writing it of course, but you won't need to think about it everytime you use it.
+One of the benefits of functions is they abstract away the details of *how* the code works. To use a function, all you need to understand is *what* the function is designed to do. You'll need to understand how your function works when you're writing it of course, but you won't need to think about it every time you use it.
 
 ### Code legibility
 
@@ -112,11 +112,11 @@ sum_squares(3, 5)
 
 ```
 
-Arguments can be specified by position or name. In the above example, the function accepts arguments called `x` and `y`, with the order specified as `x` then `y` in the function definition. Therefore when `sum_squares(3, 5)` is called, the arguments are interpreted as `x = 3` and `y = 5`. Alternatively, if we called `sum_squares(5, 3)` then the arguments would be interpreted as `x = 5` and `y = 3`.
+When you call a function, you can specify the arguments by position or name. In this example, the function accepts arguments called `x` and `y`, with the order specified as `x` then `y` in the function definition. Therefore when `sum_squares(3, 5)` is called, the arguments are interpreted as `x = 3` and `y = 5`. Alternatively, if we called `sum_squares(5, 3)` then the arguments would be interpreted as `x = 5` and `y = 3`.
 
 ---
 
-For more complicated functions with lots of arguments, specifying the arguments by position becomes more error-prone. Therefore it is often desirable to specify the arguments by name, then the order of the arguments doesn't matter:
+For more complicated functions with lots of arguments, specifying the arguments by position becomes more error-prone and harder to understand. Therefore it is often desirable to specify some or all of the arguments by name, then the order of the arguments doesn't matter:
 
 ```{r}
 
@@ -124,6 +124,9 @@ sum_squares(x = 3, y = 5)
 sum_squares(y = 5, x = 3)
 
 ```
+
+**Hint**: if you want your function to work with the pipe operator `%>%`, make 
+sure object you want to pipe (usually a dataframe) is the first argument for your function.
 
 ## Exercises
 
@@ -211,7 +214,7 @@ odd_or_even(x = 4)
 
 ## Example 5: errors and warnings
 
-Sometimes it can be useful to include helpful error messages in functions, e.g. by anticipating the sorts of variables that could input. What happens if you try to use a non-integer or a string as an argument in the above example? Try the running the function with the following arguments:
+Sometimes it can be useful to include helpful error messages in functions, e.g. by anticipating the sorts of variables that could be input. What happens if you try to use a non-integer or a string as an argument in the above example? Try the running the function with the following arguments:
 
 ```{r error = TRUE}
 odd_or_even(x = 1.5)
@@ -229,10 +232,10 @@ Here is an adapted version of the function, with some more informative error mes
 odd_or_even <- function(x){
   
   if (length(x) > 1){
-    stop("The argument is not a single number.")
+    stop("x must have length 1.")
   }
   else if (!is.numeric(x)){
-    stop("The argument is not a number.")
+    stop("x must be a number.")
   }
   else if((x %% 2) == 0){
     print("The number is even.")
@@ -241,7 +244,7 @@ odd_or_even <- function(x){
     print("The number is odd.")
   }
   else if((x %% 2) != 0 & (x %% 2) != 1){
-    stop("The number is not an integer.")
+    stop("x must be an integer.")
   }
 
 }
@@ -259,7 +262,7 @@ odd_or_even(x = c(1, 2, 3))
 
 ```
 
-`stop()` halts execution of the function and prints an error message to the console; alternatively you can use `warning()`, which prints a warning message to the console but does not stop execution of the function.
+`stop()` halts execution of the function and prints an error message to the console. Alternatively you can use `warning()`, which prints a warning message to the console but does not stop execution of the function.
 
 ## Example 6: optional arguments
 
@@ -328,6 +331,7 @@ if (condition_1) {
 ```
 * To test whether a number is divisible by another number, you can use the modulo
 operator `%%`, which calculates the remainder. E.g. `1 %% 3 == 0` evaluates to `FALSE`.
+* To find out more about if statements & conditional execution, see [here](https://r4ds.had.co.nz/functions.html#conditional-execution)
 
 ---
 
@@ -395,7 +399,7 @@ fizz_buzz_vec(1:15)
 
 #### 2.3 fizz_buzz_custom()
 
-Create version of `fizz_buzz()` or `fizz_buzz_vec()` called `fizz_buzz_custom()` or
+Create a version of `fizz_buzz()` or `fizz_buzz_vec()` called `fizz_buzz_custom()` or
 `fizz_buzz_custom_vec()` where the values for when to say "fizz" and "buzz" can be
 changed by setting arguments `fizz` and `buzz`, but the default values are still
 3 and 5.
@@ -423,7 +427,7 @@ fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
 
 fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5){
   dplyr::case_when(
-    x %% fizz == 0 && x %% buzz == 0 ~ "fizz buzz",
+    x %% fizz == 0 & x %% buzz == 0 ~ "fizz buzz",
     x %% fizz == 0 ~ "fizz",
     x %% buzz == 0 ~ "buzz",
     TRUE ~ as.character(x)
@@ -906,8 +910,8 @@ glimpse(prosecutions_extract)
 
 ## When to write a function
 
-### When you've copied and pasted three times
-There is a principal in software engineering called Don't Repeat Yourself (DRY) - which basically states that you should avoid duplication wherever possible. A good rule of thumb is whenever you find you've copied and pasted the same code three times, it's time to consider replacing that code with a function.
+### When you've copied and pasted two times
+There is a principal in software engineering called Don't Repeat Yourself (DRY) - which basically states that you should avoid duplication wherever possible. A good rule of thumb is whenever you find you've used the same or similar code in three places, it's time to consider replacing that code with a function.
 
 ### To structure your code
 You may also sometimes want to write a function for code you're only planning to use once as a way of structuring your code and "hiding" some of it to make your main script easier to read.
@@ -940,7 +944,7 @@ Think about whether there are ways you can make your function usable in more sit
 ### Vectorise by default
 R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as input and apply the transformation to each element. The `generalise_names()` function we looked at is a good example of this!
 
-### Get feedback
+### Ask for feedback
 A key measure of a good function (or any piece of code) is how easy it is for 
 someone else to understand, use and modify it. The best way to test this is to 
 get your code reviewed by someone else.
@@ -957,7 +961,7 @@ The easiest way to store your functions is just to create a folder in your proje
 
 You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.
 
-Then just use `source("my_functions_script.R")` (with `my_functions_script.R` replaced with the name of your script) to run the code and make your functions available to you in the current session. As with loading libraries, it's best to do this at the top of your script.
+Then just use `source("my_functions_script.R")` (with `my_functions_script.R` replaced with the name of your script) to run the code and make your functions available to you in the current session. As with loading packages, it's best to do this at the top of your script.
 
 ---
 
@@ -1010,5 +1014,11 @@ To find out more about writing packages, check out the links under further readi
 
 #### Misc
 + [Tidyverse style guide](https://style.tidyverse.org/) (has some guidance on choosing function and argument names)
++ [MoJ coding standards](https://github.com/moj-analytical-services/our-coding-standards)
 + [Scoping/environments](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)
 
+## Get help
+
+If you get stuck, a great place to ask is [ASD slack](asdslack.slack.com) on either the `#r` or `#intro_r` channels.
+
+# Any questions?
