@@ -184,7 +184,7 @@ Functions can return different outputs depending on some condition. In this func
 ```{r}
 
 # This function returns the absolute value of a number
-mod_x <- function(x) {
+abs_x <- function(x) {
   if (x < 0) {
     return(-x)
   } else {
@@ -192,7 +192,7 @@ mod_x <- function(x) {
   }
 }
 
-mod_x(-5)
+abs_x(-5)
 
 ```
 
@@ -993,6 +993,11 @@ Now the function is ready to use:
 colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pink")
 pick_a_colour(colours)
 ```
+---
+If you run `pick_a_colour` without brackets, it will print the function code to the console:
+```{r}
+pick_a_colour
+```
 
 ## Writing a package
 
@@ -1013,7 +1018,6 @@ To find out more about writing packages, check out the links under further readi
 ## Further reading
 #### On functions
 + [Functions chapter](https://r4ds.had.co.nz/functions.html) of Hadley's R for Data Science book
-+ [DataCamp writing functions in R course](https://www.datacamp.com/courses/writing-functions-in-r)
 + [Functions chapter](https://adv-r.hadley.nz/functions.html) of Hadley's Advanced R book
 + [Tidy Evaluation](https://tidyeval.tidyverse.org/introduction.html) (useful for writing functions which behave like Tidyverse functions) 
 
