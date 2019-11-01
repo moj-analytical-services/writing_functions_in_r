@@ -84,8 +84,10 @@ Here's an example of a very basic user-defined function, called `add_two()`, tha
 ```{r}
 # This function takes the argument 'x', and adds 2 to it
 add_two <- function(x) {
+  
   result <- x + 2
   return(result)
+  
 }
 ```
 
@@ -107,8 +109,10 @@ Functions can accept as many arguments as you like, but can only output one obje
 
 # This function sums the squares of two numbers
 sum_squares <- function(x, y) {
+  
   result <- x^2 + y^2
   return(result)
+  
 }
 
 sum_squares(3, 5)
@@ -276,6 +280,7 @@ add_a_number <- function(x, y = NULL) {
   } else {
     return(x)
   }
+  
 }
 
 add_a_number(x = 6)
@@ -329,7 +334,7 @@ if (condition_1) {
 ```
 * To test whether a number is divisible by another number, you can use the modulo
 operator `%%`, which calculates the remainder. E.g. `1 %% 3 == 0` evaluates to `FALSE`.
-* To find out more about if statements & conditional execution, see [here](https://r4ds.had.co.nz/functions.html#conditional-execution)
+* To find out more about if statements and conditional execution, see [here](https://r4ds.had.co.nz/functions.html#conditional-execution)
 
 ---
 
@@ -337,6 +342,7 @@ operator `%%`, which calculates the remainder. E.g. `1 %% 3 == 0` evaluates to `
 # 2.1 fizz_buzz() solution
 
 fizz_buzz <- function(x) {
+  
   if (x %% 3 == 0 & x %% 5 == 0) {
     return("fizz buzz")
   } else if (x %% 3 == 0) {
@@ -346,6 +352,7 @@ fizz_buzz <- function(x) {
   } else {
     return(as.character(x))
   }
+  
 }
 
 fizz_buzz(1)  # "1"
@@ -381,12 +388,14 @@ the help file.
 # 2.2 fizz_buzz_vec() solution
 
 fizz_buzz_vec <- function(x) {
+  
   dplyr::case_when(
     x %% 3 == 0 & x %% 5 == 0 ~ "fizz buzz",
     x %% 3 == 0 ~ "fizz",
     x %% 5 == 0 ~ "buzz",
     TRUE ~ as.character(x)
   )
+  
 }
 
 fizz_buzz_vec(1:15)
@@ -412,6 +421,7 @@ when you don't specify the `fizz` or `buzz` arguments, and second when you set
 # 2.3 fizz_buzz_custom() solution
 
 fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
+  
   if (x %% fizz == 0 & x %% buzz == 0) {
     return("fizz buzz")
   } else if (x %% fizz == 0) {
@@ -421,15 +431,19 @@ fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
   } else {
     return(as.character(x))
   }
+  
 }
 
+
 fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5) {
+  
   dplyr::case_when(
     x %% fizz == 0 & x %% buzz == 0 ~ "fizz buzz",
     x %% fizz == 0 ~ "fizz",
     x %% buzz == 0 ~ "buzz",
     TRUE ~ as.character(x)
   )
+  
 }
 ```
 
@@ -797,7 +811,7 @@ Let's say we want to produce some plots, and want them all to have the same styl
 
 ```{r}
 # This function produces a plot of the number of prosecutions over time
-prosecutions_graph <- function(df, breakdown = "offence_type") {
+plot_prosecutions <- function(df, breakdown = "offence_type") {
 
   grouping_variables <- c(breakdown, "year")
   
@@ -823,21 +837,21 @@ prosecutions_graph <- function(df, breakdown = "offence_type") {
 
 ```{r fig.width=10}
 # Call function
-prosecutions_graph(prosecutions, breakdown = "offence_type")
+plot_prosecutions(prosecutions, breakdown = "offence_type")
 ```
 
 ---
 
 ### Exercise 6
 
-Modify the function `prosecutions_graph` to use `theme_classic()` as the theme, rather than `theme_grey()`. Produce a plot of with a breakdown by `"offence_group"`.
+Modify the `plot_prosecutions()` function to use `theme_classic()` as the theme, rather than `theme_grey()`. Produce a plot of with a breakdown by `"offence_group"`.
 
 ---
 
 ```{r, include=show_solution, purl=FALSE}
 # Solution
 
-prosecutions_graph <- function(df, breakdown = "offence_type") {
+plot_prosecutions <- function(df, breakdown = "offence_type") {
 
   grouping_variables <- c(breakdown, "year")
   
@@ -864,7 +878,7 @@ prosecutions_graph <- function(df, breakdown = "offence_type") {
 ```{r fig.width=10, include=show_solution, purl=FALSE}
 # Solution
 
-prosecutions_graph(prosecutions, breakdown = "offence_group")
+plot_prosecutions(prosecutions, breakdown = "offence_group")
 
 ```
 
