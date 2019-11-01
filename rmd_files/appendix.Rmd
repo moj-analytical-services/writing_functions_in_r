@@ -14,8 +14,7 @@ sum_group_alt1 <- function(df, group_cols, sum_col) {
 
   summary <- df %>%
     dplyr::group_by(!!as.name(group_cols)) %>%
-    dplyr::summarise(counts = sum(!!as.name(sum_col))) %>%
-    janitor::adorn_totals("row")
+    dplyr::summarise(counts = sum(!!as.name(sum_col)))
 
   return(summary)
 
@@ -34,8 +33,7 @@ sum_group_alt2 <- function(df, group_cols, sum_col) {
 
   summary <- df %>%
     dplyr::group_by(!!enquo(group_cols)) %>%
-    dplyr::summarise(counts = sum(!!enquo(sum_col))) %>%
-    janitor::adorn_totals("row")
+    dplyr::summarise(counts = sum(!!enquo(sum_col)))
 
   return(summary)
 

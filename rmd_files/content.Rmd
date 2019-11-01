@@ -9,10 +9,13 @@
 * Where to go for more information on some of the topics touched on in this course.
 
 
-### A note on the examples given in this course:
-During this session we'll show lots of examples of functions. Depending on how experienced you are with using R, some of these examples may introduce new concepts that are not the focus of this course. It is not required that you have prior knowledge of these concepts, as they are included only to demonstrate possible uses for functions when undertaking typical programming tasks in DASD. One of the purposes of the examples is to provide a resource that can be referred back to in the future.
+### Before we start
+To follow along with the code run during this session and participate in the exercises, open the script "example_code.R" in RStudio. You may also want to have the course [read me](https://github.com/moj-analytical-services/writing_functions_in_r) open as a reference.
 
-If you would like to follow along with the code run during this session (recommended if you intend to do the exercises) then open the script "example_code.R" in RStudio.
+---
+
+### A note on the examples given in this course
+During this session we'll show lots of examples of functions. Depending on how experienced you are with using R, some of these examples may introduce new concepts that are not the focus of this course. It is not required that you have prior knowledge of these concepts, as they are included only to demonstrate possible uses for functions when undertaking typical programming tasks in DASD. One of the purposes of the examples is to provide a resource that can be referred back to in the future.
 
 
 ## What is a function?
@@ -55,7 +58,7 @@ You can use functions to make your code better structured and easier to read - d
 The syntax for creating a function is:
 
 ```{r}
-function_name <- function(arg1, arg2){
+function_name <- function(arg1, arg2) {
         # function body, e.g. 
         print(paste(arg1, arg2))
 }
@@ -70,7 +73,7 @@ A function is made up of three components:
    
 + The function **body** (everything between the curly brackets) - this is where we put the code.
    
-+ And the function **environment** (where the function was created) - this determines what variables and other functions it has access to - you can find out more about environments  [here](https://r4ds.had.co.nz/functions.html#environment).
++ And the function **environment** (where the function was created) - this determines what variables and other functions it has access to - you can find out more about environments [here](https://r4ds.had.co.nz/functions.html#environment).
 
 # Examples of basic functions
 
@@ -80,7 +83,7 @@ Here's an example of a very basic user-defined function, called `add_two()`, tha
 
 ```{r}
 # This function takes the argument 'x', and adds 2 to it
-add_two <- function(x){
+add_two <- function(x) {
   result <- x + 2
   return(result)
 }
@@ -103,7 +106,7 @@ Functions can accept as many arguments as you like, but can only output one obje
 ```{r}
 
 # This function sums the squares of two numbers
-sum_squares <- function(x, y){
+sum_squares <- function(x, y) {
   result <- x^2 + y^2
   return(result)
 }
@@ -135,7 +138,7 @@ functions.
 
 ### 1.1 hello_world()
 Create a function called `hello_world` which prints "Hello world!" to the 
-console, & call the function.
+console, and call the function.
 
 ### 1.2 my_mean()
 Create a function called `my_mean` which takes two arguments, `x` and `y`, and
@@ -149,7 +152,7 @@ result to the console.
 ```{r, include=show_solution, purl=FALSE}
 # 1.1 hello_world() solution
 
-hello_world <- function(){
+hello_world <- function() {
   print("Hello world!")
 }
 
@@ -162,7 +165,6 @@ hello_world()
 
 my_mean <- function(x, y) {
   z <- (x + y) / 2
-  
   return(z)
 }
 
@@ -173,7 +175,7 @@ my_mean(7.5, 16)
 
 ## Example 3: conditional statements in functions
 
-Functions can return different outputs depending on some condition, using the `return()` command. In this function the condition is `x < 0`, and the condition evaluates to either `TRUE` or `FALSE`:
+Functions can return different outputs depending on some condition. In this function the condition is `x < 0`, and the condition evaluates to either `TRUE` or `FALSE`:
 
 ```{r}
 
@@ -199,12 +201,13 @@ Depending on the purpose of the function, it doesn't need to return an output at
 ```{r}
 # This function lets you know whether a number is odd or even
 odd_or_even <- function(x) {
+
   if ((x %% 2) == 0) {
     print("The number is even.")
-  }
-  else if ((x %% 2) == 1) {
+  } else if ((x %% 2) == 1) {
     print("The number is odd.")
   }
+  
 }
 
 odd_or_even(x = 4)
@@ -225,25 +228,21 @@ odd_or_even(x = c(1, 2, 3))
 
 ---
 
-Here is an adapted version of the function, with some more informative error messages built in using the `stop()` function:
+Here's an adapted version of the function, with some more informative error messages built in using the `stop()` function:
 
 ```{r}
 # This function lets you know whether a number is odd or even
-odd_or_even <- function(x){
+odd_or_even <- function(x) {
   
   if (length(x) > 1){
     stop("x must have length 1.")
-  }
-  else if (!is.numeric(x)){
+  } else if (!is.numeric(x)){
     stop("x must be a number.")
-  }
-  else if((x %% 2) == 0){
+  } else if ((x %% 2) == 0) {
     print("The number is even.")
-  }
-  else if((x %% 2) == 1) {
+  } else if ((x %% 2) == 1) {
     print("The number is odd.")
-  }
-  else if((x %% 2) != 0 & (x %% 2) != 1){
+  } else if((x %% 2) != 0 & (x %% 2) != 1){
     stop("x must be an integer.")
   }
 
@@ -270,12 +269,11 @@ Here's an example of how to include optional arguments, where in this case the o
 
 ```{r}
 # This function either returns the sum of two numbers, or returns the argument if only one is supplied
-add_a_number <- function(x, y = NULL){
+add_a_number <- function(x, y = NULL) {
   
-  if(!is.null(y)){
+  if (!is.null(y)) {
     return(x + y)
-  }
-  else{
+  } else {
     return(x)
   }
 }
@@ -287,11 +285,11 @@ add_a_number(x = 6, y = 7)
 
 ## Example 7: arguments with default values
 
-Any value can be used as a default value for an argument. For example, we can generalise the `sum_squares()` function by allowing it to sum together two numbers raised to any power, but have a default power of 2:
+Any value can be used as a default value for an argument. For example, we can generalise the `sum_squares()` function by allowing it to sum together two numbers raised to any power, but with a default power of 2:
 
 ```{r}
 # This function returns the sum of two numbers raised to a particular power (with a default of 2)
-sum_powers <- function(x, y, z = 2){
+sum_powers <- function(x, y, z = 2) {
   
   result <- x ^ z + y ^ z
   return(result)
@@ -305,7 +303,7 @@ sum_powers(x = 3, y = 5, z = 3)
 
 ## Exercises
 
-#### 2.1 fizz_buzz()
+### 2.1 fizz_buzz()
 Now try using an if else statement inside a function. Create a function called `fizz_buzz` which takes a number as input and:
 
 * If the number is divisible by both 3 and 5, returns "fizz buzz"
@@ -360,7 +358,7 @@ fizz_buzz(15) # "fizz buzz"
 
 ---
 
-#### 2.2 fizz_buzz_vec()
+### 2.2 fizz_buzz_vec()
 
 Most functions in R are vectorised. This means they can apply an operation
 to every element of a vector at the same time. It's best practice to vectorise 
@@ -382,7 +380,7 @@ the help file.
 ```{r, include=show_solution, purl=FALSE}
 # 2.2 fizz_buzz_vec() solution
 
-fizz_buzz_vec <- function(x){
+fizz_buzz_vec <- function(x) {
   dplyr::case_when(
     x %% 3 == 0 & x %% 5 == 0 ~ "fizz buzz",
     x %% 3 == 0 ~ "fizz",
@@ -397,7 +395,7 @@ fizz_buzz_vec(1:15)
 
 ---
 
-#### 2.3 fizz_buzz_custom()
+### 2.3 fizz_buzz_custom()
 
 Create a version of `fizz_buzz()` or `fizz_buzz_vec()` called `fizz_buzz_custom()` or
 `fizz_buzz_custom_vec()` where the values for when to say "fizz" and "buzz" can be
@@ -425,7 +423,7 @@ fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
   }
 }
 
-fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5){
+fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5) {
   dplyr::case_when(
     x %% fizz == 0 & x %% buzz == 0 ~ "fizz buzz",
     x %% fizz == 0 ~ "fizz",
@@ -434,13 +432,14 @@ fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5){
   )
 }
 ```
+
 ---
+
 ```{r, include=show_solution, purl=FALSE}
 fizz_buzz_custom_vec(1:15)
 fizz_buzz_custom_vec(c(1, 2, 3, 7, 15, 21), buzz = 7)
 
 ```
-
 
 ## Example 8: the ellipsis argument
 
@@ -448,7 +447,7 @@ Sometimes being able to pass an arbitrary number of arguments can be useful, esp
 
 ```{r}
 # This function produces a plot of x vs y
-plot_x_and_y <- function(x, y, ...){
+plot_x_and_y <- function(x, y, ...) {
   
   plot(x, y, ...)
   
@@ -565,7 +564,9 @@ generalise_names(names)
 
 ```
 
-### Exercise 1
+---
+
+### Exercise 3
 
 Use the `generalise_names()` function defined above to clean the column headings of this dataset (Hint: use the function `colnames()` to retrieve the column headings of the dataset as a vector).
 
@@ -587,7 +588,7 @@ In this dataset, some of the columns contain values with a number along with a c
 # This function identifies and removes 1 or 2 digits followed by a semicolon or a space
 remove_numbering <- function(x) {
 
-  x <- stringr::str_replace(x,"^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]", "")
+  x <- stringr::str_replace(x, "^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]", "")
   
   return(x)
   
@@ -620,7 +621,7 @@ clean_not_known <- function(x,
   # Remove any white space that might cause the strings to not match
   x <- stringr::str_trim(x)
   
-  # Replace strings in the data that refer to a missing or unknown values
+  # Replace strings in the data that refer to a missing or unknown value
   x <- ifelse(tolower(x) %in% values_to_change, not_known_phrase, x)
   
   return(x)
@@ -640,7 +641,7 @@ glimpse(prosecutions)
 
 ---
 
-### Exercise 2
+### Exercise 4
 
 Modify `clean_not_known()` to make replacing missing (NA) values optional.
 
@@ -674,7 +675,7 @@ clean_not_known <- function(x,
 
 ---
 
-### Exercise 3
+### Exercise 5
 
 Write a wrapper function to apply `generalise_names()`, `remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
 
@@ -716,7 +717,7 @@ In the above code we are grouping the `prosecutions` dataframe by the categories
 
 The resulting dataframe is saved as a variable called `prosecutions_grouped`.
 
-Notice how the `dplyr` functions `group_by()` and `summarise()` require that the column names are not enclosed in quotation marks, meaning that they are not passed as strings: this behaviour is known as non-standard evalution, and will be important later.
+Notice how the `dplyr` functions `group_by()` and `summarise()` require that the column names are not enclosed in quotation marks, meaning that they are not passed as strings: this behaviour is known as non-standard evaluation, and will be important later.
 
 ---
 
@@ -751,7 +752,7 @@ prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", s
 
 This is because of the non-standard evaluation (NSE) mentioned above. The `dplyr` functions don't recognise `group_cols` and `sum_col` as column names, because they can't see that these are variables containing the actual column names. While the NSE usually makes the `dplyr` functions more convenient to use, it makes them slightly trickier to use in user-defined functions. 
 
-Fortunately to get around the NSE problem, functions have been added to the `dplyr` package that accept variables instead of straight column names. The function below shows an example of how the functions `group_by_at` and `summarise_at` can replace `group_by` and `summarise`.
+Fortunately to get around the NSE problem, functions have been added to the `dplyr` package that accept variables instead of straight column names. The function below shows an example of how the functions `group_by_at()` and `summarise_at()` can replace `group_by()` and `summarise()`.
 
 ```{r}
 # This function produces a summary table based on a dataset
@@ -796,11 +797,11 @@ Let's say we want to produce some plots, and want them all to have the same styl
 
 ```{r}
 # This function produces a plot of the number of prosecutions over time
-prosecutions_graph <- function(df, breakdown = "offence_type"){
+prosecutions_graph <- function(df, breakdown = "offence_type") {
 
   grouping_variables <- c(breakdown, "year")
   
-  # Group and summarise data by year and breakdown variable ready to plot
+  # Group and summarise data by year and breakdown variable
   df_grouped <- sum_group(df = df, 
                           group_cols = grouping_variables, 
                           sum_col = "count")
@@ -821,13 +822,13 @@ prosecutions_graph <- function(df, breakdown = "offence_type"){
 ---
 
 ```{r fig.width=10}
-# call function
+# Call function
 prosecutions_graph(prosecutions, breakdown = "offence_type")
 ```
 
 ---
 
-### Exercise 4
+### Exercise 6
 
 Modify the function `prosecutions_graph` to use `theme_classic()` as the theme, rather than `theme_grey()`. Produce a plot of with a breakdown by `"offence_group"`.
 
@@ -836,7 +837,7 @@ Modify the function `prosecutions_graph` to use `theme_classic()` as the theme, 
 ```{r, include=show_solution, purl=FALSE}
 # Solution
 
-prosecutions_graph <- function(df, breakdown = "offence_type"){
+prosecutions_graph <- function(df, breakdown = "offence_type") {
 
   grouping_variables <- c(breakdown, "year")
   
@@ -870,7 +871,7 @@ prosecutions_graph(prosecutions, breakdown = "offence_group")
 
 ## Extracting a subset of the data
 
-Often processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
+Sometimes processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
 
 ```{r}
 # This function extracts the prosecutions from a particular year
@@ -894,6 +895,7 @@ extract_year <- function(data, end_date) {
     dplyr::mutate(year_quarter = paste(year, quarter)) %>%
     dplyr::filter(year_quarter %in% yearquarters)
   
+  return(data)
 }
 
 ```
@@ -942,7 +944,7 @@ A rule of thumb is if all the code for your function doesn't fit on your screen 
 Think about whether there are ways you can make your function usable in more situations. For example, is there anything you're hard-coding that you could set as an argument instead?
 
 ### Vectorise by default
-R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as input and apply the transformation to each element. The `generalise_names()` function we looked at is a good example of this!
+R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as an input and apply the transformation to each element. The `generalise_names()` function we looked at is a good example of this!
 
 ### Ask for feedback
 A key measure of a good function (or any piece of code) is how easy it is for 
@@ -951,7 +953,7 @@ get your code reviewed by someone else.
 
 ## How to organise your code
 
-Whenever you're working on something in R it's generally best to create an R project and version control your code on GitHub. There's information on how to do this in the Analytical Platform guidance.
+Whenever you're working on something in R it's generally best to create an R project and version control your code on GitHub. There's information on how to do this in the [Analytical Platform guidance](https://moj-analytical-services.github.io/platform_user_guidance/github.html).
 
 It's also best to keep your functions separate from the rest of your code to make them easier to find.
 
@@ -965,11 +967,11 @@ Then just use `source("my_functions_script.R")` (with `my_functions_script.R` re
 
 ---
 
-Here's an example of calling a script that contains a new function, called `pick_a_colour`:
+Here's an example of calling a script that contains a new function, called `pick_a_colour()`:
 
 ```{r}
-# Note: if you are running this code from 'example_code.R', then
-# you should replace it with `source("rmd_files/functions.R")`
+# Note: if you are running this code from 'example_code.R', then you
+# should replace the following with `source("rmd_files/functions.R")`
 source("functions.R")
 ```
 
