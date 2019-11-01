@@ -12,7 +12,7 @@
 ### A note on the examples given in this course:
 During this session we'll show lots of examples of functions. Depending on how experienced you are with using R, some of these examples may introduce new concepts that are not the focus of this course. It is not required that you have prior knowledge of these concepts, as they are included only to demonstrate possible uses for functions when undertaking typical programming tasks in DASD. One of the purposes of the examples is to provide a resource that can be referred back to in the future.
 
-If you would like to follow along with the code run during this session (recommended if you indend to do the exercises) then open the script "example_code.R" in RStudio.
+If you would like to follow along with the code run during this session (recommended if you intend to do the exercises) then open the script "example_code.R" in RStudio.
 
 
 ## What is a function?
@@ -43,7 +43,7 @@ Generally functions are used to automate common tasks, to avoid copying and past
 
 ### Abstraction
 
-One of the benefits of functions is they abstract away the details of *how* the code works. To use a function, all you need to understand is *what* the function is designed to do. You'll need to understand how your function works when you're writing it of course, but you won't need to think about it everytime you use it.
+One of the benefits of functions is they abstract away the details of *how* the code works. To use a function, all you need to understand is *what* the function is designed to do. You'll need to understand how your function works when you're writing it of course, but you won't need to think about it every time you use it.
 
 ### Code legibility
 
@@ -717,7 +717,7 @@ In the above code we are grouping the `prosecutions` dataframe by the categories
 
 The resulting dataframe is saved as a variable called `prosecutions_grouped`.
 
-Notice how the `dplyr` functions `group_by()` and `summarise()` require that the column names are not enclosed in quotation marks, meaning that they are not passed as strings: this behaviour is known as non-standard evalution, and will be important later.
+Notice how the `dplyr` functions `group_by()` and `summarise()` require that the column names are not enclosed in quotation marks, meaning that they are not passed as strings: this behaviour is known as non-standard evaluation, and will be important later.
 
 ---
 
