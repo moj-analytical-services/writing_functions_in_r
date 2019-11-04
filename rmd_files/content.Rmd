@@ -808,7 +808,7 @@ prosecutions_grouped <- sum_group(df = prosecutions,
                                   group_cols = c("year", "offence_group"), 
                                   sum_col = "count")
 
-glimpse(prosecutions_grouped)
+head(prosecutions_grouped, 15)
 
 ```
 
