@@ -198,7 +198,7 @@ As soon as a `return()` statement is encountered in a function, the function fin
 
 ## Example 4: functions without outputs
 
-Depending on the purpose of the function, it doesn't need to return an output at all. Instead in can have a "side effect", such as printing a value to the console:
+Depending on the purpose of the function, it doesn't need to return an output at all. Instead it can have a "side effect", such as printing a value to the console:
 
 ```{r}
 # This function lets you know whether a number is odd or even
@@ -387,12 +387,14 @@ the help file.
 
 fizz_buzz_vec <- function(x) {
   
-  dplyr::case_when(
+  result <- dplyr::case_when(
     x %% 3 == 0 & x %% 5 == 0 ~ "fizz buzz",
     x %% 3 == 0 ~ "fizz",
     x %% 5 == 0 ~ "buzz",
     TRUE ~ as.character(x)
   )
+  
+  return(result)
   
 }
 
@@ -435,12 +437,14 @@ fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
 
 fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5) {
   
-  dplyr::case_when(
+  result <- dplyr::case_when(
     x %% fizz == 0 & x %% buzz == 0 ~ "fizz buzz",
     x %% fizz == 0 ~ "fizz",
     x %% buzz == 0 ~ "buzz",
     TRUE ~ as.character(x)
   )
+  
+  return(result)
   
 }
 ```
