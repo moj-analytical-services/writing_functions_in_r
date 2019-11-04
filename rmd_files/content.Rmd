@@ -503,7 +503,7 @@ This section builds on material covered in the [Intro R Training](https://github
 
 ## Loading packages and data
 
-First of all we need to load a few packages:  
+Before we start looking at more example functions, first of all we need to load a few packages:  
 
 * `s3tools` is an MoJ package designed to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.
 * `dplyr` is the package we'll use to create summary tables from the data.
@@ -598,7 +598,13 @@ glimpse(prosecutions)
 ```
 ---
 
-In this dataset, some of the columns contain values with a number along with a category; for example, the `age_group` column contains categories like "01: Juveniles" rather than just "Juveniles". These numbers might be undesirable, so we can write a function to remove these:
+In this dataset, some of the columns contain values with a number along with a category; for example, the `age_group` column contains categories like "01: Juveniles" rather than just "Juveniles".
+
+```{r, echo=FALSE}
+glimpse(prosecutions[,1:10])
+```
+
+These numbers might be undesirable, so we can write a function like this to remove them:
 
 ```{r}
 # This function identifies and removes 1 or 2 digits followed by a colon or a space
