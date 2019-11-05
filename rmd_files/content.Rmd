@@ -10,7 +10,7 @@
 
 
 ### Before we start
-To follow along with the code run during this session and participate in the exercises, open the script "example_code.R" in RStudio. You may also want to have the course [read me](https://github.com/moj-analytical-services/writing_functions_in_r) open as a reference.
+To follow along with the code run during this session and participate in the exercises, open the script "example_code.R" in RStudio. All the code that we'll show in this session is stored in "example_code.R", and you can edit this script to write solutions to the exercises. You may also want to have the course [read me](https://github.com/moj-analytical-services/writing_functions_in_r) open as a reference.
 
 ---
 
@@ -198,7 +198,7 @@ As soon as a `return()` statement is encountered in a function, the function fin
 
 ## Example 4: functions without outputs
 
-Depending on the purpose of the function, it doesn't need to return an output at all. Instead in can have a "side effect", such as printing a value to the console:
+Depending on the purpose of the function, it doesn't need to return an output at all. Instead it can have a "side effect", such as printing a value to the console:
 
 ```{r}
 # This function lets you know whether a number is odd or even
@@ -387,12 +387,14 @@ the help file.
 
 fizz_buzz_vec <- function(x) {
   
-  dplyr::case_when(
+  result <- dplyr::case_when(
     x %% 3 == 0 & x %% 5 == 0 ~ "fizz buzz",
     x %% 3 == 0 ~ "fizz",
     x %% 5 == 0 ~ "buzz",
     TRUE ~ as.character(x)
   )
+  
+  return(result)
   
 }
 
@@ -435,12 +437,14 @@ fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
 
 fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5) {
   
-  dplyr::case_when(
+  result <- dplyr::case_when(
     x %% fizz == 0 & x %% buzz == 0 ~ "fizz buzz",
     x %% fizz == 0 ~ "fizz",
     x %% buzz == 0 ~ "buzz",
     TRUE ~ as.character(x)
   )
+  
+  return(result)
   
 }
 ```
@@ -499,7 +503,7 @@ This section builds on material covered in the [Intro R Training](https://github
 
 ## Loading packages and data
 
-First of all we need to load a few packages:  
+Before we start looking at more example functions, first of all we need to load a few packages:  
 
 * `s3tools` is an MoJ package designed to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.
 * `dplyr` is the package we'll use to create summary tables from the data.
@@ -580,7 +584,9 @@ generalise_names(names)
 
 ### Exercise 3
 
-Use the `generalise_names()` function defined above to clean the column headings of the `prosecutions` dataset (Hint: use the function `colnames()` to retrieve the column headings of the dataset as a vector).
+Use the `generalise_names()` function defined above to clean the column headings of the `prosecutions` dataset. Add your solution to the script "example_code.R", underneath the line with the command `generalise_names(names)`.
+
+**Hint:** use the function `colnames()` to retrieve the column headings of the dataset as a vector.
 
 ---
 
@@ -594,7 +600,13 @@ glimpse(prosecutions)
 ```
 ---
 
-In this dataset, some of the columns contain values with a number along with a category; for example, the `age_group` column contains categories like "01: Juveniles" rather than just "Juveniles". These numbers might be undesirable, so we can write a function to remove these:
+In this dataset, some of the columns contain values with a number along with a category; for example, the `age_group` column contains categories like "01: Juveniles" rather than just "Juveniles".
+
+```{r, echo=FALSE}
+glimpse(prosecutions[,1:10])
+```
+
+These numbers might be undesirable, so we can write a function like this to remove them:
 
 ```{r}
 # This function identifies and removes 1 or 2 digits followed by a colon or a space
@@ -798,7 +810,7 @@ prosecutions_grouped <- sum_group(df = prosecutions,
                                   group_cols = c("year", "offence_group"), 
                                   sum_col = "count")
 
-glimpse(prosecutions_grouped)
+head(prosecutions_grouped, 15)
 
 ```
 
@@ -1036,6 +1048,4 @@ To find out more about writing packages, check out the links under further readi
 ## Get help
 
 If you get stuck, a great place to ask is [ASD slack](asdslack.slack.com) on either the `#r` or `#intro_r` channels.
-
-# Any questions?
 

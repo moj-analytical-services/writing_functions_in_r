@@ -1,4 +1,5 @@
 ---
+title: Writing functions in R
 output: rmarkdown::github_document
 ---
 
@@ -6,8 +7,6 @@ output: rmarkdown::github_document
 # This variable determines whether or not exercise solutions are included
 show_solution <- FALSE
 ```
-
-# Writing functions in R
 
 This repository is for Writing Functions in R course offered by the DASD R Training Group. It was also used for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session.
 
