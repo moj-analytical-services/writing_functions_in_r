@@ -10,7 +10,7 @@
 
 
 ### Before we start
-To follow along with the code run during this session and participate in the exercises, open the script "example_code.R" in RStudio. You may also want to have the course [read me](https://github.com/moj-analytical-services/writing_functions_in_r) open as a reference.
+To follow along with the code run during this session and participate in the exercises, open the script "example_code.R" in RStudio. All the code that we'll show in this session is stored in "example_code.R", and you can edit this script to write solutions to the exercises. You may also want to have the course [read me](https://github.com/moj-analytical-services/writing_functions_in_r) open as a reference.
 
 ---
 
@@ -584,7 +584,9 @@ generalise_names(names)
 
 ### Exercise 3
 
-Use the `generalise_names()` function defined above to clean the column headings of the `prosecutions` dataset (Hint: use the function `colnames()` to retrieve the column headings of the dataset as a vector).
+Use the `generalise_names()` function defined above to clean the column headings of the `prosecutions` dataset. Add your solution to the script "example_code.R", underneath the line with the command `generalise_names(names)`.
+
+**Hint:** use the function `colnames()` to retrieve the column headings of the dataset as a vector.
 
 ---
 
