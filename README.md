@@ -598,6 +598,7 @@ to load a few packages:
   - `stringr` provides functions that can be used to manipulate strings.
   - `purrr` provides functions to make the use of vectors and
     user-defined functions easier.
+  - `lubridate` provides functions that help with manipulating dates.
 
 <!-- end list -->
 
@@ -1238,7 +1239,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Purple"
+    ## [1] "Pink"
 
 -----
 

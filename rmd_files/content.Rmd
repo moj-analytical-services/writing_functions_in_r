@@ -509,7 +509,7 @@ Before we start looking at more example functions, first of all we need to load 
 * `dplyr` is the package we'll use to create summary tables from the data.
 * `stringr` provides functions that can be used to manipulate strings.
 * `purrr` provides functions to make the use of vectors and user-defined functions easier.
-
+* `lubridate` provides functions that help with manipulating dates.
 
 ```{r message=F, warning=F}
 # Load packages
