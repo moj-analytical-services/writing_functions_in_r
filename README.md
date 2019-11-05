@@ -1,5 +1,5 @@
-
-# Writing functions in R
+Writing functions in R
+================
 
 This repository is for Writing Functions in R course offered by the DASD
 R Training Group. It was also used for the April 2019 [Coffee &
@@ -71,7 +71,9 @@ script example\_code.R.
 ### Before we start
 
 To follow along with the code run during this session and participate in
-the exercises, open the script “example\_code.R” in RStudio. You may
+the exercises, open the script “example\_code.R” in RStudio. All the
+code that we’ll show in this session is stored in “example\_code.R”, and
+you can edit this script to write solutions to the exercises. You may
 also want to have the course [read
 me](https://github.com/moj-analytical-services/writing_functions_in_r)
 open as a reference.
@@ -296,7 +298,7 @@ written in R will return the last line of code to run.
 ## Example 4: functions without outputs
 
 Depending on the purpose of the function, it doesn’t need to return an
-output at all. Instead in can have a “side effect”, such as printing a
+output at all. Instead it can have a “side effect”, such as printing a
 value to the console:
 
 ``` r
@@ -586,7 +588,8 @@ System Statistics quarterly publication: December 2018 (published in May
 
 ## Loading packages and data
 
-First of all we need to load a few packages:
+Before we start looking at more example functions, first of all we need
+to load a few packages:
 
   - `s3tools` is an MoJ package designed to interact with Amazon s3 -
     we’ll need this to help read in some data from an s3 bucket.
@@ -698,9 +701,12 @@ generalise_names(names)
 ### Exercise 3
 
 Use the `generalise_names()` function defined above to clean the column
-headings of the `prosecutions` dataset (Hint: use the function
-`colnames()` to retrieve the column headings of the dataset as a
-vector).
+headings of the `prosecutions` dataset. Add your solution to the script
+“example\_code.R”, underneath the line with the command
+`generalise_names(names)`.
+
+**Hint:** use the function `colnames()` to retrieve the column headings
+of the dataset as a vector.
 
 -----
 
@@ -708,8 +714,23 @@ vector).
 
 In this dataset, some of the columns contain values with a number along
 with a category; for example, the `age_group` column contains categories
-like “01: Juveniles” rather than just “Juveniles”. These numbers might
-be undesirable, so we can write a function to remove these:
+like “01: Juveniles” rather than just “Juveniles”.
+
+    ## Observations: 107,493
+    ## Variables: 10
+    ## $ year              <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+    ## $ quarter           <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
+    ## $ sex               <chr> "01: Male", "01: Male", "01: Male", "01: Male"…
+    ## $ type_of_defendent <chr> "01: Person", "01: Person", "01: Person", "01:…
+    ## $ age_group         <chr> "01: Juveniles", "01: Juveniles", "01: Juvenil…
+    ## $ age_range         <chr> "01: 10-11", "01: 10-11", "01: 10-11", "01: 10…
+    ## $ ethnicity         <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A…
+    ## $ court_type        <chr> "Magistrates Court", "Magistrates Court", "Mag…
+    ## $ offence_type      <chr> "01 Indictable only", "01 Indictable only", "0…
+    ## $ offence_group     <chr> "02 Sexual offences", "03 Robbery", "03 Robber…
+
+These numbers might be undesirable, so we can write a function like this
+to remove them:
 
 ``` r
 # This function identifies and removes 1 or 2 digits followed by a colon or a space
@@ -968,15 +989,28 @@ prosecutions_grouped <- sum_group(df = prosecutions,
                                   group_cols = c("year", "offence_group"), 
                                   sum_col = "count")
 
-glimpse(prosecutions_grouped)
+head(prosecutions_grouped, 15)
 ```
 
-    ## Observations: 133
-    ## Variables: 3
-    ## Groups: year [11]
-    ## $ year          <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 20…
-    ## $ offence_group <chr> "Criminal damage and arson", "Drug offences", "Fra…
-    ## $ count         <int> 11278, 56953, 16262, 71652, 17968, 10465, 13096, 8…
+    ## # A tibble: 15 x 3
+    ## # Groups:   year [2]
+    ##     year offence_group                         count
+    ##    <int> <chr>                                 <int>
+    ##  1  2008 Criminal damage and arson             11278
+    ##  2  2008 Drug offences                         56953
+    ##  3  2008 Fraud Offences                        16262
+    ##  4  2008 Miscellaneous crimes against society  71652
+    ##  5  2008 Possession of weapons                 17968
+    ##  6  2008 Public order offences                 10465
+    ##  7  2008 Robbery                               13096
+    ##  8  2008 Sexual offences                        8353
+    ##  9  2008 Summary motoring                     649238
+    ## 10  2008 Summary non-motoring                 593335
+    ## 11  2008 Theft Offences                       146304
+    ## 12  2008 Violence against the person           45119
+    ## 13  2009 Criminal damage and arson              8975
+    ## 14  2009 Drug offences                         61685
+    ## 15  2009 Fraud Offences                        18756
 
 ## Plotting data
 
@@ -1017,7 +1051,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
 plot_prosecutions(prosecutions, breakdown = "offence_type")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
 
 -----
 
@@ -1204,7 +1238,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Magenta"
+    ## [1] "Purple"
 
 -----
 
@@ -1283,8 +1317,6 @@ further reading.
 
 If you get stuck, a great place to ask is [ASD
 slack](asdslack.slack.com) on either the `#r` or `#intro_r` channels.
-
-# Any questions?
 
 # Appendix
 
@@ -1377,16 +1409,7 @@ row with the total across all categories. Note that this requires the
 
 ``` r
 library(janitor)
-```
 
-    ## 
-    ## Attaching package: 'janitor'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     chisq.test, fisher.test
-
-``` r
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%

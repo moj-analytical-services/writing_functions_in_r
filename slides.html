@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>slides.utf8.md</title>
+  <title>Writing functions in R</title>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -19,6 +19,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
+                title: 'Writing functions in R',
                         useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -3109,9 +3110,7 @@ slide:not(.current) .plotly.html-widget{
           </hgroup>
   </slide>
 
-<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Writing functions in R</h2></hgroup><article  id="writing-functions-in-r" class="smaller ">
-
-</article></slide><slide class=""><hgroup><h2>Learning outcomes</h2></hgroup><article  id="learning-outcomes" class="smaller ">
+<slide class=""><hgroup><h2>Learning outcomes</h2></hgroup><article  id="learning-outcomes" class="smaller ">
 
 <h3>By the end of this session you should know:</h3>
 
@@ -3125,7 +3124,7 @@ slide:not(.current) .plotly.html-widget{
 
 <h3>Before we start</h3>
 
-<p>To follow along with the code run during this session and participate in the exercises, open the script &ldquo;example_code.R&rdquo; in RStudio. You may also want to have the course <a href='https://github.com/moj-analytical-services/writing_functions_in_r' title=''>read me</a> open as a reference.</p>
+<p>To follow along with the code run during this session and participate in the exercises, open the script &ldquo;example_code.R&rdquo; in RStudio. All the code that we’ll show in this session is stored in &ldquo;example_code.R&rdquo;, and you can edit this script to write solutions to the exercises. You may also want to have the course <a href='https://github.com/moj-analytical-services/writing_functions_in_r' title=''>read me</a> open as a reference.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -3293,7 +3292,7 @@ abs_x(-5)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Example 4: functions without outputs</h2></hgroup><article  id="example-4-functions-without-outputs" class="smaller ">
 
-<p>Depending on the purpose of the function, it doesn’t need to return an output at all. Instead in can have a &ldquo;side effect&rdquo;, such as printing a value to the console:</p>
+<p>Depending on the purpose of the function, it doesn’t need to return an output at all. Instead it can have a &ldquo;side effect&rdquo;, such as printing a value to the console:</p>
 
 <pre class = 'prettyprint lang-r'># This function lets you know whether a number is odd or even
 odd_or_even &lt;- function(x) {
@@ -3491,12 +3490,14 @@ fizz_buzz(15) # &quot;fizz buzz&quot;</pre>
 
 fizz_buzz_vec &lt;- function(x) {
   
-  dplyr::case_when(
+  result &lt;- dplyr::case_when(
     x %% 3 == 0 &amp; x %% 5 == 0 ~ &quot;fizz buzz&quot;,
     x %% 3 == 0 ~ &quot;fizz&quot;,
     x %% 5 == 0 ~ &quot;buzz&quot;,
     TRUE ~ as.character(x)
   )
+  
+  return(result)
   
 }
 
@@ -3535,12 +3536,14 @@ fizz_buzz_custom &lt;- function(x, fizz = 3, buzz = 5) {
 
 fizz_buzz_custom_vec &lt;- function(x, fizz = 3, buzz = 5) {
   
-  dplyr::case_when(
+  result &lt;- dplyr::case_when(
     x %% fizz == 0 &amp; x %% buzz == 0 ~ &quot;fizz buzz&quot;,
     x %% fizz == 0 ~ &quot;fizz&quot;,
     x %% buzz == 0 ~ &quot;buzz&quot;,
     TRUE ~ as.character(x)
   )
+  
+  return(result)
   
 }</pre>
 
@@ -3594,7 +3597,7 @@ y &lt;- (1:10) * 2</pre>
 
 </article></slide><slide class=""><hgroup><h2>Loading packages and data</h2></hgroup><article  id="loading-packages-and-data" class="smaller ">
 
-<p>First of all we need to load a few packages:</p>
+<p>Before we start looking at more example functions, first of all we need to load a few packages:</p>
 
 <ul>
 <li><code>s3tools</code> is an MoJ package designed to interact with Amazon s3 - we’ll need this to help read in some data from an s3 bucket.</li>
@@ -3683,7 +3686,9 @@ generalise_names(names)</pre>
 
 <h3>Exercise 3</h3>
 
-<p>Use the <code>generalise_names()</code> function defined above to clean the column headings of the <code>prosecutions</code> dataset (Hint: use the function <code>colnames()</code> to retrieve the column headings of the dataset as a vector).</p>
+<p>Use the <code>generalise_names()</code> function defined above to clean the column headings of the <code>prosecutions</code> dataset. Add your solution to the script &ldquo;example_code.R&rdquo;, underneath the line with the command <code>generalise_names(names)</code>.</p>
+
+<p><strong>Hint:</strong> use the function <code>colnames()</code> to retrieve the column headings of the dataset as a vector.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -3713,7 +3718,22 @@ glimpse(prosecutions)</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
-<p>In this dataset, some of the columns contain values with a number along with a category; for example, the <code>age_group</code> column contains categories like &ldquo;01: Juveniles&rdquo; rather than just &ldquo;Juveniles&rdquo;. These numbers might be undesirable, so we can write a function to remove these:</p>
+<p>In this dataset, some of the columns contain values with a number along with a category; for example, the <code>age_group</code> column contains categories like &ldquo;01: Juveniles&rdquo; rather than just &ldquo;Juveniles&rdquo;.</p>
+
+<pre >## Observations: 107,493
+## Variables: 10
+## $ year              &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+## $ quarter           &lt;chr&gt; &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;, &quot;Q1&quot;…
+## $ sex               &lt;chr&gt; &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01: Male&quot;, &quot;01: Male&quot;…
+## $ type_of_defendent &lt;chr&gt; &quot;01: Person&quot;, &quot;01: Person&quot;, &quot;01: Person&quot;, &quot;01:…
+## $ age_group         &lt;chr&gt; &quot;01: Juveniles&quot;, &quot;01: Juveniles&quot;, &quot;01: Juvenil…
+## $ age_range         &lt;chr&gt; &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;01: 10-11&quot;, &quot;01: 10…
+## $ ethnicity         &lt;chr&gt; &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A…
+## $ court_type        &lt;chr&gt; &quot;Magistrates Court&quot;, &quot;Magistrates Court&quot;, &quot;Mag…
+## $ offence_type      &lt;chr&gt; &quot;01 Indictable only&quot;, &quot;01 Indictable only&quot;, &quot;0…
+## $ offence_group     &lt;chr&gt; &quot;02 Sexual offences&quot;, &quot;03 Robbery&quot;, &quot;03 Robber…</pre>
+
+<p>These numbers might be undesirable, so we can write a function like this to remove them:</p>
 
 <pre class = 'prettyprint lang-r'># This function identifies and removes 1 or 2 digits followed by a colon or a space
 remove_numbering &lt;- function(x) {
@@ -3957,14 +3977,27 @@ prosecutions_grouped</pre>
                                   group_cols = c(&quot;year&quot;, &quot;offence_group&quot;), 
                                   sum_col = &quot;count&quot;)
 
-glimpse(prosecutions_grouped)</pre>
+head(prosecutions_grouped, 15)</pre>
 
-<pre >## Observations: 133
-## Variables: 3
-## Groups: year [11]
-## $ year          &lt;int&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 20…
-## $ offence_group &lt;chr&gt; &quot;Criminal damage and arson&quot;, &quot;Drug offences&quot;, &quot;Fra…
-## $ count         &lt;int&gt; 11278, 56953, 16262, 71652, 17968, 10465, 13096, 8…</pre>
+<pre >## # A tibble: 15 x 3
+## # Groups:   year [2]
+##     year offence_group                         count
+##    &lt;int&gt; &lt;chr&gt;                                 &lt;int&gt;
+##  1  2008 Criminal damage and arson             11278
+##  2  2008 Drug offences                         56953
+##  3  2008 Fraud Offences                        16262
+##  4  2008 Miscellaneous crimes against society  71652
+##  5  2008 Possession of weapons                 17968
+##  6  2008 Public order offences                 10465
+##  7  2008 Robbery                               13096
+##  8  2008 Sexual offences                        8353
+##  9  2008 Summary motoring                     649238
+## 10  2008 Summary non-motoring                 593335
+## 11  2008 Theft Offences                       146304
+## 12  2008 Violence against the person           45119
+## 13  2009 Criminal damage and arson              8975
+## 14  2009 Drug offences                         61685
+## 15  2009 Fraud Offences                        18756</pre>
 
 </article></slide><slide class=""><hgroup><h2>Plotting data</h2></hgroup><article  id="plotting-data" class="smaller ">
 
@@ -4165,7 +4198,7 @@ glimpse(prosecutions_extract)</pre>
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >## [1] &quot;Green&quot;</pre>
+<pre >## [1] &quot;Pink&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -4239,9 +4272,7 @@ pick_a_colour(colours)</pre>
 
 <p>If you get stuck, a great place to ask is <a href='asdslack.slack.com' title=''>ASD slack</a> on either the <code>#r</code> or <code>#intro_r</code> channels.</p>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Any questions?</h2></hgroup><article  id="any-questions" class="smaller ">
-
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Any questions?</h2></hgroup><article  id="any-questions-1" class="smaller "></article></slide>
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Any questions?</h2></hgroup><article  id="any-questions" class="smaller "></article></slide>
 
 
   <slide class="backdrop"></slide>

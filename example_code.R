@@ -239,6 +239,10 @@ generalise_names(names)
 
 
 
+## ---- echo=FALSE---------------------------------------------------------
+glimpse(prosecutions[,1:10])
+
+
 ## ------------------------------------------------------------------------
 # This function identifies and removes 1 or 2 digits followed by a colon or a space
 remove_numbering <- function(x) {
@@ -340,7 +344,7 @@ prosecutions_grouped <- sum_group(df = prosecutions,
                                   group_cols = c("year", "offence_group"), 
                                   sum_col = "count")
 
-glimpse(prosecutions_grouped)
+head(prosecutions_grouped, 15)
 
 
 
