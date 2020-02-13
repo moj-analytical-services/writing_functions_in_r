@@ -10,7 +10,7 @@ show_solution <- FALSE
 
 This repository is for Writing Functions in R course offered by the DASD R Training Group. It was also used for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session.
 
-Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we cover why, when and how to write your own functions, with plenty of examples and exercises to help you get started.
+Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we’ll cover why, when and how to write your own functions, with plenty of examples & exercises to help you get started. The session should be accessible to anyone who is familiar with the content of the R intro session & has some experience of using R in their work.
 
 The session is intended to be accessible to anyone who has attended the [Introduction to R](https://github.com/moj-analytical-services/IntroRTraining) training session and used R a little in their work.
 
