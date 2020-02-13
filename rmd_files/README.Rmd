@@ -10,9 +10,9 @@ show_solution <- FALSE
 
 This repository is for Writing Functions in R course offered by the DASD R Training Group. It was also used for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session.
 
-Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we’ll cover why, when and how to write your own functions, with plenty of examples & exercises to help you get started. The session should be accessible to anyone who is familiar with the content of the R intro session & has some experience of using R in their work.
+Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we’ll cover why, when and how to write your own functions, with plenty of examples & exercises to help you get started.
 
-The session is intended to be accessible to anyone who has attended the [Introduction to R](https://github.com/moj-analytical-services/IntroRTraining) training session and used R a little in their work.
+The session is intended to be accessible to anyone who is familiar with the content of the [Introduction to R](https://github.com/moj-analytical-services/IntroRTraining) training session & has some experience of using R in their work.
 
 All the notes for the training session are available below. If you have any feedback on the content, please get in touch!
 
@@ -38,8 +38,8 @@ A few days before the session, please make sure that -
 
 1. You have access to RStudio on the Analytical Platform
 2. You have access to the [alpha-everyone s3 bucket](https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/82/)
-3. You have followed the steps in [section 1.5 of the Platform User Guidance](https://moj-analytical-services.github.io/platform_user_guidance/introduction.html#configure-git-and-github) to configure Git and GitHub (this only needs doing once)
-4. You have cloned this repository (instructions are in [section 3.2.1 of the Platform User Guidance](https://moj-analytical-services.github.io/platform_user_guidance/github.html#r-studio))
+3. You have followed the steps in the [Configure Git and Github section of the Platform User Guidance](https://user-guidance.services.alpha.mojanalytics.xyz/introduction.html#configure-git-and-github) to configure Git and GitHub (this only needs doing once)
+4. You have cloned this repository (instructions are in the Analytical Platform User Guidance [here](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#creating-your-project-repo-on-github))
 
 If you have any problems with the above please get in touch with the course organisers or ask for help on either the #analytical_platform or #intro_r channel on [ASD slack](https://asdslack.slack.com).
 
