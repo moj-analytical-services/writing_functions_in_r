@@ -1047,5 +1047,5 @@ To find out more about writing packages, check out the links under further readi
 
 ## Get help
 
-If you get stuck, a great place to ask is [ASD slack](asdslack.slack.com) on either the `#r` or `#intro_r` channels.
+If you get stuck, a great place to ask is [ASD slack](https://asdslack.slack.com/) on either the `#r` or `#intro_r` channels.
 
