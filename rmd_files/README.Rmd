@@ -37,7 +37,7 @@ All the notes for the training session are available below. If you have any feed
 A few days before the session, please make sure that -
 
 1. You have access to RStudio on the Analytical Platform
-2. You have access to the [alpha-everyone s3 bucket](https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/82/)
+2. You have access to the [alpha-r-training s3 bucket](https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/607/)
 3. You have followed the steps in the [Configure Git and Github section of the Platform User Guidance](https://user-guidance.services.alpha.mojanalytics.xyz/introduction.html#configure-git-and-github) to configure Git and GitHub (this only needs doing once)
 4. You have cloned this repository (instructions are in the Analytical Platform User Guidance [here](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#creating-your-project-repo-on-github))
 
