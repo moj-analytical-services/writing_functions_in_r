@@ -377,9 +377,8 @@ combine them with other functions.
 Create a new version of the `fizz_buzz()` function called `fizz_buzz_vec` which
 instead accepts a vector of numbers. Test it out on a vector of the numbers 1 to 15.
 
-**Hint:** 
-if else statements aren't vectorised so you'll need to switch to using 
-`case_when()` from the Tidyverse package `dplyr`. Run `?case_when` to bring up 
+**Hint:** the function `case_when()` from the Tidyverse package `dplyr` is really useful when you want
+to vectorise multiple if-else statements, each with a different desired outcome. Run `?case_when` to bring up 
 the help file.
 
 *This exercise is a bit tricky - if you get stuck, you can still complete exercise 2.3.*
@@ -650,8 +649,6 @@ clean_not_known <- function(x,
   x <- stringr::str_trim(x)
   
   # Replace strings in the data that refer to a missing or unknown value.
-  # The `tolower()` function ensures all strings are lower case before searching
-  # for the missing/unknown phrases.
   x <- dplyr::if_else(tolower(x) %in% values_to_change, not_known_phrase, x)
   
   return(x)
@@ -660,7 +657,7 @@ clean_not_known <- function(x,
 
 ```
 
-In this function we've included some default values, so by default missing/NA values are replaced, and any strings that match "n/a", "not known", "unknown", or "not stated" are replaced. The default replacement value is "Not known".
+In this function we've included some default values, so by default any strings that match "n/a", "not known", "unknown", or "not stated" are replaced, and the default replacement value is "Not known". We've used `if_else()` as a vectorised form of an if-else statement. It's similar to `case_when()` (which we used in exercise 2.2), but can only be used with one condition and two possible outcomes. We've also used the `tolower()` function, which ensures all strings are lower case before searching for the missing/unknown phrases.
 
 ---
 
@@ -700,8 +697,6 @@ clean_not_known <- function(x,
   x <- stringr::str_trim(x)
   
   # Replace strings in the data that refer to a missing or unknown value.
-  # The `tolower()` function ensures all strings are lower case before searching
-  # for the missing/unknown phrases.
   x <- dplyr::if_else(tolower(x) %in% values_to_change, not_known_phrase, x)
   
   return(x)
