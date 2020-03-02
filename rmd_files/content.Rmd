@@ -526,7 +526,7 @@ Here we are reading in a copy of the `Prosecutions and Convictions` dataset from
 
 ```{r message=F, warning=F}
 prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
-  "alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv")
+  "alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv")
 
 # Filter for Magistrates Court to extract the prosecutions
 prosecutions <- prosecutions_and_convictions %>%
@@ -976,7 +976,7 @@ get your code reviewed by someone else.
 
 ## How to organise your code
 
-Whenever you're working on something in R it's generally best to create an R project and version control your code on GitHub. There's information on how to do this in the [Analytical Platform guidance](https://moj-analytical-services.github.io/platform_user_guidance/github.html).
+Whenever you're working on something in R it's generally best to create an R project and version control your code on GitHub. There's information on how to do this in the [Analytical Platform guidance](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#creating-your-project-repo-on-github).
 
 It's also best to keep your functions separate from the rest of your code to make them easier to find.
 
@@ -1047,5 +1047,5 @@ To find out more about writing packages, check out the links under further readi
 
 ## Get help
 
-If you get stuck, a great place to ask is [ASD slack](asdslack.slack.com) on either the `#r` or `#intro_r` channels.
+If you get stuck, a great place to ask is [ASD slack](https://asdslack.slack.com/) on either the `#r` or `#intro_r` channels.
 
