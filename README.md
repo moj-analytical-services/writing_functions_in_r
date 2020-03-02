@@ -8,14 +8,14 @@ session.
 
 Knowing how to write your own functions is a great skill to add to your
 R toolbox. Writing functions can save you time, reduce the risk of
-errors, and make your code easier to understand. In this course we cover
-why, when and how to write your own functions, with plenty of examples
-and exercises to help you get started.
+errors, and make your code easier to understand. In this course we’ll
+cover why, when and how to write your own functions, with plenty of
+examples & exercises to help you get started.
 
-The session is intended to be accessible to anyone who has attended the
-[Introduction to
+The session is intended to be accessible to anyone who is familiar with
+the content of the [Introduction to
 R](https://github.com/moj-analytical-services/IntroRTraining) training
-session and used R a little in their work.
+session & has some experience of using R in their work.
 
 All the notes for the training session are available below. If you have
 any feedback on the content, please get in touch\!
@@ -40,14 +40,15 @@ any feedback on the content, please get in touch\!
 A few days before the session, please make sure that -
 
 1.  You have access to RStudio on the Analytical Platform
-2.  You have access to the [alpha-everyone s3
-    bucket](https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/82/)
-3.  You have followed the steps in [section 1.5 of the Platform User
-    Guidance](https://moj-analytical-services.github.io/platform_user_guidance/introduction.html#configure-git-and-github)
-    to configure Git and GitHub (this only needs doing once)
-4.  You have cloned this repository (instructions are in [section 3.2.1
+2.  You have access to the [alpha-r-training s3
+    bucket](https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/607/)
+3.  You have followed the steps in the [Configure Git and Github section
     of the Platform User
-    Guidance](https://moj-analytical-services.github.io/platform_user_guidance/github.html#r-studio))
+    Guidance](https://user-guidance.services.alpha.mojanalytics.xyz/introduction.html#configure-git-and-github)
+    to configure Git and GitHub (this only needs doing once)
+4.  You have cloned this repository (instructions are in the Analytical
+    Platform User Guidance
+    [here](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#creating-your-project-repo-on-github))
 
 If you have any problems with the above please get in touch with the
 course organisers or ask for help on either the \#analytical\_platform
@@ -621,7 +622,7 @@ named `prosecutions`.
 
 ``` r
 prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
-  "alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv")
+  "alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv")
 
 # Filter for Magistrates Court to extract the prosecutions
 prosecutions <- prosecutions_and_convictions %>%
@@ -1203,7 +1204,7 @@ test this is to get your code reviewed by someone else.
 Whenever you’re working on something in R it’s generally best to create
 an R project and version control your code on GitHub. There’s
 information on how to do this in the [Analytical Platform
-guidance](https://moj-analytical-services.github.io/platform_user_guidance/github.html).
+guidance](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#creating-your-project-repo-on-github).
 
 It’s also best to keep your functions separate from the rest of your
 code to make them easier to find.
@@ -1239,7 +1240,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Pink"
+    ## [1] "Purple"
 
 -----
 
@@ -1317,7 +1318,8 @@ further reading.
 ## Get help
 
 If you get stuck, a great place to ask is [ASD
-slack](asdslack.slack.com) on either the `#r` or `#intro_r` channels.
+slack](https://asdslack.slack.com/) on either the `#r` or `#intro_r`
+channels.
 
 # Appendix
 
@@ -1410,7 +1412,16 @@ row with the total across all categories. Note that this requires the
 
 ``` r
 library(janitor)
+```
 
+    ## 
+    ## Attaching package: 'janitor'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     chisq.test, fisher.test
+
+``` r
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%

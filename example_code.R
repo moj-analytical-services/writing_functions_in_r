@@ -196,7 +196,7 @@ library(lubridate)
 
 ## ----message=F, warning=F------------------------------------------------
 prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
-  "alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv")
+  "alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv")
 
 # Filter for Magistrates Court to extract the prosecutions
 prosecutions <- prosecutions_and_convictions %>%

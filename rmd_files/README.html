@@ -602,8 +602,8 @@ body {
 
 <h1 id="writing-functions-in-r">Writing functions in R</h1>
 <p>This repository is for Writing Functions in R course offered by the DASD R Training Group. It was also used for the April 2019 <a href="https://github.com/moj-analytical-services/Coffee-and-Coding">Coffee &amp; Coding</a> session.</p>
-<p>Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we cover why, when and how to write your own functions, with plenty of examples and exercises to help you get started.</p>
-<p>The session is intended to be accessible to anyone who has attended the <a href="https://github.com/moj-analytical-services/IntroRTraining">Introduction to R</a> training session and used R a little in their work.</p>
+<p>Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we’ll cover why, when and how to write your own functions, with plenty of examples &amp; exercises to help you get started.</p>
+<p>The session is intended to be accessible to anyone who is familiar with the content of the <a href="https://github.com/moj-analytical-services/IntroRTraining">Introduction to R</a> training session &amp; has some experience of using R in their work.</p>
 <p>All the notes for the training session are available below. If you have any feedback on the content, please get in touch!</p>
 <h2 id="contents">Contents</h2>
 <ul>
@@ -624,9 +624,9 @@ body {
 <p>A few days before the session, please make sure that -</p>
 <ol>
 <li>You have access to RStudio on the Analytical Platform</li>
-<li>You have access to the <a href="https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/82/">alpha-everyone s3 bucket</a></li>
-<li>You have followed the steps in <a href="https://moj-analytical-services.github.io/platform_user_guidance/introduction.html#configure-git-and-github">section 1.5 of the Platform User Guidance</a> to configure Git and GitHub (this only needs doing once)</li>
-<li>You have cloned this repository (instructions are in <a href="https://moj-analytical-services.github.io/platform_user_guidance/github.html#r-studio">section 3.2.1 of the Platform User Guidance</a>)</li>
+<li>You have access to the <a href="https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/607/">alpha-r-training s3 bucket</a></li>
+<li>You have followed the steps in the <a href="https://user-guidance.services.alpha.mojanalytics.xyz/introduction.html#configure-git-and-github">Configure Git and Github section of the Platform User Guidance</a> to configure Git and GitHub (this only needs doing once)</li>
+<li>You have cloned this repository (instructions are in the Analytical Platform User Guidance <a href="https://user-guidance.services.alpha.mojanalytics.xyz/github.html#creating-your-project-repo-on-github">here</a>)</li>
 </ol>
 <p>If you have any problems with the above please get in touch with the course organisers or ask for help on either the #analytical_platform or #intro_r channel on <a href="https://asdslack.slack.com">ASD slack</a>.</p>
 <p>All the examples in the presentation/README are available in the R script example_code.R.</p>
@@ -919,7 +919,7 @@ body {
 <hr />
 <p>Here we are reading in a copy of the <code>Prosecutions and Convictions</code> dataset from s3 and storing the dataframe as a variable called <code>prosecutions_and_convictions</code>. In the second step we’re filtering the dataset to extract only the prosecutions and saving to another variable, named <code>prosecutions</code>.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>prosecutions_and_convictions &lt;-<span class="st"> </span>s3tools<span class="op">::</span><span class="kw">s3_path_to_full_df</span>(</span>
-<span id="cb41-2"><a href="#cb41-2"></a>  <span class="st">&quot;alpha-everyone/r_functions_training/prosecutions-and-convictions-2018.csv&quot;</span>)</span>
+<span id="cb41-2"><a href="#cb41-2"></a>  <span class="st">&quot;alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv&quot;</span>)</span>
 <span id="cb41-3"><a href="#cb41-3"></a></span>
 <span id="cb41-4"><a href="#cb41-4"></a><span class="co"># Filter for Magistrates Court to extract the prosecutions</span></span>
 <span id="cb41-5"><a href="#cb41-5"></a>prosecutions &lt;-<span class="st"> </span>prosecutions_and_convictions <span class="op">%&gt;%</span></span>
@@ -1286,7 +1286,7 @@ body {
 <h3 id="ask-for-feedback">Ask for feedback</h3>
 <p>A key measure of a good function (or any piece of code) is how easy it is for someone else to understand, use and modify it. The best way to test this is to get your code reviewed by someone else.</p>
 <h2 id="how-to-organise-your-code">How to organise your code</h2>
-<p>Whenever you’re working on something in R it’s generally best to create an R project and version control your code on GitHub. There’s information on how to do this in the <a href="https://moj-analytical-services.github.io/platform_user_guidance/github.html">Analytical Platform guidance</a>.</p>
+<p>Whenever you’re working on something in R it’s generally best to create an R project and version control your code on GitHub. There’s information on how to do this in the <a href="https://user-guidance.services.alpha.mojanalytics.xyz/github.html#creating-your-project-repo-on-github">Analytical Platform guidance</a>.</p>
 <p>It’s also best to keep your functions separate from the rest of your code to make them easier to find.</p>
 <h3 id="storing-your-functions-in-your-project">Storing your functions in your project</h3>
 <p>The easiest way to store your functions is just to create a folder in your project called “functions” and save your functions there.</p>
@@ -1299,7 +1299,7 @@ body {
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="co"># Create a list of colours to provide to the function</span></span>
 <span id="cb71-2"><a href="#cb71-2"></a>colours &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Magenta&quot;</span>, <span class="st">&quot;Cyan&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>, <span class="st">&quot;Pink&quot;</span>)</span>
 <span id="cb71-3"><a href="#cb71-3"></a><span class="kw">pick_a_colour</span>(colours)</span></code></pre></div>
-<pre><code>## [1] &quot;Pink&quot;
+<pre><code>## [1] &quot;Purple&quot;
 </code></pre>
 <hr />
 <p>You can see the code underlying a function by typing its name (without brackets) in the console and hitting “enter”:</p>
@@ -1351,7 +1351,7 @@ body {
 <li><a href="https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html">Scoping/environments</a></li>
 </ul>
 <h2 id="get-help">Get help</h2>
-<p>If you get stuck, a great place to ask is <a href="asdslack.slack.com">ASD slack</a> on either the <code>#r</code> or <code>#intro_r</code> channels.</p>
+<p>If you get stuck, a great place to ask is <a href="https://asdslack.slack.com/">ASD slack</a> on either the <code>#r</code> or <code>#intro_r</code> channels.</p>
 <h1 id="appendix">Appendix</h1>
 <h2 id="additional-nse-examples">Additional NSE examples</h2>
 <p>Below are more examples of how to handle <code>dplyr()</code>’s non-standard evaluation. If you wanted to use the <code>group_by()</code> and <code>summarise()</code> functions in a user-defined function, then one option is to have variables containing the column names as strings, and including these variables as function arguments. In the function these variables can be enclosed by <code>!!as.name()</code> to convert them into names, like so:</p>
@@ -1420,21 +1420,27 @@ body {
 </code></pre>
 <h2 id="adding-an-optional-total-row">Adding an optional total row</h2>
 <p>We can extend the <code>sum_group()</code> function by having the option to add a row with the total across all categories. Note that this requires the <code>janitor</code> package.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="kw">library</span>(janitor)</span>
-<span id="cb79-2"><a href="#cb79-2"></a></span>
-<span id="cb79-3"><a href="#cb79-3"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col, <span class="dt">add_total=</span>F) {</span>
-<span id="cb79-4"><a href="#cb79-4"></a>  </span>
-<span id="cb79-5"><a href="#cb79-5"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
-<span id="cb79-6"><a href="#cb79-6"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by_at</span>(group_cols) <span class="op">%&gt;%</span></span>
-<span id="cb79-7"><a href="#cb79-7"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise_at</span>(sum_col, sum)</span>
-<span id="cb79-8"><a href="#cb79-8"></a>  </span>
-<span id="cb79-9"><a href="#cb79-9"></a>  <span class="cf">if</span> (add_total <span class="op">==</span><span class="st"> </span>T) {</span>
-<span id="cb79-10"><a href="#cb79-10"></a>    summary &lt;-<span class="st"> </span>summary <span class="op">%&gt;%</span><span class="st"> </span>janitor<span class="op">::</span><span class="kw">adorn_totals</span>(<span class="st">&quot;row&quot;</span>)</span>
-<span id="cb79-11"><a href="#cb79-11"></a>  }</span>
-<span id="cb79-12"><a href="#cb79-12"></a>  </span>
-<span id="cb79-13"><a href="#cb79-13"></a>  <span class="kw">return</span>(summary)</span>
-<span id="cb79-14"><a href="#cb79-14"></a>  </span>
-<span id="cb79-15"><a href="#cb79-15"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="kw">library</span>(janitor)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;
+
+## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test
+</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col, <span class="dt">add_total=</span>F) {</span>
+<span id="cb81-2"><a href="#cb81-2"></a>  </span>
+<span id="cb81-3"><a href="#cb81-3"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
+<span id="cb81-4"><a href="#cb81-4"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by_at</span>(group_cols) <span class="op">%&gt;%</span></span>
+<span id="cb81-5"><a href="#cb81-5"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise_at</span>(sum_col, sum)</span>
+<span id="cb81-6"><a href="#cb81-6"></a>  </span>
+<span id="cb81-7"><a href="#cb81-7"></a>  <span class="cf">if</span> (add_total <span class="op">==</span><span class="st"> </span>T) {</span>
+<span id="cb81-8"><a href="#cb81-8"></a>    summary &lt;-<span class="st"> </span>summary <span class="op">%&gt;%</span><span class="st"> </span>janitor<span class="op">::</span><span class="kw">adorn_totals</span>(<span class="st">&quot;row&quot;</span>)</span>
+<span id="cb81-9"><a href="#cb81-9"></a>  }</span>
+<span id="cb81-10"><a href="#cb81-10"></a>  </span>
+<span id="cb81-11"><a href="#cb81-11"></a>  <span class="kw">return</span>(summary)</span>
+<span id="cb81-12"><a href="#cb81-12"></a>  </span>
+<span id="cb81-13"><a href="#cb81-13"></a>}</span></code></pre></div>
 
 </body>
 </html>
