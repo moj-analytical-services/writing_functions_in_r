@@ -324,15 +324,15 @@ Try it out with values 1, 2, 3, 5 & 15.
 
 **Hints:** 
 
-* This exercise is very similar to example 4. The structure of an if-else statement is -
+* This exercise is very similar to example 4. The structure of an if-else statement is:
 ```
-if (condition_1) {
-  code
-} else if (condition_2) {
-  code
-} else {
-  code
-}
+    if (condition_1) {
+      code
+    } else if (condition_2) {
+      code
+    } else {
+      code
+    }
 ```
 * To test whether a number is divisible by another number, you can use the modulo
 operator `%%`, which calculates the remainder. E.g. `1 %% 3 == 0` evaluates to `FALSE`.
