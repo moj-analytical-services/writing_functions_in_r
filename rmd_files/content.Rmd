@@ -503,6 +503,8 @@ plot_x_and_y(x, y, col='red', type='l')
 
 This section builds on material covered in the [Intro R Training](https://github.com/moj-analytical-services/IntroRTraining) course and makes use of the `dplyr` package, which is a commonly used R package for data manipulation. In the following examples we'll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we'll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found [here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
 
+Over the course of this section we'll be tackling some exercises that fit into a data processing story, so make sure you run the code in "example_code.R" as we go along.
+
 
 ## Loading packages and data
 
