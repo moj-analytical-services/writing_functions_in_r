@@ -675,7 +675,7 @@ Modify `clean_not_known()` to make replacing missing (NA) values optional.
 
 ### Exercise 5
 
-Write a wrapper function to apply `generalise_names()`, `remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
+Write a wrapper function to apply `generalise_names()`, `remove_numbering()`, and `clean_not_known()` to the dataset.
 
 ---
 
