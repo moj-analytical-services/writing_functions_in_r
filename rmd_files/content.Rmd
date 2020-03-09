@@ -103,6 +103,8 @@ add_two(3)
 result <- add_two(3) 
 ```
 
+Note: before you can use a function you need to run the code to create it.
+
 ## Example 2: multiple inputs
 
 Functions can accept as many arguments as you like, but can only output one object (if it is necessary to output more than one object, then the desired outputs can be combined together into a list, and the list can be returned). Here's a function that requires two input variables:
