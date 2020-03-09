@@ -158,8 +158,8 @@ A function is made up of three components:
     is where we put the code.
 
   - And the function **environment** (where the function was created) -
-    this determines what variables and other functions it has access to
-    - you can find out more about environments
+    this determines what variables and other functions it has access to.
+    You can find out more about environments
     [here](https://r4ds.had.co.nz/functions.html#environment).
 
 # Examples of basic functions
@@ -179,6 +179,15 @@ add_two <- function(x) {
 }
 ```
 
+The `return()` statement can be used to explicitly state that `result`
+should be the output of this function. Without a `return()` statement, a
+function written in R will automatically return the value of the last
+evaluated expression. So while it’s not always essential to use a
+`return()` statement, it can make the code more clear and is consistent
+with other programming languages.
+
+-----
+
 Let’s try using the function `add_two()`:
 
 ``` r
@@ -192,6 +201,9 @@ add_two(3)
 # Alternatively the result can be saved as a new variable
 result <- add_two(3) 
 ```
+
+Note: before you can use a function you need to run the code to create
+it.
 
 ## Example 2: multiple inputs
 
@@ -242,8 +254,8 @@ sum_squares(y = 5, x = 3)
     ## [1] 34
 
 **Hint**: if you want your function to work with the pipe operator
-`%>%`, make sure object you want to pipe (usually a dataframe) is the
-first argument for your function.
+`%>%`, make sure the object you want to pipe (usually a dataframe) is
+the first argument for your function.
 
 ## Exercises
 
@@ -293,8 +305,7 @@ In the above example, `return()` is used twice as there is a condition
 with two possibilities. Either the input argument `x` is less than zero,
 in which case the function ends with the `return(-x)` statement,
 otherwise if `x` is not less than zero then the function continues to
-the `return(x)` statement. Without a `return()` statement, a function
-written in R will return the last line of code to run.
+the `return(x)` statement.
 
 ## Example 4: functions without outputs
 
@@ -459,7 +470,7 @@ sum_powers(x = 3, y = 5, z = 3)
 ### 2.1 fizz\_buzz()
 
 Now try using an if else statement inside a function. Create a function
-called `fizz_buzz` which takes a number as input and:
+called `fizz_buzz()` which takes a number as input and:
 
   - If the number is divisible by both 3 and 5, returns “fizz buzz”
   - If the number is divisible by just 3, returns “fizz”
@@ -473,11 +484,12 @@ Try it out with values 1, 2, 3, 5 & 15.
 
 **Hints:**
 
-  - This exercise is very similar to example 4. The structure of an if
-    else statement is -
+  - This exercise is very similar to example 4. The structure of an
+    if-else statement is:
 
 <!-- end list -->
 
+``` 
     if (condition_1) {
       code
     } else if (condition_2) {
@@ -485,6 +497,7 @@ Try it out with values 1, 2, 3, 5 & 15.
     } else {
       code
     }
+```
 
   - To test whether a number is divisible by another number, you can use
     the modulo operator `%%`, which calculates the remainder. E.g. `1
@@ -507,9 +520,10 @@ Create a new version of the `fizz_buzz()` function called
 `fizz_buzz_vec` which instead accepts a vector of numbers. Test it out
 on a vector of the numbers 1 to 15.
 
-**Hint:** if else statements aren’t vectorised so you’ll need to switch
-to using `case_when()` from the Tidyverse package `dplyr`. Run
-`?case_when` to bring up the help file.
+**Hint:** the function `case_when()` from the Tidyverse package `dplyr`
+is really useful when you want to vectorise multiple if-else statements,
+each with a different desired outcome. Run `?case_when` to bring up the
+help file.
 
 *This exercise is a bit tricky - if you get stuck, you can still
 complete exercise 2.3.*
@@ -586,6 +600,10 @@ and plotting data. The data we’ll use is from the Criminal Justice
 System Statistics quarterly publication: December 2018 (published in May
 2019), which can be found
 [here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
+
+Over the course of this section we’ll be tackling some exercises that
+fit into a data processing story, so make sure you run the code in
+“example\_code.R” as we go along.
 
 ## Loading packages and data
 
@@ -748,8 +766,10 @@ remove_numbering <- function(x) {
 -----
 
 Then we can use the `modify_if()` function from `purrr` to apply the
-`remove_numbering()` function to all columns in the `prosecutions`
-dataframe, with the condition that the column must contain strings.
+`remove_numbering()` function to columns in the `prosecutions`
+dataframe. The `modify_if()` function will apply the specified function
+to all columns where a particular condition is met, and in this case the
+condition `is.character` requires that the column contains strings.
 
 ``` r
 prosecutions <- purrr::modify_if(prosecutions, is.character, remove_numbering)
@@ -791,18 +811,22 @@ clean_not_known <- function(x,
   # Remove any white space that might cause the strings to not match
   x <- stringr::str_trim(x)
   
-  # Replace strings in the data that refer to a missing or unknown value
-  x <- ifelse(tolower(x) %in% values_to_change, not_known_phrase, x)
+  # Replace strings in the data that refer to a missing or unknown value.
+  x <- dplyr::if_else(tolower(x) %in% values_to_change, not_known_phrase, x)
   
   return(x)
 
 }
 ```
 
-In this function we’ve included some default values, so by default
-missing/NA values are replaced, and any strings that match “n/a”, “not
-known”, “unknown”, or “not stated” are replaced. The default replacement
-value is “Not known”.
+In this function we’ve included some default values, so by default any
+strings that match “n/a”, “not known”, “unknown”, or “not stated” are
+replaced, and the default replacement value is “Not known”. We’ve used
+`if_else()` as a vectorised form of an if-else statement. It’s similar
+to `case_when()` (which we used in exercise 2.2), but can only be used
+with one condition and two possible outcomes. We’ve also used the
+`tolower()` function, which ensures all strings are lower case before
+searching for the missing/unknown phrases.
 
 -----
 
@@ -840,7 +864,7 @@ optional.
 ### Exercise 5
 
 Write a wrapper function to apply `generalise_names()`,
-`remove_indices_from_columns()`, and `clean_not_known()` to the dataset.
+`remove_numbering()`, and `clean_not_known()` to the dataset.
 
 -----
 
@@ -1217,11 +1241,11 @@ your project called “functions” and save your functions there.
 You could either put each function in its own R script with the same
 name, or you could group related functions into clearly named scripts.
 
-Then just use `source("my_functions_script.R")` (with
-`my_functions_script.R` replaced with the name of your script) to run
-the code and make your functions available to you in the current
-session. As with loading packages, it’s best to do this at the top of
-your script.
+Then just use `source("functions/my_functions_script.R")` (with
+`functions/` and `my_functions_script.R` replaced with the name of the
+folder and the name of your script, respectively) to run the code and
+make your functions available to you in the current session. As with
+loading packages, it’s best to do this at the top of your script.
 
 -----
 
@@ -1240,7 +1264,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Green"
+    ## [1] "Magenta"
 
 -----
 

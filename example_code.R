@@ -272,8 +272,8 @@ clean_not_known <- function(x,
   # Remove any white space that might cause the strings to not match
   x <- stringr::str_trim(x)
   
-  # Replace strings in the data that refer to a missing or unknown value
-  x <- ifelse(tolower(x) %in% values_to_change, not_known_phrase, x)
+  # Replace strings in the data that refer to a missing or unknown value.
+  x <- dplyr::if_else(tolower(x) %in% values_to_change, not_known_phrase, x)
   
   return(x)
 

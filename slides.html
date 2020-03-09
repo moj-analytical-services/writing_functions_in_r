@@ -3110,7 +3110,23 @@ slide:not(.current) .plotly.html-widget{
           </hgroup>
   </slide>
 
-<slide class=""><hgroup><h2>Learning outcomes</h2></hgroup><article  class="smaller " id="learning-outcomes">
+<slide class=""><hgroup><h2>Writing functions in R: setup</h2></hgroup><article  class="smaller " id="writing-functions-in-r-setup">
+
+<p>Before we start, make sure you’ve:</p>
+
+<ol>
+<li>Got access to the <code>alpha-r-training</code> bucket</li>
+<li>Cloned the <code>writing_functions_in_r</code> repo</li>
+<li>Pulled any changes (the blue arrow on the Git tab in the top right panel)</li>
+<li>Got <code>example_code.R</code> open</li>
+<li>Opened the <code>writing_functions_in_r</code> repo open so you can refer to the read me</li>
+</ol>
+
+<p>If you need any help, just ask! For anyone joining remotely, we will be monitoring Skype throughout the session.</p>
+
+<p>Note we will be recording this session for upload later to the R training Microsoft Stream channel.</p>
+
+</article></slide><slide class=""><hgroup><h2>Learning outcomes</h2></hgroup><article  class="smaller " id="learning-outcomes">
 
 <h3>By the end of this session you should know:</h3>
 
@@ -3175,7 +3191,7 @@ sum_x &lt;- sum(x) # Sum the numbers contained in &#39;x&#39;, and save the resu
 <ul>
 <li><p>Its <strong>arguments</strong> (in this example, <code>arg1</code> and <code>arg2</code>) - these are variables used inside the function body which we can set each time we call the function.</p></li>
 <li><p>The function <strong>body</strong> (everything between the curly brackets) - this is where we put the code.</p></li>
-<li><p>And the function <strong>environment</strong> (where the function was created) - this determines what variables and other functions it has access to - you can find out more about environments <a href='https://r4ds.had.co.nz/functions.html#environment' title=''>here</a>.</p></li>
+<li><p>And the function <strong>environment</strong> (where the function was created) - this determines what variables and other functions it has access to. You can find out more about environments <a href='https://r4ds.had.co.nz/functions.html#environment' title=''>here</a>.</p></li>
 </ul>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Examples of basic functions</h2></hgroup><article  class="smaller " id="examples-of-basic-functions">
@@ -3192,6 +3208,10 @@ add_two &lt;- function(x) {
   
 }</pre>
 
+<p>The <code>return()</code> statement can be used to explicitly state that <code>result</code> should be the output of this function. Without a <code>return()</code> statement, a function written in R will automatically return the value of the last evaluated expression. So while it’s not always essential to use a <code>return()</code> statement, it can make the code more clear and is consistent with other programming languages.</p>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
+
 <p>Let’s try using the function <code>add_two()</code>:</p>
 
 <pre class = 'prettyprint lang-r'># Calling the function by itself prints the result to the console
@@ -3201,6 +3221,8 @@ add_two(3)</pre>
 
 <pre class = 'prettyprint lang-r'># Alternatively the result can be saved as a new variable
 result &lt;- add_two(3) </pre>
+
+<p>Note: before you can use a function you need to run the code to create it.</p>
 
 </article></slide><slide class=""><hgroup><h2>Example 2: multiple inputs</h2></hgroup><article  class="smaller " id="example-2-multiple-inputs">
 
@@ -3232,7 +3254,7 @@ sum_squares(3, 5)</pre>
 
 <pre >## [1] 34</pre>
 
-<p><strong>Hint</strong>: if you want your function to work with the pipe operator <code>%&gt;%</code>, make sure object you want to pipe (usually a dataframe) is the first argument for your function.</p>
+<p><strong>Hint</strong>: if you want your function to work with the pipe operator <code>%&gt;%</code>, make sure the object you want to pipe (usually a dataframe) is the first argument for your function.</p>
 
 </article></slide><slide class=""><hgroup><h2>Exercises</h2></hgroup><article  class="smaller " id="exercises">
 
@@ -3288,7 +3310,7 @@ abs_x(-5)</pre>
 
 <pre >## [1] 5</pre>
 
-<p>As soon as a <code>return()</code> statement is encountered in a function, the function finishes and returns the variable in the <code>return()</code> statement. In the above example, <code>return()</code> is used twice as there is a condition with two possibilities. Either the input argument <code>x</code> is less than zero, in which case the function ends with the <code>return(-x)</code> statement, otherwise if <code>x</code> is not less than zero then the function continues to the <code>return(x)</code> statement. Without a <code>return()</code> statement, a function written in R will return the last line of code to run.</p>
+<p>As soon as a <code>return()</code> statement is encountered in a function, the function finishes and returns the variable in the <code>return()</code> statement. In the above example, <code>return()</code> is used twice as there is a condition with two possibilities. Either the input argument <code>x</code> is less than zero, in which case the function ends with the <code>return(-x)</code> statement, otherwise if <code>x</code> is not less than zero then the function continues to the <code>return(x)</code> statement.</p>
 
 </article></slide><slide class=""><hgroup><h2>Example 4: functions without outputs</h2></hgroup><article  class="smaller " id="example-4-functions-without-outputs">
 
@@ -3416,7 +3438,7 @@ sum_powers(x = 3, y = 5)</pre>
 
 <h3>2.1 fizz_buzz()</h3>
 
-<p>Now try using an if else statement inside a function. Create a function called <code>fizz_buzz</code> which takes a number as input and:</p>
+<p>Now try using an if else statement inside a function. Create a function called <code>fizz_buzz()</code> which takes a number as input and:</p>
 
 <ul>
 <li>If the number is divisible by both 3 and 5, returns &ldquo;fizz buzz&rdquo;</li>
@@ -3432,16 +3454,16 @@ sum_powers(x = 3, y = 5)</pre>
 <p><strong>Hints:</strong></p>
 
 <ul>
-<li>This exercise is very similar to example 4. The structure of an if else statement is -</li>
+<li>This exercise is very similar to example 4. The structure of an if-else statement is:</li>
 </ul>
 
-<pre >if (condition_1) {
-  code
-} else if (condition_2) {
-  code
-} else {
-  code
-}</pre>
+<pre >    if (condition_1) {
+      code
+    } else if (condition_2) {
+      code
+    } else {
+      code
+    }</pre>
 
 <ul>
 <li>To test whether a number is divisible by another number, you can use the modulo operator <code>%%</code>, which calculates the remainder. E.g. <code>1 %% 3 == 0</code> evaluates to <code>FALSE</code>.</li>
@@ -3480,7 +3502,7 @@ fizz_buzz(15) # &quot;fizz buzz&quot;</pre>
 
 <p>Create a new version of the <code>fizz_buzz()</code> function called <code>fizz_buzz_vec</code> which instead accepts a vector of numbers. Test it out on a vector of the numbers 1 to 15.</p>
 
-<p><strong>Hint:</strong> if else statements aren’t vectorised so you’ll need to switch to using <code>case_when()</code> from the Tidyverse package <code>dplyr</code>. Run <code>?case_when</code> to bring up the help file.</p>
+<p><strong>Hint:</strong> the function <code>case_when()</code> from the Tidyverse package <code>dplyr</code> is really useful when you want to vectorise multiple if-else statements, each with a different desired outcome. Run <code>?case_when</code> to bring up the help file.</p>
 
 <p><em>This exercise is a bit tricky - if you get stuck, you can still complete exercise 2.3.</em></p>
 
@@ -3594,6 +3616,8 @@ y &lt;- (1:10) * 2</pre>
 </article></slide><slide class=""><hgroup><h2>&ldquo;Real-world&rdquo; example functions</h2></hgroup><article  class="smaller " id="real-world-example-functions-1">
 
 <p>This section builds on material covered in the <a href='https://github.com/moj-analytical-services/IntroRTraining' title=''>Intro R Training</a> course and makes use of the <code>dplyr</code> package, which is a commonly used R package for data manipulation. In the following examples we’ll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we’ll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found <a href='https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018' title=''>here</a>.</p>
+
+<p>Over the course of this section we’ll be tackling some exercises that fit into a data processing story, so make sure you run the code in &ldquo;example_code.R&rdquo; as we go along.</p>
 
 </article></slide><slide class=""><hgroup><h2>Loading packages and data</h2></hgroup><article  class="smaller " id="loading-packages-and-data">
 
@@ -3747,7 +3771,7 @@ remove_numbering &lt;- function(x) {
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
-<p>Then we can use the <code>modify_if()</code> function from <code>purrr</code> to apply the <code>remove_numbering()</code> function to all columns in the <code>prosecutions</code> dataframe, with the condition that the column must contain strings.</p>
+<p>Then we can use the <code>modify_if()</code> function from <code>purrr</code> to apply the <code>remove_numbering()</code> function to columns in the <code>prosecutions</code> dataframe. The <code>modify_if()</code> function will apply the specified function to all columns where a particular condition is met, and in this case the condition <code>is.character</code> requires that the column contains strings.</p>
 
 <pre class = 'prettyprint lang-r'>prosecutions &lt;- purrr::modify_if(prosecutions, is.character, remove_numbering)
 glimpse(prosecutions)</pre>
@@ -3785,14 +3809,14 @@ glimpse(prosecutions)</pre>
   # Remove any white space that might cause the strings to not match
   x &lt;- stringr::str_trim(x)
   
-  # Replace strings in the data that refer to a missing or unknown value
-  x &lt;- ifelse(tolower(x) %in% values_to_change, not_known_phrase, x)
+  # Replace strings in the data that refer to a missing or unknown value.
+  x &lt;- dplyr::if_else(tolower(x) %in% values_to_change, not_known_phrase, x)
   
   return(x)
 
 }</pre>
 
-<p>In this function we’ve included some default values, so by default missing/NA values are replaced, and any strings that match &ldquo;n/a&rdquo;, &ldquo;not known&rdquo;, &ldquo;unknown&rdquo;, or &ldquo;not stated&rdquo; are replaced. The default replacement value is &ldquo;Not known&rdquo;.</p>
+<p>In this function we’ve included some default values, so by default any strings that match &ldquo;n/a&rdquo;, &ldquo;not known&rdquo;, &ldquo;unknown&rdquo;, or &ldquo;not stated&rdquo; are replaced, and the default replacement value is &ldquo;Not known&rdquo;. We’ve used <code>if_else()</code> as a vectorised form of an if-else statement. It’s similar to <code>case_when()</code> (which we used in exercise 2.2), but can only be used with one condition and two possible outcomes. We’ve also used the <code>tolower()</code> function, which ensures all strings are lower case before searching for the missing/unknown phrases.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -3826,7 +3850,7 @@ glimpse(prosecutions)</pre>
 
 <h3>Exercise 5</h3>
 
-<p>Write a wrapper function to apply <code>generalise_names()</code>, <code>remove_indices_from_columns()</code>, and <code>clean_not_known()</code> to the dataset.</p>
+<p>Write a wrapper function to apply <code>generalise_names()</code>, <code>remove_numbering()</code>, and <code>clean_not_known()</code> to the dataset.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -3845,8 +3869,8 @@ clean_not_known &lt;- function(x,
   # Remove any white space that might cause the strings to not match
   x &lt;- stringr::str_trim(x)
   
-  # Replace strings in the data that refer to a missing or unknown values
-  x &lt;- ifelse(tolower(x) %in% values_to_change, not_known_phrase, x)
+  # Replace strings in the data that refer to a missing or unknown value.
+  x &lt;- dplyr::if_else(tolower(x) %in% values_to_change, not_known_phrase, x)
   
   return(x)
   
@@ -4185,7 +4209,7 @@ glimpse(prosecutions_extract)</pre>
 
 <p>You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.</p>
 
-<p>Then just use <code>source(&quot;my_functions_script.R&quot;)</code> (with <code>my_functions_script.R</code> replaced with the name of your script) to run the code and make your functions available to you in the current session. As with loading packages, it’s best to do this at the top of your script.</p>
+<p>Then just use <code>source(&quot;functions/my_functions_script.R&quot;)</code> (with <code>functions/</code> and <code>my_functions_script.R</code> replaced with the name of the folder and the name of your script, respectively) to run the code and make your functions available to you in the current session. As with loading packages, it’s best to do this at the top of your script.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -4199,7 +4223,7 @@ glimpse(prosecutions_extract)</pre>
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >## [1] &quot;Purple&quot;</pre>
+<pre >## [1] &quot;Green&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 

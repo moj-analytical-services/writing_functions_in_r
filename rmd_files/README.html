@@ -669,10 +669,7 @@ body {
 <ul>
 <li><p>Its <strong>arguments</strong> (in this example, <code>arg1</code> and <code>arg2</code>) - these are variables used inside the function body which we can set each time we call the function.</p></li>
 <li><p>The function <strong>body</strong> (everything between the curly brackets) - this is where we put the code.</p></li>
-<li><p>And the function <strong>environment</strong> (where the function was created) - this determines what variables and other functions it has access to</p>
-<ul>
-<li>you can find out more about environments <a href="https://r4ds.had.co.nz/functions.html#environment">here</a>.</li>
-</ul></li>
+<li><p>And the function <strong>environment</strong> (where the function was created) - this determines what variables and other functions it has access to. You can find out more about environments <a href="https://r4ds.had.co.nz/functions.html#environment">here</a>.</p></li>
 </ul>
 <h1 id="examples-of-basic-functions">Examples of basic functions</h1>
 <h2 id="example-1-a-very-basic-function">Example 1: a very basic function</h2>
@@ -684,6 +681,8 @@ body {
 <span id="cb3-5"><a href="#cb3-5"></a>  <span class="kw">return</span>(result)</span>
 <span id="cb3-6"><a href="#cb3-6"></a>  </span>
 <span id="cb3-7"><a href="#cb3-7"></a>}</span></code></pre></div>
+<p>The <code>return()</code> statement can be used to explicitly state that <code>result</code> should be the output of this function. Without a <code>return()</code> statement, a function written in R will automatically return the value of the last evaluated expression. So while it’s not always essential to use a <code>return()</code> statement, it can make the code more clear and is consistent with other programming languages.</p>
+<hr />
 <p>Let’s try using the function <code>add_two()</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Calling the function by itself prints the result to the console</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">add_two</span>(<span class="dv">3</span>)</span></code></pre></div>
@@ -691,6 +690,7 @@ body {
 </code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Alternatively the result can be saved as a new variable</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>result &lt;-<span class="st"> </span><span class="kw">add_two</span>(<span class="dv">3</span>) </span></code></pre></div>
+<p>Note: before you can use a function you need to run the code to create it.</p>
 <h2 id="example-2-multiple-inputs">Example 2: multiple inputs</h2>
 <p>Functions can accept as many arguments as you like, but can only output one object (if it is necessary to output more than one object, then the desired outputs can be combined together into a list, and the list can be returned). Here’s a function that requires two input variables:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># This function sums the squares of two numbers</span></span>
@@ -713,7 +713,7 @@ body {
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">sum_squares</span>(<span class="dt">y =</span> <span class="dv">5</span>, <span class="dt">x =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 34
 </code></pre>
-<p><strong>Hint</strong>: if you want your function to work with the pipe operator <code>%&gt;%</code>, make sure object you want to pipe (usually a dataframe) is the first argument for your function.</p>
+<p><strong>Hint</strong>: if you want your function to work with the pipe operator <code>%&gt;%</code>, make sure the object you want to pipe (usually a dataframe) is the first argument for your function.</p>
 <h2 id="exercises">Exercises</h2>
 <p>Let’s start with some simple exercises to get familiar with the syntax of writing functions.</p>
 <h3 id="11-hello_world">1.1 hello_world()</h3>
@@ -736,7 +736,7 @@ body {
 <span id="cb13-10"><a href="#cb13-10"></a><span class="kw">abs_x</span>(<span class="op">-</span><span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 5
 </code></pre>
-<p>As soon as a <code>return()</code> statement is encountered in a function, the function finishes and returns the variable in the <code>return()</code> statement. In the above example, <code>return()</code> is used twice as there is a condition with two possibilities. Either the input argument <code>x</code> is less than zero, in which case the function ends with the <code>return(-x)</code> statement, otherwise if <code>x</code> is not less than zero then the function continues to the <code>return(x)</code> statement. Without a <code>return()</code> statement, a function written in R will return the last line of code to run.</p>
+<p>As soon as a <code>return()</code> statement is encountered in a function, the function finishes and returns the variable in the <code>return()</code> statement. In the above example, <code>return()</code> is used twice as there is a condition with two possibilities. Either the input argument <code>x</code> is less than zero, in which case the function ends with the <code>return(-x)</code> statement, otherwise if <code>x</code> is not less than zero then the function continues to the <code>return(x)</code> statement.</p>
 <h2 id="example-4-functions-without-outputs">Example 4: functions without outputs</h2>
 <p>Depending on the purpose of the function, it doesn’t need to return an output at all. Instead it can have a “side effect”, such as printing a value to the console:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># This function lets you know whether a number is odd or even</span></span>
@@ -836,7 +836,7 @@ body {
 </code></pre>
 <h2 id="exercises-1">Exercises</h2>
 <h3 id="21-fizz_buzz">2.1 fizz_buzz()</h3>
-<p>Now try using an if else statement inside a function. Create a function called <code>fizz_buzz</code> which takes a number as input and:</p>
+<p>Now try using an if else statement inside a function. Create a function called <code>fizz_buzz()</code> which takes a number as input and:</p>
 <ul>
 <li>If the number is divisible by both 3 and 5, returns “fizz buzz”</li>
 <li>If the number is divisible by just 3, returns “fizz”</li>
@@ -847,17 +847,17 @@ body {
 <hr />
 <p><strong>Hints:</strong></p>
 <ul>
-<li>This exercise is very similar to example 4. The structure of an if else statement is -</li>
+<li>This exercise is very similar to example 4. The structure of an if-else statement is:</li>
 </ul>
 <!-- end list -->
 
-<pre><code>if (condition_1) {
-  code
-} else if (condition_2) {
-  code
-} else {
-  code
-}
+<pre><code>    if (condition_1) {
+      code
+    } else if (condition_2) {
+      code
+    } else {
+      code
+    }
 </code></pre>
 <ul>
 <li>To test whether a number is divisible by another number, you can use the modulo operator <code>%%</code>, which calculates the remainder. E.g. <code>1 %% 3 == 0</code> evaluates to <code>FALSE</code>.</li>
@@ -868,7 +868,7 @@ body {
 <h3 id="22-fizz_buzz_vec">2.2 fizz_buzz_vec()</h3>
 <p>Most functions in R are vectorised. This means they can apply an operation to every element of a vector at the same time. It’s best practice to vectorise your own functions too as this will help you to apply them to data sets and combine them with other functions.</p>
 <p>Create a new version of the <code>fizz_buzz()</code> function called <code>fizz_buzz_vec</code> which instead accepts a vector of numbers. Test it out on a vector of the numbers 1 to 15.</p>
-<p><strong>Hint:</strong> if else statements aren’t vectorised so you’ll need to switch to using <code>case_when()</code> from the Tidyverse package <code>dplyr</code>. Run <code>?case_when</code> to bring up the help file.</p>
+<p><strong>Hint:</strong> the function <code>case_when()</code> from the Tidyverse package <code>dplyr</code> is really useful when you want to vectorise multiple if-else statements, each with a different desired outcome. Run <code>?case_when</code> to bring up the help file.</p>
 <p><em>This exercise is a bit tricky - if you get stuck, you can still complete exercise 2.3.</em></p>
 <hr />
 <hr />
@@ -899,6 +899,7 @@ body {
 <h1 id="real-world-example-functions">“Real-world” example functions</h1>
 <h2 id="real-world-example-functions-1">“Real-world” example functions</h2>
 <p>This section builds on material covered in the <a href="https://github.com/moj-analytical-services/IntroRTraining">Intro R Training</a> course and makes use of the <code>dplyr</code> package, which is a commonly used R package for data manipulation. In the following examples we’ll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we’ll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found <a href="https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018">here</a>.</p>
+<p>Over the course of this section we’ll be tackling some exercises that fit into a data processing story, so make sure you run the code in “example_code.R” as we go along.</p>
 <h2 id="loading-packages-and-data">Loading packages and data</h2>
 <p>Before we start looking at more example functions, first of all we need to load a few packages:</p>
 <ul>
@@ -1003,7 +1004,7 @@ body {
 <span id="cb48-7"><a href="#cb48-7"></a>  </span>
 <span id="cb48-8"><a href="#cb48-8"></a>}</span></code></pre></div>
 <hr />
-<p>Then we can use the <code>modify_if()</code> function from <code>purrr</code> to apply the <code>remove_numbering()</code> function to all columns in the <code>prosecutions</code> dataframe, with the condition that the column must contain strings.</p>
+<p>Then we can use the <code>modify_if()</code> function from <code>purrr</code> to apply the <code>remove_numbering()</code> function to columns in the <code>prosecutions</code> dataframe. The <code>modify_if()</code> function will apply the specified function to all columns where a particular condition is met, and in this case the condition <code>is.character</code> requires that the column contains strings.</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>prosecutions &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">modify_if</span>(prosecutions, is.character, remove_numbering)</span>
 <span id="cb49-2"><a href="#cb49-2"></a><span class="kw">glimpse</span>(prosecutions)</span></code></pre></div>
 <pre><code>## Observations: 107,493
@@ -1037,13 +1038,13 @@ body {
 <span id="cb51-8"><a href="#cb51-8"></a>  <span class="co"># Remove any white space that might cause the strings to not match</span></span>
 <span id="cb51-9"><a href="#cb51-9"></a>  x &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_trim</span>(x)</span>
 <span id="cb51-10"><a href="#cb51-10"></a>  </span>
-<span id="cb51-11"><a href="#cb51-11"></a>  <span class="co"># Replace strings in the data that refer to a missing or unknown value</span></span>
-<span id="cb51-12"><a href="#cb51-12"></a>  x &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">tolower</span>(x) <span class="op">%in%</span><span class="st"> </span>values_to_change, not_known_phrase, x)</span>
+<span id="cb51-11"><a href="#cb51-11"></a>  <span class="co"># Replace strings in the data that refer to a missing or unknown value.</span></span>
+<span id="cb51-12"><a href="#cb51-12"></a>  x &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">if_else</span>(<span class="kw">tolower</span>(x) <span class="op">%in%</span><span class="st"> </span>values_to_change, not_known_phrase, x)</span>
 <span id="cb51-13"><a href="#cb51-13"></a>  </span>
 <span id="cb51-14"><a href="#cb51-14"></a>  <span class="kw">return</span>(x)</span>
 <span id="cb51-15"><a href="#cb51-15"></a></span>
 <span id="cb51-16"><a href="#cb51-16"></a>}</span></code></pre></div>
-<p>In this function we’ve included some default values, so by default missing/NA values are replaced, and any strings that match “n/a”, “not known”, “unknown”, or “not stated” are replaced. The default replacement value is “Not known”.</p>
+<p>In this function we’ve included some default values, so by default any strings that match “n/a”, “not known”, “unknown”, or “not stated” are replaced, and the default replacement value is “Not known”. We’ve used <code>if_else()</code> as a vectorised form of an if-else statement. It’s similar to <code>case_when()</code> (which we used in exercise 2.2), but can only be used with one condition and two possible outcomes. We’ve also used the <code>tolower()</code> function, which ensures all strings are lower case before searching for the missing/unknown phrases.</p>
 <hr />
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>prosecutions &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">modify_if</span>(prosecutions, is.character, clean_not_known)</span>
 <span id="cb52-2"><a href="#cb52-2"></a><span class="kw">glimpse</span>(prosecutions)</span></code></pre></div>
@@ -1070,7 +1071,7 @@ body {
 <h3 id="exercise-4">Exercise 4</h3>
 <p>Modify <code>clean_not_known()</code> to make replacing missing (NA) values optional.</p>
 <h3 id="exercise-5">Exercise 5</h3>
-<p>Write a wrapper function to apply <code>generalise_names()</code>, <code>remove_indices_from_columns()</code>, and <code>clean_not_known()</code> to the dataset.</p>
+<p>Write a wrapper function to apply <code>generalise_names()</code>, <code>remove_numbering()</code>, and <code>clean_not_known()</code> to the dataset.</p>
 <hr />
 <hr />
 <h2 id="summarising-data">Summarising data</h2>
@@ -1291,7 +1292,7 @@ body {
 <h3 id="storing-your-functions-in-your-project">Storing your functions in your project</h3>
 <p>The easiest way to store your functions is just to create a folder in your project called “functions” and save your functions there.</p>
 <p>You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.</p>
-<p>Then just use <code>source(&quot;my_functions_script.R&quot;)</code> (with <code>my_functions_script.R</code> replaced with the name of your script) to run the code and make your functions available to you in the current session. As with loading packages, it’s best to do this at the top of your script.</p>
+<p>Then just use <code>source(&quot;functions/my_functions_script.R&quot;)</code> (with <code>functions/</code> and <code>my_functions_script.R</code> replaced with the name of the folder and the name of your script, respectively) to run the code and make your functions available to you in the current session. As with loading packages, it’s best to do this at the top of your script.</p>
 <hr />
 <p>Here’s an example of calling a script that contains a new function, called <code>pick_a_colour()</code>:</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">source</span>(<span class="st">&quot;functions.R&quot;</span>)</span></code></pre></div>
@@ -1299,7 +1300,7 @@ body {
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="co"># Create a list of colours to provide to the function</span></span>
 <span id="cb71-2"><a href="#cb71-2"></a>colours &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Magenta&quot;</span>, <span class="st">&quot;Cyan&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Purple&quot;</span>, <span class="st">&quot;Pink&quot;</span>)</span>
 <span id="cb71-3"><a href="#cb71-3"></a><span class="kw">pick_a_colour</span>(colours)</span></code></pre></div>
-<pre><code>## [1] &quot;Green&quot;
+<pre><code>## [1] &quot;Magenta&quot;
 </code></pre>
 <hr />
 <p>You can see the code underlying a function by typing its name (without brackets) in the console and hitting “enter”:</p>
