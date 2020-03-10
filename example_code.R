@@ -291,7 +291,7 @@ glimpse(prosecutions)
 
 
 ## ------------------------------------------------------------------------
-# Note: if you are running this code from 'example_code.R', then Exercise 1 must be completed first
+# Note: if you are running this code from 'example_code.R', then Exercise 3 must be completed first
 
 prosecutions_grouped <- prosecutions %>%
   dplyr::group_by(age_range) %>%

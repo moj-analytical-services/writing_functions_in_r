@@ -876,7 +876,7 @@ Let’s say we wanted to create a summary table showing the number of
 people prosecuted in different age bands. We could do:
 
 ``` r
-# Note: if you are running this code from 'example_code.R', then Exercise 1 must be completed first
+# Note: if you are running this code from 'example_code.R', then Exercise 3 must be completed first
 
 prosecutions_grouped <- prosecutions %>%
   dplyr::group_by(age_range) %>%
@@ -1436,16 +1436,7 @@ row with the total across all categories. Note that this requires the
 
 ``` r
 library(janitor)
-```
 
-    ## 
-    ## Attaching package: 'janitor'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     chisq.test, fisher.test
-
-``` r
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%

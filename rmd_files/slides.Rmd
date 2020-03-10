@@ -19,7 +19,7 @@ Before we start, make sure you've:
 2. Cloned the `writing_functions_in_r` repo
 3. Pulled any changes (the blue arrow on the Git tab in the top right panel)
 4. Got `example_code.R` open
-5. Opened the `writing_functions_in_r` repo open so you can refer to the read me
+5. Opened the `writing_functions_in_r` repo on GitHub, so you can refer to the read me
 
 If you need any help, just ask! For anyone joining remotely, we will be monitoring Skype throughout the session.
 

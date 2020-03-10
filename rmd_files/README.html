@@ -1076,7 +1076,7 @@ body {
 <hr />
 <h2 id="summarising-data">Summarising data</h2>
 <p>Let’s say we wanted to create a summary table showing the number of people prosecuted in different age bands. We could do:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># Note: if you are running this code from &#39;example_code.R&#39;, then Exercise 1 must be completed first</span></span>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># Note: if you are running this code from &#39;example_code.R&#39;, then Exercise 3 must be completed first</span></span>
 <span id="cb54-2"><a href="#cb54-2"></a></span>
 <span id="cb54-3"><a href="#cb54-3"></a>prosecutions_grouped &lt;-<span class="st"> </span>prosecutions <span class="op">%&gt;%</span></span>
 <span id="cb54-4"><a href="#cb54-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(age_range) <span class="op">%&gt;%</span></span>
@@ -1421,27 +1421,21 @@ body {
 </code></pre>
 <h2 id="adding-an-optional-total-row">Adding an optional total row</h2>
 <p>We can extend the <code>sum_group()</code> function by having the option to add a row with the total across all categories. Note that this requires the <code>janitor</code> package.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="kw">library</span>(janitor)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;janitor&#39;
-
-## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     chisq.test, fisher.test
-</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col, <span class="dt">add_total=</span>F) {</span>
-<span id="cb81-2"><a href="#cb81-2"></a>  </span>
-<span id="cb81-3"><a href="#cb81-3"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
-<span id="cb81-4"><a href="#cb81-4"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by_at</span>(group_cols) <span class="op">%&gt;%</span></span>
-<span id="cb81-5"><a href="#cb81-5"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise_at</span>(sum_col, sum)</span>
-<span id="cb81-6"><a href="#cb81-6"></a>  </span>
-<span id="cb81-7"><a href="#cb81-7"></a>  <span class="cf">if</span> (add_total <span class="op">==</span><span class="st"> </span>T) {</span>
-<span id="cb81-8"><a href="#cb81-8"></a>    summary &lt;-<span class="st"> </span>summary <span class="op">%&gt;%</span><span class="st"> </span>janitor<span class="op">::</span><span class="kw">adorn_totals</span>(<span class="st">&quot;row&quot;</span>)</span>
-<span id="cb81-9"><a href="#cb81-9"></a>  }</span>
-<span id="cb81-10"><a href="#cb81-10"></a>  </span>
-<span id="cb81-11"><a href="#cb81-11"></a>  <span class="kw">return</span>(summary)</span>
-<span id="cb81-12"><a href="#cb81-12"></a>  </span>
-<span id="cb81-13"><a href="#cb81-13"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="kw">library</span>(janitor)</span>
+<span id="cb79-2"><a href="#cb79-2"></a></span>
+<span id="cb79-3"><a href="#cb79-3"></a>sum_group &lt;-<span class="st"> </span><span class="cf">function</span>(df, group_cols, sum_col, <span class="dt">add_total=</span>F) {</span>
+<span id="cb79-4"><a href="#cb79-4"></a>  </span>
+<span id="cb79-5"><a href="#cb79-5"></a>  summary &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
+<span id="cb79-6"><a href="#cb79-6"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">group_by_at</span>(group_cols) <span class="op">%&gt;%</span></span>
+<span id="cb79-7"><a href="#cb79-7"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarise_at</span>(sum_col, sum)</span>
+<span id="cb79-8"><a href="#cb79-8"></a>  </span>
+<span id="cb79-9"><a href="#cb79-9"></a>  <span class="cf">if</span> (add_total <span class="op">==</span><span class="st"> </span>T) {</span>
+<span id="cb79-10"><a href="#cb79-10"></a>    summary &lt;-<span class="st"> </span>summary <span class="op">%&gt;%</span><span class="st"> </span>janitor<span class="op">::</span><span class="kw">adorn_totals</span>(<span class="st">&quot;row&quot;</span>)</span>
+<span id="cb79-11"><a href="#cb79-11"></a>  }</span>
+<span id="cb79-12"><a href="#cb79-12"></a>  </span>
+<span id="cb79-13"><a href="#cb79-13"></a>  <span class="kw">return</span>(summary)</span>
+<span id="cb79-14"><a href="#cb79-14"></a>  </span>
+<span id="cb79-15"><a href="#cb79-15"></a>}</span></code></pre></div>
 
 </body>
 </html>
