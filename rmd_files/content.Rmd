@@ -730,6 +730,11 @@ clean_dataset <- function(data) {
 
 ```
 
+```{r, include=FALSE, purl=TRUE}
+# This is code is included in case Exercise 3 wasn't completed above
+colnames(prosecutions) <- generalise_names(colnames(prosecutions))
+```
+
 
 ## Summarising data
 
