@@ -17,12 +17,20 @@ the content of the [Introduction to
 R](https://github.com/moj-analytical-services/IntroRTraining) training
 session & has some experience of using R in their work.
 
-All the notes for the training session are available below. If you have
-any feedback on the content, please get in touch\!
+This training session is run in person/over Skype every few months.
+Alternatively, you can go through this material in your own time - all
+the notes are available below and you can also find the recording of a
+previous session
+[here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a).
+See [Remote learning](#remote-learning) for more tips on going through
+this material in your own time.
+
+If you have any feedback on the content, please get in touch\!
 
 ## Contents
 
   - [Pre-material](#pre-material)
+  - [Remote learning](#remote-learning)
   - [Learning outcomes](#learning-outcomes)
   - [What is a function?](#what-is-a-function)
   - [Why use functions?](#why-use-functions)
@@ -56,6 +64,30 @@ or \#intro\_r channel on [ASD slack](https://asdslack.slack.com).
 
 All the examples in the presentation/README are available in the R
 script example\_code.R.
+
+## Remote learning
+
+Here are a few suggestions if you are going through this material in
+your own time:
+
+  - Both the read me and slides contain the same content so you can use
+    whichever works best for you - the only difference is the exercise
+    solutions are only in the slides
+  - To open the slides, first clone the repo (see
+    [pre-material](#pre-material)) and then open the file “slides.html”
+    from RStudio by clicking “View in web browser”
+  - You can find a recording of a previous training session on the R
+    training Microsoft Stream channel
+    [here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a)
+  - If you need any help, the best place to ask is on either the
+    [\#intro\_r](https://app.slack.com/client/T1PU1AP6D/CGKSJV9HN) or
+    [\#r](https://app.slack.com/client/T1PU1AP6D/C1PUCG719) slack
+    channels on ASD slack.
+
+If you have any feedback on the material and/or your experience of
+working through it in your own time, please get in touch with a member
+of the R training group or leave a review on
+[Airtable](https://airtable.com/shr9u2OJB2pW8Y0Af).
 
 ## Learning outcomes
 
@@ -1264,7 +1296,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Magenta"
+    ## [1] "Green"
 
 -----
 
@@ -1436,7 +1468,16 @@ row with the total across all categories. Note that this requires the
 
 ``` r
 library(janitor)
+```
 
+    ## 
+    ## Attaching package: 'janitor'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     chisq.test, fisher.test
+
+``` r
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%
