@@ -10,11 +10,19 @@ rmarkdown::render("rmd_files/slides.Rmd", output_format = "ioslides_presentation
 file.rename("rmd_files/README.md", "README.md")
 file.rename("rmd_files/slides.html", "slides.html")
 
-# extract R code from content.Rmd into separate script ----
-knitr::purl("rmd_files/content.Rmd")
+# extract R code from content.Rmd into separate script
+purl_solution <- FALSE
+show_code <- TRUE
+knitr::purl("rmd_files/content.Rmd", documentation=0)
 
 # give it a more sensible name
 file.rename("content.R", "example_code.R")
+
+# extract solutions from content.Rmd into separate script
+purl_solution <- TRUE
+show_code <- FALSE
+knitr::purl("rmd_files/content.Rmd", documentation=0)
+file.rename("content.R", "solutions.R")
 
 # copy files that content.R and README.md call to the main folder
 file.copy("rmd_files/functions.R", ".")

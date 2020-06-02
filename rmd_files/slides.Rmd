@@ -7,8 +7,10 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-# This variable determines whether or not exercise solutions are included
+# These variable determine whether or not exercise solutions are included
 show_solution <- TRUE
+purl_solution <- FALSE
+show_code <- TRUE
 ```
 
 ## Writing functions in R: setup
