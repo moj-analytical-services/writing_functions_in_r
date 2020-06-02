@@ -14,11 +14,14 @@ Knowing how to write your own functions is a great skill to add to your R toolbo
 
 The session is intended to be accessible to anyone who is familiar with the content of the [Introduction to R](https://github.com/moj-analytical-services/IntroRTraining) training session & has some experience of using R in their work.
 
-All the notes for the training session are available below. If you have any feedback on the content, please get in touch!
+This training session is run in person/over Skype every few months. Alternatively, you can go through this material in your own time - all the notes are available below and you can also find the recording of a previous session [here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a). See [Remote learning](#remote-learning) for more tips on going through this material in your own time.
+
+If you have any feedback on the content, please get in touch!
 
 ## Contents
 
 * [Pre-material](#pre-material)
+* [Remote learning](#remote-learning)
 * [Learning outcomes](#learning-outcomes)
 * [What is a function?](#what-is-a-function)
 * [Why use functions?](#why-use-functions)
@@ -30,7 +33,6 @@ All the notes for the training session are available below. If you have any feed
 * [How to organise your code](#how-to-organise-your-code)
 * [Writing a package](#writing-a-package)
 * [Further reading](#further-reading)
-
 
 ## Pre-material
 
@@ -44,6 +46,18 @@ A few days before the session, please make sure that -
 If you have any problems with the above please get in touch with the course organisers or ask for help on either the #analytical_platform or #intro_r channel on [ASD slack](https://asdslack.slack.com).
 
 All the examples in the presentation/README are available in the R script example_code.R.
+
+## Remote learning
+
+Here are a few suggestions if you are going through this material in your own time:
+
+* Both the read me and slides contain the same content so you can use whichever works best for you - the only difference is the exercise solutions are only in the slides
+*  To open the slides, first clone the repo (see [pre-material](#pre-material)) and then open the file "slides.html" from RStudio by clicking "View in web browser"
+* You can find a recording of a previous training session on the R training Microsoft Stream channel [here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a)
+* If you need any help, the best place to ask is on either the [#intro_r](https://app.slack.com/client/T1PU1AP6D/CGKSJV9HN) or [#r](https://app.slack.com/client/T1PU1AP6D/C1PUCG719) slack channels on ASD slack.
+
+If you have any feedback on the material and/or your experience of working through it in your own time, please get in touch with a member of the R training group or leave a review on [Airtable](https://airtable.com/shr9u2OJB2pW8Y0Af).
+
 
 ```{r source_content, child = 'content.Rmd'}
 ```
