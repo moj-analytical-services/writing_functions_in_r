@@ -325,7 +325,7 @@ operator `%%`, which calculates the remainder. E.g. `1 %% 3 == 0` evaluates to `
 
 ---
 
-```{r, include=show_solution, purl=purl_solutions, eval=FALSE}
+```{r, include=show_solution, purl=purl_solutions, eval=TRUE}
 # 2.1 fizz_buzz() solution
 
 fizz_buzz <- function(x) {
@@ -341,7 +341,9 @@ fizz_buzz <- function(x) {
   }
   
 }
+```
 
+```{r, include=show_solution, purl=purl_solutions, eval=FALSE}
 fizz_buzz(1)  # "1"
 fizz_buzz(2)  # "2"
 fizz_buzz(3)  # "fizz"
