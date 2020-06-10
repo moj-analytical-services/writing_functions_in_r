@@ -7,10 +7,10 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-# These variable determine whether or not exercise solutions are included
-show_solution <- TRUE
-purl_solution <- FALSE
-show_code <- TRUE
+# These variables determine whether or not exercise solutions are included
+show_solution <- TRUE # This determines if the solutions are displayed in the slides
+purl_solutions <- FALSE # This variable relates to code blocks that are exercise solutions
+purl_example_code <- TRUE # This variable relates to code blocks that aren't exercise solutions
 ```
 
 ## Writing functions in R: setup

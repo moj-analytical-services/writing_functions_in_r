@@ -5,9 +5,9 @@ output: rmarkdown::github_document
 
 ```{r setup, include=FALSE}
 # These variables determine whether or not exercise solutions are included
-show_solution <- FALSE
-purl_solution <- FALSE
-show_code <- TRUE
+show_solution <- FALSE # This determines if the solutions are displayed in the readme
+purl_solutions <- FALSE # This variable relates to code blocks that are exercise solutions
+purl_example_code <- TRUE # This variable relates to code blocks that aren't exercise solutions
 ```
 
 This repository is for Writing Functions in R course offered by the DASD R Training Group. It was also used for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session.
