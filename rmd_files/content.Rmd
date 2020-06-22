@@ -25,11 +25,9 @@ Functions are a way to bundle up bits of code to make them easy to reuse. Base R
 
 Here is an example of one of the built-in R functions, `sum()`:
 
-```{r}
-
+```{r, purl=purl_example_code}
 x <- c(1, 2, 3, 4, 5) # Create a vector of numbers to sum
 sum_x <- sum(x) # Sum the numbers contained in 'x', and save the result as a new variable 'sum_x'
-
 ```
 
 You can also write your own functions, called "user-defined functions".
@@ -55,12 +53,11 @@ You can use functions to make your code better structured and easier to read - d
 
 The syntax for creating a function is:
 
-```{r}
+```{r, purl=purl_example_code}
 function_name <- function(arg1, arg2) {
         # function body, e.g. 
         print(paste(arg1, arg2))
 }
-
 ```
 
 We use `function()` to create a function and assign it to the object `function_name`.
@@ -79,7 +76,7 @@ A function is made up of three components:
 
 Here's an example of a very basic user-defined function, called `add_two()`, that takes `x` as an argument:
 
-```{r}
+```{r, purl=purl_example_code}
 # This function takes the argument 'x', and adds 2 to it
 add_two <- function(x) {
   
@@ -95,7 +92,7 @@ The `return()` statement can be used to explicitly state that `result` should be
 
 Let's try using the function `add_two()`:
 
-```{r}
+```{r, purl=purl_example_code}
 # Calling the function by itself prints the result to the console
 add_two(3)
 
@@ -109,8 +106,7 @@ Note: before you can use a function you need to run the code to create it.
 
 Functions can accept as many arguments as you like, but can only output one object (if it is necessary to output more than one object, then the desired outputs can be combined together into a list, and the list can be returned). Here's a function that requires two input variables:
 
-```{r}
-
+```{r, purl=purl_example_code}
 # This function sums the squares of two numbers
 sum_squares <- function(x, y) {
   
@@ -120,7 +116,6 @@ sum_squares <- function(x, y) {
 }
 
 sum_squares(3, 5)
-
 ```
 
 When you call a function, you can specify the arguments by position or name. In this example, the function accepts arguments called `x` and `y`, with the order specified as `x` then `y` in the function definition. Therefore when `sum_squares(3, 5)` is called, the arguments are interpreted as `x = 3` and `y = 5`. Alternatively, if we called `sum_squares(5, 3)` then the arguments would be interpreted as `x = 5` and `y = 3`.
@@ -129,11 +124,9 @@ When you call a function, you can specify the arguments by position or name. In 
 
 For more complicated functions with lots of arguments, specifying the arguments by position becomes more error-prone and harder to understand. Therefore it is often desirable to specify some or all of the arguments by name, then the order of the arguments doesn't matter:
 
-```{r}
-
+```{r, purl=purl_example_code}
 sum_squares(x = 3, y = 5)
 sum_squares(y = 5, x = 3)
-
 ```
 
 **Hint**: if you want your function to work with the pipe operator `%>%`, make 
@@ -157,7 +150,7 @@ result to the console.
 
 ---
 
-```{r, include=show_solution, purl=FALSE}
+```{r, include=show_solution, purl=purl_solutions}
 # 1.1 hello_world() solution
 
 hello_world <- function() {
@@ -165,10 +158,9 @@ hello_world <- function() {
 }
 
 hello_world()
-  
 ```
 
-```{r, include=show_solution, purl=FALSE}
+```{r, include=show_solution, purl=purl_solutions}
 # 1.2 my_mean() solution
 
 my_mean <- function(x, y) {
@@ -177,7 +169,6 @@ my_mean <- function(x, y) {
 }
 
 my_mean(7.5, 16)
-
 ```
 
 
@@ -185,8 +176,7 @@ my_mean(7.5, 16)
 
 Functions can return different outputs depending on some condition. In this function the condition is `x < 0`, and the condition evaluates to either `TRUE` or `FALSE`:
 
-```{r}
-
+```{r, purl=purl_example_code}
 # This function returns the absolute value of a number
 abs_x <- function(x) {
   if (x < 0) {
@@ -197,7 +187,6 @@ abs_x <- function(x) {
 }
 
 abs_x(-5)
-
 ```
 
 As soon as a `return()` statement is encountered in a function, the function finishes and returns the variable in the `return()` statement. In the above example, `return()` is used twice as there is a condition with two possibilities. Either the input argument `x` is less than zero, in which case the function ends with the `return(-x)` statement, otherwise if `x` is not less than zero then the function continues to the `return(x)` statement.
@@ -206,7 +195,7 @@ As soon as a `return()` statement is encountered in a function, the function fin
 
 Depending on the purpose of the function, it doesn't need to return an output at all. Instead it can have a "side effect", such as printing a value to the console:
 
-```{r}
+```{r, purl=purl_example_code}
 # This function lets you know whether a number is odd or even
 odd_or_even <- function(x) {
 
@@ -219,7 +208,6 @@ odd_or_even <- function(x) {
 }
 
 odd_or_even(x = 4)
-
 ```
 **Note:** It's best practice for your function to either return a value or have a side effect, but not both.
 
@@ -227,18 +215,17 @@ odd_or_even(x = 4)
 
 Sometimes it can be useful to include helpful error messages in functions, e.g. by anticipating the sorts of variables that could be input. What happens if you try to use a non-integer or a string as an argument in the above example? Try the running the function with the following arguments:
 
-```{r error = TRUE}
+```{r, error = TRUE, purl=purl_example_code}
 odd_or_even(x = 1.5)
 odd_or_even(x = "a")
 odd_or_even(x = c(1, 2, 3))
-
 ```
 
 ---
 
 Here's an adapted version of the function, with some more informative error messages built in using the `stop()` function:
 
-```{r}
+```{r, purl=purl_example_code}
 # This function lets you know whether a number is odd or even
 odd_or_even <- function(x) {
   
@@ -255,18 +242,16 @@ odd_or_even <- function(x) {
   }
 
 }
-
 ```
 
 ---
 
 Now try passing some incompatible arguments to the function:
 
-```{r error = TRUE}
+```{r, error = TRUE, purl=purl_example_code}
 odd_or_even(x = 1.5)
 odd_or_even(x = "a")
 odd_or_even(x = c(1, 2, 3))
-
 ```
 
 `stop()` halts execution of the function and prints an error message to the console. Alternatively you can use `warning()`, which prints a warning message to the console but does not stop execution of the function.
@@ -275,7 +260,7 @@ odd_or_even(x = c(1, 2, 3))
 
 Here's an example of how to include optional arguments, where in this case the optional argument is called `y`:
 
-```{r}
+```{r, purl=purl_example_code}
 # This function either returns the sum of two numbers, or returns the argument if only one is supplied
 add_a_number <- function(x, y = NULL) {
   
@@ -289,14 +274,13 @@ add_a_number <- function(x, y = NULL) {
 
 add_a_number(x = 6)
 add_a_number(x = 6, y = 7)
-
 ```
 
 ## Example 7: arguments with default values
 
 Any value can be used as a default value for an argument. For example, we can generalise the `sum_squares()` function by allowing it to sum together two numbers raised to any power, but with a default power of 2:
 
-```{r}
+```{r, purl=purl_example_code}
 # This function returns the sum of two numbers raised to a particular power (with a default of 2)
 sum_powers <- function(x, y, z = 2) {
   
@@ -307,7 +291,6 @@ sum_powers <- function(x, y, z = 2) {
 
 sum_powers(x = 3, y = 5)
 sum_powers(x = 3, y = 5, z = 3)
-
 ```
 
 ## Exercises
@@ -342,7 +325,7 @@ operator `%%`, which calculates the remainder. E.g. `1 %% 3 == 0` evaluates to `
 
 ---
 
-```{r, include=show_solution, purl=FALSE, eval = FALSE}
+```{r, include=show_solution, purl=purl_solutions, eval=TRUE}
 # 2.1 fizz_buzz() solution
 
 fizz_buzz <- function(x) {
@@ -358,13 +341,14 @@ fizz_buzz <- function(x) {
   }
   
 }
+```
 
+```{r, include=show_solution, purl=purl_solutions, eval=FALSE}
 fizz_buzz(1)  # "1"
 fizz_buzz(2)  # "2"
 fizz_buzz(3)  # "fizz"
 fizz_buzz(5)  # "buzz"
 fizz_buzz(15) # "fizz buzz"
-
 ```
 
 ---
@@ -387,7 +371,7 @@ the help file.
 
 ---
 
-```{r, include=show_solution, purl=FALSE}
+```{r, include=show_solution, purl=purl_solutions}
 # 2.2 fizz_buzz_vec() solution
 
 fizz_buzz_vec <- function(x) {
@@ -404,7 +388,6 @@ fizz_buzz_vec <- function(x) {
 }
 
 fizz_buzz_vec(1:15)
-
 ```
 
 ---
@@ -422,7 +405,7 @@ when you don't specify the `fizz` or `buzz` arguments, and second when you set
 
 ---
 
-```{r, include=show_solution, purl=FALSE}
+```{r, include=show_solution, purl=purl_solutions}
 # 2.3 fizz_buzz_custom() solution
 
 fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
@@ -456,17 +439,16 @@ fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5) {
 
 ---
 
-```{r, include=show_solution, purl=FALSE}
+```{r, include=show_solution, purl=purl_solutions}
 fizz_buzz_custom_vec(1:15)
 fizz_buzz_custom_vec(c(1, 2, 3, 7, 15, 21), buzz = 7)
-
 ```
 
 ## Example 8: the ellipsis argument
 
 Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function is called within a wrapper function. This requires the ellipsis construct, `...`, which is designed to pass a variable number of arguments to a function. Here's an example:
 
-```{r}
+```{r, purl=purl_example_code}
 # This function produces a plot of x vs y
 plot_x_and_y <- function(x, y, ...) {
   
@@ -476,27 +458,22 @@ plot_x_and_y <- function(x, y, ...) {
 
 x <- 1:10
 y <- (1:10) * 2
-
 ```
 
 ---
 
 The function can be called with only the required arguments:
 
-```{r}
-
+```{r, purl=purl_example_code}
 plot_x_and_y(x, y)
-
 ```
 
 ---
 
 Or the function can be called with any optional arguments accepted by the plot function:
 
-```{r}
-
+```{r, purl=purl_example_code}
 plot_x_and_y(x, y, col='red', type='l')
-
 ```
 
 # "Real-world" example functions
@@ -518,7 +495,7 @@ Before we start looking at more example functions, first of all we need to load 
 * `purrr` provides functions to make the use of vectors and user-defined functions easier.
 * `lubridate` provides functions that help with manipulating dates.
 
-```{r message=F, warning=F}
+```{r message=F, warning=F, purl=purl_example_code}
 # Load packages
 library(s3tools)
 library(dplyr)
@@ -531,7 +508,7 @@ library(lubridate)
 
 Here we are reading in a copy of the `Prosecutions and Convictions` dataset from s3 and storing the dataframe as a variable called `prosecutions_and_convictions`. In the second step we're filtering the dataset to extract only the prosecutions and saving to another variable, named `prosecutions`.
 
-```{r message=F, warning=F}
+```{r message=F, warning=F, purl=purl_example_code}
 prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
   "alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv")
 
@@ -544,7 +521,7 @@ prosecutions <- prosecutions_and_convictions %>%
 
 Here's a preview of the data stored in `prosecutions`:
 
-```{r}
+```{r, purl=purl_example_code}
 glimpse(prosecutions)
 ```
 
@@ -553,7 +530,7 @@ glimpse(prosecutions)
 
 After reading in a dataframe it can often be helpful to standardise the column headings. Below is an example of a function that could be used for this purpose. It takes a vector of strings as the argument, ensures all letters in the string vector are lower-case, and makes use of "regular expressions" or "regex" to find and replace all spaces and punctuation marks with an underscore:
 
-```{r}
+```{r, purl=purl_example_code}
 # This function standardises strings contained in a vector
 generalise_names <- function(names) {
   
@@ -573,18 +550,15 @@ generalise_names <- function(names) {
   return(names)
   
 }
-
 ```
 
 ---
 
 Here is a demonstration of how functions such as this can be useful:
 
-```{r}
-
+```{r, purl=purl_example_code}
 names <- c("Option 1", "   Option (1)", "Option: 1", "option 1", "OPTION - 1")
 generalise_names(names)
-
 ```
 
 ---
@@ -597,25 +571,23 @@ Use the `generalise_names()` function defined above to clean the column headings
 
 ---
 
-```{r, include=show_solution, purl=FALSE}
-
-# Solution
+```{r, include=show_solution, purl=purl_solutions}
+# Exercise 3 solution
 
 colnames(prosecutions) <- generalise_names(colnames(prosecutions))
 glimpse(prosecutions)
-
 ```
 ---
 
 In this dataset, some of the columns contain values with a number along with a category; for example, the `age_group` column contains categories like "01: Juveniles" rather than just "Juveniles".
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, purl=purl_example_code}
 glimpse(prosecutions[,1:10])
 ```
 
 These numbers might be undesirable, so we can write a function like this to remove them:
 
-```{r}
+```{r, purl=purl_example_code}
 # This function identifies and removes 1 or 2 digits followed by a colon or a space
 remove_numbering <- function(x) {
 
@@ -624,14 +596,13 @@ remove_numbering <- function(x) {
   return(x)
   
 }
-
 ```
 
 ---
 
 Then we can use the `modify_if()` function from `purrr` to apply the `remove_numbering()` function to columns in the `prosecutions` dataframe. The `modify_if()` function will apply the specified function to all columns where a particular condition is met, and in this case the condition `is.character` requires that the column contains strings.
 
-```{r}
+```{r, purl=purl_example_code}
 prosecutions <- purrr::modify_if(prosecutions, is.character, remove_numbering)
 glimpse(prosecutions)
 ```
@@ -640,8 +611,7 @@ glimpse(prosecutions)
 
 For the final stage of data cleaning, we can make missing and unknown values more consistent using a function such as the following:
 
-```{r}
-
+```{r, purl=purl_example_code}
 clean_not_known <- function(x,
                             not_known_phrase = "Not known",
                             values_to_change = c("n/a", "not known", "unknown", "not stated")) {
@@ -658,14 +628,13 @@ clean_not_known <- function(x,
   return(x)
 
 }
-
 ```
 
 In this function we've included some default values, so by default any strings that match "n/a", "not known", "unknown", or "not stated" are replaced, and the default replacement value is "Not known". We've used `if_else()` as a vectorised form of an if-else statement. It's similar to `case_when()` (which we used in exercise 2.2), but can only be used with one condition and two possible outcomes. We've also used the `tolower()` function, which ensures all strings are lower case before searching for the missing/unknown phrases.
 
 ---
 
-```{r}
+```{r, purl=purl_example_code}
 prosecutions <- purrr::modify_if(prosecutions, is.character, clean_not_known)
 glimpse(prosecutions)
 ```
@@ -683,9 +652,8 @@ Write a wrapper function to apply `generalise_names()`, `remove_numbering()`, an
 
 ---
 
-```{r, include=show_solution, purl=FALSE}
-
-# Solution to Exercise 4
+```{r, include=show_solution, purl=purl_solutions}
+# Exercise 4 solution
 
 clean_not_known <- function(x,
                             not_known_phrase = "Not known",
@@ -706,14 +674,12 @@ clean_not_known <- function(x,
   return(x)
   
 }
-
 ```
 
 ---
 
-```{r, include=show_solution, purl=FALSE}
-
-# Solution to Exercise 5
+```{r, include=show_solution, purl=purl_solutions}
+# Exercise 5 solution
 
 clean_dataset <- function(data) {
   
@@ -727,7 +693,11 @@ clean_dataset <- function(data) {
   return(data)
   
 }
+```
 
+```{r, include=FALSE, purl=purl_example_code}
+# Solution to exercise 3 - must run before the next section
+colnames(prosecutions) <- generalise_names(colnames(prosecutions))
 ```
 
 
@@ -735,9 +705,7 @@ clean_dataset <- function(data) {
 
 Let's say we wanted to create a summary table showing the number of people prosecuted in different age bands. We could do:
 
-```{r}
-# Note: if you are running this code from 'example_code.R', then Exercise 3 must be completed first
-
+```{r, purl=purl_example_code}
 prosecutions_grouped <- prosecutions %>%
   dplyr::group_by(age_range) %>%
   dplyr::summarise(counts = sum(count))
@@ -751,7 +719,7 @@ Notice how the `dplyr` functions `group_by()` and `summarise()` require that the
 
 ---
 
-```{r}
+```{r, purl=purl_example_code}
 prosecutions_grouped
 ```
 
@@ -759,7 +727,7 @@ prosecutions_grouped
 
 What if we wanted to create several different summary tables? We could write a function to avoid writing this out each time. Following the previous examples in this course, you might expect this function to work:
 
-```{r error = TRUE}
+```{r, error = TRUE, purl=purl_example_code}
 # This function produces a summary table based on a dataset
 sum_group <- function(df, group_cols, sum_col) {
   
@@ -774,7 +742,7 @@ sum_group <- function(df, group_cols, sum_col) {
 
 However trying to use this function results in an error.
 
-```{r error = TRUE}
+```{r, error = TRUE, purl=purl_example_code}
 prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
 ```
 
@@ -784,7 +752,7 @@ This is because of the non-standard evaluation (NSE) mentioned above. The `dplyr
 
 Fortunately to get around the NSE problem, functions have been added to the `dplyr` package that accept variables instead of straight column names. The function below shows an example of how the functions `group_by_at()` and `summarise_at()` can replace `group_by()` and `summarise()`.
 
-```{r}
+```{r, purl=purl_example_code}
 # This function produces a summary table based on a dataset
 sum_group <- function(df, group_cols, sum_col) {
   
@@ -795,14 +763,13 @@ sum_group <- function(df, group_cols, sum_col) {
   return(summary)
   
 }
-
 ```
 
 The way that the Tidyverse packages handle NSE is still evolving, so new methods of addressing this issue may be introduced in the future. See the appendix for some examples of alternative methods to tackle this problem.
 
 ---
 
-```{r}
+```{r, purl=purl_example_code}
 prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
 prosecutions_grouped
 ```
@@ -811,21 +778,19 @@ prosecutions_grouped
 
 The `sum_group()` function also allows us to add any number of grouping columns:
 
-```{r}
-
+```{r, purl=purl_example_code}
 prosecutions_grouped <- sum_group(df = prosecutions, 
                                   group_cols = c("year", "offence_group"), 
                                   sum_col = "count")
 
 head(prosecutions_grouped, 15)
-
 ```
 
 ## Plotting data
 
 Let's say we want to produce some plots, and want them all to have the same style. We can define the style of the plot in a function, then we only have to change the styling in one place if it needs changing. This function plots a breakdown of the number of prosecutions over time, with a default breakdown option of `"offence_type"`, and the plot is a line chart with `ggplot2`'s grey theme:
 
-```{r}
+```{r, purl=purl_example_code}
 # This function produces a plot of the number of prosecutions over time
 plot_prosecutions <- function(df, breakdown = "offence_type") {
 
@@ -846,12 +811,11 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
   return(plot)
   
 }
-
 ```
 
 ---
 
-```{r fig.width=10}
+```{r fig.width=10, purl=purl_example_code}
 # Call function
 plot_prosecutions(prosecutions, breakdown = "offence_type")
 ```
@@ -864,8 +828,8 @@ Modify the `plot_prosecutions()` function to use `theme_classic()` as the theme,
 
 ---
 
-```{r, include=show_solution, purl=FALSE}
-# Solution
+```{r, include=show_solution, purl=purl_solutions}
+# Exercise 6 solution
 
 plot_prosecutions <- function(df, breakdown = "offence_type") {
 
@@ -886,16 +850,14 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
   return(plot)
   
 }
-
 ```
 
 ---
 
-```{r fig.width=10, include=show_solution, purl=FALSE}
-# Solution
+```{r fig.width=10, include=show_solution, purl=purl_solutions}
+# Exercise 6 solution
 
 plot_prosecutions(prosecutions, breakdown = "offence_group")
-
 ```
 
 
@@ -903,7 +865,7 @@ plot_prosecutions(prosecutions, breakdown = "offence_group")
 
 Sometimes processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
 
-```{r}
+```{r, purl=purl_example_code}
 # This function extracts the prosecutions from a particular year
 extract_year <- function(data, end_date) {
   
@@ -927,12 +889,11 @@ extract_year <- function(data, end_date) {
   
   return(data)
 }
-
 ```
 
 ---
 
-```{r}
+```{r, purl=purl_example_code}
 prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
 glimpse(prosecutions_extract)
 ```
@@ -999,13 +960,13 @@ Then just use `source("functions/my_functions_script.R")` (with `functions/` and
 
 Here's an example of calling a script that contains a new function, called `pick_a_colour()`:
 
-```{r}
+```{r, purl=purl_example_code}
 source("functions.R")
 ```
 
 Now the function is ready to use:
 
-```{r}
+```{r, purl=purl_example_code}
 # Create a list of colours to provide to the function
 colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pink")
 pick_a_colour(colours)
@@ -1013,7 +974,7 @@ pick_a_colour(colours)
 ---
 You can see the code underlying a function by typing its name (without brackets) in the console and hitting "enter":
 
-```{r}
+```{r, purl=purl_example_code}
 pick_a_colour
 ```
 

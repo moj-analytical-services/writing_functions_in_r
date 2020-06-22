@@ -7,8 +7,10 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-# This variable determines whether or not exercise solutions are included
-show_solution <- TRUE
+# These variables determine whether or not exercise solutions are included
+show_solution <- TRUE # This determines if the solutions are displayed in the slides
+purl_solutions <- FALSE # This variable relates to code blocks that are exercise solutions
+purl_example_code <- TRUE # This variable relates to code blocks that aren't exercise solutions
 ```
 
 ## Writing functions in R: setup
@@ -21,7 +23,7 @@ Before we start, make sure you've:
 4. Got `example_code.R` open
 5. Opened the `writing_functions_in_r` repo on GitHub, so you can refer to the read me
 
-If you need any help, just ask! For anyone joining remotely, we will be monitoring Skype throughout the session.
+If you need any help, just ask! For anyone joining remotely, we will be monitoring Teams throughout the session.
 
 Note we will be recording this session for upload later to the R training Microsoft Stream channel.
 
