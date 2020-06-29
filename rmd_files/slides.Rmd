@@ -27,6 +27,15 @@ If you need any help, just ask! For anyone joining remotely, we will be monitori
 
 Note we will be recording this session for upload later to the R training Microsoft Stream channel.
 
+## Agenda
+
+1. Set up and introductions - 10 mins
+2. Examples of basic functions (including exercises) - 1 hour 10 mins
+3. Break - 10 mins
+4. 'Real-world' example functions (including exercises) - 1 hour 15 mins
+5. Hints and tips - 15 mins
+
+
 ```{r source_content, child = 'content.Rmd'}
 ```
 
