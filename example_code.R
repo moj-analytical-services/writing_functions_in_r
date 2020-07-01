@@ -1,19 +1,11 @@
-## ------------------------------------------------------------------------
-
 x <- c(1, 2, 3, 4, 5) # Create a vector of numbers to sum
 sum_x <- sum(x) # Sum the numbers contained in 'x', and save the result as a new variable 'sum_x'
 
-
-
-## ------------------------------------------------------------------------
 function_name <- function(arg1, arg2) {
         # function body, e.g. 
         print(paste(arg1, arg2))
 }
 
-
-
-## ------------------------------------------------------------------------
 # This function takes the argument 'x', and adds 2 to it
 add_two <- function(x) {
   
@@ -22,16 +14,11 @@ add_two <- function(x) {
   
 }
 
-
-## ------------------------------------------------------------------------
 # Calling the function by itself prints the result to the console
 add_two(3)
 
 # Alternatively the result can be saved as a new variable
 result <- add_two(3) 
-
-
-## ------------------------------------------------------------------------
 
 # This function sums the squares of two numbers
 sum_squares <- function(x, y) {
@@ -43,20 +30,12 @@ sum_squares <- function(x, y) {
 
 sum_squares(3, 5)
 
-
-
-## ------------------------------------------------------------------------
-
 sum_squares(x = 3, y = 5)
 sum_squares(y = 5, x = 3)
 
 
 
 
-
-
-
-## ------------------------------------------------------------------------
 
 # This function returns the absolute value of a number
 abs_x <- function(x) {
@@ -69,9 +48,6 @@ abs_x <- function(x) {
 
 abs_x(-5)
 
-
-
-## ------------------------------------------------------------------------
 # This function lets you know whether a number is odd or even
 odd_or_even <- function(x) {
 
@@ -85,16 +61,10 @@ odd_or_even <- function(x) {
 
 odd_or_even(x = 4)
 
-
-
-## ----error = TRUE--------------------------------------------------------
 odd_or_even(x = 1.5)
 odd_or_even(x = "a")
 odd_or_even(x = c(1, 2, 3))
 
-
-
-## ------------------------------------------------------------------------
 # This function lets you know whether a number is odd or even
 odd_or_even <- function(x) {
   
@@ -112,16 +82,10 @@ odd_or_even <- function(x) {
 
 }
 
-
-
-## ----error = TRUE--------------------------------------------------------
 odd_or_even(x = 1.5)
 odd_or_even(x = "a")
 odd_or_even(x = c(1, 2, 3))
 
-
-
-## ------------------------------------------------------------------------
 # This function either returns the sum of two numbers, or returns the argument if only one is supplied
 add_a_number <- function(x, y = NULL) {
   
@@ -136,9 +100,6 @@ add_a_number <- function(x, y = NULL) {
 add_a_number(x = 6)
 add_a_number(x = 6, y = 7)
 
-
-
-## ------------------------------------------------------------------------
 # This function returns the sum of two numbers raised to a particular power (with a default of 2)
 sum_powers <- function(x, y, z = 2) {
   
@@ -160,7 +121,6 @@ sum_powers(x = 3, y = 5, z = 3)
 
 
 
-## ------------------------------------------------------------------------
 # This function produces a plot of x vs y
 plot_x_and_y <- function(x, y, ...) {
   
@@ -171,21 +131,10 @@ plot_x_and_y <- function(x, y, ...) {
 x <- 1:10
 y <- (1:10) * 2
 
-
-
-## ------------------------------------------------------------------------
-
 plot_x_and_y(x, y)
-
-
-
-## ------------------------------------------------------------------------
 
 plot_x_and_y(x, y, col='red', type='l')
 
-
-
-## ----message=F, warning=F------------------------------------------------
 # Load packages
 library(s3tools)
 library(dplyr)
@@ -193,8 +142,6 @@ library(stringr)
 library(purrr)
 library(lubridate)
 
-
-## ----message=F, warning=F------------------------------------------------
 prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
   "alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv")
 
@@ -202,12 +149,8 @@ prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
 prosecutions <- prosecutions_and_convictions %>%
   filter(`Court.Type` == "Magistrates Court")
 
-
-## ------------------------------------------------------------------------
 glimpse(prosecutions)
 
-
-## ------------------------------------------------------------------------
 # This function standardises strings contained in a vector
 generalise_names <- function(names) {
   
@@ -228,22 +171,13 @@ generalise_names <- function(names) {
   
 }
 
-
-
-## ------------------------------------------------------------------------
-
 names <- c("Option 1", "   Option (1)", "Option: 1", "option 1", "OPTION - 1")
 generalise_names(names)
 
 
 
-
-
-## ---- echo=FALSE---------------------------------------------------------
 glimpse(prosecutions[,1:10])
 
-
-## ------------------------------------------------------------------------
 # This function identifies and removes 1 or 2 digits followed by a colon or a space
 remove_numbering <- function(x) {
 
@@ -253,14 +187,8 @@ remove_numbering <- function(x) {
   
 }
 
-
-
-## ------------------------------------------------------------------------
 prosecutions <- purrr::modify_if(prosecutions, is.character, remove_numbering)
 glimpse(prosecutions)
-
-
-## ------------------------------------------------------------------------
 
 clean_not_known <- function(x,
                             not_known_phrase = "Not known",
@@ -279,9 +207,6 @@ clean_not_known <- function(x,
 
 }
 
-
-
-## ------------------------------------------------------------------------
 prosecutions <- purrr::modify_if(prosecutions, is.character, clean_not_known)
 glimpse(prosecutions)
 
@@ -289,20 +214,15 @@ glimpse(prosecutions)
 
 
 
-
-## ------------------------------------------------------------------------
-# Note: if you are running this code from 'example_code.R', then Exercise 3 must be completed first
+# Solution to exercise 3 - must run before the next section
+colnames(prosecutions) <- generalise_names(colnames(prosecutions))
 
 prosecutions_grouped <- prosecutions %>%
   dplyr::group_by(age_range) %>%
   dplyr::summarise(counts = sum(count))
 
-
-## ------------------------------------------------------------------------
 prosecutions_grouped
 
-
-## ----error = TRUE--------------------------------------------------------
 # This function produces a summary table based on a dataset
 sum_group <- function(df, group_cols, sum_col) {
   
@@ -314,12 +234,8 @@ sum_group <- function(df, group_cols, sum_col) {
   
 }
 
-
-## ----error = TRUE--------------------------------------------------------
 prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
 
-
-## ------------------------------------------------------------------------
 # This function produces a summary table based on a dataset
 sum_group <- function(df, group_cols, sum_col) {
   
@@ -331,14 +247,8 @@ sum_group <- function(df, group_cols, sum_col) {
   
 }
 
-
-
-## ------------------------------------------------------------------------
 prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
 prosecutions_grouped
-
-
-## ------------------------------------------------------------------------
 
 prosecutions_grouped <- sum_group(df = prosecutions, 
                                   group_cols = c("year", "offence_group"), 
@@ -346,9 +256,6 @@ prosecutions_grouped <- sum_group(df = prosecutions,
 
 head(prosecutions_grouped, 15)
 
-
-
-## ------------------------------------------------------------------------
 # This function produces a plot of the number of prosecutions over time
 plot_prosecutions <- function(df, breakdown = "offence_type") {
 
@@ -370,9 +277,6 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
   
 }
 
-
-
-## ----fig.width=10--------------------------------------------------------
 # Call function
 plot_prosecutions(prosecutions, breakdown = "offence_type")
 
@@ -380,8 +284,6 @@ plot_prosecutions(prosecutions, breakdown = "offence_type")
 
 
 
-
-## ------------------------------------------------------------------------
 # This function extracts the prosecutions from a particular year
 extract_year <- function(data, end_date) {
   
@@ -406,23 +308,13 @@ extract_year <- function(data, end_date) {
   return(data)
 }
 
-
-
-## ------------------------------------------------------------------------
 prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
 glimpse(prosecutions_extract)
 
-
-## ------------------------------------------------------------------------
 source("functions.R")
 
-
-## ------------------------------------------------------------------------
 # Create a list of colours to provide to the function
 colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pink")
 pick_a_colour(colours)
 
-
-## ------------------------------------------------------------------------
 pick_a_colour
-

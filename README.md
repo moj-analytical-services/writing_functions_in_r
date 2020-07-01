@@ -17,7 +17,7 @@ the content of the [Introduction to
 R](https://github.com/moj-analytical-services/IntroRTraining) training
 session & has some experience of using R in their work.
 
-This training session is run in person/over Skype every few months.
+This training session is run in person/over Teams every few months.
 Alternatively, you can go through this material in your own time - all
 the notes are available below and you can also find the recording of a
 previous session
@@ -606,7 +606,7 @@ The function can be called with only the required arguments:
 plot_x_and_y(x, y)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
 
 -----
 
@@ -617,7 +617,7 @@ the plot function:
 plot_x_and_y(x, y, col='red', type='l')
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
 # “Real-world” example functions
 
@@ -908,8 +908,6 @@ Let’s say we wanted to create a summary table showing the number of
 people prosecuted in different age bands. We could do:
 
 ``` r
-# Note: if you are running this code from 'example_code.R', then Exercise 3 must be completed first
-
 prosecutions_grouped <- prosecutions %>%
   dplyr::group_by(age_range) %>%
   dplyr::summarise(counts = sum(count))
@@ -1109,7 +1107,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
 plot_prosecutions(prosecutions, breakdown = "offence_type")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
 
 -----
 
@@ -1296,7 +1294,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Green"
+    ## [1] "Red"
 
 -----
 
