@@ -492,7 +492,6 @@ Before we start looking at more example functions, first of all we need to load 
 * `s3tools` is an MoJ package designed to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.
 * `dplyr` is the package we'll use to create summary tables from the data.
 * `stringr` provides functions that can be used to manipulate strings.
-* `purrr` provides functions to make the use of vectors and user-defined functions easier.
 * `lubridate` provides functions that help with manipulating dates.
 
 ```{r message=F, warning=F, purl=purl_example_code}
@@ -500,7 +499,6 @@ Before we start looking at more example functions, first of all we need to load 
 library(s3tools)
 library(dplyr)
 library(stringr)
-library(purrr)
 library(lubridate)
 ```
 
@@ -600,10 +598,10 @@ remove_numbering <- function(x) {
 
 ---
 
-Then we can use the `modify_if()` function from `purrr` to apply the `remove_numbering()` function to columns in the `prosecutions` dataframe. The `modify_if()` function will apply the specified function to all columns where a particular condition is met, and in this case the condition `is.character` requires that the column contains strings.
+Then we can use the `mutate_if()` function from `dplyr` to apply the `remove_numbering()` function to columns in the `prosecutions` dataframe. The `mutate_if()` function will apply the specified function to all columns where a particular condition is met, and in this case the condition `is.character` requires that the column contains strings.
 
 ```{r, purl=purl_example_code}
-prosecutions <- purrr::modify_if(prosecutions, is.character, remove_numbering)
+prosecutions <- dplyr::mutate_if(prosecutions, is.character, remove_numbering)
 glimpse(prosecutions)
 ```
 
@@ -635,7 +633,7 @@ In this function we've included some default values, so by default any strings t
 ---
 
 ```{r, purl=purl_example_code}
-prosecutions <- purrr::modify_if(prosecutions, is.character, clean_not_known)
+prosecutions <- dplyr::mutate_if(prosecutions, is.character, clean_not_known)
 glimpse(prosecutions)
 ```
 
@@ -686,9 +684,9 @@ clean_dataset <- function(data) {
   # Clean the column headings
   colnames(data) <- generalise_names(colnames(data))
   # Remove numeric indices from columns
-  data <- purrr::modify_if(data, is.character, remove_numbering)
+  data <- dplyr::mutate_if(data, is.character, remove_numbering)
   # Make missing/unknown value entries more consistent
-  data <- purrr::modify_if(data, is.character, clean_not_known)
+  data <- dplyr::mutate_if(data, is.character, clean_not_known)
   
   return(data)
   
@@ -1004,9 +1002,8 @@ To find out more about writing packages, check out the links under further readi
 + [Writing an R package from scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
 + Hadley's [R packages](http://r-pkgs.had.co.nz/) book
 
-#### On loops and the purrr package
+#### On loops
 + [Iteration chapter](https://r4ds.had.co.nz/iteration.html#dealing-with-failure) of Hadley's R for Data Science book
-+ Jenny Bryan's [purrr tutorial](https://jennybc.github.io/purrr-tutorial/index.html)
 
 #### Misc
 + [Tidyverse style guide](https://style.tidyverse.org/) (has some guidance on choosing function and argument names)

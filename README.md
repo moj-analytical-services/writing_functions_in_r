@@ -17,7 +17,7 @@ the content of the [Introduction to
 R](https://github.com/moj-analytical-services/IntroRTraining) training
 session & has some experience of using R in their work.
 
-This training session is periodically run in person/over Teams.
+This training session is run in person/over Teams every few months.
 Alternatively, you can go through this material in your own time - all
 the notes are available below and you can also find the recording of a
 previous session
