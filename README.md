@@ -23,7 +23,8 @@ the notes are available below and you can also find the recording of a
 previous session
 [here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a).
 See [Remote learning](#remote-learning) for more tips on going through
-this material in your own time.
+this material in your own time. If you work through the material by youself please 
+leave feedback about the material [here](https://airtable.com/shr9u2OJB2pW8Y0Af).  
 
 If you have any feedback on the content, please get in touch\!
 
