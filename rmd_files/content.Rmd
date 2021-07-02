@@ -748,40 +748,28 @@ prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", s
 
 This is because of the non-standard evaluation (NSE) mentioned above. The `dplyr` functions don't recognise `group_cols` and `sum_col` as column names, because they can't see that these are variables containing the actual column names. While the NSE usually makes the `dplyr` functions more convenient to use, it makes them slightly trickier to use in user-defined functions. 
 
-Fortunately to get around the NSE problem, functions have been added to the `dplyr` package that accept variables instead of straight column names. The function below shows an example of how the functions `group_by_at()` and `summarise_at()` can replace `group_by()` and `summarise()`.
+Fortunately there are methods available to help get around the NSE problem. The function below shows an example of how our `sum_group()` function can be modified to accept column names stored as strings, using the `.data` pronoun with `[[]]`. 
 
 ```{r, purl=purl_example_code}
 # This function produces a summary table based on a dataset
 sum_group <- function(df, group_cols, sum_col) {
-  
+
   summary <- df %>%
-    dplyr::group_by_at(group_cols) %>%
-    dplyr::summarise_at(sum_col, sum)
-  
+    dplyr::group_by(.data[[group_cols]]) %>%
+    dplyr::summarise(counts = sum(.data[[ sum_col ]]))
+
   return(summary)
   
 }
 ```
 
-The way that the Tidyverse packages handle NSE is still evolving, so new methods of addressing this issue may be introduced in the future. See the appendix for some examples of alternative methods to tackle this problem.
+The way that the Tidyverse packages handle NSE has evolved over the past few years, so new methods of addressing this issue may be introduced in the future. See the appendix for some examples of alternative methods to tackle this problem.
 
 ---
 
 ```{r, purl=purl_example_code}
 prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
 prosecutions_grouped
-```
-
----
-
-The `sum_group()` function also allows us to add any number of grouping columns:
-
-```{r, purl=purl_example_code}
-prosecutions_grouped <- sum_group(df = prosecutions, 
-                                  group_cols = c("year", "offence_group"), 
-                                  sum_col = "count")
-
-head(prosecutions_grouped, 15)
 ```
 
 ## Plotting data
@@ -857,45 +845,6 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
 
 plot_prosecutions(prosecutions, breakdown = "offence_group")
 ```
-
-
-## Extracting a subset of the data
-
-Sometimes processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
-
-```{r, purl=purl_example_code}
-# This function extracts the prosecutions from a particular year
-extract_year <- function(data, end_date) {
-  
-  # Ensure the date is a date-time object
-  if (is.character(end_date)) { end_date <- lubridate::dmy(end_date) }
-  
-  # Find end of quarter dates for the past year
-  quarters_to_include <- end_date %m-% months(c(0, 3, 6, 9))
-  
-  # Format the dates to years and quarters
-  years <- lubridate::year(quarters_to_include)
-  quarters <- quarters(quarters_to_include)
-
-  # Combine into a unique set of year-quarters
-  yearquarters <- str_c(years, " ", quarters)
-  
-  # Filter data based on these years and quarters
-  data <- data %>%
-    dplyr::mutate(year_quarter = paste(year, quarter)) %>%
-    dplyr::filter(year_quarter %in% yearquarters)
-  
-  return(data)
-}
-```
-
----
-
-```{r, purl=purl_example_code}
-prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
-glimpse(prosecutions_extract)
-```
-
 
 # Hints and tips
 
