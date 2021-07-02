@@ -755,7 +755,7 @@ Fortunately there are methods available to help get around the NSE problem. The 
 sum_group <- function(df, group_cols, sum_col) {
 
   summary <- df %>%
-    dplyr::group_by(.data[[group_cols]]) %>%
+    dplyr::group_by(.data[[ group_cols ]]) %>%
     dplyr::summarise(counts = sum(.data[[ sum_col ]]))
 
   return(summary)
