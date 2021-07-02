@@ -492,7 +492,6 @@ Before we start looking at more example functions, first of all we need to load 
 * `s3tools` is an MoJ package designed to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.
 * `dplyr` is the package we'll use to create summary tables from the data.
 * `stringr` provides functions that can be used to manipulate strings.
-* `purrr` provides functions to make the use of vectors and user-defined functions easier.
 * `lubridate` provides functions that help with manipulating dates.
 
 ```{r message=F, warning=F, purl=purl_example_code}
@@ -500,7 +499,6 @@ Before we start looking at more example functions, first of all we need to load 
 library(s3tools)
 library(dplyr)
 library(stringr)
-library(purrr)
 library(lubridate)
 ```
 
@@ -600,10 +598,10 @@ remove_numbering <- function(x) {
 
 ---
 
-Then we can use the `modify_if()` function from `purrr` to apply the `remove_numbering()` function to columns in the `prosecutions` dataframe. The `modify_if()` function will apply the specified function to all columns where a particular condition is met, and in this case the condition `is.character` requires that the column contains strings.
+Then we can use the `mutate_if()` function from `dplyr` to apply the `remove_numbering()` function to columns in the `prosecutions` dataframe. The `mutate_if()` function will apply the specified function to all columns where a particular condition is met, and in this case the condition `is.character` requires that the column contains strings.
 
 ```{r, purl=purl_example_code}
-prosecutions <- purrr::modify_if(prosecutions, is.character, remove_numbering)
+prosecutions <- dplyr::mutate_if(prosecutions, is.character, remove_numbering)
 glimpse(prosecutions)
 ```
 
@@ -635,7 +633,7 @@ In this function we've included some default values, so by default any strings t
 ---
 
 ```{r, purl=purl_example_code}
-prosecutions <- purrr::modify_if(prosecutions, is.character, clean_not_known)
+prosecutions <- dplyr::mutate_if(prosecutions, is.character, clean_not_known)
 glimpse(prosecutions)
 ```
 
@@ -686,9 +684,9 @@ clean_dataset <- function(data) {
   # Clean the column headings
   colnames(data) <- generalise_names(colnames(data))
   # Remove numeric indices from columns
-  data <- purrr::modify_if(data, is.character, remove_numbering)
+  data <- dplyr::mutate_if(data, is.character, remove_numbering)
   # Make missing/unknown value entries more consistent
-  data <- purrr::modify_if(data, is.character, clean_not_known)
+  data <- dplyr::mutate_if(data, is.character, clean_not_known)
   
   return(data)
   
@@ -750,40 +748,28 @@ prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", s
 
 This is because of the non-standard evaluation (NSE) mentioned above. The `dplyr` functions don't recognise `group_cols` and `sum_col` as column names, because they can't see that these are variables containing the actual column names. While the NSE usually makes the `dplyr` functions more convenient to use, it makes them slightly trickier to use in user-defined functions. 
 
-Fortunately to get around the NSE problem, functions have been added to the `dplyr` package that accept variables instead of straight column names. The function below shows an example of how the functions `group_by_at()` and `summarise_at()` can replace `group_by()` and `summarise()`.
+Fortunately there are methods available to help get around the NSE problem. The function below shows an example of how our `sum_group()` function can be modified to accept column names stored as strings, using the `.data` pronoun with `[[]]`. 
 
 ```{r, purl=purl_example_code}
 # This function produces a summary table based on a dataset
 sum_group <- function(df, group_cols, sum_col) {
-  
+
   summary <- df %>%
-    dplyr::group_by_at(group_cols) %>%
-    dplyr::summarise_at(sum_col, sum)
-  
+    dplyr::group_by(.data[[ group_cols ]]) %>%
+    dplyr::summarise(counts = sum(.data[[ sum_col ]]))
+
   return(summary)
   
 }
 ```
 
-The way that the Tidyverse packages handle NSE is still evolving, so new methods of addressing this issue may be introduced in the future. See the appendix for some examples of alternative methods to tackle this problem.
+The way that the Tidyverse packages handle NSE has evolved over the past few years, so new methods of addressing this issue may be introduced in the future. See the appendix for some examples of alternative methods to tackle this problem.
 
 ---
 
 ```{r, purl=purl_example_code}
 prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
 prosecutions_grouped
-```
-
----
-
-The `sum_group()` function also allows us to add any number of grouping columns:
-
-```{r, purl=purl_example_code}
-prosecutions_grouped <- sum_group(df = prosecutions, 
-                                  group_cols = c("year", "offence_group"), 
-                                  sum_col = "count")
-
-head(prosecutions_grouped, 15)
 ```
 
 ## Plotting data
@@ -859,45 +845,6 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
 
 plot_prosecutions(prosecutions, breakdown = "offence_group")
 ```
-
-
-## Extracting a subset of the data
-
-Sometimes processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
-
-```{r, purl=purl_example_code}
-# This function extracts the prosecutions from a particular year
-extract_year <- function(data, end_date) {
-  
-  # Ensure the date is a date-time object
-  if (is.character(end_date)) { end_date <- lubridate::dmy(end_date) }
-  
-  # Find end of quarter dates for the past year
-  quarters_to_include <- end_date %m-% months(c(0, 3, 6, 9))
-  
-  # Format the dates to years and quarters
-  years <- lubridate::year(quarters_to_include)
-  quarters <- quarters(quarters_to_include)
-
-  # Combine into a unique set of year-quarters
-  yearquarters <- str_c(years, " ", quarters)
-  
-  # Filter data based on these years and quarters
-  data <- data %>%
-    dplyr::mutate(year_quarter = paste(year, quarter)) %>%
-    dplyr::filter(year_quarter %in% yearquarters)
-  
-  return(data)
-}
-```
-
----
-
-```{r, purl=purl_example_code}
-prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
-glimpse(prosecutions_extract)
-```
-
 
 # Hints and tips
 
@@ -1004,9 +951,8 @@ To find out more about writing packages, check out the links under further readi
 + [Writing an R package from scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
 + Hadley's [R packages](http://r-pkgs.had.co.nz/) book
 
-#### On loops and the purrr package
+#### On loops
 + [Iteration chapter](https://r4ds.had.co.nz/iteration.html#dealing-with-failure) of Hadley's R for Data Science book
-+ Jenny Bryan's [purrr tutorial](https://jennybc.github.io/purrr-tutorial/index.html)
 
 #### Misc
 + [Tidyverse style guide](https://style.tidyverse.org/) (has some guidance on choosing function and argument names)
