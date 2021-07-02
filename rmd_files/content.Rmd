@@ -727,10 +727,10 @@ What if we wanted to create several different summary tables? We could write a f
 
 ```{r, error = TRUE, purl=purl_example_code}
 # This function produces a summary table based on a dataset
-sum_group <- function(df, group_cols, sum_col) {
+sum_group <- function(df, group_col, sum_col) {
   
   summary <- df %>%
-    dplyr::group_by(group_cols) %>%
+    dplyr::group_by(group_col) %>%
     dplyr::summarise(counts = sum(sum_col))
   
   return(summary)
@@ -741,21 +741,21 @@ sum_group <- function(df, group_cols, sum_col) {
 However trying to use this function results in an error.
 
 ```{r, error = TRUE, purl=purl_example_code}
-prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group(df = prosecutions, group_col = "age_range", sum_col = "count")
 ```
 
 ---
 
-This is because of the non-standard evaluation (NSE) mentioned above. The `dplyr` functions don't recognise `group_cols` and `sum_col` as column names, because they can't see that these are variables containing the actual column names. While the NSE usually makes the `dplyr` functions more convenient to use, it makes them slightly trickier to use in user-defined functions. 
+This is because of the non-standard evaluation (NSE) mentioned above. The `dplyr` functions don't recognise `group_col` and `sum_col` as column names, because they can't see that these are variables containing the actual column names. While the NSE usually makes the `dplyr` functions more convenient to use, it makes them slightly trickier to use in user-defined functions. 
 
 Fortunately there are methods available to help get around the NSE problem. The function below shows an example of how our `sum_group()` function can be modified to accept column names stored as strings, using the `.data` pronoun with `[[]]`. 
 
 ```{r, purl=purl_example_code}
 # This function produces a summary table based on a dataset
-sum_group <- function(df, group_cols, sum_col) {
+sum_group <- function(df, group_col, sum_col) {
 
   summary <- df %>%
-    dplyr::group_by(.data[[ group_cols ]]) %>%
+    dplyr::group_by(.data[[ group_col ]]) %>%
     dplyr::summarise(counts = sum(.data[[ sum_col ]]))
 
   return(summary)
@@ -768,7 +768,7 @@ The way that the Tidyverse packages handle NSE has evolved over the past few yea
 ---
 
 ```{r, purl=purl_example_code}
-prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group(df = prosecutions, group_col = "age_range", sum_col = "count")
 prosecutions_grouped
 ```
 
@@ -779,17 +779,15 @@ Let's say we want to produce some plots, and want them all to have the same styl
 ```{r, purl=purl_example_code}
 # This function produces a plot of the number of prosecutions over time
 plot_prosecutions <- function(df, breakdown = "offence_type") {
-
-  grouping_variables <- c(breakdown, "year")
   
   # Group and summarise data by year and breakdown variable
-  df_grouped <- sum_group(df = df, 
-                          group_cols = grouping_variables, 
-                          sum_col = "count")
+  df_grouped <- df %>%
+    dplyr::group_by(.dots = c(breakdown, "year")) %>%
+    dplyr::summarise(counts = sum(count))
 
   # Produce the plot
   plot <- df_grouped %>%
-    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "count", group = breakdown, col = breakdown)) +
+    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "counts", group = breakdown, col = breakdown)) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous(breaks = 0:2100) +
     ggplot2::theme_grey()
@@ -818,17 +816,15 @@ Modify the `plot_prosecutions()` function to use `theme_classic()` as the theme,
 # Exercise 6 solution
 
 plot_prosecutions <- function(df, breakdown = "offence_type") {
-
-  grouping_variables <- c(breakdown, "year")
   
   # Group and summarise data by year and breakdown variable ready to plot
-  df_grouped <- sum_group(df = df, 
-                          group_cols = grouping_variables, 
-                          sum_col = "count")
+  df_grouped <- df %>%
+    dplyr::group_by(.dots = c(breakdown, "year")) %>%
+    dplyr::summarise(counts = sum(count))
 
   # Produce the plot
   plot <- df_grouped %>%
-    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "count", group = breakdown, col = breakdown)) +
+    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "counts", group = breakdown, col = breakdown)) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous(breaks = 0:2100) +
     ggplot2::theme_classic()

@@ -139,7 +139,6 @@ plot_x_and_y(x, y, col='red', type='l')
 library(s3tools)
 library(dplyr)
 library(stringr)
-library(purrr)
 library(lubridate)
 
 prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
@@ -187,7 +186,7 @@ remove_numbering <- function(x) {
   
 }
 
-prosecutions <- purrr::modify_if(prosecutions, is.character, remove_numbering)
+prosecutions <- dplyr::mutate_if(prosecutions, is.character, remove_numbering)
 glimpse(prosecutions)
 
 clean_not_known <- function(x,
@@ -207,7 +206,7 @@ clean_not_known <- function(x,
 
 }
 
-prosecutions <- purrr::modify_if(prosecutions, is.character, clean_not_known)
+prosecutions <- dplyr::mutate_if(prosecutions, is.character, clean_not_known)
 glimpse(prosecutions)
 
 
@@ -224,51 +223,43 @@ prosecutions_grouped <- prosecutions %>%
 prosecutions_grouped
 
 # This function produces a summary table based on a dataset
-sum_group <- function(df, group_cols, sum_col) {
+sum_group <- function(df, group_col, sum_col) {
   
   summary <- df %>%
-    dplyr::group_by(group_cols) %>%
+    dplyr::group_by(group_col) %>%
     dplyr::summarise(counts = sum(sum_col))
   
   return(summary)
   
 }
 
-prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group(df = prosecutions, group_col = "age_range", sum_col = "count")
 
 # This function produces a summary table based on a dataset
-sum_group <- function(df, group_cols, sum_col) {
-  
+sum_group <- function(df, group_col, sum_col) {
+
   summary <- df %>%
-    dplyr::group_by_at(group_cols) %>%
-    dplyr::summarise_at(sum_col, sum)
-  
+    dplyr::group_by(.data[[ group_col ]]) %>%
+    dplyr::summarise(counts = sum(.data[[ sum_col ]]))
+
   return(summary)
   
 }
 
-prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group(df = prosecutions, group_col = "age_range", sum_col = "count")
 prosecutions_grouped
-
-prosecutions_grouped <- sum_group(df = prosecutions, 
-                                  group_cols = c("year", "offence_group"), 
-                                  sum_col = "count")
-
-head(prosecutions_grouped, 15)
 
 # This function produces a plot of the number of prosecutions over time
 plot_prosecutions <- function(df, breakdown = "offence_type") {
-
-  grouping_variables <- c(breakdown, "year")
   
   # Group and summarise data by year and breakdown variable
-  df_grouped <- sum_group(df = df, 
-                          group_cols = grouping_variables, 
-                          sum_col = "count")
+  df_grouped <- df %>%
+    dplyr::group_by(.dots = c(breakdown, "year")) %>%
+    dplyr::summarise(counts = sum(count))
 
   # Produce the plot
   plot <- df_grouped %>%
-    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "count", group = breakdown, col = breakdown)) +
+    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "counts", group = breakdown, col = breakdown)) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous(breaks = 0:2100) +
     ggplot2::theme_grey()
@@ -283,33 +274,6 @@ plot_prosecutions(prosecutions, breakdown = "offence_type")
 
 
 
-
-# This function extracts the prosecutions from a particular year
-extract_year <- function(data, end_date) {
-  
-  # Ensure the date is a date-time object
-  if (is.character(end_date)) { end_date <- lubridate::dmy(end_date) }
-  
-  # Find end of quarter dates for the past year
-  quarters_to_include <- end_date %m-% months(c(0, 3, 6, 9))
-  
-  # Format the dates to years and quarters
-  years <- lubridate::year(quarters_to_include)
-  quarters <- quarters(quarters_to_include)
-
-  # Combine into a unique set of year-quarters
-  yearquarters <- str_c(years, " ", quarters)
-  
-  # Filter data based on these years and quarters
-  data <- data %>%
-    dplyr::mutate(year_quarter = paste(year, quarter)) %>%
-    dplyr::filter(year_quarter %in% yearquarters)
-  
-  return(data)
-}
-
-prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
-glimpse(prosecutions_extract)
 
 source("functions.R")
 

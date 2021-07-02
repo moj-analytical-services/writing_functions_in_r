@@ -17,14 +17,15 @@ the content of the [Introduction to
 R](https://github.com/moj-analytical-services/IntroRTraining) training
 session & has some experience of using R in their work.
 
-This training session is run in person/over Teams every few months.
+This training session is periodically run in person/over Teams.
 Alternatively, you can go through this material in your own time - all
 the notes are available below and you can also find the recording of a
 previous session
 [here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a).
 See [Remote learning](#remote-learning) for more tips on going through
-this material in your own time. If you work through the material by youself please 
-leave feedback about the material [here](https://airtable.com/shr9u2OJB2pW8Y0Af).  
+this material in your own time. If you work through the material by
+youself please leave feedback about the material
+[here](https://airtable.com/shr9u2OJB2pW8Y0Af).
 
 If you have any feedback on the content, please get in touch\!
 
@@ -385,11 +386,9 @@ odd_or_even(x = "a")
 odd_or_even(x = c(1, 2, 3))
 ```
 
-    ## Warning in if ((x%%2) == 0) {: the condition has length > 1 and only the
-    ## first element will be used
+    ## Warning in if ((x%%2) == 0) {: the condition has length > 1 and only the first element will be used
 
-    ## Warning in if ((x%%2) == 1) {: the condition has length > 1 and only the
-    ## first element will be used
+    ## Warning in if ((x%%2) == 1) {: the condition has length > 1 and only the first element will be used
 
     ## [1] "The number is odd."
 
@@ -648,8 +647,6 @@ to load a few packages:
   - `dplyr` is the package we’ll use to create summary tables from the
     data.
   - `stringr` provides functions that can be used to manipulate strings.
-  - `purrr` provides functions to make the use of vectors and
-    user-defined functions easier.
   - `lubridate` provides functions that help with manipulating dates.
 
 <!-- end list -->
@@ -659,7 +656,6 @@ to load a few packages:
 library(s3tools)
 library(dplyr)
 library(stringr)
-library(purrr)
 library(lubridate)
 ```
 
@@ -688,24 +684,24 @@ Here’s a preview of the data stored in `prosecutions`:
 glimpse(prosecutions)
 ```
 
-    ## Observations: 107,493
-    ## Variables: 16
-    ## $ Year                      <int> 2008, 2008, 2008, 2008, 2008, 2008, 20…
-    ## $ Quarter                   <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q…
-    ## $ Sex                       <chr> "01: Male", "01: Male", "01: Male", "0…
-    ## $ Type.of.Defendent         <chr> "01: Person", "01: Person", "01: Perso…
-    ## $ Age.Group                 <chr> "01: Juveniles", "01: Juveniles", "01:…
-    ## $ Age.Range                 <chr> "01: 10-11", "01: 10-11", "01: 10-11",…
-    ## $ Ethnicity                 <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
-    ## $ Court.Type                <chr> "Magistrates Court", "Magistrates Cour…
-    ## $ Offence.Type              <chr> "01 Indictable only", "01 Indictable o…
-    ## $ Offence.Group             <chr> "02 Sexual offences", "03 Robbery", "0…
-    ## $ Tried                     <chr> "5: Not tried", "01: Tried at magistra…
-    ## $ Plea.at.the.Crown.Court   <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
-    ## $ Convicted..Not.convicted  <chr> "02: Not convicted", "01: Convicted", …
-    ## $ Sentenced...Not.sentenced <chr> "02: Not sentenced", "01: Sentenced", …
-    ## $ Outcome                   <chr> "01: Proceedings terminated early", "0…
-    ## $ Count                     <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15,…
+    ## Rows: 107,493
+    ## Columns: 16
+    ## $ Year                      <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 200…
+    ## $ Quarter                   <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1…
+    ## $ Sex                       <chr> "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01…
+    ## $ Type.of.Defendent         <chr> "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: …
+    ## $ Age.Group                 <chr> "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Ju…
+    ## $ Age.Range                 <chr> "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11…
+    ## $ Ethnicity                 <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
+    ## $ Court.Type                <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates…
+    ## $ Offence.Type              <chr> "01 Indictable only", "01 Indictable only", "01 Indictable only", "01 Indic…
+    ## $ Offence.Group             <chr> "02 Sexual offences", "03 Robbery", "03 Robbery", "07 Possession of weapons…
+    ## $ Tried                     <chr> "5: Not tried", "01: Tried at magistrates court", "01: Tried at magistrates…
+    ## $ Plea.at.the.Crown.Court   <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
+    ## $ Convicted..Not.convicted  <chr> "02: Not convicted", "01: Convicted", "02: Not convicted", "01: Convicted",…
+    ## $ Sentenced...Not.sentenced <chr> "02: Not sentenced", "01: Sentenced", "02: Not sentenced", "01: Sentenced",…
+    ## $ Outcome                   <chr> "01: Proceedings terminated early", "07: Found guilty", "03: Dismissed (fou…
+    ## $ Count                     <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5…
 
 ## Cleaning data
 
@@ -769,18 +765,18 @@ In this dataset, some of the columns contain values with a number along
 with a category; for example, the `age_group` column contains categories
 like “01: Juveniles” rather than just “Juveniles”.
 
-    ## Observations: 107,493
-    ## Variables: 10
-    ## $ year              <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-    ## $ quarter           <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
-    ## $ sex               <chr> "01: Male", "01: Male", "01: Male", "01: Male"…
-    ## $ type_of_defendent <chr> "01: Person", "01: Person", "01: Person", "01:…
-    ## $ age_group         <chr> "01: Juveniles", "01: Juveniles", "01: Juvenil…
-    ## $ age_range         <chr> "01: 10-11", "01: 10-11", "01: 10-11", "01: 10…
-    ## $ ethnicity         <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A…
-    ## $ court_type        <chr> "Magistrates Court", "Magistrates Court", "Mag…
-    ## $ offence_type      <chr> "01 Indictable only", "01 Indictable only", "0…
-    ## $ offence_group     <chr> "02 Sexual offences", "03 Robbery", "03 Robber…
+    ## Rows: 107,493
+    ## Columns: 10
+    ## $ year              <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008,…
+    ## $ quarter           <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1",…
+    ## $ sex               <chr> "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male",…
+    ## $ type_of_defendent <chr> "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person",…
+    ## $ age_group         <chr> "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles"…
+    ## $ age_range         <chr> "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: …
+    ## $ ethnicity         <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A",…
+    ## $ court_type        <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court",…
+    ## $ offence_type      <chr> "01 Indictable only", "01 Indictable only", "01 Indictable only", "01 Indictable on…
+    ## $ offence_group     <chr> "02 Sexual offences", "03 Robbery", "03 Robbery", "07 Possession of weapons", "01 V…
 
 These numbers might be undesirable, so we can write a function like this
 to remove them:
@@ -798,35 +794,35 @@ remove_numbering <- function(x) {
 
 -----
 
-Then we can use the `modify_if()` function from `purrr` to apply the
+Then we can use the `mutate_if()` function from `dplyr` to apply the
 `remove_numbering()` function to columns in the `prosecutions`
-dataframe. The `modify_if()` function will apply the specified function
+dataframe. The `mutate_if()` function will apply the specified function
 to all columns where a particular condition is met, and in this case the
 condition `is.character` requires that the column contains strings.
 
 ``` r
-prosecutions <- purrr::modify_if(prosecutions, is.character, remove_numbering)
+prosecutions <- dplyr::mutate_if(prosecutions, is.character, remove_numbering)
 glimpse(prosecutions)
 ```
 
-    ## Observations: 107,493
-    ## Variables: 16
-    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
-    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", …
-    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", …
-    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "…
-    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-…
-    ## $ ethnicity               <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
-    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
-    ## $ offence_type            <chr> "Indictable only", "Indictable only", "I…
-    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery",…
-    ## $ tried                   <chr> "Not tried", "Tried at magistrates court…
-    ## $ plea_at_the_crown_court <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"…
-    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convi…
-    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sente…
-    ## $ outcome                 <chr> "Proceedings terminated early", "Found g…
-    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
+    ## Rows: 107,493
+    ## Columns: 16
+    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008,…
+    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1",…
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male…
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person…
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles",…
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-1…
+    ## $ ethnicity               <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", …
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates C…
+    ## $ offence_type            <chr> "Indictable only", "Indictable only", "Indictable only", "Indictable only", "…
+    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery", "Possession of weapons", "Violence a…
+    ## $ tried                   <chr> "Not tried", "Tried at magistrates court", "Tried at magistrates court", "Tri…
+    ## $ plea_at_the_crown_court <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", …
+    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Not…
+    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Not…
+    ## $ outcome                 <chr> "Proceedings terminated early", "Found guilty", "Dismissed (found not guilty"…
+    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, …
 
 -----
 
@@ -864,28 +860,28 @@ searching for the missing/unknown phrases.
 -----
 
 ``` r
-prosecutions <- purrr::modify_if(prosecutions, is.character, clean_not_known)
+prosecutions <- dplyr::mutate_if(prosecutions, is.character, clean_not_known)
 glimpse(prosecutions)
 ```
 
-    ## Observations: 107,493
-    ## Variables: 16
-    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
-    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", …
-    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", …
-    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "…
-    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-…
-    ## $ ethnicity               <chr> "Not known", "Not known", "Not known", "…
-    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
-    ## $ offence_type            <chr> "Indictable only", "Indictable only", "I…
-    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery",…
-    ## $ tried                   <chr> "Not tried", "Tried at magistrates court…
-    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "…
-    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convi…
-    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sente…
-    ## $ outcome                 <chr> "Proceedings terminated early", "Found g…
-    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1…
+    ## Rows: 107,493
+    ## Columns: 16
+    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008,…
+    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1",…
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male…
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person…
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles",…
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-1…
+    ## $ ethnicity               <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known",…
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates C…
+    ## $ offence_type            <chr> "Indictable only", "Indictable only", "Indictable only", "Indictable only", "…
+    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery", "Possession of weapons", "Violence a…
+    ## $ tried                   <chr> "Not tried", "Tried at magistrates court", "Tried at magistrates court", "Tri…
+    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known",…
+    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Not…
+    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Not…
+    ## $ outcome                 <chr> "Proceedings terminated early", "Found guilty", "Dismissed (found not guilty"…
+    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, …
 
 -----
 
@@ -959,10 +955,10 @@ work:
 
 ``` r
 # This function produces a summary table based on a dataset
-sum_group <- function(df, group_cols, sum_col) {
+sum_group <- function(df, group_col, sum_col) {
   
   summary <- df %>%
-    dplyr::group_by(group_cols) %>%
+    dplyr::group_by(group_col) %>%
     dplyr::summarise(counts = sum(sum_col))
   
   return(summary)
@@ -973,53 +969,52 @@ sum_group <- function(df, group_cols, sum_col) {
 However trying to use this function results in an error.
 
 ``` r
-prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group(df = prosecutions, group_col = "age_range", sum_col = "count")
 ```
 
-    ## Error: Column `group_cols` is unknown
+    ## Error: Column `group_col` is unknown
 
 -----
 
 This is because of the non-standard evaluation (NSE) mentioned above.
-The `dplyr` functions don’t recognise `group_cols` and `sum_col` as
+The `dplyr` functions don’t recognise `group_col` and `sum_col` as
 column names, because they can’t see that these are variables containing
 the actual column names. While the NSE usually makes the `dplyr`
 functions more convenient to use, it makes them slightly trickier to use
 in user-defined functions.
 
-Fortunately to get around the NSE problem, functions have been added to
-the `dplyr` package that accept variables instead of straight column
-names. The function below shows an example of how the functions
-`group_by_at()` and `summarise_at()` can replace `group_by()` and
-`summarise()`.
+Fortunately there are methods available to help get around the NSE
+problem. The function below shows an example of how our `sum_group()`
+function can be modified to accept column names stored as strings, using
+the `.data` pronoun with `[[]]`.
 
 ``` r
 # This function produces a summary table based on a dataset
-sum_group <- function(df, group_cols, sum_col) {
-  
+sum_group <- function(df, group_col, sum_col) {
+
   summary <- df %>%
-    dplyr::group_by_at(group_cols) %>%
-    dplyr::summarise_at(sum_col, sum)
-  
+    dplyr::group_by(.data[[ group_col ]]) %>%
+    dplyr::summarise(counts = sum(.data[[ sum_col ]]))
+
   return(summary)
   
 }
 ```
 
-The way that the Tidyverse packages handle NSE is still evolving, so new
-methods of addressing this issue may be introduced in the future. See
-the appendix for some examples of alternative methods to tackle this
-problem.
+The way that the Tidyverse packages handle NSE has evolved over the past
+few years, so new methods of addressing this issue may be introduced in
+the future. See the appendix for some examples of alternative methods to
+tackle this problem.
 
 -----
 
 ``` r
-prosecutions_grouped <- sum_group(df = prosecutions, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group(df = prosecutions, group_col = "age_range", sum_col = "count")
 prosecutions_grouped
 ```
 
     ## # A tibble: 14 x 2
-    ##    age_range                        count
+    ##    age_range                       counts
     ##    <chr>                            <int>
     ##  1 10-11                             3324
     ##  2 12-14                           113960
@@ -1036,39 +1031,6 @@ prosecutions_grouped
     ## 13 Not known (Adult)               195459
     ## 14 Not known (Juvenile)               150
 
------
-
-The `sum_group()` function also allows us to add any number of grouping
-columns:
-
-``` r
-prosecutions_grouped <- sum_group(df = prosecutions, 
-                                  group_cols = c("year", "offence_group"), 
-                                  sum_col = "count")
-
-head(prosecutions_grouped, 15)
-```
-
-    ## # A tibble: 15 x 3
-    ## # Groups:   year [2]
-    ##     year offence_group                         count
-    ##    <int> <chr>                                 <int>
-    ##  1  2008 Criminal damage and arson             11278
-    ##  2  2008 Drug offences                         56953
-    ##  3  2008 Fraud Offences                        16262
-    ##  4  2008 Miscellaneous crimes against society  71652
-    ##  5  2008 Possession of weapons                 17968
-    ##  6  2008 Public order offences                 10465
-    ##  7  2008 Robbery                               13096
-    ##  8  2008 Sexual offences                        8353
-    ##  9  2008 Summary motoring                     649238
-    ## 10  2008 Summary non-motoring                 593335
-    ## 11  2008 Theft Offences                       146304
-    ## 12  2008 Violence against the person           45119
-    ## 13  2009 Criminal damage and arson              8975
-    ## 14  2009 Drug offences                         61685
-    ## 15  2009 Fraud Offences                        18756
-
 ## Plotting data
 
 Let’s say we want to produce some plots, and want them all to have the
@@ -1081,17 +1043,15 @@ chart with `ggplot2`’s grey theme:
 ``` r
 # This function produces a plot of the number of prosecutions over time
 plot_prosecutions <- function(df, breakdown = "offence_type") {
-
-  grouping_variables <- c(breakdown, "year")
   
   # Group and summarise data by year and breakdown variable
-  df_grouped <- sum_group(df = df, 
-                          group_cols = grouping_variables, 
-                          sum_col = "count")
+  df_grouped <- df %>%
+    dplyr::group_by(.dots = c(breakdown, "year")) %>%
+    dplyr::summarise(counts = sum(count))
 
   # Produce the plot
   plot <- df_grouped %>%
-    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "count", group = breakdown, col = breakdown)) +
+    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "counts", group = breakdown, col = breakdown)) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous(breaks = 0:2100) +
     ggplot2::theme_grey()
@@ -1108,7 +1068,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
 plot_prosecutions(prosecutions, breakdown = "offence_type")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
 
 -----
 
@@ -1121,65 +1081,6 @@ breakdown by `"offence_group"`.
 -----
 
 -----
-
-## Extracting a subset of the data
-
-Sometimes processing data requires manipulating dates and times. For
-example, if we wanted to extract the prosecutions from the year up to a
-particular date, we could use a function like:
-
-``` r
-# This function extracts the prosecutions from a particular year
-extract_year <- function(data, end_date) {
-  
-  # Ensure the date is a date-time object
-  if (is.character(end_date)) { end_date <- lubridate::dmy(end_date) }
-  
-  # Find end of quarter dates for the past year
-  quarters_to_include <- end_date %m-% months(c(0, 3, 6, 9))
-  
-  # Format the dates to years and quarters
-  years <- lubridate::year(quarters_to_include)
-  quarters <- quarters(quarters_to_include)
-
-  # Combine into a unique set of year-quarters
-  yearquarters <- str_c(years, " ", quarters)
-  
-  # Filter data based on these years and quarters
-  data <- data %>%
-    dplyr::mutate(year_quarter = paste(year, quarter)) %>%
-    dplyr::filter(year_quarter %in% yearquarters)
-  
-  return(data)
-}
-```
-
------
-
-``` r
-prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
-glimpse(prosecutions_extract)
-```
-
-    ## Observations: 14,929
-    ## Variables: 17
-    ## $ year                    <int> 2017, 2017, 2017, 2017, 2017, 2017, 2017…
-    ## $ quarter                 <chr> "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2"…
-    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", …
-    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", …
-    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "…
-    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-…
-    ## $ ethnicity               <chr> "White", "White", "White", "White", "Whi…
-    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court"…
-    ## $ offence_type            <chr> "Indictable only", "Triable either way",…
-    ## $ offence_group           <chr> "Robbery", "Violence against the person"…
-    ## $ tried                   <chr> "Tried at magistrates court", "Tried at …
-    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "…
-    ## $ convicted_not_convicted <chr> "Convicted", "Convicted", "Not convicted…
-    ## $ sentenced_not_sentenced <chr> "Sentenced", "Sentenced", "Not sentenced…
-    ## $ outcome                 <chr> "Found guilty", "Found guilty", "Proceed…
-    ## $ count                   <int> 1, 1, 1, 1, 1, 1, 1, 1, 8, 7, 2, 2, 3, 1…
-    ## $ year_quarter            <chr> "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q…
 
 # Hints and tips
 
@@ -1354,13 +1255,11 @@ further reading.
     scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
   - Hadley’s [R packages](http://r-pkgs.had.co.nz/) book
 
-#### On loops and the purrr package
+#### On loops
 
   - [Iteration
     chapter](https://r4ds.had.co.nz/iteration.html#dealing-with-failure)
     of Hadley’s R for Data Science book
-  - Jenny Bryan’s [purrr
-    tutorial](https://jennybc.github.io/purrr-tutorial/index.html)
 
 #### Misc
 
@@ -1377,6 +1276,22 @@ slack](https://asdslack.slack.com/) on either the `#r` or `#intro_r`
 channels.
 
 # Appendix
+
+## Table of operators
+
+| Operator | Definition                    |
+| :------: | :---------------------------- |
+|   \==    | Equal to                      |
+|   \!=    | Not equal to                  |
+|    \>    | Greater than                  |
+|    \<    | Less than                     |
+|   \>=    | Greater than or equal to      |
+|   \<=    | Less than or equal to         |
+|    ǀ     | Or                            |
+|    &     | And                           |
+|    \!    | Not                           |
+|   %in%   | The subject appears in a list |
+| is.na()  | The subject is NA             |
 
 ## Additional NSE examples
 
@@ -1399,7 +1314,6 @@ sum_group_alt1 <- function(df, group_cols, sum_col) {
 }
 
 prosecutions_grouped <- sum_group_alt1(df = prosecutions, group_cols = "age_range", sum_col = "count")
-
 prosecutions_grouped
 ```
 
@@ -1437,7 +1351,6 @@ sum_group_alt2 <- function(df, group_cols, sum_col) {
 }
 
 prosecutions_grouped <- sum_group_alt2(df = prosecutions, group_cols = age_range, sum_col = count)
-
 prosecutions_grouped
 ```
 
@@ -1459,7 +1372,47 @@ prosecutions_grouped
     ## 13 Not known (Adult)               195459
     ## 14 Not known (Juvenile)               150
 
-## Adding an optional total row
+The function below shows an example of how our `sum_group()` function
+can be modified to accept column names as arguments, using the `{{`
+operator. Note that you need version 0.4 or later of the rlang package
+to use the `{{` operator.
+
+``` r
+sum_group_alt3 <- function(df, group_cols, sum_col) {
+
+  summary <- df %>%
+    dplyr::group_by({{ group_cols }}) %>%
+    dplyr::summarise(counts = sum({{ sum_col }}))
+
+  return(summary)
+  
+}
+
+prosecutions_grouped <- sum_group_alt3(df = prosecutions, group_cols = age_range, sum_col = count)
+prosecutions_grouped
+```
+
+    ## # A tibble: 14 x 2
+    ##    age_range                       counts
+    ##    <chr>                            <int>
+    ##  1 10-11                             3324
+    ##  2 12-14                           113960
+    ##  3 15-17                           570275
+    ##  4 18-20                          1302589
+    ##  5 21-24                          2131033
+    ##  6 25-29 (2017 onwards)            447108
+    ##  7 25+ (prior to 2017)           10209264
+    ##  8 30-39 (2017 onwards)            758230
+    ##  9 40-49 (2017 onwards)            477217
+    ## 10 50-59 (2017 onwards)            261626
+    ## 11 60+ (2017 onwards)              101554
+    ## 12 Companies, public bodies etc.   114771
+    ## 13 Not known (Adult)               195459
+    ## 14 Not known (Juvenile)               150
+
+## Bonus examples
+
+### Adding an optional total row
 
 We can extend the `sum_group()` function by having the option to add a
 row with the total across all categories. Note that this requires the
@@ -1467,16 +1420,7 @@ row with the total across all categories. Note that this requires the
 
 ``` r
 library(janitor)
-```
 
-    ## 
-    ## Attaching package: 'janitor'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     chisq.test, fisher.test
-
-``` r
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
   summary <- df %>%
@@ -1491,3 +1435,60 @@ sum_group <- function(df, group_cols, sum_col, add_total=F) {
   
 }
 ```
+
+### Extracting a subset of the data
+
+Sometimes processing data requires manipulating dates and times. For
+example, if we wanted to extract the prosecutions from the year up to a
+particular date, we could use a function like:
+
+``` r
+# This function extracts the prosecutions from a particular year
+extract_year <- function(data, end_date) {
+  
+  # Ensure the date is a date-time object
+  if (is.character(end_date)) { end_date <- lubridate::dmy(end_date) }
+  
+  # Find end of quarter dates for the past year
+  quarters_to_include <- end_date %m-% months(c(0, 3, 6, 9))
+  
+  # Format the dates to years and quarters
+  years <- lubridate::year(quarters_to_include)
+  quarters <- quarters(quarters_to_include)
+
+  # Combine into a unique set of year-quarters
+  yearquarters <- str_c(years, " ", quarters)
+  
+  # Filter data based on these years and quarters
+  data <- data %>%
+    dplyr::mutate(year_quarter = paste(year, quarter)) %>%
+    dplyr::filter(year_quarter %in% yearquarters)
+  
+  return(data)
+}
+```
+
+``` r
+prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
+glimpse(prosecutions_extract)
+```
+
+    ## Rows: 14,929
+    ## Columns: 17
+    ## $ year                    <int> 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017,…
+    ## $ quarter                 <chr> "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2",…
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male…
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person…
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles",…
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-1…
+    ## $ ethnicity               <chr> "White", "White", "White", "White", "White", "Not known", "Not known", "Not k…
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates C…
+    ## $ offence_type            <chr> "Indictable only", "Triable either way", "Triable either way", "Triable eithe…
+    ## $ offence_group           <chr> "Robbery", "Violence against the person", "Theft Offences", "Criminal damage …
+    ## $ tried                   <chr> "Tried at magistrates court", "Tried at magistrates court", "Not tried", "Tri…
+    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known",…
+    ## $ convicted_not_convicted <chr> "Convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Convict…
+    ## $ sentenced_not_sentenced <chr> "Sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Sentenc…
+    ## $ outcome                 <chr> "Found guilty", "Found guilty", "Proceedings terminated early", "Found guilty…
+    ## $ count                   <int> 1, 1, 1, 1, 1, 1, 1, 1, 8, 7, 2, 2, 3, 1, 5, 9, 1, 1, 5, 2, 1, 1, 2, 1, 1, 21…
+    ## $ year_quarter            <chr> "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", …

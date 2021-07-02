@@ -161,9 +161,9 @@ clean_dataset <- function(data) {
   # Clean the column headings
   colnames(data) <- generalise_names(colnames(data))
   # Remove numeric indices from columns
-  data <- purrr::modify_if(data, is.character, remove_numbering)
+  data <- dplyr::mutate_if(data, is.character, remove_numbering)
   # Make missing/unknown value entries more consistent
-  data <- purrr::modify_if(data, is.character, clean_not_known)
+  data <- dplyr::mutate_if(data, is.character, clean_not_known)
   
   return(data)
   
@@ -187,22 +187,18 @@ clean_dataset <- function(data) {
 
 
 
-
-
 # Exercise 6 solution
 
 plot_prosecutions <- function(df, breakdown = "offence_type") {
-
-  grouping_variables <- c(breakdown, "year")
   
   # Group and summarise data by year and breakdown variable ready to plot
-  df_grouped <- sum_group(df = df, 
-                          group_cols = grouping_variables, 
-                          sum_col = "count")
+  df_grouped <- df %>%
+    dplyr::group_by(.dots = c(breakdown, "year")) %>%
+    dplyr::summarise(counts = sum(count))
 
   # Produce the plot
   plot <- df_grouped %>%
-    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "count", group = breakdown, col = breakdown)) +
+    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "counts", group = breakdown, col = breakdown)) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous(breaks = 0:2100) +
     ggplot2::theme_classic()

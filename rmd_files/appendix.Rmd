@@ -98,13 +98,11 @@ sum_group <- function(df, group_cols, sum_col, add_total=F) {
 
 ```
 
----
-
 ### Extracting a subset of the data
 
 Sometimes processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
 
-```{r, purl=purl_example_code}
+```{r}
 # This function extracts the prosecutions from a particular year
 extract_year <- function(data, end_date) {
   
@@ -130,9 +128,7 @@ extract_year <- function(data, end_date) {
 }
 ```
 
----
-
-```{r, purl=purl_example_code}
+```{r}
 prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
 glimpse(prosecutions_extract)
 ```
