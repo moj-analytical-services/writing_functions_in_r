@@ -6,6 +6,8 @@ output: rmarkdown::github_document
 
 ## Table of operators
 
+This table shows some of the logical operators you are likely to encounter when using R.
+
 | Operator | Definition |
 | :------: | :--------- |
 |    ==    | Equal to                      |
@@ -79,7 +81,7 @@ prosecutions_grouped
 
 We can extend the `sum_group()` function by having the option to add a row with the total across all categories. Note that this requires the `janitor` package.
 
-```{r}
+```{r, message = FALSE}
 library(janitor)
 
 sum_group <- function(df, group_cols, sum_col, add_total=F) {
@@ -95,7 +97,6 @@ sum_group <- function(df, group_cols, sum_col, add_total=F) {
   return(summary)
   
 }
-
 ```
 
 ### Extracting a subset of the data

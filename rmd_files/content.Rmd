@@ -54,6 +54,7 @@ You can use functions to make your code better structured and easier to read - d
 The syntax for creating a function is:
 
 ```{r, purl=purl_example_code}
+# Comment describing what the function does
 function_name <- function(arg1, arg2) {
         # function body, e.g. 
         print(paste(arg1, arg2))
@@ -213,7 +214,7 @@ odd_or_even(x = 4)
 
 ## Example 5: errors and warnings
 
-Sometimes it can be useful to include helpful error messages in functions, e.g. by anticipating the sorts of variables that could be input. What happens if you try to use a non-integer or a string as an argument in the above example? Try the running the function with the following arguments:
+Sometimes it can be useful to include helpful error messages in functions, e.g. by anticipating the sorts of variables that could be input. What happens if you try to use a non-integer or a string as an argument in the previous example? Try the running the function with the following arguments:
 
 ```{r, error = TRUE, purl=purl_example_code}
 odd_or_even(x = 1.5)
@@ -319,8 +320,7 @@ Try it out with values 1, 2, 3, 5 & 15.
       code
     }
 ```
-* To test whether a number is divisible by another number, you can use the modulo
-operator `%%`, which calculates the remainder. E.g. `1 %% 3 == 0` evaluates to `FALSE`.
+* To test whether a number is divisible by another number, you can use the modulus operator `%%`, which calculates the remainder. E.g. `1 %% 3 == 0` evaluates to `FALSE`.
 * To find out more about if statements and conditional execution, see [here](https://r4ds.had.co.nz/functions.html#conditional-execution)
 
 ---

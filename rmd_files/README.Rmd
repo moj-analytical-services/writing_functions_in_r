@@ -35,6 +35,7 @@ If you have any feedback on the content, please get in touch!
 * [How to organise your code](#how-to-organise-your-code)
 * [Writing a package](#writing-a-package)
 * [Further reading](#further-reading)
+* [Appendix](#appendix)
 
 ## Pre-material
 

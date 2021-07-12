@@ -1,6 +1,7 @@
 x <- c(1, 2, 3, 4, 5) # Create a vector of numbers to sum
 sum_x <- sum(x) # Sum the numbers contained in 'x', and save the result as a new variable 'sum_x'
 
+# Comment describing what the function does
 function_name <- function(arg1, arg2) {
         # function body, e.g. 
         print(paste(arg1, arg2))
