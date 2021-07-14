@@ -1,5 +1,5 @@
 x <- c(1, 2, 3, 4, 5) # Create a vector of numbers to sum
-sum_x <- sum(x) # Sum the numbers contained in 'x', and save the result as a new variable 'sum_x'
+sum(x) # Sum the numbers contained in 'x'
 
 # Comment describing what the function does
 function_name <- function(arg1, arg2) {
@@ -140,14 +140,13 @@ plot_x_and_y(x, y, col='red', type='l')
 library(s3tools)
 library(dplyr)
 library(stringr)
-library(lubridate)
 
 prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
   "alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv")
 
 # Filter for Magistrates Court to extract the prosecutions
 prosecutions <- prosecutions_and_convictions %>%
-  filter(`Court.Type` == "Magistrates Court")
+  dplyr::filter(`Court.Type` == "Magistrates Court")
 
 glimpse(prosecutions)
 

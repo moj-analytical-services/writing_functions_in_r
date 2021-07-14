@@ -10,7 +10,7 @@
 
 
 ### Before we start
-To follow along with the code run during this session and participate in the exercises, open the script "example_code.R" in RStudio. All the code that we'll show in this session is stored in "example_code.R", and you can edit this script to write solutions to the exercises. You may also want to have the course [read me](https://github.com/moj-analytical-services/writing_functions_in_r) open as a reference.
+To follow along with the code run during this session and participate in the exercises, open the script "example_code.R" in RStudio. All the code that we'll show in this session is stored in "example_code.R", and you can edit this script to write solutions to the exercises. You may also want to have the course [README](https://github.com/moj-analytical-services/writing_functions_in_r) open as a reference.
 
 ---
 
@@ -27,7 +27,7 @@ Here is an example of one of the built-in R functions, `sum()`:
 
 ```{r, purl=purl_example_code}
 x <- c(1, 2, 3, 4, 5) # Create a vector of numbers to sum
-sum_x <- sum(x) # Sum the numbers contained in 'x', and save the result as a new variable 'sum_x'
+sum(x) # Sum the numbers contained in 'x'
 ```
 
 You can also write your own functions, called "user-defined functions".
@@ -492,14 +492,12 @@ Before we start looking at more example functions, first of all we need to load 
 * `s3tools` is an MoJ package designed to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.
 * `dplyr` is the package we'll use to create summary tables from the data.
 * `stringr` provides functions that can be used to manipulate strings.
-* `lubridate` provides functions that help with manipulating dates.
 
 ```{r message=F, warning=F, purl=purl_example_code}
 # Load packages
 library(s3tools)
 library(dplyr)
 library(stringr)
-library(lubridate)
 ```
 
 ---
@@ -512,7 +510,7 @@ prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
 
 # Filter for Magistrates Court to extract the prosecutions
 prosecutions <- prosecutions_and_convictions %>%
-  filter(`Court.Type` == "Magistrates Court")
+  dplyr::filter(`Court.Type` == "Magistrates Court")
 ```
 
 ---
@@ -881,9 +879,7 @@ Think about whether there are ways you can make your function usable in more sit
 R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as an input and apply the transformation to each element. The `generalise_names()` function we looked at is a good example of this!
 
 ### Ask for feedback
-A key measure of a good function (or any piece of code) is how easy it is for 
-someone else to understand, use and modify it. The best way to test this is to 
-get your code reviewed by someone else.
+A key measure of a good function (or any piece of code) is how easy it is for someone else to understand, use and modify it. The best way to test this is to get your code reviewed by someone else.
 
 ## How to organise your code
 

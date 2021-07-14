@@ -104,6 +104,8 @@ sum_group <- function(df, group_cols, sum_col, add_total=F) {
 Sometimes processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
 
 ```{r}
+library(lubridate)
+
 # This function extracts the prosecutions from a particular year
 extract_year <- function(data, end_date) {
   
