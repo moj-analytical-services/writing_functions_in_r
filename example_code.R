@@ -157,8 +157,6 @@ generalise_names <- function(names) {
   names <- tolower(names)
   # Trim any blank spaces at the start or end of each string
   names <- stringr::str_trim(names)
-  # Replace spaces with an underscore
-  names <- stringr::str_replace_all(names, " ", "_")
   # Replace anything that isn't a letter or number with an underscore
   names <- stringr::str_replace_all(names, "[^A-Za-z0-9]", "_")
   # Replace repeated underscores with a single underscore
