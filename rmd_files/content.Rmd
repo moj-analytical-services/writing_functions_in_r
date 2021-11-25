@@ -192,9 +192,9 @@ abs_x(-5)
 
 As soon as a `return()` statement is encountered in a function, the function finishes and returns the variable in the `return()` statement. In the above example, `return()` is used twice as there is a condition with two possibilities. Either the input argument `x` is less than zero, in which case the function ends with the `return(-x)` statement, otherwise if `x` is not less than zero then the function continues to the `return(x)` statement.
 
-## Example 4: functions without outputs
+## Example 4: functions with side-effects
 
-Depending on the purpose of the function, it doesn't need to return an output at all. Instead it can have a "side effect", such as printing a value to the console:
+Pipeable functions, i.e. ones that work with the pipe operator `%>%` and usually take a dataframe as the first argument, come in two basic types: transformations and side-effects. With transformations, an object is passed to the function’s first argument and a modified object is returned. With side-effects, the function performs an action on the object, like drawing a plot or saving a file. The function below has the side-effect of printing a message to the console, depending on the value of the object:
 
 ```{r, purl=purl_example_code}
 # This function lets you know whether a number is odd or even
@@ -210,7 +210,7 @@ odd_or_even <- function(x) {
 
 odd_or_even(x = 4)
 ```
-**Note:** It's best practice for your function to either return a value or have a side effect, but not both.
+**Note:** It's best practice for your function to either return a value or have a side-effect, but not both.
 
 ## Example 5: errors and warnings
 
@@ -594,10 +594,10 @@ remove_numbering <- function(x) {
 
 ---
 
-Then we can use the `mutate_if()` function from `dplyr` to apply the `remove_numbering()` function to columns in the `prosecutions` dataframe. The `mutate_if()` function will apply the specified function to all columns where a particular condition is met, and in this case the condition `is.character` requires that the column contains strings.
+Then we can use the `mutate()` function with the `across()` function from `dplyr`, and the `where()` selection helper from `tidyselect`, to apply the `remove_numbering()` function to columns in the `prosecutions` dataframe. The `mutate()` function will apply the specified function to all columns where a particular condition is met, and in this case the condition `is.character` requires that the column contains strings.
 
 ```{r, purl=purl_example_code}
-prosecutions <- dplyr::mutate_if(prosecutions, is.character, remove_numbering)
+prosecutions <- dplyr::mutate(prosecutions, across(where(is.character), remove_numbering)) 
 glimpse(prosecutions)
 ```
 
@@ -759,7 +759,7 @@ sum_group <- function(df, group_col, sum_col) {
 }
 ```
 
-The way that the Tidyverse packages handle NSE has evolved over the past few years, so new methods of addressing this issue may be introduced in the future. See the appendix for some examples of alternative methods to tackle this problem.
+The way that the tidyverse packages handle NSE has evolved over the past few years, so new methods of addressing this issue may be introduced in the future. For the current recommeneded approach to working with "tidy evaluation", i.e. a special type of NSE used throughout the tidyverse, please see [this vignette](https://dplyr.tidyverse.org/articles/programming.html). See the appendix for some examples of alternative methods to tackle this problem.
 
 ---
 
@@ -778,7 +778,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
   
   # Group and summarise data by year and breakdown variable
   df_grouped <- df %>%
-    dplyr::group_by(.dots = c(breakdown, "year")) %>%
+    dplyr::group_by(.data[[breakdown]], year) %>%
     dplyr::summarise(counts = sum(count))
 
   # Produce the plot
@@ -804,7 +804,7 @@ plot_prosecutions(prosecutions, breakdown = "offence_type")
 
 ### Exercise 6
 
-Modify the `plot_prosecutions()` function to use `theme_classic()` as the theme, rather than `theme_grey()`. Produce a plot of with a breakdown by `"offence_group"`.
+Modify the `plot_prosecutions()` function to use `theme_classic()` as the theme, rather than `theme_grey()`. Produce a plot of the breakdown of the number of prosecutions over time, with a breakdown by `"offence_group"`.
 
 ---
 
@@ -815,7 +815,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
   
   # Group and summarise data by year and breakdown variable ready to plot
   df_grouped <- df %>%
-    dplyr::group_by(.dots = c(breakdown, "year")) %>%
+    dplyr::group_by(.data[[breakdown]], year) %>%
     dplyr::summarise(counts = sum(count))
 
   # Produce the plot
@@ -927,7 +927,7 @@ This comes at the cost of slightly higher overheads.
 A few examples of packages written by people in MoJ are:
 
 + [s3tools](https://github.com/moj-analytical-services/s3tools)
-+ [asdrap](https://github.com/moj-analytical-services/asdrap)
++ [mojrap](https://github.com/moj-analytical-services/mojrap)
 
 To find out more about writing packages, check out the links under further reading.
 

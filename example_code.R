@@ -184,7 +184,7 @@ remove_numbering <- function(x) {
   
 }
 
-prosecutions <- dplyr::mutate_if(prosecutions, is.character, remove_numbering)
+prosecutions <- dplyr::mutate(prosecutions, across(where(is.character), remove_numbering)) 
 glimpse(prosecutions)
 
 clean_not_known <- function(x,
@@ -252,7 +252,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
   
   # Group and summarise data by year and breakdown variable
   df_grouped <- df %>%
-    dplyr::group_by(.dots = c(breakdown, "year")) %>%
+    dplyr::group_by(.data[[breakdown]], year) %>%
     dplyr::summarise(counts = sum(count))
 
   # Produce the plot
