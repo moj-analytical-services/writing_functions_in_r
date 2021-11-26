@@ -204,7 +204,7 @@ clean_not_known <- function(x,
 
 }
 
-prosecutions <- dplyr::mutate_if(prosecutions, is.character, clean_not_known)
+prosecutions <- dplyr::mutate(prosecutions, across(where(is.character), clean_not_known))
 glimpse(prosecutions)
 
 
