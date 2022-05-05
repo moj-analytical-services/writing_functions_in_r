@@ -55,7 +55,7 @@ All the examples in the presentation/README are available in the R script exampl
 
 Here are a few suggestions if you are going through this material in your own time:
 
-* Both the read me and slides contain the same content so you can use whichever works best for you - the only difference is the exercise solutions are only in the slides
+* Both the README and slides contain the same content so you can use whichever works best for you - the only difference is the exercise solutions are only in the slides
 *  To open the slides, first clone the repo (see [pre-material](#pre-material)) and then open the file "slides.html" from RStudio by clicking "View in web browser"
 * You can find a recording of a previous training session on the R training Microsoft Stream channel [here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a)
 * If you need any help, the best place to ask is on either the [#intro_r](https://app.slack.com/client/T1PU1AP6D/CGKSJV9HN) or [#r](https://app.slack.com/client/T1PU1AP6D/C1PUCG719) slack channels on ASD slack.

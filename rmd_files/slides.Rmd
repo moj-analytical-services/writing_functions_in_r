@@ -18,10 +18,11 @@ purl_example_code <- TRUE # This variable relates to code blocks that aren't exe
 Before we start, make sure you've:
 
 1. Got access to the `alpha-r-training` bucket
-2. Cloned the `writing_functions_in_r` repo
+2. Cloned the [writing_functions_in_r](https://github.com/moj-analytical-services/writing_functions_in_r) repo into your RStudio
 3. Pulled any changes (the blue arrow on the Git tab in the top right panel)
-4. Got `example_code.R` open
-5. Opened the `writing_functions_in_r` repo on GitHub, so you can refer to the README
+4. Got `example_code.R` open in RStudio
+5. Run the command `renv::restore()` in the RStudio console to make sure you have the required packages installed
+6. Opened the [writing_functions_in_r](https://github.com/moj-analytical-services/writing_functions_in_r) repo on GitHub, so you can refer to the README
 
 If you need any help, just ask! We will be monitoring the Teams chat throughout the session.
 

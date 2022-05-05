@@ -15,7 +15,7 @@ To follow along with the code run during this session and participate in the exe
 ---
 
 ### A note on the examples given in this course
-During this session we'll show lots of examples of functions. Depending on how experienced you are with using R, some of these examples may introduce new concepts that are not the focus of this course. It is not required that you have prior knowledge of these concepts, as they are included only to demonstrate possible uses for functions when undertaking typical programming tasks in DASD. One of the purposes of the examples is to provide a resource that can be referred back to in the future.
+During this session we'll show lots of examples of functions. Depending on how experienced you are with using R, some of these examples may introduce new concepts that are not the focus of this course. It is not required that you have prior knowledge of these concepts, as they are included only to demonstrate possible uses for functions when undertaking typical programming tasks in Data & Analysis. One of the purposes of the examples is to provide a resource that can be referred back to in the future.
 
 
 ## What is a function?
