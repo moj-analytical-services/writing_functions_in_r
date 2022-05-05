@@ -194,7 +194,7 @@ As soon as a `return()` statement is encountered in a function, the function fin
 
 ## Example 4: functions with side-effects
 
-Pipeable functions, i.e. ones that work with the pipe operator `%>%` and usually take a dataframe as the first argument, come in two basic types: transformations and side-effects. With transformations, an object is passed to the function’s first argument and a modified object is returned. With side-effects, the function performs an action on the object, like drawing a plot or saving a file. The function below has the side-effect of printing a message to the console, depending on the value of the object:
+A function side-effect can be thought of as any change to the workspace that the function makes other than the object that it returns. This can include printing, plotting a chart, saving a file, or modifying a variable in the wider environment. The side-effect is often the main purpose of the function, and in this case the function doesn't need to return any value. This function has the side-effect of printing a message to the console, depending on the value of the object:
 
 ```{r, purl=purl_example_code}
 # This function lets you know whether a number is odd or even
@@ -210,7 +210,8 @@ odd_or_even <- function(x) {
 
 odd_or_even(x = 4)
 ```
-**Note:** It's best practice for your function to either return a value or have a side-effect, but not both.
+
+**Note:** It’s best practice for your function to either return an object or have a side-effect, but not both (with the exception of simple print statements).
 
 ## Example 5: errors and warnings
 
