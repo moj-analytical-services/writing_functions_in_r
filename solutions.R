@@ -193,7 +193,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
   
   # Group and summarise data by year and breakdown variable ready to plot
   df_grouped <- df %>%
-    dplyr::group_by(.dots = c(breakdown, "year")) %>%
+    dplyr::group_by(.data[[breakdown]], year) %>%
     dplyr::summarise(counts = sum(count))
 
   # Produce the plot
