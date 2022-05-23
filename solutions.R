@@ -161,9 +161,9 @@ clean_dataset <- function(data) {
   # Clean the column headings
   colnames(data) <- generalise_names(colnames(data))
   # Remove numeric indices from columns
-  data <- dplyr::mutate_if(data, is.character, remove_numbering)
+  data <- dplyr::mutate(data, across(where(is.character), remove_numbering))
   # Make missing/unknown value entries more consistent
-  data <- dplyr::mutate_if(data, is.character, clean_not_known)
+  data <- dplyr::mutate(data, across(where(is.character), clean_not_known))
   
   return(data)
   

@@ -137,12 +137,13 @@ plot_x_and_y(x, y)
 plot_x_and_y(x, y, col='red', type='l')
 
 # Load packages
-library(s3tools)
+library(botor)
 library(dplyr)
 library(stringr)
+library(ggplot2)
 
-prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
-  "alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv")
+prosecutions_and_convictions <- botor::s3_read(
+  "s3://alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv", read.csv)
 
 # Filter for Magistrates Court to extract the prosecutions
 prosecutions <- prosecutions_and_convictions %>%

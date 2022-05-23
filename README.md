@@ -27,24 +27,24 @@ this material in your own time. If you work through the material by
 youself please leave feedback about the material
 [here](https://airtable.com/shr9u2OJB2pW8Y0Af).
 
-If you have any feedback on the content, please get in touch\!
+If you have any feedback on the content, please get in touch!
 
 ## Contents
 
-  - [Pre-material](#pre-material)
-  - [Remote learning](#remote-learning)
-  - [Learning outcomes](#learning-outcomes)
-  - [What is a function?](#what-is-a-function)
-  - [Why use functions?](#why-use-functions)
-  - [How to write a function](#how-to-write-a-function)
-  - [Examples of basic functions](#examples-of-basic-functions)
-  - [“Real-world” example functions](#real-world-example-functions)
-  - [When to write a function](#when-to-write-a-function)
-  - [Best practice](#best-practice)
-  - [How to organise your code](#how-to-organise-your-code)
-  - [Writing a package](#writing-a-package)
-  - [Further reading](#further-reading)
-  - [Appendix](#appendix)
+-   [Pre-material](#pre-material)
+-   [Remote learning](#remote-learning)
+-   [Learning outcomes](#learning-outcomes)
+-   [What is a function?](#what-is-a-function)
+-   [Why use functions?](#why-use-functions)
+-   [How to write a function](#how-to-write-a-function)
+-   [Examples of basic functions](#examples-of-basic-functions)
+-   [“Real-world” example functions](#real-world-example-functions)
+-   [When to write a function](#when-to-write-a-function)
+-   [Best practice](#best-practice)
+-   [How to organise your code](#how-to-organise-your-code)
+-   [Writing a package](#writing-a-package)
+-   [Further reading](#further-reading)
+-   [Appendix](#appendix)
 
 ## Pre-material
 
@@ -60,31 +60,33 @@ A few days before the session, please make sure that -
 4.  You have cloned this repository (instructions are in the Analytical
     Platform User Guidance
     [here](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#creating-your-project-repo-on-github))
+5.  You run the command `renv::restore()` in the console to make sure
+    you have the required packages installed
 
 If you have any problems with the above please get in touch with the
-course organisers or ask for help on either the \#analytical\_platform
-or \#intro\_r channel on [ASD slack](https://asdslack.slack.com).
+course organisers or ask for help on either the #analytical_platform or
+#intro_r channel on [ASD slack](https://asdslack.slack.com).
 
 All the examples in the presentation/README are available in the R
-script example\_code.R.
+script example_code.R.
 
 ## Remote learning
 
 Here are a few suggestions if you are going through this material in
 your own time:
 
-  - Both the read me and slides contain the same content so you can use
+-   Both the README and slides contain the same content so you can use
     whichever works best for you - the only difference is the exercise
     solutions are only in the slides
-  - To open the slides, first clone the repo (see
+-   To open the slides, first clone the repo (see
     [pre-material](#pre-material)) and then open the file “slides.html”
     from RStudio by clicking “View in web browser”
-  - You can find a recording of a previous training session on the R
+-   You can find a recording of a previous training session on the R
     training Microsoft Stream channel
     [here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a)
-  - If you need any help, the best place to ask is on either the
-    [\#intro\_r](https://app.slack.com/client/T1PU1AP6D/CGKSJV9HN) or
-    [\#r](https://app.slack.com/client/T1PU1AP6D/C1PUCG719) slack
+-   If you need any help, the best place to ask is on either the
+    [#intro_r](https://app.slack.com/client/T1PU1AP6D/CGKSJV9HN) or
+    [#r](https://app.slack.com/client/T1PU1AP6D/C1PUCG719) slack
     channels on ASD slack.
 
 If you have any feedback on the material and/or your experience of
@@ -96,25 +98,25 @@ of the R training group or leave a review on
 
 ### By the end of this session you should know:
 
-  - How to write a basic function.
-  - The circumstances when you might want to consider writing a
+-   How to write a basic function.
+-   The circumstances when you might want to consider writing a
     function.
-  - Why using functions is beneficial.
-  - The best practice for writing functions.
-  - Where to go for more information on some of the topics touched on in
+-   Why using functions is beneficial.
+-   The best practice for writing functions.
+-   Where to go for more information on some of the topics touched on in
     this course.
 
 ### Before we start
 
 To follow along with the code run during this session and participate in
-the exercises, open the script “example\_code.R” in RStudio. All the
-code that we’ll show in this session is stored in “example\_code.R”, and
-you can edit this script to write solutions to the exercises. You may
-also want to have the course
+the exercises, open the script “example_code.R” in RStudio. All the code
+that we’ll show in this session is stored in “example_code.R”, and you
+can edit this script to write solutions to the exercises. You may also
+want to have the course
 [README](https://github.com/moj-analytical-services/writing_functions_in_r)
 open as a reference.
 
------
+------------------------------------------------------------------------
 
 ### A note on the examples given in this course
 
@@ -123,9 +125,9 @@ on how experienced you are with using R, some of these examples may
 introduce new concepts that are not the focus of this course. It is not
 required that you have prior knowledge of these concepts, as they are
 included only to demonstrate possible uses for functions when
-undertaking typical programming tasks in DASD. One of the purposes of
-the examples is to provide a resource that can be referred back to in
-the future.
+undertaking typical programming tasks in Data & Analysis. One of the
+purposes of the examples is to provide a resource that can be referred
+back to in the future.
 
 ## What is a function?
 
@@ -155,7 +157,7 @@ Generally functions are used to automate common tasks, to avoid copying
 and pasting the same code multiple times with minor alterations. While
 writing a function has a small up front cost, you’ll reap the benefits
 when you need to make changes to your code, and your QA’er will also
-thank you, as they’ll only need to check your function works once\!
+thank you, as they’ll only need to check your function works once!
 
 ### Abstraction
 
@@ -188,14 +190,14 @@ We use `function()` to create a function and assign it to the object
 
 A function is made up of three components:
 
-  - Its **arguments** (in this example, `arg1` and `arg2`) - these are
+-   Its **arguments** (in this example, `arg1` and `arg2`) - these are
     variables used inside the function body which we can set each time
     we call the function.
 
-  - The function **body** (everything between the curly brackets) - this
+-   The function **body** (everything between the curly brackets) - this
     is where we put the code.
 
-  - And the function **environment** (where the function was created) -
+-   And the function **environment** (where the function was created) -
     this determines what variables and other functions it has access to.
     You can find out more about environments
     [here](https://r4ds.had.co.nz/functions.html#environment).
@@ -224,7 +226,7 @@ evaluated expression. So while it’s not always essential to use a
 `return()` statement, it can make the code more clear and is consistent
 with other programming languages.
 
------
+------------------------------------------------------------------------
 
 Let’s try using the function `add_two()`:
 
@@ -272,7 +274,7 @@ are interpreted as `x = 3` and `y = 5`. Alternatively, if we called
 `sum_squares(5, 3)` then the arguments would be interpreted as `x = 5`
 and `y = 3`.
 
------
+------------------------------------------------------------------------
 
 For more complicated functions with lots of arguments, specifying the
 arguments by position becomes more error-prone and harder to understand.
@@ -300,12 +302,12 @@ the first argument for your function.
 Let’s start with some simple exercises to get familiar with the syntax
 of writing functions.
 
-### 1.1 hello\_world()
+### 1.1 hello_world()
 
-Create a function called `hello_world` which prints “Hello world\!” to
+Create a function called `hello_world` which prints “Hello world!” to
 the console, and call the function.
 
-### 1.2 my\_mean()
+### 1.2 my_mean()
 
 Create a function called `my_mean` which takes two arguments, `x` and
 `y`, and calculates their mean. Call the function to find the mean of
@@ -314,7 +316,7 @@ Create a function called `my_mean` which takes two arguments, `x` and
 **Hint:** include a `return()` statement if you want your function to
 print the result to the console.
 
------
+------------------------------------------------------------------------
 
 ## Example 3: conditional statements in functions
 
@@ -347,14 +349,13 @@ the `return(x)` statement.
 
 ## Example 4: functions with side-effects
 
-Pipeable functions, i.e. ones that work with the pipe operator `%>%` and
-usually take a dataframe as the first argument, come in two basic types:
-transformations and side-effects. With transformations, an object is
-passed to the function’s first argument and a modified object is
-returned. With side-effects, the function performs an action on the
-object, like drawing a plot or saving a file. The function below has the
-side-effect of printing a message to the console, depending on the value
-of the object:
+A function side-effect can be thought of as any change to the workspace
+that the function makes other than the object that it returns. This can
+include printing, plotting a chart, saving a file, or modifying a
+variable in the wider environment. The side-effect is often the main
+purpose of the function, and in this case the function doesn’t need to
+return any value. This function has the side-effect of printing a
+message to the console, depending on the value of the object:
 
 ``` r
 # This function lets you know whether a number is odd or even
@@ -373,8 +374,9 @@ odd_or_even(x = 4)
 
     ## [1] "The number is even."
 
-**Note:** It’s best practice for your function to either return a value
-or have a side-effect, but not both.
+**Note:** It’s best practice for your function to either return an
+object or have a side-effect, but not both (with the exception of simple
+print statements).
 
 ## Example 5: errors and warnings
 
@@ -401,7 +403,7 @@ odd_or_even(x = c(1, 2, 3))
 
     ## [1] "The number is odd."
 
------
+------------------------------------------------------------------------
 
 Here’s an adapted version of the function, with some more informative
 error messages built in using the `stop()` function:
@@ -425,7 +427,7 @@ odd_or_even <- function(x) {
 }
 ```
 
------
+------------------------------------------------------------------------
 
 Now try passing some incompatible arguments to the function:
 
@@ -508,49 +510,47 @@ sum_powers(x = 3, y = 5, z = 3)
 
 ## Exercises
 
-### 2.1 fizz\_buzz()
+### 2.1 fizz_buzz()
 
 Now try using an if else statement inside a function. Create a function
 called `fizz_buzz()` which takes a number as input and:
 
-  - If the number is divisible by both 3 and 5, returns “fizz buzz”
-  - If the number is divisible by just 3, returns “fizz”
-  - If the number is divisible by just 5, returns “buzz”
-  - Otherwise the number is returned (coerced to character type using
+-   If the number is divisible by both 3 and 5, returns “fizz buzz”
+-   If the number is divisible by just 3, returns “fizz”
+-   If the number is divisible by just 5, returns “buzz”
+-   Otherwise the number is returned (coerced to character type using
     `as.character()`)
 
 Try it out with values 1, 2, 3, 5 & 15.
 
------
+------------------------------------------------------------------------
 
 **Hints:**
 
-  - This exercise is very similar to example 4. The structure of an
+-   This exercise is very similar to example 4. The structure of an
     if-else statement is:
 
-<!-- end list -->
+<!-- -->
 
-``` 
-    if (condition_1) {
-      code
-    } else if (condition_2) {
-      code
-    } else {
-      code
-    }
-```
+        if (condition_1) {
+          code
+        } else if (condition_2) {
+          code
+        } else {
+          code
+        }
 
-  - To test whether a number is divisible by another number, you can use
-    the modulus operator `%%`, which calculates the remainder. E.g. `1
-    %% 3 == 0` evaluates to `FALSE`.
-  - To find out more about if statements and conditional execution, see
+-   To test whether a number is divisible by another number, you can use
+    the modulus operator `%%`, which calculates the remainder. E.g.
+    `1 %% 3 == 0` evaluates to `FALSE`.
+-   To find out more about if statements and conditional execution, see
     [here](https://r4ds.had.co.nz/functions.html#conditional-execution)
 
------
+------------------------------------------------------------------------
 
------
+------------------------------------------------------------------------
 
-### 2.2 fizz\_buzz\_vec()
+### 2.2 fizz_buzz_vec()
 
 Most functions in R are vectorised. This means they can apply an
 operation to every element of a vector at the same time. It’s best
@@ -569,11 +569,11 @@ help file.
 *This exercise is a bit tricky - if you get stuck, you can still
 complete exercise 2.3.*
 
------
+------------------------------------------------------------------------
 
------
+------------------------------------------------------------------------
 
-### 2.3 fizz\_buzz\_custom()
+### 2.3 fizz_buzz_custom()
 
 Create a version of `fizz_buzz()` or `fizz_buzz_vec()` called
 `fizz_buzz_custom()` or `fizz_buzz_custom_vec()` where the values for
@@ -584,9 +584,9 @@ Test your new function out, first by checking you get the same results
 as above when you don’t specify the `fizz` or `buzz` arguments, and
 second when you set `buzz = 7` for values 1, 2, 3, 7, 15 and 21.
 
------
+------------------------------------------------------------------------
 
------
+------------------------------------------------------------------------
 
 ## Example 8: the ellipsis argument
 
@@ -607,7 +607,7 @@ x <- 1:10
 y <- (1:10) * 2
 ```
 
------
+------------------------------------------------------------------------
 
 The function can be called with only the required arguments:
 
@@ -617,7 +617,7 @@ plot_x_and_y(x, y)
 
 ![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
 
------
+------------------------------------------------------------------------
 
 Or the function can be called with any optional arguments accepted by
 the plot function:
@@ -644,29 +644,29 @@ System Statistics quarterly publication: December 2018 (published in May
 
 Over the course of this section we’ll be tackling some exercises that
 fit into a data processing story, so make sure you run the code in
-“example\_code.R” as we go along.
+“example_code.R” as we go along.
 
 ## Loading packages and data
 
 Before we start looking at more example functions, first of all we need
 to load a few packages:
 
-  - `s3tools` is an MoJ package designed to interact with Amazon s3 -
-    we’ll need this to help read in some data from an s3 bucket.
-  - `dplyr` is the package we’ll use to create summary tables from the
+-   `botor` allows R to interact with Amazon s3 - we’ll need this to
+    help read in some data from an s3 bucket.
+-   `dplyr` is the package we’ll use to create summary tables from the
     data.
-  - `stringr` provides functions that can be used to manipulate strings.
-
-<!-- end list -->
+-   `stringr` provides functions that can be used to manipulate strings.
+-   `ggplot2` to create charts.
 
 ``` r
 # Load packages
-library(s3tools)
+library(botor)
 library(dplyr)
 library(stringr)
+library(ggplot2)
 ```
 
------
+------------------------------------------------------------------------
 
 Here we are reading in a copy of the `Prosecutions and Convictions`
 dataset from s3 and storing the dataframe as a variable called
@@ -675,15 +675,15 @@ dataset to extract only the prosecutions and saving to another variable,
 named `prosecutions`.
 
 ``` r
-prosecutions_and_convictions <- s3tools::s3_path_to_full_df(
-  "alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv")
+prosecutions_and_convictions <- botor::s3_read(
+  "s3://alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv", read.csv)
 
 # Filter for Magistrates Court to extract the prosecutions
 prosecutions <- prosecutions_and_convictions %>%
   dplyr::filter(`Court.Type` == "Magistrates Court")
 ```
 
------
+------------------------------------------------------------------------
 
 Here’s a preview of the data stored in `prosecutions`:
 
@@ -693,22 +693,22 @@ glimpse(prosecutions)
 
     ## Rows: 107,493
     ## Columns: 16
-    ## $ Year                      <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-    ## $ Quarter                   <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
-    ## $ Sex                       <chr> "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male"…
-    ## $ Type.of.Defendent         <chr> "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Per…
-    ## $ Age.Group                 <chr> "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01…
-    ## $ Age.Range                 <chr> "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-…
-    ## $ Ethnicity                 <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "…
-    ## $ Court.Type                <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "…
-    ## $ Offence.Type              <chr> "01 Indictable only", "01 Indictable only", "01 Indictable only", "01 Indictable only", "02 Triable either way", "02 Triable either way", "02 Triable either way", "02 Triable either way", "0…
-    ## $ Offence.Group             <chr> "02 Sexual offences", "03 Robbery", "03 Robbery", "07 Possession of weapons", "01 Violence against the person", "01 Violence against the person", "02 Sexual offences", "02 Sexual offences", …
-    ## $ Tried                     <chr> "5: Not tried", "01: Tried at magistrates court", "01: Tried at magistrates court", "01: Tried at magistrates court", "01: Tried at magistrates court", "5: Not tried", "01: Tried at magistra…
-    ## $ Plea.at.the.Crown.Court   <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "…
-    ## $ Convicted..Not.convicted  <chr> "02: Not convicted", "01: Convicted", "02: Not convicted", "01: Convicted", "01: Convicted", "02: Not convicted", "01: Convicted", "02: Not convicted", "01: Convicted", "02: Not convicted", …
-    ## $ Sentenced...Not.sentenced <chr> "02: Not sentenced", "01: Sentenced", "02: Not sentenced", "01: Sentenced", "01: Sentenced", "02: Not sentenced", "01: Sentenced", "02: Not sentenced", "01: Sentenced", "02: Not sentenced", …
-    ## $ Outcome                   <chr> "01: Proceedings terminated early", "07: Found guilty", "03: Dismissed (found not guilty", "07: Found guilty", "07: Found guilty", "01: Proceedings terminated early", "07: Found guilty", "01…
-    ## $ Count                     <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, 11, 1, 2, 1, 18, 168, 2, 15, 55, 44, 3, 1, 1, 6, 1, 1, 3, 3, 12, 1, 2, 1, 140, 1, 12, 4, 38, 16, 7, 1, 5, 909, 5,…
+    ## $ Year                      <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008…
+    ## $ Quarter                   <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1"…
+    ## $ Sex                       <chr> "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01:…
+    ## $ Type.of.Defendent         <chr> "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: P…
+    ## $ Age.Group                 <chr> "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juv…
+    ## $ Age.Range                 <chr> "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11"…
+    ## $ Ethnicity                 <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A",…
+    ## $ Court.Type                <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates …
+    ## $ Offence.Type              <chr> "01 Indictable only", "01 Indictable only", "01 Indictable only", "01 Indict…
+    ## $ Offence.Group             <chr> "02 Sexual offences", "03 Robbery", "03 Robbery", "07 Possession of weapons"…
+    ## $ Tried                     <chr> "5: Not tried", "01: Tried at magistrates court", "01: Tried at magistrates …
+    ## $ Plea.at.the.Crown.Court   <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A",…
+    ## $ Convicted..Not.convicted  <chr> "02: Not convicted", "01: Convicted", "02: Not convicted", "01: Convicted", …
+    ## $ Sentenced...Not.sentenced <chr> "02: Not sentenced", "01: Sentenced", "02: Not sentenced", "01: Sentenced", …
+    ## $ Outcome                   <chr> "01: Proceedings terminated early", "07: Found guilty", "03: Dismissed (foun…
+    ## $ Count                     <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5,…
 
 ## Cleaning data
 
@@ -739,7 +739,7 @@ generalise_names <- function(names) {
 }
 ```
 
------
+------------------------------------------------------------------------
 
 Here is a demonstration of how functions such as this can be useful:
 
@@ -750,21 +750,21 @@ generalise_names(names)
 
     ## [1] "option_1" "option_1" "option_1" "option_1" "option_1"
 
------
+------------------------------------------------------------------------
 
 ### Exercise 3
 
 Use the `generalise_names()` function defined above to clean the column
 headings of the `prosecutions` dataset. Add your solution to the script
-“example\_code.R”, underneath the line with the command
+“example_code.R”, underneath the line with the command
 `generalise_names(names)`.
 
 **Hint:** use the function `colnames()` to retrieve the column headings
 of the dataset as a vector.
 
------
+------------------------------------------------------------------------
 
------
+------------------------------------------------------------------------
 
 In this dataset, some of the columns contain values with a number along
 with a category; for example, the `age_group` column contains categories
@@ -772,16 +772,16 @@ like “01: Juveniles” rather than just “Juveniles”.
 
     ## Rows: 107,493
     ## Columns: 10
-    ## $ year              <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, …
-    ## $ quarter           <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", …
-    ## $ sex               <chr> "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: M…
-    ## $ type_of_defendent <chr> "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "0…
-    ## $ age_group         <chr> "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveni…
-    ## $ age_range         <chr> "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01…
-    ## $ ethnicity         <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N…
-    ## $ court_type        <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistra…
-    ## $ offence_type      <chr> "01 Indictable only", "01 Indictable only", "01 Indictable only", "01 Indictable only", "02 Triable either way", "02 Triable either way", "02 Triable either way", "02 Triable either way", "02 Triabl…
-    ## $ offence_group     <chr> "02 Sexual offences", "03 Robbery", "03 Robbery", "07 Possession of weapons", "01 Violence against the person", "01 Violence against the person", "02 Sexual offences", "02 Sexual offences", "04 Thef…
+    ## $ year              <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, …
+    ## $ quarter           <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", …
+    ## $ sex               <chr> "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", …
+    ## $ type_of_defendent <chr> "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", …
+    ## $ age_group         <chr> "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles",…
+    ## $ age_range         <chr> "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 1…
+    ## $ ethnicity         <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", …
+    ## $ court_type        <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", …
+    ## $ offence_type      <chr> "01 Indictable only", "01 Indictable only", "01 Indictable only", "01 Indictable onl…
+    ## $ offence_group     <chr> "02 Sexual offences", "03 Robbery", "03 Robbery", "07 Possession of weapons", "01 Vi…
 
 These numbers might be undesirable, so we can write a function like this
 to remove them:
@@ -797,7 +797,7 @@ remove_numbering <- function(x) {
 }
 ```
 
------
+------------------------------------------------------------------------
 
 Then we can use the `mutate()` function with the `across()` function
 from `dplyr`, and the `where()` selection helper from `tidyselect`, to
@@ -813,24 +813,24 @@ glimpse(prosecutions)
 
     ## Rows: 107,493
     ## Columns: 16
-    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, …
-    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", …
-    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", …
-    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "P…
-    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles…
-    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10…
-    ## $ ethnicity               <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
-    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Ma…
-    ## $ offence_type            <chr> "Indictable only", "Indictable only", "Indictable only", "Indictable only", "Triable either way", "Triable either way", "Triable either way", "Triable either way", "Triable either way", "Triab…
-    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery", "Possession of weapons", "Violence against the person", "Violence against the person", "Sexual offences", "Sexual offences", "Theft Offences", "Theft O…
-    ## $ tried                   <chr> "Not tried", "Tried at magistrates court", "Tried at magistrates court", "Tried at magistrates court", "Tried at magistrates court", "Not tried", "Tried at magistrates court", "Not tried", "Tr…
-    ## $ plea_at_the_crown_court <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/…
-    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Not convicted", "Convicted", "Not convicted", "Convicted", "Not convicted", "Not convicted", "Convicted", "Not convict…
-    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Not sentenced", "Not sentenced", "Sentenced", "Not sentenc…
-    ## $ outcome                 <chr> "Proceedings terminated early", "Found guilty", "Dismissed (found not guilty", "Found guilty", "Found guilty", "Proceedings terminated early", "Found guilty", "Proceedings terminated early", "…
-    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, 11, 1, 2, 1, 18, 168, 2, 15, 55, 44, 3, 1, 1, 6, 1, 1, 3, 3, 12, 1, 2, 1, 140, 1, 12, 4, 38, 16, 7, 1, 5, 909, 5, 1…
+    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, …
+    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", …
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male"…
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person"…
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", …
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11…
+    ## $ ethnicity               <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "…
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Co…
+    ## $ offence_type            <chr> "Indictable only", "Indictable only", "Indictable only", "Indictable only", "T…
+    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery", "Possession of weapons", "Violence ag…
+    ## $ tried                   <chr> "Not tried", "Tried at magistrates court", "Tried at magistrates court", "Trie…
+    ## $ plea_at_the_crown_court <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "…
+    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Not …
+    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Not …
+    ## $ outcome                 <chr> "Proceedings terminated early", "Found guilty", "Dismissed (found not guilty",…
+    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, 1…
 
------
+------------------------------------------------------------------------
 
 For the final stage of data cleaning, we can make missing and unknown
 values more consistent using a function such as the following:
@@ -863,33 +863,33 @@ with one condition and two possible outcomes. We’ve also used the
 `tolower()` function, which ensures all strings are lower case before
 searching for the missing/unknown phrases.
 
------
+------------------------------------------------------------------------
 
 ``` r
-prosecutions <- dplyr::mutate_if(prosecutions, is.character, clean_not_known)
+prosecutions <- dplyr::mutate(prosecutions, across(where(is.character), clean_not_known))
 glimpse(prosecutions)
 ```
 
     ## Rows: 107,493
     ## Columns: 16
-    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, …
-    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", …
-    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", …
-    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "P…
-    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles…
-    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10…
-    ## $ ethnicity               <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known…
-    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Ma…
-    ## $ offence_type            <chr> "Indictable only", "Indictable only", "Indictable only", "Indictable only", "Triable either way", "Triable either way", "Triable either way", "Triable either way", "Triable either way", "Triab…
-    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery", "Possession of weapons", "Violence against the person", "Violence against the person", "Sexual offences", "Sexual offences", "Theft Offences", "Theft O…
-    ## $ tried                   <chr> "Not tried", "Tried at magistrates court", "Tried at magistrates court", "Tried at magistrates court", "Tried at magistrates court", "Not tried", "Tried at magistrates court", "Not tried", "Tr…
-    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known…
-    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Not convicted", "Convicted", "Not convicted", "Convicted", "Not convicted", "Not convicted", "Convicted", "Not convict…
-    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Not sentenced", "Not sentenced", "Sentenced", "Not sentenc…
-    ## $ outcome                 <chr> "Proceedings terminated early", "Found guilty", "Dismissed (found not guilty", "Found guilty", "Found guilty", "Proceedings terminated early", "Found guilty", "Proceedings terminated early", "…
-    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, 11, 1, 2, 1, 18, 168, 2, 15, 55, 44, 3, 1, 1, 6, 1, 1, 3, 3, 12, 1, 2, 1, 140, 1, 12, 4, 38, 16, 7, 1, 5, 909, 5, 1…
+    ## $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, …
+    ## $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", …
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male"…
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person"…
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", …
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11…
+    ## $ ethnicity               <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", …
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Co…
+    ## $ offence_type            <chr> "Indictable only", "Indictable only", "Indictable only", "Indictable only", "T…
+    ## $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery", "Possession of weapons", "Violence ag…
+    ## $ tried                   <chr> "Not tried", "Tried at magistrates court", "Tried at magistrates court", "Trie…
+    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", …
+    ## $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Not …
+    ## $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Not …
+    ## $ outcome                 <chr> "Proceedings terminated early", "Found guilty", "Dismissed (found not guilty",…
+    ## $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, 1…
 
------
+------------------------------------------------------------------------
 
 ### Exercise 4
 
@@ -901,9 +901,9 @@ optional.
 Write a wrapper function to apply `generalise_names()`,
 `remove_numbering()`, and `clean_not_known()` to the dataset.
 
------
+------------------------------------------------------------------------
 
------
+------------------------------------------------------------------------
 
 ## Summarising data
 
@@ -928,15 +928,15 @@ that the column names are not enclosed in quotation marks, meaning that
 they are not passed as strings: this behaviour is known as non-standard
 evaluation, and will be important later.
 
------
+------------------------------------------------------------------------
 
 ``` r
 prosecutions_grouped
 ```
 
-    ## # A tibble: 14 x 2
+    ## # A tibble: 14 × 2
     ##    age_range                       counts
-    ##  * <chr>                            <int>
+    ##    <chr>                            <int>
     ##  1 10-11                             3324
     ##  2 12-14                           113960
     ##  3 15-17                           570275
@@ -952,7 +952,7 @@ prosecutions_grouped
     ## 13 Not known (Adult)               195459
     ## 14 Not known (Juvenile)               150
 
------
+------------------------------------------------------------------------
 
 What if we wanted to create several different summary tables? We could
 write a function to avoid writing this out each time. Following the
@@ -978,10 +978,11 @@ However trying to use this function results in an error.
 prosecutions_grouped <- sum_group(df = prosecutions, group_col = "age_range", sum_col = "count")
 ```
 
-    ## Error: Must group by variables found in `.data`.
-    ## * Column `group_col` is not found.
+    ## Error in `dplyr::group_by()`:
+    ## ! Must group by variables found in `.data`.
+    ## ✖ Column `group_col` is not found.
 
------
+------------------------------------------------------------------------
 
 This is because of the non-standard evaluation (NSE) mentioned above.
 The `dplyr` functions don’t recognise `group_col` and `sum_col` as
@@ -1017,16 +1018,16 @@ vignette](https://dplyr.tidyverse.org/articles/programming.html). See
 the appendix for some examples of alternative methods to tackle this
 problem.
 
------
+------------------------------------------------------------------------
 
 ``` r
 prosecutions_grouped <- sum_group(df = prosecutions, group_col = "age_range", sum_col = "count")
 prosecutions_grouped
 ```
 
-    ## # A tibble: 14 x 2
+    ## # A tibble: 14 × 2
     ##    age_range                       counts
-    ##  * <chr>                            <int>
+    ##    <chr>                            <int>
     ##  1 10-11                             3324
     ##  2 12-14                           113960
     ##  3 15-17                           570275
@@ -1072,7 +1073,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
 }
 ```
 
------
+------------------------------------------------------------------------
 
 ``` r
 # Call function
@@ -1083,7 +1084,7 @@ plot_prosecutions(prosecutions, breakdown = "offence_type")
 
 ![](README_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
 
------
+------------------------------------------------------------------------
 
 ### Exercise 6
 
@@ -1092,9 +1093,9 @@ the theme, rather than `theme_grey()`. Produce a plot of the breakdown
 of the number of prosecutions over time, with a breakdown by
 `"offence_group"`.
 
------
+------------------------------------------------------------------------
 
------
+------------------------------------------------------------------------
 
 # Hints and tips
 
@@ -1123,7 +1124,7 @@ doesn’t already exist before writing your own.
 ## Best practice
 
 Writing a function is easy, writing a really good function can be a lot
-harder\! Here are a few things to consider:
+harder! Here are a few things to consider:
 
 ### Give your function a good name
 
@@ -1142,7 +1143,7 @@ understand and modify, and makes the function itself harder to reuse.
 You should have comments explaining what your function does, what each
 argument is, and what it returns.
 
------
+------------------------------------------------------------------------
 
 ### Keep it short
 
@@ -1161,7 +1162,7 @@ you could set as an argument instead?
 R is designed to work well with vectors (e.g. columns of a dataframe).
 Where possible you should write your function so it can take a vector as
 an input and apply the transformation to each element. The
-`generalise_names()` function we looked at is a good example of this\!
+`generalise_names()` function we looked at is a good example of this!
 
 ### Ask for feedback
 
@@ -1193,7 +1194,7 @@ folder and the name of your script, respectively) to run the code and
 make your functions available to you in the current session. As with
 loading packages, it’s best to do this at the top of your script.
 
------
+------------------------------------------------------------------------
 
 Here’s an example of calling a script that contains a new function,
 called `pick_a_colour()`:
@@ -1210,9 +1211,9 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    ## [1] "Blue"
+    ## [1] "Red"
 
------
+------------------------------------------------------------------------
 
 You can see the code underlying a function by typing its name (without
 brackets) in the console and hitting “enter”:
@@ -1237,17 +1238,17 @@ An alternative is to make your own package to store your functions,
 which you can then use like any other R package. There are a few
 advantages to this:
 
-  - It means you (and others) can access your functions from different
+-   It means you (and others) can access your functions from different
     projects
-  - There are certain requirements for making R packages that enforce
+-   There are certain requirements for making R packages that enforce
     good practice, such as including documentation
 
 This comes at the cost of slightly higher overheads.
 
 A few examples of packages written by people in MoJ are:
 
-  - [s3tools](https://github.com/moj-analytical-services/s3tools)
-  - [mojrap](https://github.com/moj-analytical-services/mojrap)
+-   [mojchart](https://github.com/moj-analytical-services/mojchart)
+-   [mojrap](https://github.com/moj-analytical-services/mojrap)
 
 To find out more about writing packages, check out the links under
 further reading.
@@ -1256,32 +1257,34 @@ further reading.
 
 #### On functions
 
-  - [Functions chapter](https://r4ds.had.co.nz/functions.html) of
+-   [Functions chapter](https://r4ds.had.co.nz/functions.html) of
     Hadley’s R for Data Science book
-  - [Functions chapter](https://adv-r.hadley.nz/functions.html) of
+-   [Functions chapter](https://adv-r.hadley.nz/functions.html) of
     Hadley’s Advanced R book
-  - [Tidy Evaluation](https://tidyeval.tidyverse.org/introduction.html)
+-   [Tidy Evaluation](https://tidyeval.tidyverse.org/introduction.html)
     (useful for writing functions which behave like Tidyverse functions)
 
 #### On packages
 
-  - [Writing an R package from
+-   [MoJ R package
+    training](https://github.com/moj-analytical-services/rpackage_training)
+-   [Writing an R package from
     scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
-  - Hadley’s [R packages](http://r-pkgs.had.co.nz/) book
+-   Hadley’s [R packages](http://r-pkgs.had.co.nz/) book
 
 #### On loops
 
-  - [Iteration
+-   [Iteration
     chapter](https://r4ds.had.co.nz/iteration.html#dealing-with-failure)
     of Hadley’s R for Data Science book
 
 #### Misc
 
-  - [Tidyverse style guide](https://style.tidyverse.org/) (has some
+-   [Tidyverse style guide](https://style.tidyverse.org/) (has some
     guidance on choosing function and argument names)
-  - [MoJ coding
+-   [MoJ coding
     standards](https://github.com/moj-analytical-services/our-coding-standards)
-  - [Scoping/environments](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)
+-   [Scoping/environments](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)
 
 ## Get help
 
@@ -1297,16 +1300,16 @@ This table shows some of the logical operators you are likely to
 encounter when using R.
 
 | Operator | Definition                    |
-| :------: | :---------------------------- |
-|   \==    | Equal to                      |
-|   \!=    | Not equal to                  |
+|:--------:|:------------------------------|
+|    ==    | Equal to                      |
+|    !=    | Not equal to                  |
 |    \>    | Greater than                  |
 |    \<    | Less than                     |
 |   \>=    | Greater than or equal to      |
 |   \<=    | Less than or equal to         |
 |    ǀ     | Or                            |
 |    &     | And                           |
-|    \!    | Not                           |
+|    !     | Not                           |
 |   %in%   | The subject appears in a list |
 | is.na()  | The subject is NA             |
 
@@ -1334,9 +1337,9 @@ prosecutions_grouped <- sum_group_alt1(df = prosecutions, group_cols = "age_rang
 prosecutions_grouped
 ```
 
-    ## # A tibble: 14 x 2
+    ## # A tibble: 14 × 2
     ##    age_range                       counts
-    ##  * <chr>                            <int>
+    ##    <chr>                            <int>
     ##  1 10-11                             3324
     ##  2 12-14                           113960
     ##  3 15-17                           570275
@@ -1371,9 +1374,9 @@ prosecutions_grouped <- sum_group_alt2(df = prosecutions, group_cols = age_range
 prosecutions_grouped
 ```
 
-    ## # A tibble: 14 x 2
+    ## # A tibble: 14 × 2
     ##    age_range                       counts
-    ##  * <chr>                            <int>
+    ##    <chr>                            <int>
     ##  1 10-11                             3324
     ##  2 12-14                           113960
     ##  3 15-17                           570275
@@ -1409,9 +1412,9 @@ prosecutions_grouped <- sum_group_alt3(df = prosecutions, group_cols = age_range
 prosecutions_grouped
 ```
 
-    ## # A tibble: 14 x 2
+    ## # A tibble: 14 × 2
     ##    age_range                       counts
-    ##  * <chr>                            <int>
+    ##    <chr>                            <int>
     ##  1 10-11                             3324
     ##  2 12-14                           113960
     ##  3 15-17                           570275
@@ -1466,9 +1469,9 @@ library(lubridate)
     ## 
     ## Attaching package: 'lubridate'
 
-    ## The following object is masked from 'package:base':
+    ## The following objects are masked from 'package:base':
     ## 
-    ##     date
+    ##     date, intersect, setdiff, union
 
 ``` r
 # This function extracts the prosecutions from a particular year
@@ -1503,20 +1506,20 @@ glimpse(prosecutions_extract)
 
     ## Rows: 14,929
     ## Columns: 17
-    ## $ year                    <int> 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, …
-    ## $ quarter                 <chr> "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", …
-    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", …
-    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "P…
-    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles…
-    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "12-14", "12-14", "12-14", "12-14", "12-14", "12-14", "12-14", "12-14", "12-14", "12-14", "12-14", "12…
-    ## $ ethnicity               <chr> "White", "White", "White", "White", "White", "Not known", "Not known", "Not known", "Not known", "Not known", "White", "White", "White", "White", "White", "White", "White", "White", "White", "…
-    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Ma…
-    ## $ offence_type            <chr> "Indictable only", "Triable either way", "Triable either way", "Triable either way", "Triable either way", "Triable either way", "Triable either way", "Triable either way", "Summary non-motori…
-    ## $ offence_group           <chr> "Robbery", "Violence against the person", "Theft Offences", "Criminal damage and arson", "Possession of weapons", "Theft Offences", "Theft Offences", "Possession of weapons", "Summary non-moto…
-    ## $ tried                   <chr> "Tried at magistrates court", "Tried at magistrates court", "Not tried", "Tried at magistrates court", "Tried at magistrates court", "Tried at magistrates court", "Not tried", "Tried at magist…
-    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known…
-    ## $ convicted_not_convicted <chr> "Convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Not convicted", "Not convicted", "Not convicted", "Convicted", "Co…
-    ## $ sentenced_not_sentenced <chr> "Sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Not sentenced", "Not sentenced", "Not sentenced", "Sentenced", "No…
-    ## $ outcome                 <chr> "Found guilty", "Found guilty", "Proceedings terminated early", "Found guilty", "Found guilty", "Found guilty", "Proceedings terminated early", "Found guilty", "Found guilty", "Proceedings ter…
-    ## $ count                   <int> 1, 1, 1, 1, 1, 1, 1, 1, 8, 7, 2, 2, 3, 1, 5, 9, 1, 1, 5, 2, 1, 1, 2, 1, 1, 21, 1, 1, 5, 6, 2, 2, 81, 4, 27, 11, 1, 3, 21, 2, 2, 25, 2, 1, 3, 17, 1, 1, 6, 14, 1, 5, 11, 1, 1, 1, 2, 17, 2, 2, 2,…
-    ## $ year_quarter            <chr> "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017…
+    ## $ year                    <int> 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, …
+    ## $ quarter                 <chr> "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", "Q2", …
+    ## $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male"…
+    ## $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person"…
+    ## $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", …
+    ## $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11…
+    ## $ ethnicity               <chr> "White", "White", "White", "White", "White", "Not known", "Not known", "Not kn…
+    ## $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Co…
+    ## $ offence_type            <chr> "Indictable only", "Triable either way", "Triable either way", "Triable either…
+    ## $ offence_group           <chr> "Robbery", "Violence against the person", "Theft Offences", "Criminal damage a…
+    ## $ tried                   <chr> "Tried at magistrates court", "Tried at magistrates court", "Not tried", "Trie…
+    ## $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", …
+    ## $ convicted_not_convicted <chr> "Convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Convicte…
+    ## $ sentenced_not_sentenced <chr> "Sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Sentence…
+    ## $ outcome                 <chr> "Found guilty", "Found guilty", "Proceedings terminated early", "Found guilty"…
+    ## $ count                   <int> 1, 1, 1, 1, 1, 1, 1, 1, 8, 7, 2, 2, 3, 1, 5, 9, 1, 1, 5, 2, 1, 1, 2, 1, 1, 21,…
+    ## $ year_quarter            <chr> "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "2017 Q2", "…
