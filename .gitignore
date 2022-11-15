@@ -5,4 +5,5 @@
 .Rprofile
 *.Rproj
 rmd_files/README.html
-renv/
+renv/*
+!renv/activate.R
