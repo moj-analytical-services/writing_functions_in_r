@@ -853,9 +853,9 @@ You may also have noticed that a function you wrote wasn't doing what you wanted
 
 You can make life easier by adding _assertions_ (calls to assertion functions).
 
-An assertion function call accepts a condition, and stops the function execution if that condition is not met. You can use them to check that inputs, outputs and intermediate objects are as expected. You can also provide them with custom error messages that are specific to your custom function, and helpful to the user.
+An assertion function call accepts a condition, and stops the function execution if that condition is not met. You can use them to check that inputs, outputs and intermediate objects are as expected. You can also pass to them bespoke error messages that are specific to your custom function, and helpful to the user.
 
-A good package - developed by the RStudio (Posit) people - is `assertthat`. It is extremely easy to use, in particular the function `assertthat::assert_that()`, which we will focus on.
+A good package - developed by the RStudio (Posit) people - is `assertthat`. It is extremely easy to use. We will focus on the most useful function, `assertthat::assert_that()`.
 
 The first - and only essential - argument that `assertthat::assert_that()` takes is an expression that returns either `TRUE` or `FALSE`. It's very useful for causing your functions to fail when objects do not meet the conditions you expect.
 
@@ -897,9 +897,10 @@ pythagoras(2, -3)
 
 ```
 
+
 ---
 
-That's great, but we could make things more informative. The second most useful argument that `assertthat::assert_that()` takes is `msg`. This is a string that will be output as part of the error message, overriding the default, e.g. 
+That's great, but we could improve clarity. The second most useful argument that `assertthat::assert_that()` takes is `msg`. This is a string that will be output as part of the error message, overriding the default, e.g. 
 
 
 ```{r, purl=purl_example_code}
