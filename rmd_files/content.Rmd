@@ -861,7 +861,7 @@ The first - and only essential - argument that `assertthat::assert_that()` takes
 
 This function `pythagoras()` calculates the length of a right-angled triangle's hypotenuse side, given the lengths of the other two sides. However, it will return a result for negative numbers, and this is not ideal behavior in the context.
 
-
+---
 
 ```{r, purl=purl_example_code}
 # Function to calculate the length of a hypotenuse 
@@ -876,11 +876,13 @@ pythagoras(2, -3)
 
 ```
 
+---
+
 We can add assertion statements to prevent this undesirable behaviour.
 
 ```{r, purl=purl_example_code}
 # Function to calculate the length of a hypotenuse 
-pythagoras_2 <- function(a, b) {
+pythagoras <- function(a, b) {
   
   assertthat::assert_that(a > 0)
   assertthat::assert_that(b > 0)
@@ -891,16 +893,18 @@ pythagoras_2 <- function(a, b) {
   
 }
 
-pythagoras_2(2, -3)
+pythagoras(2, -3)
 
 ```
+
+---
 
 That's great, but we could make things more informative. The second most useful argument that `assertthat::assert_that()` takes is `msg`. This is a string that will be output as part of the error message, overriding the default, e.g. 
 
 
 ```{r, purl=purl_example_code}
 # Function to calculate the length of a hypotenuse 
-pythagoras_3 <- function(a, b) {
+pythagoras <- function(a, b) {
   
   assertthat::assert_that(
     a > 0 & b > 0,
@@ -912,17 +916,57 @@ pythagoras_3 <- function(a, b) {
   
 }
 
-pythagoras_3(-2, 1)
+pythagoras(-2, 1)
 
 ```
 
-Here we also combine the two assertions into one, to avoid repetition.
+(Here we also combine the two assertions into one, to avoid repetition.)
+
+In the final exercise, we will apply `assertthat::assert_that()` to the end product before returning it to the user.
+
+---
+
+### Exercise 7
+
+1. Add the below assertion to `pythagorus()` in the correct place to cause it to fail when called with `pythagoras(2, 3)`.
+3. Add a message that would tell the developer why their function is not passing the assertion.
+2. Modify the function so that the assertion passes and the function succeeds.
 
 
+```{r, purl_example_code}
+# Exercise 7 assertion statement
+
+assertthat::assert_that(c %% 1 == 0)
+
+```
 
 
+```{r, include=show_solution, purl=purl_solutions}
+# Exercise 7 solution
+# Function to return hypotenuse length rounded to whole number
+pythagoras <- function(a, b) {
+  
+  assertthat::assert_that(
+    a > 0 & b > 0,
+    msg = "both triangle sides must have positive length!")
+  
+  c <- sqrt(a^2 + b^2)
+  
+  # round the value to ensure it passes the assertion
+  c <- round(c)
+  
+  # assertion statement checks product before returning to user
+  assertthat::assert_that(
+    c %% 1 == 0,
+    msg = "value to be returned is not a whole number")
+  
+  return(c)
+  
+}
 
+pythagoras(2, 3)
 
+```
 
 # Hints and tips
 
