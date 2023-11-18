@@ -929,9 +929,9 @@ In the final exercise, we will apply `assertthat::assert_that()` to the end prod
 
 ### Exercise 7
 
-1. Add the below assertion to `pythagorus()` in the correct place to cause it to fail when called with `pythagoras(2, 3)`.
-3. Add a message that would tell the developer why the assertion is not being passed.
-2. Modify the function so that the assertion passes and the function succeeds.
+1. Add the below assertion to `pythagorus()` in the correct place to test the output object.
+2. Add a message that would tell the developer why the assertion is not being passed.
+3. Modify the function so that the assertion passes and the function succeeds.
 
 
 ```{r, purl_example_code}
