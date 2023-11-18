@@ -859,7 +859,7 @@ A good package - developed by the RStudio (Posit) people - is `assertthat`. It i
 
 The first - and only essential - argument that `assertthat::assert_that()` takes is an expression that returns either `TRUE` or `FALSE`. It's very useful for testing input, output and intermediate objects.
 
-This function `pythagoras()` calculates the length of a hypotenuse triangle, given the other two lengths. However, it will return a result for negative numbers, but this is not ideal behavior in the context.
+This function `pythagoras()` calculates the length of a right-angled triangle's hypotenuse side, given the lengths of the other two sides. However, it will return a result for negative numbers, and this is not ideal behavior in the context.
 
 
 
