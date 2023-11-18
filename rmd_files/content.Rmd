@@ -897,7 +897,6 @@ pythagoras_2(2, -3)
 
 That's great, but we could make things more informative. The second most useful argument that `assertthat::assert_that()` takes is `msg`. This is a string that will be output as part of the error message, overriding the default, e.g. 
 
-We can add assertion statements to prevent this undesirable behaviour. We can also combine the two assertions into one, to avoid repetition.
 
 ```{r, purl=purl_example_code}
 # Function to calculate the length of a hypotenuse 
@@ -917,7 +916,7 @@ pythagoras_3(-2, 1)
 
 ```
 
-
+Here we also combine the two assertions into one, to avoid repetition.
 
 
 
