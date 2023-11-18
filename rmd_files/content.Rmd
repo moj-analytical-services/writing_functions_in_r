@@ -857,7 +857,7 @@ An assertion function call accepts a condition, and stops the function execution
 
 A good package - developed by the RStudio (Posit) people - is `assertthat`. It is extremely easy to use, in particular the function `assertthat::assert_that()`, which we will focus on.
 
-The first - and only essential - argument that `assertthat::assert_that()` takes is an expression that returns either `TRUE` or `FALSE`. It's very useful for testing input, output and intermediate objects.
+The first - and only essential - argument that `assertthat::assert_that()` takes is an expression that returns either `TRUE` or `FALSE`. It's very useful for causing your functions to fail when objects do not meet the conditions you expect.
 
 This function `pythagoras()` calculates the length of a right-angled triangle's hypotenuse side, given the lengths of the other two sides. However, it will return a result for negative numbers, and this is not ideal behavior in the context.
 
