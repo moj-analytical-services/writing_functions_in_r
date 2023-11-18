@@ -845,13 +845,13 @@ plot_prosecutions(prosecutions, breakdown = "offence_group")
 
 ## Assertions
 
-In both development and deployment, the effects of functions can differ from that which is expected.
+In both development and deployment, the effects of functions can differ from that which is expected. If you have experienced such problems while writing custom functions in the above exercises, you may have seen an error message.
 
-Problem 1: If you have experienced such problems while writing custom functions in the above exercises, you may have seen an error message. Any error messages that you have seen while executing a custom function will have originated from the functions that your custom function calls. They are by nature generic. Sometimes, these error messages will be easy for you to understand, and therefore see what's gone wrong, but because they are generic, they can sometimes be confusing.
+Any error messages that you have seen while executing a custom function will have originated from the functions that your custom function calls. They are by nature generic. Sometimes, these error messages will be easy for you to understand, and therefore see what's gone wrong, but because they are generic, they can sometimes be confusing.
 
-Problem 2: You may also have noticed that a function you wrote wasn't doing what you wanted because the output was surprising. This kind of thing is more pernicious, because you may not notice the problem straight away. When you're trying to debug a complex network of functions, the root cause may be obscure if it doesn't generate an error at all.
+You may also have noticed that a function you wrote wasn't doing what you wanted because the output was surprising. This kind of thing is more pernicious, because you may not notice the problem straight away. When you're trying to debug a complex network of functions, the root cause may be obscure if it doesn't generate an error at all.
 
-Solution: You can make life easier by adding _assertions_ (calls to assertion functions).
+You can make life easier by adding _assertions_ (calls to assertion functions).
 
 An assertion function call accepts a condition, and stops the function execution if that condition is not met. You can use them to check that inputs, outputs and intermediate objects are as expected. You can also provide them with custom error messages that are specific to your custom function, and helpful to the user.
 
