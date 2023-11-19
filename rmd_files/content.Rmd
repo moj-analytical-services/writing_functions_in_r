@@ -930,8 +930,8 @@ In the final exercise, we will apply `assertthat::assert_that()` to the end prod
 
 ### Exercise 7
 
-1. Add the below assertion to `pythagorus()` in the correct place to test the output object.
-2. Add a message that would tell the developer why the assertion is not being passed.
+1. Add the below assertion to `pythagorus()` in the correct place to test the value that is reported.
+2. Add a message that would report why the assertion is not being passed.
 3. Modify the function so that the assertion passes and the function succeeds.
 
 
@@ -958,7 +958,7 @@ pythagoras <- function(a, b) {
   # assertion statement checks that rounding has occurred
   assertthat::assert_that(
     c %% 1 == 0,
-    msg = "value to be returned is not a whole number")
+    msg = "calculated answer is not a whole number")
   
   paste0("The rounded length of the hypotenuse is ", c)
   
