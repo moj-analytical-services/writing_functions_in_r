@@ -845,15 +845,26 @@ plot_prosecutions(prosecutions, breakdown = "offence_group")
 
 ## Assertions
 
-In both development and deployment, the effects of functions can differ from that which is expected. If you have experienced such problems while writing custom functions in the above exercises, you may have seen an error message.
+In both development and deployment, the effects of functions can differ from that which is expected. If you have experienced such problems while writing and executing custom functions in the above exercises, you may have seen an error message.
 
-Any error messages that you have seen while executing a custom function will have originated from the functions that your custom function calls. They are by nature generic. Sometimes, these error messages will be easy for you to understand, and therefore see what's gone wrong, but because they are generic, they can sometimes be confusing.
+Any error messages that you have seen while executing a custom function will have originated from the functions that your custom function calls. They are by nature generic. Sometimes, these error messages will be easy for you to understand, and therefore see what's gone wrong, but because they are generic, their meaning in any given context is not necessary clear.
 
-You may also have noticed that a function you wrote wasn't doing what you wanted because the output was surprising, even though no error was generated. This kind of thing is more pernicious, because a problem may exist that you're not immediately aware of. Alternatively, you may be able to tell that there is a problem somewhere, but not know what the root cause is.
+You may also have noticed that a function you wrote wasn't doing what you wanted because the output was surprising, even though no error was generated.
+
+```{r purl=purl_example_code}
+my_mean <- function(x, y) {
+  x + y / 2
+}
+
+my_mean(3, 5)
+
+```
+
+Although this is a frivolous example, and the problem immediately obvious, in general this issue is serious and pernicious, because a problem may exist that you're not immediately aware of. Alternatively, you may be able to tell that there is a problem somewhere, but not know what the root cause is, particularly when your functions get more complex.
 
 You can make life easier by adding _assertions_ (calls to assertion functions).
 
-An assertion function call accepts a condition, and stops the function execution if that condition is not met. You can use them to check that inputs, outputs and intermediate objects are as expected. You can also pass to them bespoke error messages that are specific to your custom function, and helpful to the user.
+An assertion function call accepts a condition, and stops the function execution if that condition is not met. You can use them to check that inputs, outputs and intermediate objects are as expected. You can also get them to generate bespoke error messages that are specific to your custom function, and helpful to the user.
 
 A good package - developed by the RStudio (Posit) people - is `assertthat`. It is extremely easy to use. We will focus on the most useful function, `assertthat::assert_that()`.
 
