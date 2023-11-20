@@ -930,9 +930,9 @@ In the final exercise, we will apply `assertthat::assert_that()` to the end prod
 
 ### Exercise 7
 
-1. Add the below assertion to `pythagorus()` in the correct place to test the value that is reported.
-2. Add a message that would report why the assertion is not being passed.
-3. Modify the function so that the assertion passes and the function succeeds.
+1. Add the below assertion to `pythagorus()` in the correct place to test the value that is reported. Reload the function and confirm that it fails with positive numeric inputs.
+2. Add a message to the assertion to explain why it fails. Reload the function and confirm that failure with this message occurs with positive numeric inputs.
+3. Modify the function so that the assertion passes and the function succeeds. Reload the function and confirm that it passes with positive numeric inputs.
 
 
 ```{r, purl_example_code}
