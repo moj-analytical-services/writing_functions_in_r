@@ -860,7 +860,7 @@ my_mean(3, 5)
 
 ```
 
-Although this is a frivolous example, and the problem immediately obvious, in general this issue is serious and pernicious, because a problem may exist that you're not immediately aware of. Alternatively, you may be able to tell that there is a problem somewhere, but not know what the root cause is, particularly when your functions get more complex.
+Although this is a frivolous example, and the problem immediately obvious, in general this issue is serious and pernicious, because a problem may exist that you're not immediately aware of. Alternatively, you may be able to tell that there is a problem somewhere, but not know what the root cause is, particularly when your custom functions get more complex, or when you're calling custom functions from within other custom functions.
 
 You can make life easier by adding _assertions_ (calls to assertion functions).
 
@@ -935,6 +935,35 @@ pythagoras(-2, 1)
 
 (Here we also combine the two assertions into one, to avoid repetition.)
 
+In this final example, additional assertions are added to check more fundamental aspects of input.
+
+```{r, purl=purl_example_code}
+# Function to calculate the length of a hypotenuse 
+pythagoras <- function(a, b) {
+
+  assertthat::assert_that(
+    !missing(a) & !missing(b),
+    msg = "you must supply two triangle lengths")
+  
+  assertthat::assert_that(
+    is.numeric(a) & is.numeric(b),
+    msg = "both arguments must be of numeric data type")
+  
+  assertthat::assert_that(
+    a > 0 & b > 0,
+    msg = "both triangle sides must have positive length!")
+  
+  sqrt(a^2 + b^2)
+  
+}
+
+pythagoras("1", 2)
+
+pythagoras(b = 2)
+```
+
+
+
 In the final exercise, we will apply `assertthat::assert_that()` to the end product before returning it to the user.
 
 ---
@@ -958,6 +987,14 @@ assertthat::assert_that(c %% 1 == 0)
 # Exercise 7 solution
 # Function to return hypotenuse length rounded to whole number
 pythagoras <- function(a, b) {
+  
+  assertthat::assert_that(
+    !missing(a) & !missing(b),
+    msg = "you must supply two triangle lengths")
+  
+  assertthat::assert_that(
+    is.numeric(a) & is.numeric(b),
+    msg = "both arguments must be of numeric data type")
   
   assertthat::assert_that(
     a > 0 & b > 0,
