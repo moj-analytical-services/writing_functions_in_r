@@ -10,7 +10,7 @@ purl_solutions <- FALSE # This variable relates to code blocks that are exercise
 purl_example_code <- TRUE # This variable relates to code blocks that aren't exercise solutions
 ```
 
-This repository is for Writing Functions in R course offered by the DASD R Training Group. It was also used for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session.
+This repository is for Writing Functions in R course offered by the Data and Analysis R Training Group. It was also used for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session.
 
 Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we’ll cover why, when and how to write your own functions, with plenty of examples & exercises to help you get started.
 
