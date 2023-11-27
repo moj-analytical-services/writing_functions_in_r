@@ -674,7 +674,7 @@ clean_not_known <- function(x,
   x <- stringr::str_trim(x)
   
   # Replace strings in the data that refer to a missing or unknown value.
-  dplyr::if_else(tolower(x) %in% values_to_change, not_known_phrase, x)
+  dplyr::if_else(tolower(x) %in% values_to_change, true = not_known_phrase, false = x)
   
 }
 ```
@@ -725,7 +725,7 @@ clean_not_known <- function(x,
   x <- stringr::str_trim(x)
   
   # Replace strings in the data that refer to a missing or unknown value.
-  dplyr::if_else(tolower(x) %in% values_to_change, not_known_phrase, x)
+  dplyr::if_else(tolower(x) %in% values_to_change, true = not_known_phrase, false = x)
   
 }
 ```
