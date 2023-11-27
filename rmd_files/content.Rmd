@@ -129,8 +129,7 @@ When you call a function, you can specify the arguments by position or name. In 
 
 ---
 
-For more complicated functions with lots of arguments, specifying the arguments by position becomes more error-prone and harder to understand. For home-made functions you should always provide the names of all arguments (except potentially
-the first one if it is in first place), then the order of the arguments doesn't matter:
+For more complicated functions with multiple arguments, specifying the arguments by position becomes more error-prone and harder to understand. For home-made functions you should always provide the names of all arguments (except potentially the first one if it is data).
 
 ```{r, purl=purl_example_code}
 # Good
