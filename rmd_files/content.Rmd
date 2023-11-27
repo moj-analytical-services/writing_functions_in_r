@@ -504,7 +504,7 @@ function. If a dependency has not been attached to the search list at run time, 
 a probably very unhelpful error message (or your code might use the wrong function). 
 
 For a similar reason we are using the R native pipe `|>` rather than the `magrittr` one. (If you are using
-R < 4.1.0 you will need to replace the native pipe with `%>%`.)
+R < 4.1.0 you will need to replace the native pipe with `%>%` and use `library("magrittr")`.)
 
 
 ## Examples why you should avoid `library()` calls
