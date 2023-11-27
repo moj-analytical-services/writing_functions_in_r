@@ -668,7 +668,7 @@ clean_not_known <- function(x,
                             values_to_change = c("n/a", "not known", "unknown", "not stated")) {
   
   # Replace any missing (NA) values
-  x <- replace(x, is.na(x), not_known_phrase)
+  x <- replace(x, list = is.na(x), values = not_known_phrase)
   
   # Remove any white space that might cause the strings to not match
   x <- stringr::str_trim(x)
@@ -718,7 +718,7 @@ clean_not_known <- function(x,
   
   # Replace any missing (NA) values
   if (change_na) {
-    x <- replace(x, is.na(x), not_known_phrase)
+    x <- replace(x, list = is.na(x), values = not_known_phrase)
   }
   
   # Remove any white space that might cause the strings to not match
