@@ -8,11 +8,6 @@
       }
     ]
   },
-  "Python": {
-    "Version": "3.8.10",
-    "Type": "virtualenv",
-    "Name": "./renv/python/virtualenvs/renv-python-3.8"
-  },
   "Packages": {
     "MASS": {
       "Package": "MASS",
@@ -124,6 +119,13 @@
         "sys"
       ],
       "Hash": "cad6cf7f1d5f6e906700b9d3e718c796"
+    },
+    "assertthat": {
+      "Package": "assertthat",
+      "Version": "0.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "50c838a310445e954bc13f26f26a6ecf"
     },
     "backports": {
       "Package": "backports",
