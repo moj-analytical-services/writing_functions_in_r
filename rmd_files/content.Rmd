@@ -1,3 +1,9 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  comment = ">"
+)
+```
+
 ## Learning outcomes
 
 ### By the end of this session you should know:
@@ -87,7 +93,7 @@ add_two <- function(x) {
 ```
 
 R will automatically return the value of the last evaluated expression. There is also a `return()`
-fucntion. More on where to use this later.
+function. More on where to use this later.
 
 ---
 
@@ -99,6 +105,7 @@ add_two(3)
 
 # Alternatively the result can be saved as a new variable
 result <- add_two(3) 
+result
 ```
 
 Note: before you can use a function you need to run the code to create it.
@@ -115,22 +122,26 @@ sum_squares <- function(x, y) {
   
 }
 
-sum_squares(3, 5)
+sum_squares(3, y = 5)
 ```
 
 When you call a function, you can specify the arguments by position or name. In this example, the function accepts arguments called `x` and `y`, with the order specified as `x` then `y` in the function definition. Therefore when `sum_squares(3, 5)` is called, the arguments are interpreted as `x = 3` and `y = 5`. Alternatively, if we called `sum_squares(5, 3)` then the arguments would be interpreted as `x = 5` and `y = 3`.
 
 ---
 
-For more complicated functions with lots of arguments, specifying the arguments by position becomes more error-prone and harder to understand. Therefore it is often desirable to specify some or all of the arguments by name, then the order of the arguments doesn't matter:
+For more complicated functions with lots of arguments, specifying the arguments by position becomes more error-prone and harder to understand. For home-made functions you should always provide the names of all arguments (except potentially
+the first one if it is in first place), then the order of the arguments doesn't matter:
 
 ```{r, purl=purl_example_code}
-sum_squares(x = 3, y = 5)
-sum_squares(y = 5, x = 3)
-```
+# Good
+sum_squares(3, y = 5)
 
-**Hint**: if you want your function to work with the pipe operator `%>%`, make 
-sure the object you want to pipe (usually a dataframe) is the first argument for your function.
+# Acceptable
+sum_squares(y = 5, x = 3)
+
+# Bad
+sum_squares(3, 5)
+```
 
 ## Exercises
 
@@ -477,23 +488,60 @@ This section builds on material covered in the [Intro R Training](https://github
 Over the course of this section we'll be tackling some exercises that fit into a data processing story, so make sure you run the code in "example_code.R" as we go along.
 
 
-## Loading packages and data
+## Packages
 
-Before we start looking at more example functions, first of all we need to load a few packages:  
+For these examples we will be using a few packages:  
 
-* [`Rs3tools`](https://github.com/moj-analytical-services/Rs3tools) allows R to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.
+* [`Rs3tools`](https://github.com/moj-analytical-services/Rs3tools) to fetch data from s3.
 * `dplyr` is the package we'll use to create summary tables from the data.
 * `stringr` provides functions that can be used to manipulate strings.
 * `ggplot2` to create charts.
 
-```{r message=F, warning=F, purl=purl_example_code}
-# Load packages
-library(dplyr)
-library(stringr)
-library(ggplot2)
+We will use `package::function()` syntax throughout this course instead of `library()` calls.
+This makes it easier to see where functions come from, avoids "function masking" and improves the
+reproducibility and reusability of code. This is particularly important within the body of a 
+function. If a dependency has not been attached to the search list at run time, you will get
+a probably very unhelpful error message (or your code might use the wrong function). 
+
+For a similar reason we are using the R native pipe `|>` rather than the `magrittr` one. (If you are using
+R < 4.1.0 you will need to replace the native pipe with `%>%`.)
+
+
+## Examples why you should avoid `library()` calls
+
+Which of the following would you rather have to deal with? A missing function from *somewhere*; a 
+missing but *known* package; or a missing function from a *known* package?
+
+```
+> bar()
+Error in bar() : could not find function "bar"
+
+> foo::bar()
+Error in loadNamespace(x) : there is no package called ‘foo’
+
+> dplyr::bar()
+Error: 'bar' is not an exported object from 'namespace:dplyr'
 ```
 
 ---
+
+Even worse, your code might silently give the wrong result if you are relying on the user having 
+made the "correct" `library()` calls. 
+
+```{r, purl=purl_example_code}
+iris_by_species_1 <- function(species) {
+  datasets::iris |> filter(iris[[5]] == species) |> dplyr::glimpse()
+}
+
+iris_by_species_2 <- function(species) {
+  datasets::iris |> dplyr::filter(iris[[5]] == species) |> dplyr::glimpse()
+}
+
+iris_by_species_1("setosa")
+iris_by_species_2("setosa")
+```
+
+## Fetching data
 
 Here we are reading in a copy of the `Prosecutions and Convictions` dataset from s3 and storing the dataframe as a variable called `prosecutions_and_convictions`. In the second step we're filtering the dataset to extract only the prosecutions and saving to another variable, named `prosecutions`.
 
@@ -504,7 +552,7 @@ prosecutions_and_convictions <- Rs3tools::read_using(
 )
 
 # Filter for Magistrates Court to extract the prosecutions
-prosecutions <- prosecutions_and_convictions %>%
+prosecutions <- prosecutions_and_convictions |>
   dplyr::filter(`Court.Type` == "Magistrates Court")
 ```
 
@@ -513,7 +561,7 @@ prosecutions <- prosecutions_and_convictions %>%
 Here's a preview of the data stored in `prosecutions`:
 
 ```{r, purl=purl_example_code}
-glimpse(prosecutions)
+dplyr::glimpse(prosecutions)
 ```
 
 
@@ -525,17 +573,17 @@ After reading in a dataframe it can often be helpful to standardise the column h
 # This function standardises strings contained in a vector
 generalise_names <- function(names) {
   
-  names %>% 
+  names |> 
     # Convert any uppercase letters to lowercase
-    tolower() %>% 
+    tolower() |> 
     # Trim any blank spaces at the start or end of each string
-    stringr::str_trim() %>% 
+    stringr::str_trim() |> 
     # Replace anything that isn't a letter or number with an underscore
-    stringr::str_replace_all(pattern = "[^A-Za-z0-9]", replacement = "_") %>% 
+    stringr::str_replace_all(pattern = "[^A-Za-z0-9]", replacement = "_") |> 
     # Remove repeated underscores
-    stringr::str_remove_all(pattern = "(?<=_)_+") %>% 
+    stringr::str_remove_all(pattern = "(?<=_)_+") |> 
     # Remove any underscore at the beginning or end of the string
-    stringr::str_rempve_all(pattern = "^_|_$")
+    stringr::str_remove_all(pattern = "^_|_$")
   
 }
 ```
@@ -548,6 +596,9 @@ Here is a demonstration of how functions such as this can be useful:
 names <- c("Option 1", "   Option (1)", "Option: 1", "option 1", "OPTION - 1")
 generalise_names(names)
 ```
+
+The [`stringr` cheatsheet](https://stringr.tidyverse.org/#cheatsheet) is a great resource for 
+learning more about regular expressions.
 
 ---
 
@@ -562,36 +613,49 @@ Use the `generalise_names()` function defined above to clean the column headings
 ```{r, include=show_solution, purl=purl_solutions}
 # Exercise 3 solution
 
-colnames(prosecutions) <- generalise_names(colnames(prosecutions))
-glimpse(prosecutions)
+colnames(prosecutions) <- colnames(prosecutions) |> generalise_names()
+dplyr::glimpse(prosecutions)
 ```
 ---
 
 In this dataset, some of the columns contain values with a number along with a category; for example, the `age_group` column contains categories like "01: Juveniles" rather than just "Juveniles".
 
 ```{r, echo=FALSE, purl=purl_example_code}
-glimpse(prosecutions[,1:10])
+dplyr::glimpse(prosecutions[, 1:10])
 ```
 
 These numbers might be undesirable, so we can write a function like this to remove them:
 
 ```{r, purl=purl_example_code}
-# This function identifies and removes 1 or 2 digits followed by a colon or a space
+# This function removes patterns at the start of a string that are: 
+# 1 or 2 digits followed by any number of colons and/or spaces
+
 remove_numbering <- function(x) {
-  
-  stringr::str_remove(x, 
-                      pattern = "^[:digit:]{1,2}[:blank:]*:[:blank:]*|^[:digit:]{1,2}[:blank:]")
-  
+  stringr::str_remove(x, pattern = "^\\d{1,2}\\s*:*\\s*")
 }
 ```
 
 ---
 
-Then we can use the `mutate()` function with the `across()` function from `dplyr`, and the `where()` selection helper from `tidyselect`, to apply the `remove_numbering()` function to columns in the `prosecutions` dataframe. The `mutate()` function will apply the specified function to all columns where a particular condition is met, and in this case the condition `is.character` requires that the column contains strings.
+Here is a demonstration of what this is doing:
+
+```{r, purl=purl_example_code}
+
+some_strings <- c("01 :foo", "01 foo", "01: foo", "01  :  foo", "foo", "bar foo")
+remove_numbering(some_strings)
+
+```
+
+The [`stringr` cheatsheet](https://stringr.tidyverse.org/#cheatsheet) is a great resource for 
+learning more about regular expressions.
+
+---
+
+Then we can use the `mutate()` function with the `across()` function from `dplyr`, and the `where()` selection helper from `tidyselect`, to apply the `remove_numbering()` function to columns in the `prosecutions` dataframe. The `dplyr::mutate()` function will apply the specified function to all columns where a particular condition is met, and in this case the condition `is.character` requires that the column contains strings.
 
 ```{r, purl=purl_example_code}
 prosecutions <- dplyr::mutate(prosecutions, across(where(is.character), remove_numbering)) 
-glimpse(prosecutions)
+dplyr::glimpse(prosecutions)
 ```
 
 ---
@@ -615,13 +679,20 @@ clean_not_known <- function(x,
 }
 ```
 
-In this function we've included some default values, so by default any strings that match "n/a", "not known", "unknown", or "not stated" are replaced, and the default replacement value is "Not known". We've used `if_else()` as a vectorised form of an if-else statement. It's similar to `case_when()` (which we used in exercise 2.2), but can only be used with one condition and two possible outcomes. We've also used the `tolower()` function, which ensures all strings are lower case before searching for the missing/unknown phrases.
+In this function we've included some default values, so by default any strings that match "n/a", "not known", "unknown", or "not stated" are replaced, and the default replacement value is "Not known". We've used `dplyr::if_else()` as a vectorised form of an if-else statement. It's similar to `dplyr::case_when()` (which we used in exercise 2.2), but can only be used with one condition and two possible outcomes. We've also used the `tolower()` function, which ensures all strings are lower case before searching for the missing/unknown phrases.
 
 ---
 
 ```{r, purl=purl_example_code}
-prosecutions <- dplyr::mutate(prosecutions, across(where(is.character), clean_not_known))
-glimpse(prosecutions)
+prosecutions <- dplyr::mutate(
+  prosecutions, 
+  dplyr::across(
+    .cols = tidyselect::where(is.character), 
+    .fns = clean_not_known
+  )
+)
+
+dplyr::glimpse(prosecutions)
 ```
 
 ---
@@ -668,17 +739,31 @@ clean_dataset <- function(data) {
   
   # Clean the column headings
   colnames(data) <- generalise_names(colnames(data))
+  
   # Remove numeric indices from columns
-  data <- dplyr::mutate(data, across(where(is.character), remove_numbering))
+  data <- dplyr::mutate(
+    data, 
+    dplyr::across(
+      .cols = tidyselect::where(is.character), 
+      .fns = remove_numbering
+    )
+  )
+  
   # Make missing/unknown value entries more consistent
-  dplyr::mutate(data, across(where(is.character), clean_not_known))
+  dplyr::mutate(
+    data, 
+    dplyr::across(
+      .cols = tidyselect::where(is.character), 
+      .fns = clean_not_known
+    )
+  )
   
 }
 ```
 
 ```{r, include=FALSE, purl=purl_example_code}
 # Solution to exercise 3 - must run before the next section
-colnames(prosecutions) <- generalise_names(colnames(prosecutions))
+colnames(prosecutions) <- colnames(prosecutions) |> generalise_names()
 ```
 
 
@@ -687,8 +772,8 @@ colnames(prosecutions) <- generalise_names(colnames(prosecutions))
 Let's say we wanted to create a summary table showing the number of people prosecuted in different age bands. We could do:
 
 ```{r, purl=purl_example_code}
-prosecutions_grouped <- prosecutions %>%
-  dplyr::group_by(age_range) %>%
+prosecutions_grouped <- prosecutions |>
+  dplyr::group_by(age_range) |>
   dplyr::summarise(counts = sum(count))
 ```
 
@@ -704,6 +789,17 @@ Notice how the `dplyr` functions `group_by()` and `summarise()` require that the
 prosecutions_grouped
 ```
 
+## Sidenote: standard vs non-standard evaluation
+
+In the plot below how does R know to label the x-axis `foo` and the y-axis `bar` we haven't explicitly supplied axis labels? The `plot()` function is using standard evaluation to get the values supplied to the x and y axes but is
+also using non-standard evaluation to get the names of the objects passed to the arguments for use as axis labels.
+
+```{r, purl=purl_example_code, fig.height = 3}
+foo <- 1:10
+bar <- 10:1
+plot(foo, bar)
+```
+
 ---
 
 What if we wanted to create several different summary tables? We could write a function to avoid writing this out each time. Following the previous examples in this course, you might expect this function to work:
@@ -712,8 +808,8 @@ What if we wanted to create several different summary tables? We could write a f
 # This function produces a summary table based on a dataset
 sum_group <- function(df, group_col, sum_col) {
   
-  df %>%
-    dplyr::group_by(group_col) %>%
+  df |>
+    dplyr::group_by(group_col) |>
     dplyr::summarise(counts = sum(sum_col))
   
 }
@@ -735,9 +831,9 @@ Fortunately there are methods available to help get around the NSE problem. The 
 # This function produces a summary table based on a dataset
 sum_group <- function(df, group_col, sum_col) {
   
-  df %>%
-    dplyr::group_by(.data[[ group_col ]]) %>%
-    dplyr::summarise(counts = sum(.data[[ sum_col ]]))
+  df |>
+    dplyr::group_by(.data[[group_col]]) |>
+    dplyr::summarise(counts = sum(.data[[sum_col]]))
   
 }
 ```
@@ -759,18 +855,20 @@ Let's say we want to produce some plots, and want them all to have the same styl
 # This function produces a plot of the number of prosecutions over time
 plot_prosecutions <- function(df, breakdown = "offence_type") {
   
-  # Group and summarise data by year and breakdown variable
-  df_grouped <- df %>%
-    dplyr::group_by(.data[[breakdown]], year) %>%
-    dplyr::summarise(counts = sum(count))
+  df_grouped <- df |>
+    dplyr::group_by(.data[[breakdown]], year) |>
+    dplyr::summarise(counts = sum(count), .groups = "keep")
   
-  # Produce the plot
-  df_grouped %>%
-    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "counts", group = breakdown, col = breakdown)) +
+  df_grouped |>
+    ggplot2::ggplot(
+      ggplot2::aes(x = .data$year, 
+                   y = .data$counts, 
+                   group = .data[[breakdown]], 
+                   col = .data[[breakdown]])
+    ) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous(breaks = 0:2100) +
     ggplot2::theme_grey()
-  
 }
 ```
 
@@ -791,21 +889,22 @@ Modify the `plot_prosecutions()` function to use `theme_classic()` as the theme,
 
 ```{r, include=show_solution, purl=purl_solutions}
 # Exercise 6 solution
-
 plot_prosecutions <- function(df, breakdown = "offence_type") {
   
-  # Group and summarise data by year and breakdown variable ready to plot
-  df_grouped <- df %>%
-    dplyr::group_by(.data[[breakdown]], year) %>%
-    dplyr::summarise(counts = sum(count))
+  df_grouped <- df |>
+    dplyr::group_by(.data[[breakdown]], year) |>
+    dplyr::summarise(counts = sum(count), .groups = "keep")
   
-  # Produce the plot
-  df_grouped %>%
-    ggplot2::ggplot(ggplot2::aes_string(x = "year", y = "counts", group = breakdown, col = breakdown)) +
+  df_grouped |>
+    ggplot2::ggplot(
+      ggplot2::aes(x = .data$year, 
+                   y = .data$counts, 
+                   group = .data[[breakdown]], 
+                   col = .data[[breakdown]])
+    ) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous(breaks = 0:2100) +
     ggplot2::theme_classic()
-  
 }
 ```
 
