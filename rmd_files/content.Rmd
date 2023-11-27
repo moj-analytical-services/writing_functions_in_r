@@ -970,6 +970,8 @@ In the final exercise, we will apply `assertthat::assert_that()` to the end prod
 
 ### Exercise 7
 
+We will make a new function, called `pythagorus_rounded()`.
+
 1. Add the below assertion to `pythagorus()` in the correct place to test the value that is reported. Reload the function and confirm that it fails with positive numeric inputs.
 2. Add a message to the assertion to explain why it fails. Reload the function and confirm that failure with this message occurs with positive numeric inputs.
 3. Modify the function so that the assertion passes and the function succeeds. Reload the function and confirm that it passes with positive numeric inputs.
@@ -986,7 +988,7 @@ assertthat::assert_that(c %% 1 == 0)
 ```{r, include=show_solution, purl=purl_solutions}
 # Exercise 7 solution
 # Function to return hypotenuse length rounded to whole number
-pythagoras <- function(a, b) {
+pythagoras_rounded <- function(a, b) {
   
   assertthat::assert_that(
     !missing(a) & !missing(b),
@@ -1012,7 +1014,7 @@ pythagoras <- function(a, b) {
   
 }
 
-pythagoras(2, 3)
+pythagoras_rounded(2, 3)
 
 ```
 
