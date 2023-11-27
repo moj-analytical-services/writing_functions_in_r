@@ -481,14 +481,13 @@ Over the course of this section we'll be tackling some exercises that fit into a
 
 Before we start looking at more example functions, first of all we need to load a few packages:  
 
-* `botor` allows R to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.
+* [`Rs3tools`](https://github.com/moj-analytical-services/Rs3tools) allows R to interact with Amazon s3 - we'll need this to help read in some data from an s3 bucket.
 * `dplyr` is the package we'll use to create summary tables from the data.
 * `stringr` provides functions that can be used to manipulate strings.
 * `ggplot2` to create charts.
 
 ```{r message=F, warning=F, purl=purl_example_code}
 # Load packages
-library(botor)
 library(dplyr)
 library(stringr)
 library(ggplot2)
@@ -499,8 +498,10 @@ library(ggplot2)
 Here we are reading in a copy of the `Prosecutions and Convictions` dataset from s3 and storing the dataframe as a variable called `prosecutions_and_convictions`. In the second step we're filtering the dataset to extract only the prosecutions and saving to another variable, named `prosecutions`.
 
 ```{r message=F, warning=F, purl=purl_example_code}
-prosecutions_and_convictions <- botor::s3_read(
-  "s3://alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv", read.csv)
+prosecutions_and_convictions <- Rs3tools::read_using(
+  FUN = read.csv,
+  s3_path = "s3://alpha-r-training/writing-functions-in-r/prosecutions-and-convictions-2018.csv"
+)
 
 # Filter for Magistrates Court to extract the prosecutions
 prosecutions <- prosecutions_and_convictions %>%
