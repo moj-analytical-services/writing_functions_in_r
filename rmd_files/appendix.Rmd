@@ -19,7 +19,7 @@ This table shows some of the logical operators you are likely to encounter when 
 |  &#448;  | Or                            |
 |    &     | And                           |
 |    !     | Not                           |
-|   %in%   | The subject appears in a list |
+|   %in%   | The subject appears in a population |
 | is.na()  | The subject is NA             |
 
 ## Additional NSE examples
