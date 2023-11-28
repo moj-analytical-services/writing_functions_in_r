@@ -183,24 +183,72 @@ my_mean(7.5, 16)
 ```
 
 
-## Example 3: conditional statements in functions
+## Example 3: conditional statements and early returns
 
 Functions can return different outputs depending on some condition. In this function the condition is `x < 0`, and the condition evaluates to either `TRUE` or `FALSE`:
 
 ```{r, purl=purl_example_code}
 # This function returns the absolute value of a number
 abs_x <- function(x) {
-  if (x < 0) {
-    return(-x)
+  if (x >= 0) {
+    x
   } else {
-    return(x)
+    -x
   }
 }
 
 abs_x(-5)
+abs_x(4)
 ```
 
-As soon as a `return()` statement is encountered in a function, the function finishes and returns the variable in the `return()` statement. In the above example, `return()` is used twice as there is a condition with two possibilities. Either the input argument `x` is less than zero, in which case the function ends with the `return(-x)` statement, otherwise if `x` is not less than zero then the function continues to the `return(x)` statement.
+By default R will always return the last evaluated statement. In this example when `x` is greater than
+or equal to zero, the last evaluated statement is `x`. In contrast when `x` is less than zero, the 
+last evaluated statement is `-x`.
+
+---
+
+Why does this function always return minus x?
+```{r, purl=purl_example_code}
+# why does this function always return -x?
+abs_x_v2 <- function(x) {
+  
+  if (x >= 0) {
+    x
+  } 
+  
+  -x
+  
+}
+
+abs_x_v2(-5)
+abs_x_v2(4)
+```
+
+---
+
+Sometimes exiting a function early is useful. We can achieve this with an explicit `return()`. As 
+soon as a `return()` statement is encountered in a function, the function finishes and returns the 
+variable in the `return()` statement.
+
+```{r, purl=purl_example_code}
+# We can fix it by using an early return
+abs_x_v3 <- function(x) {
+  
+  if (x >= 0) {
+    return(x)
+  } 
+  
+  -x
+  
+}
+
+abs_x_v3(-5)
+abs_x_v3(4)
+```
+
+---
+
+
 
 ## Example 4: functions with side-effects
 
@@ -277,9 +325,9 @@ Here's an example of how to include optional arguments, where in this case the o
 add_a_number <- function(x, y = NULL) {
   
   if (!is.null(y)) {
-    return(x + y)
+    x + y
   } else {
-    return(x)
+    x
   }
   
 }
@@ -341,13 +389,13 @@ code
 fizz_buzz <- function(x) {
   
   if (x %% 3 == 0 & x %% 5 == 0) {
-    return("fizz buzz")
+    "fizz buzz"
   } else if (x %% 3 == 0) {
-    return("fizz")
+    "fizz"
   } else if (x %% 5 == 0) {
-    return("buzz")
+    "buzz"
   } else {
-    return(as.character(x))
+    as.character(x)
   }
   
 }
@@ -419,13 +467,13 @@ when you don't specify the `fizz` or `buzz` arguments, and second when you set
 fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
   
   if (x %% fizz == 0 & x %% buzz == 0) {
-    return("fizz buzz")
+    "fizz buzz"
   } else if (x %% fizz == 0) {
-    return("fizz")
+    "fizz"
   } else if (x %% buzz == 0) {
-    return("buzz")
+    "buzz"
   } else {
-    return(as.character(x))
+    as.character(x)
   }
   
 }
@@ -1017,7 +1065,7 @@ In this final example, additional assertions are added to check more fundamental
 ```{r, purl=purl_example_code, error = TRUE}
 # Function to calculate the length of a hypotenuse 
 pythagoras <- function(a, b) {
-
+  
   assertthat::assert_that(
     !missing(a) & !missing(b),
     msg = "you must supply two triangle lengths")
