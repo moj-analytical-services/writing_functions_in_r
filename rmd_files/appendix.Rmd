@@ -6,7 +6,12 @@ output: rmarkdown::github_document
 
 ## Table of operators
 
-This table shows some of the logical operators you are likely to encounter when using R.
+This table shows some of the logical operators you are likely to encounter when using R. Note that
+operators can't be *evaluated* using `package_name::operator` syntax. To import operators from 
+a package without using `library()` calls you can define them in your script with 
+`` `operator` <- package_name::`operator` `` or use the
+[import](https://cran.r-project.org/web/packages/import/vignettes/import.html) package e.g. 
+`import::from("magrittr", "%>%")`.
 
 | Operator | Definition |
 | :------: | :--------- |
@@ -29,13 +34,17 @@ Below are more examples of how to handle `dplyr()`'s non-standard evaluation. If
 ```{r}
 sum_group_alt1 <- function(df, group_cols, sum_col) {
   
-  df %>%
-    dplyr::group_by(!!as.name(group_cols)) %>%
+  `!!` <- rlang::`!!`
+  
+  df |>
+    dplyr::group_by(!!as.name(group_cols)) |>
     dplyr::summarise(counts = sum(!!as.name(sum_col)))
   
 }
 
-prosecutions_grouped <- sum_group_alt1(df = prosecutions, group_cols = "age_range", sum_col = "count")
+prosecutions_grouped <- sum_group_alt1(df = prosecutions, 
+                                       group_cols = "age_range", 
+                                       sum_col = "count")
 prosecutions_grouped
 ```
 
@@ -44,12 +53,17 @@ Alternatively, this version of the function means the column names can be input 
 ```{r}
 sum_group_alt2 <- function(df, group_cols, sum_col) {
   
-  df %>%
-    dplyr::group_by(!!enquo(group_cols)) %>%
-    dplyr::summarise(counts = sum(!!enquo(sum_col)))
+  `!!` <- rlang::`!!`
+  
+  df |>
+    dplyr::group_by(!!rlang::enquo(group_cols)) |>
+    dplyr::summarise(counts = sum(!!rlang::enquo(sum_col)))
+  
 }
 
-prosecutions_grouped <- sum_group_alt2(df = prosecutions, group_cols = age_range, sum_col = count)
+prosecutions_grouped <- sum_group_alt2(df = prosecutions, 
+                                       group_cols = age_range, 
+                                       sum_col = count)
 prosecutions_grouped
 ```
 
@@ -58,15 +72,15 @@ The function below shows an example of how our `sum_group()` function can be mod
 ```{r}
 sum_group_alt3 <- function(df, group_cols, sum_col) {
   
-  df %>%
-    dplyr::group_by({{ group_cols }}) %>%
+  df |>
+    dplyr::group_by({{ group_cols }}) |>
     dplyr::summarise(counts = sum({{ sum_col }}))
-  
-  summary
   
 }
 
-prosecutions_grouped <- sum_group_alt3(df = prosecutions, group_cols = age_range, sum_col = count)
+prosecutions_grouped <- sum_group_alt3(df = prosecutions, 
+                                       group_cols = age_range, 
+                                       sum_col = count)
 prosecutions_grouped
 ```
 
@@ -77,16 +91,14 @@ prosecutions_grouped
 We can extend the `sum_group()` function by having the option to add a row with the total across all categories. Note that this requires the `janitor` package.
 
 ```{r, message = FALSE}
-library(janitor)
-
 sum_group <- function(df, group_cols, sum_col, add_total = FALSE) {
   
-  summary <- df %>%
-    dplyr::group_by_at(group_cols) %>%
+  summary <- df |>
+    dplyr::group_by_at(group_cols) |>
     dplyr::summarise_at(sum_col, sum)
   
   if (add_total == TRUE) {
-    summary <- summary %>% janitor::adorn_totals("row")
+    summary <- summary |> janitor::adorn_totals("row")
   }
   
   summary
@@ -99,10 +111,10 @@ sum_group <- function(df, group_cols, sum_col, add_total = FALSE) {
 Sometimes processing data requires manipulating dates and times. For example, if we wanted to extract the prosecutions from the year up to a particular date, we could use a function like:
 
 ```{r}
-library(lubridate)
-
 # This function extracts the prosecutions from a particular year
 extract_year <- function(data, end_date) {
+  
+  `%m-%` <- lubridate::`%m-%`
   
   # Ensure the date is a date-time object
   if (is.character(end_date)) { end_date <- lubridate::dmy(end_date) }
@@ -115,11 +127,11 @@ extract_year <- function(data, end_date) {
   quarters <- quarters(quarters_to_include)
   
   # Combine into a unique set of year-quarters
-  yearquarters <- str_c(years, " ", quarters)
+  yearquarters <- stringr::str_c(years, " ", quarters)
   
   # Filter data based on these years and quarters
-  data %>%
-    dplyr::mutate(year_quarter = paste(year, quarter)) %>%
+  data |>
+    dplyr::mutate(year_quarter = paste(year, quarter)) |>
     dplyr::filter(year_quarter %in% yearquarters)
   
   data
@@ -128,5 +140,5 @@ extract_year <- function(data, end_date) {
 
 ```{r}
 prosecutions_extract <- extract_year(prosecutions, "31-Mar-2018")
-glimpse(prosecutions_extract)
+dplyr::glimpse(prosecutions_extract)
 ```
