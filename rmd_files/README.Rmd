@@ -17,7 +17,7 @@ purl_solutions <- FALSE # This variable relates to code blocks that are exercise
 purl_example_code <- TRUE # This variable relates to code blocks that aren't exercise solutions
 ```
 
-This repository is for Writing Functions in R course offered by the Data and Analysis R Training Group. It was also used for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session.
+This repository is for the Writing Functions in R course offered by the Data and Analysis R Training Group. 
 
 Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we’ll cover why, when and how to write your own functions, with plenty of examples & exercises to help you get started.
 
@@ -43,15 +43,17 @@ If you have any feedback on the content, please get in touch!
 * [Writing a package](#writing-a-package)
 * [Further reading](#further-reading)
 * [Appendix](#appendix)
+* [Information for presenters](#information-for-presenters)
 
 ## Pre-material
 
 A few days before the session, please make sure that -
 
 1. You have access to RStudio on the Analytical Platform
-2. You have access to the [alpha-r-training s3 bucket](https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/607/)
-3. You have followed the steps in the [Configure Git and Github section of the Platform User Guidance](https://user-guidance.services.alpha.mojanalytics.xyz/introduction.html#configure-git-and-github) to configure Git and GitHub (this only needs doing once)
-4. You have cloned this repository (instructions are in the Analytical Platform User Guidance [here](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#creating-your-project-repo-on-github))
+2. You have requested access to the **alpha-r-training** s3 bucket via the [intro_r slack channel on the ASD
+workspace](https://moj.enterprise.slack.com/archives/CGKSJV9HN)
+3. You have followed the steps in the [Configure Git and Github section of the Platform User Guidance](https://user-guidance.analytical-platform.service.justice.gov.uk/github/set-up-github.html) to configure Git and GitHub (this only needs doing once)
+4. You have cloned this repository (instructions are in the Analytical Platform User Guidance [here](https://user-guidance.analytical-platform.service.justice.gov.uk/github/rstudio-git.html#work-with-git-in-rstudio))
 5. You run the command `renv::restore()` in the console to make sure you have the required packages installed
 
 If you have any problems with the above please get in touch with the course organisers or ask for help on either the #analytical_platform or #intro_r channel on [ASD slack](https://asdslack.slack.com).
