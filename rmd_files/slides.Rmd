@@ -40,7 +40,8 @@ Item                                                 | Time
 Set up and introduction                              | 10:00 - 10:10
 Examples of basic functions (including exercises)    | 10:10 - 11:30
 Break                                                | 11:30 - 11:40
-'Real-world' example functions (including exercises) | 11:40 - 12:50
+'Real-world' example functions (including exercises) | 11:40 - 12:30
+Using `assertthat`                                   | 12:30 - 12:50
 Hints and tips                                       | 12:50 - 13:00
 
 ```{r source_content, child = 'content.Rmd'}
