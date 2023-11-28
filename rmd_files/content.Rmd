@@ -922,7 +922,7 @@ sum_group <- function(df, group_col, sum_col) {
 }
 ```
 
-The way that the tidyverse packages handle NSE has evolved over the past few years, so new methods of addressing this issue may be introduced in the future. For the current recommeneded approach to working with "tidy evaluation", i.e. a special type of NSE used throughout the tidyverse, please see [this vignette](https://dplyr.tidyverse.org/articles/programming.html). See the appendix for some examples of alternative methods to tackle this problem.
+The way that the tidyverse packages handle NSE has evolved over the past few years, so new methods of addressing this issue may be introduced in the future. For the current recommended approach to working with "tidy evaluation", i.e. a special type of NSE used throughout the tidyverse, please see [this vignette](https://dplyr.tidyverse.org/articles/programming.html). See the appendix for some examples of alternative methods to tackle this problem.
 
 ---
 
