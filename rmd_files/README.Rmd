@@ -102,3 +102,6 @@ and is required for knitting the various files.
 chunks. Running them will re-generate all the course material. This file should always be run before
 you merge any changes to the `main` branch.
 
+### Tips when presenting
+* You can press F11 to make the presentation full screen. To go off of full screen you can press F11 again.
+
