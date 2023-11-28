@@ -1,10 +1,8 @@
 Writing functions in R
 ================
 
-This repository is for Writing Functions in R course offered by the DASD
-R Training Group. It was also used for the April 2019 [Coffee &
-Coding](https://github.com/moj-analytical-services/Coffee-and-Coding)
-session.
+This repository is for Writing Functions in R course offered by the Data
+and Analysis R Training Group.
 
 Knowing how to write your own functions is a great skill to add to your
 R toolbox. Writing functions can save you time, reduce the risk of
@@ -21,10 +19,10 @@ This training session is periodically run in person/over Teams.
 Alternatively, you can go through this material in your own time - all
 the notes are available below and you can also find the recording of a
 previous session
-[here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a).
+[here](https://justiceuk.sharepoint.com/:f:/s/RTrainingGroup/Ev1kwXxGaVNNpLwFg4drakUBNUpZz72DRdcD8PipkU-u9A?e=SQzeJL).
 See [Remote learning](#remote-learning) for more tips on going through
 this material in your own time. If you work through the material by
-youself please leave feedback about the material
+yourself please leave feedback about the material
 [here](https://airtable.com/shr9u2OJB2pW8Y0Af).
 
 If you have any feedback on the content, please get in touch!
