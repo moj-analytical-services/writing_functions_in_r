@@ -18,6 +18,10 @@ knitr::opts_chunk$set(
 ### Before we start
 To follow along with the code run during this session and participate in the exercises, open the script "example_code.R" in RStudio. All the code that we'll show in this session is stored in "example_code.R", and you can edit this script to write solutions to the exercises. You may also want to have the course [README](https://github.com/moj-analytical-services/writing_functions_in_r) open as a reference.
 
+The training repo is set up with a `renv` lock.file that includes all the packages and package 
+versions you will need for this course. Please make sure you pull the latest version of the `main`
+branch and run `renv::restore()` before starting!
+
 ---
 
 ### A note on the examples given in this course
