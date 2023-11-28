@@ -19,7 +19,7 @@ This table shows some of the logical operators you are likely to encounter when 
 |  &#448;  | Or                            |
 |    &     | And                           |
 |    !     | Not                           |
-|   %in%   | The subject appears in a list |
+|   %in%   | The subject appears in a population |
 | is.na()  | The subject is NA             |
 
 ## Additional NSE examples
@@ -28,13 +28,11 @@ Below are more examples of how to handle `dplyr()`'s non-standard evaluation. If
 
 ```{r}
 sum_group_alt1 <- function(df, group_cols, sum_col) {
-
-  summary <- df %>%
+  
+  df %>%
     dplyr::group_by(!!as.name(group_cols)) %>%
     dplyr::summarise(counts = sum(!!as.name(sum_col)))
-
-  return(summary)
-
+  
 }
 
 prosecutions_grouped <- sum_group_alt1(df = prosecutions, group_cols = "age_range", sum_col = "count")
@@ -45,13 +43,10 @@ Alternatively, this version of the function means the column names can be input 
 
 ```{r}
 sum_group_alt2 <- function(df, group_cols, sum_col) {
-
-  summary <- df %>%
+  
+  df %>%
     dplyr::group_by(!!enquo(group_cols)) %>%
     dplyr::summarise(counts = sum(!!enquo(sum_col)))
-
-  return(summary)
-
 }
 
 prosecutions_grouped <- sum_group_alt2(df = prosecutions, group_cols = age_range, sum_col = count)
@@ -62,12 +57,12 @@ The function below shows an example of how our `sum_group()` function can be mod
 
 ```{r}
 sum_group_alt3 <- function(df, group_cols, sum_col) {
-
-  summary <- df %>%
+  
+  df %>%
     dplyr::group_by({{ group_cols }}) %>%
     dplyr::summarise(counts = sum({{ sum_col }}))
-
-  return(summary)
+  
+  summary
   
 }
 
@@ -84,17 +79,17 @@ We can extend the `sum_group()` function by having the option to add a row with 
 ```{r, message = FALSE}
 library(janitor)
 
-sum_group <- function(df, group_cols, sum_col, add_total=F) {
+sum_group <- function(df, group_cols, sum_col, add_total = FALSE) {
   
   summary <- df %>%
     dplyr::group_by_at(group_cols) %>%
     dplyr::summarise_at(sum_col, sum)
   
-  if (add_total == T) {
+  if (add_total == TRUE) {
     summary <- summary %>% janitor::adorn_totals("row")
   }
   
-  return(summary)
+  summary
   
 }
 ```
@@ -118,16 +113,16 @@ extract_year <- function(data, end_date) {
   # Format the dates to years and quarters
   years <- lubridate::year(quarters_to_include)
   quarters <- quarters(quarters_to_include)
-
+  
   # Combine into a unique set of year-quarters
   yearquarters <- str_c(years, " ", quarters)
   
   # Filter data based on these years and quarters
-  data <- data %>%
+  data %>%
     dplyr::mutate(year_quarter = paste(year, quarter)) %>%
     dplyr::filter(year_quarter %in% yearquarters)
   
-  return(data)
+  data
 }
 ```
 
