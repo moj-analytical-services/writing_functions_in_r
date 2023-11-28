@@ -1,6 +1,13 @@
 ---
 title: Writing functions in R
 output: rmarkdown::github_document
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_dir = "../",
+      output_file = file.path("../README.md")  
+    )
+  })
 ---
 
 ```{r setup, include=FALSE}
