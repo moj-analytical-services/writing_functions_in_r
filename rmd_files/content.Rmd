@@ -259,9 +259,9 @@ A function side-effect can be thought of as any change to the workspace that the
 odd_or_even <- function(x) {
   
   if ((x %% 2) == 0) {
-    print("The number is even.")
+    message("The number is even.")
   } else if ((x %% 2) == 1) {
-    print("The number is odd.")
+    message("The number is odd.")
   }
   
 }
@@ -269,7 +269,7 @@ odd_or_even <- function(x) {
 odd_or_even(x = 4)
 ```
 
-**Note:** It’s best practice for your function to either return an object or have a side-effect, but not both (with the exception of simple print statements).
+**Note:** It’s best practice for your function to either return an object or have a side-effect, but not both (with the exception of messages errors and warnings).
 
 ## Example 5: errors and warnings
 
@@ -314,7 +314,7 @@ odd_or_even(x = "a")
 odd_or_even(x = c(1, 2, 3))
 ```
 
-`stop()` halts execution of the function and prints an error message to the console. Alternatively you can use `warning()`, which prints a warning message to the console but does not stop execution of the function.
+`stop()` halts execution of the function and prints an error message to the console. Alternatively you can use `warning()`, which returns a warning but does not stop execution of the function.
 
 ## Example 6: optional arguments
 
