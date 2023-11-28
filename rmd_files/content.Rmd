@@ -1,9 +1,3 @@
-```{r, include=FALSE}
-knitr::opts_chunk$set(
-  comment = ">"
-)
-```
-
 ## Learning outcomes
 
 ### By the end of this session you should know:
@@ -183,24 +177,72 @@ my_mean(7.5, 16)
 ```
 
 
-## Example 3: conditional statements in functions
+## Example 3: conditional statements and early returns
 
 Functions can return different outputs depending on some condition. In this function the condition is `x < 0`, and the condition evaluates to either `TRUE` or `FALSE`:
 
 ```{r, purl=purl_example_code}
 # This function returns the absolute value of a number
 abs_x <- function(x) {
-  if (x < 0) {
-    return(-x)
+  if (x >= 0) {
+    x
   } else {
-    return(x)
+    -x
   }
 }
 
 abs_x(-5)
+abs_x(4)
 ```
 
-As soon as a `return()` statement is encountered in a function, the function finishes and returns the variable in the `return()` statement. In the above example, `return()` is used twice as there is a condition with two possibilities. Either the input argument `x` is less than zero, in which case the function ends with the `return(-x)` statement, otherwise if `x` is not less than zero then the function continues to the `return(x)` statement.
+By default R will always return the last evaluated statement. In this example when `x` is greater than
+or equal to zero, the last evaluated statement is `x`. In contrast when `x` is less than zero, the 
+last evaluated statement is `-x`.
+
+---
+
+Why does this function always return minus x?
+```{r, purl=purl_example_code}
+# why does this function always return -x?
+abs_x_v2 <- function(x) {
+  
+  if (x >= 0) {
+    x
+  } 
+  
+  -x
+  
+}
+
+abs_x_v2(-5)
+abs_x_v2(4)
+```
+
+---
+
+Sometimes exiting a function early is useful. We can achieve this with an explicit `return()`. As 
+soon as a `return()` statement is encountered in a function, the function finishes and returns the 
+variable in the `return()` statement.
+
+```{r, purl=purl_example_code}
+# We can fix it by using an early return
+abs_x_v3 <- function(x) {
+  
+  if (x >= 0) {
+    return(x)
+  } 
+  
+  -x
+  
+}
+
+abs_x_v3(-5)
+abs_x_v3(4)
+```
+
+---
+
+
 
 ## Example 4: functions with side-effects
 
@@ -211,9 +253,9 @@ A function side-effect can be thought of as any change to the workspace that the
 odd_or_even <- function(x) {
   
   if ((x %% 2) == 0) {
-    print("The number is even.")
+    message("The number is even.")
   } else if ((x %% 2) == 1) {
-    print("The number is odd.")
+    message("The number is odd.")
   }
   
 }
@@ -221,7 +263,7 @@ odd_or_even <- function(x) {
 odd_or_even(x = 4)
 ```
 
-**Note:** It’s best practice for your function to either return an object or have a side-effect, but not both (with the exception of simple print statements).
+**Note:** It’s best practice for your function to either return an object or have a side-effect, but not both (with the exception of messages, errors and warnings).
 
 ## Example 5: errors and warnings
 
@@ -241,15 +283,15 @@ Here's an adapted version of the function, with some more informative error mess
 # This function lets you know whether a number is odd or even
 odd_or_even <- function(x) {
   
-  if (length(x) > 1){
+  if (length(x) > 1) {
     stop("x must have length 1.")
-  } else if (!is.numeric(x)){
+  } else if (!is.numeric(x)) {
     stop("x must be a number.")
   } else if ((x %% 2) == 0) {
     print("The number is even.")
   } else if ((x %% 2) == 1) {
     print("The number is odd.")
-  } else if((x %% 2) != 0 & (x %% 2) != 1){
+  } else if((x %% 2) != 0 & (x %% 2) != 1) {
     stop("x must be an integer.")
   }
   
@@ -266,7 +308,7 @@ odd_or_even(x = "a")
 odd_or_even(x = c(1, 2, 3))
 ```
 
-`stop()` halts execution of the function and prints an error message to the console. Alternatively you can use `warning()`, which prints a warning message to the console but does not stop execution of the function.
+`stop()` halts execution of the function and prints an error message to the console. Alternatively you can use `warning()`, which returns a warning but does not stop execution of the function.
 
 ## Example 6: optional arguments
 
@@ -277,9 +319,9 @@ Here's an example of how to include optional arguments, where in this case the o
 add_a_number <- function(x, y = NULL) {
   
   if (!is.null(y)) {
-    return(x + y)
+    x + y
   } else {
-    return(x)
+    x
   }
   
 }
@@ -287,6 +329,40 @@ add_a_number <- function(x, y = NULL) {
 add_a_number(x = 6)
 add_a_number(x = 6, y = 7)
 ```
+
+---
+
+Note that `NULL` and `NA` values, and missing arguments are different and tested for in different ways.
+
+```{r, purl=purl_example_code}
+# This function demonstrates the difference between NULL, NA and "missing"
+return_x <- function(x) {
+  if (missing(x)) {
+    message("x is missing")
+  } 
+  if (is.null(x)) {
+    message("x is null")
+  }
+  if (is.na(x)) {
+    message("x is NA")
+  }
+  x
+}
+
+return_x(5)
+```
+
+A message will be returned when the relevant condition is found and then R will attempt to evaluate
+`x`. Note this will fail when `x` is `NULL` or missing.
+
+---
+
+```{r, purl=purl_example_code, error = TRUE}
+return_x()
+return_x(NULL)
+return_x(NA)
+```
+
 
 ## Example 7: arguments with default values
 
@@ -341,13 +417,13 @@ code
 fizz_buzz <- function(x) {
   
   if (x %% 3 == 0 & x %% 5 == 0) {
-    return("fizz buzz")
+    "fizz buzz"
   } else if (x %% 3 == 0) {
-    return("fizz")
+    "fizz"
   } else if (x %% 5 == 0) {
-    return("buzz")
+    "buzz"
   } else {
-    return(as.character(x))
+    as.character(x)
   }
   
 }
@@ -419,13 +495,13 @@ when you don't specify the `fizz` or `buzz` arguments, and second when you set
 fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
   
   if (x %% fizz == 0 & x %% buzz == 0) {
-    return("fizz buzz")
+    "fizz buzz"
   } else if (x %% fizz == 0) {
-    return("fizz")
+    "fizz"
   } else if (x %% buzz == 0) {
-    return("buzz")
+    "buzz"
   } else {
-    return(as.character(x))
+    as.character(x)
   }
   
 }
@@ -615,7 +691,6 @@ Use the `generalise_names()` function defined above to clean the column headings
 
 ```{r, include=show_solution, purl=purl_solutions}
 # Exercise 3 solution
-
 colnames(prosecutions) <- colnames(prosecutions) |> generalise_names()
 dplyr::glimpse(prosecutions)
 ```
@@ -841,7 +916,7 @@ sum_group <- function(df, group_col, sum_col) {
 }
 ```
 
-The way that the tidyverse packages handle NSE has evolved over the past few years, so new methods of addressing this issue may be introduced in the future. For the current recommeneded approach to working with "tidy evaluation", i.e. a special type of NSE used throughout the tidyverse, please see [this vignette](https://dplyr.tidyverse.org/articles/programming.html). See the appendix for some examples of alternative methods to tackle this problem.
+The way that the tidyverse packages handle NSE has evolved over the past few years, so new methods of addressing this issue may be introduced in the future. For the current recommended approach to working with "tidy evaluation", i.e. a special type of NSE used throughout the tidyverse, please see [this vignette](https://dplyr.tidyverse.org/articles/programming.html). See the appendix for some examples of alternative methods to tackle this problem.
 
 ---
 
@@ -929,7 +1004,7 @@ Beyond those generated by basic syntax mistakes, any error messages that you hav
 
 You may also have noticed that a function you wrote wasn't doing what you wanted because the output was surprising, even though no error was generated.
 
-```{r purl=purl_example_code}
+```{r purl=purl_example_code, error = TRUE}
 my_mean <- function(x, y) {
   x + y / 2
 }
@@ -937,6 +1012,8 @@ my_mean <- function(x, y) {
 my_mean(3, 5)
 
 ```
+
+---
 
 Although this is a frivolous example, and the problem immediately obvious, in general this issue is serious and pernicious, because a problem may exist that you're not immediately aware of. Alternatively, you may be able to tell that there is a problem somewhere, but not know what the root cause is, particularly when your custom functions get more complex, or when you're calling custom functions from within other custom functions.
 
@@ -952,7 +1029,7 @@ Here we work with a toy function, `pythagoras()`. It calculates the length of a 
 
 ---
 
-```{r, purl=purl_example_code}
+```{r, purl=purl_example_code, error = TRUE}
 # Function to calculate the length of a hypotenuse 
 pythagoras <- function(a, b) {
   
@@ -970,7 +1047,7 @@ pythagoras(2, -3)
 
 We can add assertion statements to prevent this undesirable behaviour.
 
-```{r, purl=purl_example_code}
+```{r, purl=purl_example_code, error = TRUE}
 # Function to calculate the length of a hypotenuse 
 pythagoras <- function(a, b) {
   
@@ -987,13 +1064,11 @@ pythagoras(2, -3)
 
 ```
 
-
 ---
 
 That's great, but we could improve clarity. The second most useful argument that `assertthat::assert_that()` takes is `msg`. This is a string that will be output as part of the error message, overriding the default, e.g. 
 
-
-```{r, purl=purl_example_code}
+```{r, purl=purl_example_code, error = TRUE}
 # Function to calculate the length of a hypotenuse 
 pythagoras <- function(a, b) {
   
@@ -1013,12 +1088,14 @@ pythagoras(-2, 1)
 
 (Here we also combine the two assertions into one, to avoid repetition.)
 
+---
+
 In this final example, additional assertions are added to check more fundamental aspects of input.
 
-```{r, purl=purl_example_code}
+```{r, purl=purl_example_code, error = TRUE}
 # Function to calculate the length of a hypotenuse 
 pythagoras <- function(a, b) {
-
+  
   assertthat::assert_that(
     !missing(a) & !missing(b),
     msg = "you must supply two triangle lengths")
@@ -1035,18 +1112,21 @@ pythagoras <- function(a, b) {
   
 }
 
+```
+
+---
+
+```{r, purl=purl_example_code, error = TRUE}
 pythagoras("1", 2)
 
 pythagoras(b = 2)
 ```
 
-
-
-In the final exercise, we will apply `assertthat::assert_that()` to the end product before returning it to the user.
-
 ---
 
 ### Exercise 7
+
+In the final exercise, we will apply `assertthat::assert_that()` to the end product before returning it to the user.
 
 We will make a new function, called `pythagorus_rounded()`.
 
@@ -1055,17 +1135,19 @@ We will make a new function, called `pythagorus_rounded()`.
 3. Modify the function so that the assertion passes and the function succeeds. Reload the function and confirm that it passes with positive numeric inputs.
 
 
-```{r, purl_example_code}
+```{r, purl_example_code, error = TRUE, eval = FALSE}
 # Exercise 7 assertion statement
 
 assertthat::assert_that(c %% 1 == 0)
 
 ```
 
+---
 
-```{r, include=show_solution, purl=purl_solutions}
-# Exercise 7 solution
-# Function to return hypotenuse length rounded to whole number
+### Exercise 7 Answers
+
+```{r, include=show_solution, purl=purl_solutions, error = TRUE}
+# Exercise 7 solution - function to return hypotenuse length rounded to whole number
 pythagoras_rounded <- function(a, b) {
   
   assertthat::assert_that(
@@ -1089,11 +1171,14 @@ pythagoras_rounded <- function(a, b) {
     msg = "calculated answer is not a whole number")
   
   paste0("The rounded length of the hypotenuse is ", c)
-  
 }
+```
 
+---
+
+
+```{r, include=show_solution, purl=purl_solutions, error = TRUE}
 pythagoras_rounded(2, 3)
-
 ```
 
 # Hints and tips

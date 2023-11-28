@@ -4,6 +4,13 @@ output:
   ioslides_presentation:
     widescreen: true
     smaller: true
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_dir = "../",
+      output_file = file.path("../slides.html")  
+    )
+  })
 ---
 
 ```{r setup, include=FALSE}
@@ -11,6 +18,9 @@ output:
 show_solution <- TRUE # This determines if the solutions are displayed in the slides
 purl_solutions <- FALSE # This variable relates to code blocks that are exercise solutions
 purl_example_code <- TRUE # This variable relates to code blocks that aren't exercise solutions
+knitr::opts_chunk$set(
+  comment = "#>"
+)
 ```
 
 ## Writing functions in R: setup
@@ -28,13 +38,14 @@ If you need any help, just ask! We will be monitoring the Teams chat throughout 
 
 ## Agenda
 
-Item                       | Time
----------------------------| -------------
-Set up and introduction    | 10:00 - 10:10
-Examples of basic functions (including exercises) | 10:10 - 11:20
-Break | 11:20 - 11:30
-'Real-world' example functions (including exercises) | 11:30 - 12:45
-Hints and tips | 12:45 - 13:00
+Item                                                 | Time
+---------------------------------------------------- | -------------
+Set up and introduction                              | 10:00 - 10:10
+Examples of basic functions (including exercises)    | 10:10 - 11:30
+Break                                                | 11:30 - 11:40
+'Real-world' example functions (including exercises) | 11:40 - 12:30
+Using `assertthat`                                   | 12:30 - 12:50
+Hints and tips                                       | 12:50 - 13:00
 
 ```{r source_content, child = 'content.Rmd'}
 ```

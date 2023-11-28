@@ -1,6 +1,13 @@
 ---
 title: Writing functions in R
 output: rmarkdown::github_document
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_dir = "../",
+      output_file = file.path("../README.md")  
+    )
+  })
 ---
 
 ```{r setup, include=FALSE}
@@ -8,9 +15,13 @@ output: rmarkdown::github_document
 show_solution <- FALSE # This determines if the solutions are displayed in the readme
 purl_solutions <- FALSE # This variable relates to code blocks that are exercise solutions
 purl_example_code <- TRUE # This variable relates to code blocks that aren't exercise solutions
+knitr::opts_chunk$set(
+  comment = "#>",
+  fig.path = "../README_files/"
+)
 ```
 
-This repository is for Writing Functions in R course offered by the Data and Analysis R Training Group. It was also used for the April 2019 [Coffee & Coding](https://github.com/moj-analytical-services/Coffee-and-Coding) session.
+This repository is for the Writing Functions in R course offered by the Data and Analysis R Training Group. 
 
 Knowing how to write your own functions is a great skill to add to your R toolbox. Writing functions can save you time, reduce the risk of errors, and make your code easier to understand. In this course we’ll cover why, when and how to write your own functions, with plenty of examples & exercises to help you get started.
 
@@ -36,15 +47,17 @@ If you have any feedback on the content, please get in touch!
 * [Writing a package](#writing-a-package)
 * [Further reading](#further-reading)
 * [Appendix](#appendix)
+* [Information for presenters](#information-for-presenters)
 
 ## Pre-material
 
 A few days before the session, please make sure that -
 
 1. You have access to RStudio on the Analytical Platform
-2. You have access to the [alpha-r-training s3 bucket](https://cpanel-master.services.alpha.mojanalytics.xyz/datasources/607/)
-3. You have followed the steps in the [Configure Git and Github section of the Platform User Guidance](https://user-guidance.services.alpha.mojanalytics.xyz/introduction.html#configure-git-and-github) to configure Git and GitHub (this only needs doing once)
-4. You have cloned this repository (instructions are in the Analytical Platform User Guidance [here](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#creating-your-project-repo-on-github))
+2. You have requested access to the **alpha-r-training** s3 bucket via the [intro_r slack channel on the ASD
+workspace](https://moj.enterprise.slack.com/archives/CGKSJV9HN)
+3. You have followed the steps in the [Configure Git and Github section of the Platform User Guidance](https://user-guidance.analytical-platform.service.justice.gov.uk/github/set-up-github.html) to configure Git and GitHub (this only needs doing once)
+4. You have cloned this repository (instructions are in the Analytical Platform User Guidance [here](https://user-guidance.analytical-platform.service.justice.gov.uk/github/rstudio-git.html#work-with-git-in-rstudio))
 5. You run the command `renv::restore()` in the console to make sure you have the required packages installed
 
 If you have any problems with the above please get in touch with the course organisers or ask for help on either the #analytical_platform or #intro_r channel on [ASD slack](https://asdslack.slack.com).
@@ -68,3 +81,31 @@ If you have any feedback on the material and/or your experience of working throu
 
 ```{r source_content, child = 'appendix.Rmd'}
 ```
+
+## Information for presenters
+
+### Where stuff is for on the day
+* The training slides are in [slides.html](slides.html) (you will need to download these and open them in a browser).
+* The course material is also duplicated in the README with some additional examples in the appendix.
+* The code from the presentation is available in [example_code.R](example_code.R).
+* The answers to the exercises are available in [solutions.R](solutions.R).
+* The [functions.R](functions.R) script is used in one example to demonstrate how to organize code.
+
+### How to update the course contents
+The README, slides, solutions, and example_code are all generated from files in the "rmd_files" folder.
+
+* The bulk of the content is in [content.Rmd](rmd_files/content.Rmd).
+* The appendix (used in the README) is in [appendix.Rmd](rmd_files/appendix.Rmd).
+* The README is generated from [README.Rmd](rmd_files/README.Rmd) (this will source the contents of
+content.Rmd and appendix.Rmd).
+* The slides are generated from [slides.Rmd](rmd_files/slides.Rmd) (this will source the contents of
+content.Rmd).
+* The [functions.R](rmd_files/functions.R) script is a duplicate of the one in the top directory 
+and is required for knitting the various files. 
+* The [render_rmakdown_files.R](rmd_files/render_rmakdown_files.R) script contains four code 
+chunks. Running them will re-generate all the course material. This file should always be run before
+you merge any changes to the `main` branch.
+
+### Tips when presenting
+* You can press F11 to make the presentation full screen. To go off of full screen you can press F11 again.
+
