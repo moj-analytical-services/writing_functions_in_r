@@ -18,6 +18,9 @@ knit: (function(input, ...) {
 show_solution <- TRUE # This determines if the solutions are displayed in the slides
 purl_solutions <- FALSE # This variable relates to code blocks that are exercise solutions
 purl_example_code <- TRUE # This variable relates to code blocks that aren't exercise solutions
+knitr::opts_chunk$set(
+  comment = "#>"
+)
 ```
 
 ## Writing functions in R: setup

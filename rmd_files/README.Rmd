@@ -15,6 +15,10 @@ knit: (function(input, ...) {
 show_solution <- FALSE # This determines if the solutions are displayed in the readme
 purl_solutions <- FALSE # This variable relates to code blocks that are exercise solutions
 purl_example_code <- TRUE # This variable relates to code blocks that aren't exercise solutions
+knitr::opts_chunk$set(
+  comment = "#>",
+  fig.path = "../README_files/"
+)
 ```
 
 This repository is for the Writing Functions in R course offered by the Data and Analysis R Training Group. 

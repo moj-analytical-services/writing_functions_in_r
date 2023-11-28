@@ -1,9 +1,3 @@
-```{r, include=FALSE}
-knitr::opts_chunk$set(
-  comment = ">"
-)
-```
-
 ## Learning outcomes
 
 ### By the end of this session you should know:
