@@ -1019,6 +1019,8 @@ my_mean(3, 5)
 
 ```
 
+---
+
 Although this is a frivolous example, and the problem immediately obvious, in general this issue is serious and pernicious, because a problem may exist that you're not immediately aware of. Alternatively, you may be able to tell that there is a problem somewhere, but not know what the root cause is, particularly when your custom functions get more complex, or when you're calling custom functions from within other custom functions.
 
 You can make life easier by adding _assertions_ (calls to assertion functions).
@@ -1068,11 +1070,9 @@ pythagoras(2, -3)
 
 ```
 
-
 ---
 
 That's great, but we could improve clarity. The second most useful argument that `assertthat::assert_that()` takes is `msg`. This is a string that will be output as part of the error message, overriding the default, e.g. 
-
 
 ```{r, purl=purl_example_code, error = TRUE}
 # Function to calculate the length of a hypotenuse 
@@ -1093,6 +1093,8 @@ pythagoras(-2, 1)
 ```
 
 (Here we also combine the two assertions into one, to avoid repetition.)
+
+---
 
 In this final example, additional assertions are added to check more fundamental aspects of input.
 
@@ -1116,18 +1118,21 @@ pythagoras <- function(a, b) {
   
 }
 
+```
+
+---
+
+```{r, purl=purl_example_code, error = TRUE}
 pythagoras("1", 2)
 
 pythagoras(b = 2)
 ```
 
-
-
-In the final exercise, we will apply `assertthat::assert_that()` to the end product before returning it to the user.
-
 ---
 
 ### Exercise 7
+
+In the final exercise, we will apply `assertthat::assert_that()` to the end product before returning it to the user.
 
 We will make a new function, called `pythagorus_rounded()`.
 
@@ -1136,17 +1141,19 @@ We will make a new function, called `pythagorus_rounded()`.
 3. Modify the function so that the assertion passes and the function succeeds. Reload the function and confirm that it passes with positive numeric inputs.
 
 
-```{r, purl_example_code, error = TRUE}
+```{r, purl_example_code, error = TRUE, eval = FALSE}
 # Exercise 7 assertion statement
 
 assertthat::assert_that(c %% 1 == 0)
 
 ```
 
+---
+
+### Exercise 7 Answers
 
 ```{r, include=show_solution, purl=purl_solutions, error = TRUE}
-# Exercise 7 solution
-# Function to return hypotenuse length rounded to whole number
+# Exercise 7 solution - function to return hypotenuse length rounded to whole number
 pythagoras_rounded <- function(a, b) {
   
   assertthat::assert_that(
@@ -1170,11 +1177,14 @@ pythagoras_rounded <- function(a, b) {
     msg = "calculated answer is not a whole number")
   
   paste0("The rounded length of the hypotenuse is ", c)
-  
 }
+```
 
+---
+
+
+```{r, include=show_solution, purl=purl_solutions, error = TRUE}
 pythagoras_rounded(2, 3)
-
 ```
 
 # Hints and tips
