@@ -282,7 +282,6 @@ Here's an adapted version of the function, with some more informative error mess
 ```{r, purl=purl_example_code}
 # This function lets you know whether a number is odd or even
 odd_or_even <- function(x) {
-  
   if (length(x) > 1) {
     stop("x must have length 1.")
   } else if (!is.numeric(x)) {
@@ -291,7 +290,7 @@ odd_or_even <- function(x) {
     print("The number is even.")
   } else if ((x %% 2) == 1) {
     print("The number is odd.")
-  } else if((x %% 2) != 0 & (x %% 2) != 1) {
+  } else if((x %% 2) != 0 && (x %% 2) != 1) {
     stop("x must be an integer.")
   }
   
@@ -416,7 +415,7 @@ code
 
 fizz_buzz <- function(x) {
   
-  if (x %% 3 == 0 & x %% 5 == 0) {
+  if (x %% 3 == 0 && x %% 5 == 0) {
     "fizz buzz"
   } else if (x %% 3 == 0) {
     "fizz"
@@ -1073,7 +1072,7 @@ That's great, but we could improve clarity. The second most useful argument that
 pythagoras <- function(a, b) {
   
   assertthat::assert_that(
-    a > 0 & b > 0,
+    a > 0 && b > 0,
     msg = "both triangle sides must have positive length!")
   
   c <- sqrt(a^2 + b^2)
@@ -1097,15 +1096,15 @@ In this final example, additional assertions are added to check more fundamental
 pythagoras <- function(a, b) {
   
   assertthat::assert_that(
-    !missing(a) & !missing(b),
+    !missing(a) && !missing(b),
     msg = "you must supply two triangle lengths")
   
   assertthat::assert_that(
-    is.numeric(a) & is.numeric(b),
+    is.numeric(a) && is.numeric(b),
     msg = "both arguments must be of numeric data type")
   
   assertthat::assert_that(
-    a > 0 & b > 0,
+    a > 0 && b > 0,
     msg = "both triangle sides must have positive length!")
   
   sqrt(a^2 + b^2)
@@ -1151,15 +1150,15 @@ assertthat::assert_that(c %% 1 == 0)
 pythagoras_rounded <- function(a, b) {
   
   assertthat::assert_that(
-    !missing(a) & !missing(b),
+    !missing(a) && !missing(b),
     msg = "you must supply two triangle lengths")
   
   assertthat::assert_that(
-    is.numeric(a) & is.numeric(b),
+    is.numeric(a) && is.numeric(b),
     msg = "both arguments must be of numeric data type")
   
   assertthat::assert_that(
-    a > 0 & b > 0,
+    a > 0 && b > 0,
     msg = "both triangle sides must have positive length!")
   
   # round the value to ensure it passes the assertion

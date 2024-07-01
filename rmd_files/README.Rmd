@@ -94,15 +94,15 @@ If you have any feedback on the material and/or your experience of working throu
 ### How to update the course contents
 The README, slides, solutions, and example_code are all generated from files in the "rmd_files" folder.
 
-* The bulk of the content is in [content.Rmd](rmd_files/content.Rmd).
-* The appendix (used in the README) is in [appendix.Rmd](rmd_files/appendix.Rmd).
-* The README is generated from [README.Rmd](rmd_files/README.Rmd) (this will source the contents of
+* The bulk of the content is in [rmd_files/content.Rmd](rmd_files/content.Rmd).
+* The appendix (used in the README) is in [rmd_files/appendix.Rmd](rmd_files/appendix.Rmd).
+* The README is generated from [rmd_files/README.Rmd](rmd_files/README.Rmd) (this will source the contents of
 content.Rmd and appendix.Rmd).
-* The slides are generated from [slides.Rmd](rmd_files/slides.Rmd) (this will source the contents of
+* The slides are generated from [rmd_files/slides.Rmd](rmd_files/slides.Rmd) (this will source the contents of
 content.Rmd).
-* The [functions.R](rmd_files/functions.R) script is a duplicate of the one in the top directory 
+* The [rmd_files/functions.R](rmd_files/functions.R) script is a duplicate of the one in the top directory 
 and is required for knitting the various files. 
-* The [render_rmakdown_files.R](rmd_files/render_rmakdown_files.R) script contains four code 
+* The [rmd_files/render_rmakdown_files.R](rmd_files/render_rmakdown_files.R) script contains four code 
 chunks. Running them will re-generate all the course material. This file should always be run before
 you merge any changes to the `main` branch.
 
