@@ -1,4 +1,4 @@
-## ----include=show_solution, purl=purl_solutions-----------------------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions--------------------------------------------------------------------------------------------------
 # 1.1 hello_world() solution
 
 hello_world <- function() {
@@ -8,7 +8,7 @@ hello_world <- function() {
 hello_world()
 
 
-## ----include=show_solution, purl=purl_solutions-----------------------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions--------------------------------------------------------------------------------------------------
 # 1.2 my_mean() solution
 
 my_mean <- function(x, y) {
@@ -40,12 +40,12 @@ my_mean(7.5, 16)
 
 
 
-## ----include=show_solution, purl=purl_solutions, eval=TRUE------------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions, eval=TRUE---------------------------------------------------------------------------------------
 # 2.1 fizz_buzz() solution
 
 fizz_buzz <- function(x) {
   
-  if (x %% 3 == 0 & x %% 5 == 0) {
+  if (x %% 3 == 0 && x %% 5 == 0) {
     "fizz buzz"
   } else if (x %% 3 == 0) {
     "fizz"
@@ -58,7 +58,7 @@ fizz_buzz <- function(x) {
 }
 
 
-## ----include=show_solution, purl=purl_solutions, eval=FALSE-----------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions, eval=FALSE--------------------------------------------------------------------------------------
 ## fizz_buzz(1)  # "1"
 ## fizz_buzz(2)  # "2"
 ## fizz_buzz(3)  # "fizz"
@@ -66,7 +66,7 @@ fizz_buzz <- function(x) {
 ## fizz_buzz(15) # "fizz buzz"
 
 
-## ----include=show_solution, purl=purl_solutions-----------------------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions--------------------------------------------------------------------------------------------------
 # 2.2 fizz_buzz_vec() solution
 
 fizz_buzz_vec <- function(x) {
@@ -83,7 +83,7 @@ fizz_buzz_vec <- function(x) {
 fizz_buzz_vec(1:15)
 
 
-## ----include=show_solution, purl=purl_solutions-----------------------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions--------------------------------------------------------------------------------------------------
 # 2.3 fizz_buzz_custom() solution
 
 fizz_buzz_custom <- function(x, fizz = 3, buzz = 5) {
@@ -113,7 +113,7 @@ fizz_buzz_custom_vec <- function(x, fizz = 3, buzz = 5) {
 }
 
 
-## ----include=show_solution, purl=purl_solutions-----------------------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions--------------------------------------------------------------------------------------------------
 fizz_buzz_custom_vec(1:15)
 fizz_buzz_custom_vec(c(1, 2, 3, 7, 15, 21), buzz = 7)
 
@@ -134,7 +134,7 @@ fizz_buzz_custom_vec(c(1, 2, 3, 7, 15, 21), buzz = 7)
 
 
 
-## ----include=show_solution, purl=purl_solutions-----------------------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions--------------------------------------------------------------------------------------------------
 # Exercise 3 solution
 colnames(prosecutions) <- colnames(prosecutions) |> generalise_names()
 dplyr::glimpse(prosecutions)
@@ -152,7 +152,7 @@ dplyr::glimpse(prosecutions)
 
 
 
-## ----include=show_solution, purl=purl_solutions-----------------------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions--------------------------------------------------------------------------------------------------
 # Exercise 4 solution
 
 clean_not_known <- function(x,
@@ -174,7 +174,7 @@ clean_not_known <- function(x,
 }
 
 
-## ----include=show_solution, purl=purl_solutions-----------------------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions--------------------------------------------------------------------------------------------------
 # Exercise 5 solution
 
 clean_dataset <- function(data) {
@@ -223,7 +223,7 @@ clean_dataset <- function(data) {
 
 
 
-## ----include=show_solution, purl=purl_solutions-----------------------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions--------------------------------------------------------------------------------------------------
 # Exercise 6 solution
 plot_prosecutions <- function(df, breakdown = "offence_type") {
   
@@ -244,7 +244,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
 }
 
 
-## ----fig.width=10, include=show_solution, purl=purl_solutions---------------------------------------------------------------------------------------------------------------
+## ----fig.width=10, include=show_solution, purl=purl_solutions------------------------------------------------------------------------------------
 # Exercise 6 solution
 
 plot_prosecutions(prosecutions, breakdown = "offence_group")
@@ -262,27 +262,27 @@ plot_prosecutions(prosecutions, breakdown = "offence_group")
 
 
 
-## ----purl_example_code, error = TRUE, eval = FALSE--------------------------------------------------------------------------------------------------------------------------
+## ----purl_example_code, error = TRUE, eval = FALSE-----------------------------------------------------------------------------------------------
 ## # Exercise 7 assertion statement
 ## 
 ## assertthat::assert_that(c %% 1 == 0)
 ## 
 
 
-## ----include=show_solution, purl=purl_solutions, error = TRUE---------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions, error = TRUE------------------------------------------------------------------------------------
 # Exercise 7 solution - function to return hypotenuse length rounded to whole number
 pythagoras_rounded <- function(a, b) {
   
   assertthat::assert_that(
-    !missing(a) & !missing(b),
+    !missing(a) && !missing(b),
     msg = "you must supply two triangle lengths")
   
   assertthat::assert_that(
-    is.numeric(a) & is.numeric(b),
+    is.numeric(a) && is.numeric(b),
     msg = "both arguments must be of numeric data type")
   
   assertthat::assert_that(
-    a > 0 & b > 0,
+    a > 0 && b > 0,
     msg = "both triangle sides must have positive length!")
   
   # round the value to ensure it passes the assertion
@@ -297,6 +297,6 @@ pythagoras_rounded <- function(a, b) {
 }
 
 
-## ----include=show_solution, purl=purl_solutions, error = TRUE---------------------------------------------------------------------------------------------------------------
+## ----include=show_solution, purl=purl_solutions, error = TRUE------------------------------------------------------------------------------------
 pythagoras_rounded(2, 3)
 
