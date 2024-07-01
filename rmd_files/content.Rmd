@@ -240,8 +240,6 @@ abs_x_v3(-5)
 abs_x_v3(4)
 ```
 
----
-
 
 
 ## Example 4: functions with side-effects
