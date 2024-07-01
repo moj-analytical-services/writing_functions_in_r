@@ -410,8 +410,6 @@ abs_x_v3(4)
 
     #> [1] 4
 
-------------------------------------------------------------------------
-
 ## Example 4: functions with side-effects
 
 A function side-effect can be thought of as any change to the workspace
@@ -1604,7 +1602,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Magenta"
+    #> [1] "Blue"
 
 ------------------------------------------------------------------------
 
