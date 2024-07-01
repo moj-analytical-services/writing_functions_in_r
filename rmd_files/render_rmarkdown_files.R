@@ -5,40 +5,43 @@
 rmarkdown::render(
   "rmd_files/README.Rmd", 
   output_format = "github_document",
-  output_dir = "../",
-  output_file = file.path("../README.md")
+  output_dir = here::here(),
+  output_file = here::here("README.md")
 )
+
+here::here("README.html") |> file.remove()
 
 ### Render slides.html as an isoslides presentation ------------------------------------------------
 # Note: this includes rmd_files/content.Rmd.
 rmarkdown::render(
   "rmd_files/slides.Rmd", 
   output_format = "ioslides_presentation",
-  output_dir = "../",
-  output_file = file.path("../slides.html")
+  output_dir = here::here(),
+  output_file = here::here("slides.html")
 )
 
 
 ### Extract the example code chunks into an R script -----------------------------------------------
-# Note: purl flags are set in the global environment prison to extracting the code.
+# Note: purl flags are set in the global environment prior to extracting the code.
 purl_solutions <- FALSE 
 purl_example_code <- TRUE 
 knitr::purl(
-  "rmd_files/content.Rmd", 
+  here::here("rmd_files/content.Rmd"), 
   documentation = 1, 
-  output = "example_code.R"
+  output = here::here("example_code.R")
 )
 rm(purl_solutions, purl_example_code)
 
 
 ### Extract the solution code chunks into an R script ----------------------------------------------
-# Note: purl flags are set in the global environment prison to extracting the code.
+# Note: purl flags are set in the global environment prior to extracting the code.
 purl_solutions <- TRUE 
 purl_example_code <- FALSE 
 knitr::purl(
-  "rmd_files/content.Rmd", 
+  here::here("rmd_files/content.Rmd"), 
   documentation = 1,
-  output = "solutions.R"
+  output = here::here("solutions.R")
 )
 rm(purl_solutions, purl_example_code)
+
 
