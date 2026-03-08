@@ -617,7 +617,7 @@ iris_by_species_1("setosa")
 iris_by_species_2("setosa")
 ```
 
-## Fetching data
+## Reading data
 
 Here we are reading in a copy of the `Prosecutions and Convictions` dataset from s3 and storing the dataframe as a variable called `prosecutions_and_convictions`. In the second step we're filtering the dataset to extract only the prosecutions and saving to another variable, named `prosecutions`.
 
