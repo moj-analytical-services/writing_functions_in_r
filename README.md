@@ -29,7 +29,7 @@ If you have any feedback on the content, please get in touch!
 
 ## Contents
 
-- [Pre-material](#pre-material)
+- [Set up instructions](#set-up-instructions)
 - [Remote learning](#remote-learning)
 - [Learning outcomes](#learning-outcomes)
 - [What is a function?](#what-is-a-function)
@@ -45,32 +45,38 @@ If you have any feedback on the content, please get in touch!
 - [Appendix](#appendix)
 - [Information for presenters](#information-for-presenters)
 
-## Pre-material
+### Set up instructions
 
-A few days before the session, please make sure that -
+A few days before the session, please:
 
-1.  You have access to RStudio on the Analytical Platform
-2.  You have requested access to the **alpha-r-training** s3 bucket via
-    the [intro_r slack channel on the ASD
-    workspace](https://moj.enterprise.slack.com/archives/CGKSJV9HN)
-3.  You have followed the steps in the [Configure Git and Github section
-    of the Platform User
-    Guidance](https://user-guidance.analytical-platform.service.justice.gov.uk/github/set-up-github.html)
-    to configure Git and GitHub (this only needs doing once)
-4.  You have cloned this repository (instructions are in the Analytical
-    Platform User Guidance
-    [here](https://user-guidance.analytical-platform.service.justice.gov.uk/github/rstudio-git.html#work-with-git-in-rstudio))
-5.  You run the command `renv::restore()` in the console to make sure
-    you have the required packages installed
+- Ensure you have requested access to the **alpha-r-training** s3 bucket
+  via the [intro_r slack channel on the ASD
+  workspace](https://moj.enterprise.slack.com/archives/CGKSJV9HN)
+- [Ensure you have access to the Analytical
+  Platform](https://user-guidance.analytical-platform.service.justice.gov.uk/get-started.html#quickstart-guide).
+- [Ensure you have linked RStudio and GitHub with an SSH
+  key](https://user-guidance.analytical-platform.service.justice.gov.uk/github/set-up-github.html).
 
-If you have any problems with the above please get in touch with the
-course organisers or ask for help on either the \#analytical_platform or
-\#intro_r channel on [ASD slack](https://asdslack.slack.com).
+A before the session, please:
 
-All the examples in the presentation/README are available in the R
-script example_code.R.
+- [Clone](https://user-guidance.analytical-platform.service.justice.gov.uk/github/rstudio-git.html#work-with-git-in-rstudio)
+  this repo as an RStudio project.
+- Run `install.packages("renv")`
+- Run `renv::install()` to install the packages declared in the
+  `DESCRIPTION` file.
 
 ## Remote learning
+
+This training session is run in person/over Teams every few months.
+Alternatively, you can go through this material in your own time.
+Recordings of these sessions can be viewed via links provided in the
+[Analytical Platform and related tools training section on R
+training](https://moj-analytical-services.github.io/ap-tools-training/ITG.html#r-training).
+If you work through the material by yourself please leave feedback about
+the material [here](https://airtable.com/shr9u2OJB2pW8Y0Af).
+
+**Please contact [Aidan Mews](aidan.mews@justice.gov.uk) if you have any
+questions.**
 
 Here are a few suggestions if you are going through this material in
 your own time:
@@ -78,21 +84,9 @@ your own time:
 - Both the README and slides contain the same content so you can use
   whichever works best for you - the only difference is the exercise
   solutions are only in the slides
-- To open the slides, first clone the repo (see
-  [pre-material](#pre-material)) and then open the file “slides.html”
-  from RStudio by clicking “View in web browser”
-- You can find a recording of a previous training session on the R
-  training Microsoft Stream channel
-  [here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a)
-- If you need any help, the best place to ask is on either the
-  [\#intro_r](https://app.slack.com/client/T1PU1AP6D/CGKSJV9HN) or
-  [\#r](https://app.slack.com/client/T1PU1AP6D/C1PUCG719) slack channels
-  on ASD slack.
-
-If you have any feedback on the material and/or your experience of
-working through it in your own time, please get in touch with a member
-of the R training group or leave a review on
-[Airtable](https://airtable.com/shr9u2OJB2pW8Y0Af).
+- To open the slides, first clone the repo (see [set up
+  instructions](#set-up-instructions)) and then open the file
+  “slides.html” from RStudio by clicking “View in web browser”
 
 ## Learning outcomes
 
@@ -115,10 +109,13 @@ want to have the course
 [README](https://github.com/moj-analytical-services/writing_functions_in_r)
 open as a reference.
 
-The training repo is set up with a `renv` lock.file that includes all
-the packages and package versions you will need for this course. Please
-make sure you pull the latest version of the `main` branch and run
-`renv::restore()` before starting!
+The training repo is set up with a DESCRIPTION file for more flexible
+package management with attendees/trainers potentially using different
+version of R. To install the required packages:
+
+- Run install.packages(“renv”)
+- Run renv::install() to install the packages declared in the
+  DESCRIPTION file.
 
 ------------------------------------------------------------------------
 
@@ -454,13 +451,15 @@ odd_or_even(x = 1.5)
 odd_or_even(x = "a")
 ```
 
-    #> Error in x%%2: non-numeric argument to binary operator
+    #> Error in `x %% 2`:
+    #> ! non-numeric argument to binary operator
 
 ``` r
 odd_or_even(x = c(1, 2, 3))
 ```
 
-    #> Error in if ((x%%2) == 0) {: the condition has length > 1
+    #> Error in `if ((x%%2) == 0) ...`:
+    #> ! the condition has length > 1
 
 ------------------------------------------------------------------------
 
@@ -493,19 +492,22 @@ Now try passing some incompatible arguments to the function:
 odd_or_even(x = 1.5)
 ```
 
-    #> Error in odd_or_even(x = 1.5): x must be an integer.
+    #> Error in `odd_or_even()`:
+    #> ! x must be an integer.
 
 ``` r
 odd_or_even(x = "a")
 ```
 
-    #> Error in odd_or_even(x = "a"): x must be a number.
+    #> Error in `odd_or_even()`:
+    #> ! x must be a number.
 
 ``` r
 odd_or_even(x = c(1, 2, 3))
 ```
 
-    #> Error in odd_or_even(x = c(1, 2, 3)): x must have length 1.
+    #> Error in `odd_or_even()`:
+    #> ! x must have length 1.
 
 `stop()` halts execution of the function and prints an error message to
 the console. Alternatively you can use `warning()`, which returns a
@@ -576,7 +578,8 @@ return_x()
 
     #> x is missing
 
-    #> Error in return_x(): argument "x" is missing, with no default
+    #> Error in `return_x()`:
+    #> ! argument "x" is missing, with no default
 
 ``` r
 return_x(NULL)
@@ -584,7 +587,8 @@ return_x(NULL)
 
     #> x is null
 
-    #> Error in if (is.na(x)) {: argument is of length zero
+    #> Error in `if (is.na(x)) ...`:
+    #> ! argument is of length zero
 
 ``` r
 return_x(NA)
@@ -672,10 +676,9 @@ Create a new version of the `fizz_buzz()` function called
 `fizz_buzz_vec` which instead accepts a vector of numbers. Test it out
 on a vector of the numbers 1 to 15.
 
-**Hint:** the function `case_when()` from the Tidyverse package `dplyr`
-is really useful when you want to vectorise multiple if-else statements,
-each with a different desired outcome. Run `?case_when` to bring up the
-help file.
+**Hint:** the function `dplyr::case_when()` is really useful when you
+want to vectorise multiple if-else statements, each with a different
+desired outcome. Run `?dplyr::case_when` to bring up the help file.
 
 *This exercise is a bit tricky - if you get stuck, you can still
 complete exercise 2.3.*
@@ -745,7 +748,7 @@ plot_x_and_y(x, y, col='red', type='l')
 
 This section builds on material covered in the [Intro R
 Training](https://github.com/moj-analytical-services/IntroRTraining)
-course and makes use of the `dplyr` package, which is a commonly used R
+course and makes use of the {dplyr} package, which is a commonly used R
 package for data manipulation. In the following examples we’ll see how
 user-defined functions can be used to help with cleaning, summarising,
 and plotting data. The data we’ll use is from the Criminal Justice
@@ -761,12 +764,12 @@ fit into a data processing story, so make sure you run the code in
 
 For these examples we will be using a few packages:
 
-- [`Rs3tools`](https://github.com/moj-analytical-services/Rs3tools) to
-  fetch data from s3.
-- `dplyr` is the package we’ll use to create summary tables from the
+- [{Rs3tools}](https://github.com/moj-analytical-services/Rs3tools) an
+  MoJ R package for reading and writing data from/to s3.
+- {dplyr} is the package we’ll use to create summary tables from the
   data.
-- `stringr` provides functions that can be used to manipulate strings.
-- `ggplot2` to create charts.
+- {stringr} provides functions that can be used to manipulate strings.
+- {ggplot2} to create charts.
 
 We will use `package::function()` syntax throughout this course instead
 of `library()` calls. This makes it easier to see where functions come
@@ -777,7 +780,7 @@ run time, you will get a probably very unhelpful error message (or your
 code might use the wrong function).
 
 For a similar reason we are using the R native pipe `|>` rather than the
-`magrittr` one. (If you are using R \< 4.1.0 you will need to replace
+{magrittr} one. (If you are using R \< 4.1.0 you will need to replace
 the native pipe with `%>%` and use `library("magrittr")`.)
 
 ## Examples why you should avoid `library()` calls
@@ -820,13 +823,13 @@ iris_by_species_2("setosa")
 
     #> Rows: 50
     #> Columns: 5
-    #> $ Sepal.Length <dbl> 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.8, 4.8, 4.3, 5.8, 5.7, 5.4, 5.1, 5.7, 5.1, 5.4, 5.1, 4.6, 5.1, 4.8,…
-    #> $ Sepal.Width  <dbl> 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3.8, 3.4, 3.7, 3.6, 3.3, 3.4,…
-    #> $ Petal.Length <dbl> 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4, 1.1, 1.2, 1.5, 1.3, 1.4, 1.7, 1.5, 1.7, 1.5, 1.0, 1.7, 1.9,…
-    #> $ Petal.Width  <dbl> 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.3, 0.2, 0.4, 0.2, 0.5, 0.2,…
-    #> $ Species      <fct> setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, setosa, seto…
+    #> $ Sepal.Length <dbl> 5.1, 4.…
+    #> $ Sepal.Width  <dbl> 3.5, 3.…
+    #> $ Petal.Length <dbl> 1.4, 1.…
+    #> $ Petal.Width  <dbl> 0.2, 0.…
+    #> $ Species      <fct> setosa,…
 
-## Fetching data
+## Reading data
 
 Here we are reading in a copy of the `Prosecutions and Convictions`
 dataset from s3 and storing the dataframe as a variable called
@@ -855,22 +858,22 @@ dplyr::glimpse(prosecutions)
 
     #> Rows: 107,493
     #> Columns: 16
-    #> $ Year                      <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 200…
-    #> $ Quarter                   <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1…
-    #> $ Sex                       <chr> "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01…
-    #> $ Type.of.Defendent         <chr> "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person",…
-    #> $ Age.Group                 <chr> "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juve…
-    #> $ Age.Range                 <chr> "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10…
-    #> $ Ethnicity                 <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A",…
-    #> $ Court.Type                <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magis…
-    #> $ Offence.Type              <chr> "01 Indictable only", "01 Indictable only", "01 Indictable only", "01 Indictable only", "02 Triable either way"…
-    #> $ Offence.Group             <chr> "02 Sexual offences", "03 Robbery", "03 Robbery", "07 Possession of weapons", "01 Violence against the person",…
-    #> $ Tried                     <chr> "5: Not tried", "01: Tried at magistrates court", "01: Tried at magistrates court", "01: Tried at magistrates c…
-    #> $ Plea.at.the.Crown.Court   <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A",…
-    #> $ Convicted..Not.convicted  <chr> "02: Not convicted", "01: Convicted", "02: Not convicted", "01: Convicted", "01: Convicted", "02: Not convicted…
-    #> $ Sentenced...Not.sentenced <chr> "02: Not sentenced", "01: Sentenced", "02: Not sentenced", "01: Sentenced", "01: Sentenced", "02: Not sentenced…
-    #> $ Outcome                   <chr> "01: Proceedings terminated early", "07: Found guilty", "03: Dismissed (found not guilty", "07: Found guilty", …
-    #> $ Count                     <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, 11, 1, 2, 1, 18, 168, 2, 15, 55, 4…
+    #> $ Year                      <int> …
+    #> $ Quarter                   <chr> …
+    #> $ Sex                       <chr> …
+    #> $ Type.of.Defendent         <chr> …
+    #> $ Age.Group                 <chr> …
+    #> $ Age.Range                 <chr> …
+    #> $ Ethnicity                 <chr> …
+    #> $ Court.Type                <chr> …
+    #> $ Offence.Type              <chr> …
+    #> $ Offence.Group             <chr> …
+    #> $ Tried                     <chr> …
+    #> $ Plea.at.the.Crown.Court   <chr> …
+    #> $ Convicted..Not.convicted  <chr> …
+    #> $ Sentenced...Not.sentenced <chr> …
+    #> $ Outcome                   <chr> …
+    #> $ Count                     <int> …
 
 ## Cleaning data
 
@@ -909,7 +912,9 @@ names <- c("Option 1", "   Option (1)", "Option: 1", "option 1", "OPTION - 1")
 generalise_names(names)
 ```
 
-    #> [1] "option_1" "option_1" "option_1" "option_1" "option_1"
+    #> [1] "option_1" "option_1"
+    #> [3] "option_1" "option_1"
+    #> [5] "option_1"
 
 The [`stringr` cheatsheet](https://stringr.tidyverse.org/#cheatsheet) is
 a great resource for learning more about regular expressions.
@@ -936,16 +941,16 @@ like “01: Juveniles” rather than just “Juveniles”.
 
     #> Rows: 107,493
     #> Columns: 10
-    #> $ year              <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008,…
-    #> $ quarter           <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1",…
-    #> $ sex               <chr> "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male", "01: Male",…
-    #> $ type_of_defendent <chr> "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Person", "01: Pe…
-    #> $ age_group         <chr> "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", "01: Juveniles", …
-    #> $ age_range         <chr> "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "01: 10-11", "0…
-    #> $ ethnicity         <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", …
-    #> $ court_type        <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates C…
-    #> $ offence_type      <chr> "01 Indictable only", "01 Indictable only", "01 Indictable only", "01 Indictable only", "02 Triable either way", "02 Tr…
-    #> $ offence_group     <chr> "02 Sexual offences", "03 Robbery", "03 Robbery", "07 Possession of weapons", "01 Violence against the person", "01 Vio…
+    #> $ year              <int> 20…
+    #> $ quarter           <chr> "Q…
+    #> $ sex               <chr> "0…
+    #> $ type_of_defendent <chr> "0…
+    #> $ age_group         <chr> "0…
+    #> $ age_range         <chr> "0…
+    #> $ ethnicity         <chr> "N…
+    #> $ court_type        <chr> "M…
+    #> $ offence_type      <chr> "0…
+    #> $ offence_group     <chr> "0…
 
 These numbers might be undesirable, so we can write a function like this
 to remove them:
@@ -968,7 +973,9 @@ some_strings <- c("01 :foo", "01 foo", "01: foo", "01  :  foo", "foo", "bar foo"
 remove_numbering(some_strings)
 ```
 
-    #> [1] "foo"     "foo"     "foo"     "foo"     "foo"     "bar foo"
+    #> [1] "foo"     "foo"    
+    #> [3] "foo"     "foo"    
+    #> [5] "foo"     "bar foo"
 
 The [`stringr` cheatsheet](https://stringr.tidyverse.org/#cheatsheet) is
 a great resource for learning more about regular expressions.
@@ -990,22 +997,22 @@ dplyr::glimpse(prosecutions)
 
     #> Rows: 107,493
     #> Columns: 16
-    #> $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008,…
-    #> $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1",…
-    #> $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "…
-    #> $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Pe…
-    #> $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juvenile…
-    #> $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-1…
-    #> $ ethnicity               <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "…
-    #> $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistr…
-    #> $ offence_type            <chr> "Indictable only", "Indictable only", "Indictable only", "Indictable only", "Triable either way", "Triable either…
-    #> $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery", "Possession of weapons", "Violence against the person", "Violence agains…
-    #> $ tried                   <chr> "Not tried", "Tried at magistrates court", "Tried at magistrates court", "Tried at magistrates court", "Tried at …
-    #> $ plea_at_the_crown_court <chr> "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "…
-    #> $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Not convicted", "Convicted", "Not convi…
-    #> $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Not sentenced", "Sentenced", "Not sente…
-    #> $ outcome                 <chr> "Proceedings terminated early", "Found guilty", "Dismissed (found not guilty", "Found guilty", "Found guilty", "P…
-    #> $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, 11, 1, 2, 1, 18, 168, 2, 15, 55, 44,…
+    #> $ year                    <int> …
+    #> $ quarter                 <chr> …
+    #> $ sex                     <chr> …
+    #> $ type_of_defendent       <chr> …
+    #> $ age_group               <chr> …
+    #> $ age_range               <chr> …
+    #> $ ethnicity               <chr> …
+    #> $ court_type              <chr> …
+    #> $ offence_type            <chr> …
+    #> $ offence_group           <chr> …
+    #> $ tried                   <chr> …
+    #> $ plea_at_the_crown_court <chr> …
+    #> $ convicted_not_convicted <chr> …
+    #> $ sentenced_not_sentenced <chr> …
+    #> $ outcome                 <chr> …
+    #> $ count                   <int> …
 
 ------------------------------------------------------------------------
 
@@ -1054,22 +1061,22 @@ dplyr::glimpse(prosecutions)
 
     #> Rows: 107,493
     #> Columns: 16
-    #> $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008,…
-    #> $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1",…
-    #> $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "…
-    #> $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Pe…
-    #> $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juvenile…
-    #> $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-1…
-    #> $ ethnicity               <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not know…
-    #> $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistr…
-    #> $ offence_type            <chr> "Indictable only", "Indictable only", "Indictable only", "Indictable only", "Triable either way", "Triable either…
-    #> $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery", "Possession of weapons", "Violence against the person", "Violence agains…
-    #> $ tried                   <chr> "Not tried", "Tried at magistrates court", "Tried at magistrates court", "Tried at magistrates court", "Tried at …
-    #> $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not know…
-    #> $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Not convicted", "Convicted", "Not convi…
-    #> $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Not sentenced", "Sentenced", "Not sente…
-    #> $ outcome                 <chr> "Proceedings terminated early", "Found guilty", "Dismissed (found not guilty", "Found guilty", "Found guilty", "P…
-    #> $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, 11, 1, 2, 1, 18, 168, 2, 15, 55, 44,…
+    #> $ year                    <int> …
+    #> $ quarter                 <chr> …
+    #> $ sex                     <chr> …
+    #> $ type_of_defendent       <chr> …
+    #> $ age_group               <chr> …
+    #> $ age_range               <chr> …
+    #> $ ethnicity               <chr> …
+    #> $ court_type              <chr> …
+    #> $ offence_type            <chr> …
+    #> $ offence_group           <chr> …
+    #> $ tried                   <chr> …
+    #> $ plea_at_the_crown_court <chr> …
+    #> $ convicted_not_convicted <chr> …
+    #> $ sentenced_not_sentenced <chr> …
+    #> $ outcome                 <chr> …
+    #> $ count                   <int> …
 
 ------------------------------------------------------------------------
 
@@ -1105,9 +1112,9 @@ prosecutions in each of those categories by summing the `count` column.
 The resulting dataframe is saved as a variable called
 `prosecutions_grouped`.
 
-Notice how the `dplyr` functions `group_by()` and `summarise()` require
-that the column names are not enclosed in quotation marks, meaning that
-they are not passed as strings: this behaviour is known as non-standard
+Notice how `dplyr::group_by()` and `dplyr::summarise()` require that the
+column names are not enclosed in quotation marks, meaning that they are
+not passed as strings: this behaviour is known as non-standard
 evaluation, and will be important later.
 
 ------------------------------------------------------------------------
@@ -1117,22 +1124,22 @@ prosecutions_grouped
 ```
 
     #> # A tibble: 14 × 2
-    #>    age_range                       counts
-    #>    <chr>                            <int>
-    #>  1 10-11                             3324
-    #>  2 12-14                           113960
-    #>  3 15-17                           570275
-    #>  4 18-20                          1302589
-    #>  5 21-24                          2131033
-    #>  6 25+ (prior to 2017)           10209264
-    #>  7 25-29 (2017 onwards)            447108
-    #>  8 30-39 (2017 onwards)            758230
-    #>  9 40-49 (2017 onwards)            477217
-    #> 10 50-59 (2017 onwards)            261626
-    #> 11 60+ (2017 onwards)              101554
-    #> 12 Companies, public bodies etc.   114771
-    #> 13 Not known (Adult)               195459
-    #> 14 Not known (Juvenile)               150
+    #>    age_range            counts
+    #>    <chr>                 <int>
+    #>  1 10-11                3.32e3
+    #>  2 12-14                1.14e5
+    #>  3 15-17                5.70e5
+    #>  4 18-20                1.30e6
+    #>  5 21-24                2.13e6
+    #>  6 25+ (prior to 2017)  1.02e7
+    #>  7 25-29 (2017 onwards) 4.47e5
+    #>  8 30-39 (2017 onwards) 7.58e5
+    #>  9 40-49 (2017 onwards) 4.77e5
+    #> 10 50-59 (2017 onwards) 2.62e5
+    #> 11 60+ (2017 onwards)   1.02e5
+    #> 12 Companies, public b… 1.15e5
+    #> 13 Not known (Adult)    1.95e5
+    #> 14 Not known (Juvenile) 1.5 e2
 
 ## Sidenote: standard vs non-standard evaluation
 
@@ -1175,13 +1182,15 @@ prosecutions_grouped <- sum_group(df = prosecutions, group_col = "age_range", su
 ```
 
     #> Error in `dplyr::group_by()`:
-    #> ! Must group by variables found in `.data`.
-    #> ✖ Column `group_col` is not found.
+    #> ! Must group by
+    #>   variables found in `.data`.
+    #> ✖ Column `group_col` is not
+    #>   found.
 
 ------------------------------------------------------------------------
 
 This is because of the non-standard evaluation (NSE) mentioned above.
-The `dplyr` functions don’t recognise `group_col` and `sum_col` as
+The {dplyr} functions don’t recognise `group_col` and `sum_col` as
 column names, because they can’t see that these are variables containing
 the actual column names. While the NSE usually makes the `dplyr`
 functions more convenient to use, it makes them slightly trickier to use
@@ -1220,22 +1229,22 @@ prosecutions_grouped
 ```
 
     #> # A tibble: 14 × 2
-    #>    age_range                       counts
-    #>    <chr>                            <int>
-    #>  1 10-11                             3324
-    #>  2 12-14                           113960
-    #>  3 15-17                           570275
-    #>  4 18-20                          1302589
-    #>  5 21-24                          2131033
-    #>  6 25+ (prior to 2017)           10209264
-    #>  7 25-29 (2017 onwards)            447108
-    #>  8 30-39 (2017 onwards)            758230
-    #>  9 40-49 (2017 onwards)            477217
-    #> 10 50-59 (2017 onwards)            261626
-    #> 11 60+ (2017 onwards)              101554
-    #> 12 Companies, public bodies etc.   114771
-    #> 13 Not known (Adult)               195459
-    #> 14 Not known (Juvenile)               150
+    #>    age_range            counts
+    #>    <chr>                 <int>
+    #>  1 10-11                3.32e3
+    #>  2 12-14                1.14e5
+    #>  3 15-17                5.70e5
+    #>  4 18-20                1.30e6
+    #>  5 21-24                2.13e6
+    #>  6 25+ (prior to 2017)  1.02e7
+    #>  7 25-29 (2017 onwards) 4.47e5
+    #>  8 30-39 (2017 onwards) 7.58e5
+    #>  9 40-49 (2017 onwards) 4.77e5
+    #> 10 50-59 (2017 onwards) 2.62e5
+    #> 11 60+ (2017 onwards)   1.02e5
+    #> 12 Companies, public b… 1.15e5
+    #> 13 Not known (Adult)    1.95e5
+    #> 14 Not known (Juvenile) 1.5 e2
 
 ## Plotting data
 
@@ -1244,7 +1253,7 @@ same style. We can define the style of the plot in a function, then we
 only have to change the styling in one place if it needs changing. This
 function plots a breakdown of the number of prosecutions over time, with
 a default breakdown option of `"offence_type"`, and the plot is a line
-chart with `ggplot2`’s grey theme:
+chart with {ggplot2}’s grey theme:
 
 ``` r
 # This function produces a plot of the number of prosecutions over time
@@ -1387,7 +1396,8 @@ pythagoras <- function(a, b) {
 pythagoras(2, -3)
 ```
 
-    #> Error: b not greater than 0
+    #> Error:
+    #> ! b not greater than 0
 
 ------------------------------------------------------------------------
 
@@ -1413,7 +1423,8 @@ pythagoras <- function(a, b) {
 pythagoras(-2, 1)
 ```
 
-    #> Error: both triangle sides must have positive length!
+    #> Error:
+    #> ! both triangle sides must have positive length!
 
 (Here we also combine the two assertions into one, to avoid repetition.)
 
@@ -1449,13 +1460,15 @@ pythagoras <- function(a, b) {
 pythagoras("1", 2)
 ```
 
-    #> Error: both arguments must be of numeric data type
+    #> Error:
+    #> ! both arguments must be of numeric data type
 
 ``` r
 pythagoras(b = 2)
 ```
 
-    #> Error: you must supply two triangle lengths
+    #> Error:
+    #> ! you must supply two triangle lengths
 
 ------------------------------------------------------------------------
 
@@ -1602,7 +1615,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Blue"
+    #> [1] "Red"
 
 ------------------------------------------------------------------------
 
@@ -1734,22 +1747,22 @@ prosecutions_grouped
 ```
 
     #> # A tibble: 14 × 2
-    #>    age_range                       counts
-    #>    <chr>                            <int>
-    #>  1 10-11                             3324
-    #>  2 12-14                           113960
-    #>  3 15-17                           570275
-    #>  4 18-20                          1302589
-    #>  5 21-24                          2131033
-    #>  6 25+ (prior to 2017)           10209264
-    #>  7 25-29 (2017 onwards)            447108
-    #>  8 30-39 (2017 onwards)            758230
-    #>  9 40-49 (2017 onwards)            477217
-    #> 10 50-59 (2017 onwards)            261626
-    #> 11 60+ (2017 onwards)              101554
-    #> 12 Companies, public bodies etc.   114771
-    #> 13 Not known (Adult)               195459
-    #> 14 Not known (Juvenile)               150
+    #>    age_range            counts
+    #>    <chr>                 <int>
+    #>  1 10-11                3.32e3
+    #>  2 12-14                1.14e5
+    #>  3 15-17                5.70e5
+    #>  4 18-20                1.30e6
+    #>  5 21-24                2.13e6
+    #>  6 25+ (prior to 2017)  1.02e7
+    #>  7 25-29 (2017 onwards) 4.47e5
+    #>  8 30-39 (2017 onwards) 7.58e5
+    #>  9 40-49 (2017 onwards) 4.77e5
+    #> 10 50-59 (2017 onwards) 2.62e5
+    #> 11 60+ (2017 onwards)   1.02e5
+    #> 12 Companies, public b… 1.15e5
+    #> 13 Not known (Adult)    1.95e5
+    #> 14 Not known (Juvenile) 1.5 e2
 
 Alternatively, this version of the function means the column names can
 be input as function arguments directly (rather than needing to enclose
@@ -1773,22 +1786,22 @@ prosecutions_grouped
 ```
 
     #> # A tibble: 14 × 2
-    #>    age_range                       counts
-    #>    <chr>                            <int>
-    #>  1 10-11                             3324
-    #>  2 12-14                           113960
-    #>  3 15-17                           570275
-    #>  4 18-20                          1302589
-    #>  5 21-24                          2131033
-    #>  6 25+ (prior to 2017)           10209264
-    #>  7 25-29 (2017 onwards)            447108
-    #>  8 30-39 (2017 onwards)            758230
-    #>  9 40-49 (2017 onwards)            477217
-    #> 10 50-59 (2017 onwards)            261626
-    #> 11 60+ (2017 onwards)              101554
-    #> 12 Companies, public bodies etc.   114771
-    #> 13 Not known (Adult)               195459
-    #> 14 Not known (Juvenile)               150
+    #>    age_range            counts
+    #>    <chr>                 <int>
+    #>  1 10-11                3.32e3
+    #>  2 12-14                1.14e5
+    #>  3 15-17                5.70e5
+    #>  4 18-20                1.30e6
+    #>  5 21-24                2.13e6
+    #>  6 25+ (prior to 2017)  1.02e7
+    #>  7 25-29 (2017 onwards) 4.47e5
+    #>  8 30-39 (2017 onwards) 7.58e5
+    #>  9 40-49 (2017 onwards) 4.77e5
+    #> 10 50-59 (2017 onwards) 2.62e5
+    #> 11 60+ (2017 onwards)   1.02e5
+    #> 12 Companies, public b… 1.15e5
+    #> 13 Not known (Adult)    1.95e5
+    #> 14 Not known (Juvenile) 1.5 e2
 
 The function below shows an example of how our `sum_group()` function
 can be modified to accept column names as arguments, using the `{{`
@@ -1811,22 +1824,22 @@ prosecutions_grouped
 ```
 
     #> # A tibble: 14 × 2
-    #>    age_range                       counts
-    #>    <chr>                            <int>
-    #>  1 10-11                             3324
-    #>  2 12-14                           113960
-    #>  3 15-17                           570275
-    #>  4 18-20                          1302589
-    #>  5 21-24                          2131033
-    #>  6 25+ (prior to 2017)           10209264
-    #>  7 25-29 (2017 onwards)            447108
-    #>  8 30-39 (2017 onwards)            758230
-    #>  9 40-49 (2017 onwards)            477217
-    #> 10 50-59 (2017 onwards)            261626
-    #> 11 60+ (2017 onwards)              101554
-    #> 12 Companies, public bodies etc.   114771
-    #> 13 Not known (Adult)               195459
-    #> 14 Not known (Juvenile)               150
+    #>    age_range            counts
+    #>    <chr>                 <int>
+    #>  1 10-11                3.32e3
+    #>  2 12-14                1.14e5
+    #>  3 15-17                5.70e5
+    #>  4 18-20                1.30e6
+    #>  5 21-24                2.13e6
+    #>  6 25+ (prior to 2017)  1.02e7
+    #>  7 25-29 (2017 onwards) 4.47e5
+    #>  8 30-39 (2017 onwards) 7.58e5
+    #>  9 40-49 (2017 onwards) 4.77e5
+    #> 10 50-59 (2017 onwards) 2.62e5
+    #> 11 60+ (2017 onwards)   1.02e5
+    #> 12 Companies, public b… 1.15e5
+    #> 13 Not known (Adult)    1.95e5
+    #> 14 Not known (Juvenile) 1.5 e2
 
 ## Bonus examples
 
@@ -1893,22 +1906,22 @@ dplyr::glimpse(prosecutions_extract)
 
     #> Rows: 107,493
     #> Columns: 16
-    #> $ year                    <int> 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008,…
-    #> $ quarter                 <chr> "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1", "Q1",…
-    #> $ sex                     <chr> "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "…
-    #> $ type_of_defendent       <chr> "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Pe…
-    #> $ age_group               <chr> "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juveniles", "Juvenile…
-    #> $ age_range               <chr> "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-11", "10-1…
-    #> $ ethnicity               <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not know…
-    #> $ court_type              <chr> "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistrates Court", "Magistr…
-    #> $ offence_type            <chr> "Indictable only", "Indictable only", "Indictable only", "Indictable only", "Triable either way", "Triable either…
-    #> $ offence_group           <chr> "Sexual offences", "Robbery", "Robbery", "Possession of weapons", "Violence against the person", "Violence agains…
-    #> $ tried                   <chr> "Not tried", "Tried at magistrates court", "Tried at magistrates court", "Tried at magistrates court", "Tried at …
-    #> $ plea_at_the_crown_court <chr> "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not known", "Not know…
-    #> $ convicted_not_convicted <chr> "Not convicted", "Convicted", "Not convicted", "Convicted", "Convicted", "Not convicted", "Convicted", "Not convi…
-    #> $ sentenced_not_sentenced <chr> "Not sentenced", "Sentenced", "Not sentenced", "Sentenced", "Sentenced", "Not sentenced", "Sentenced", "Not sente…
-    #> $ outcome                 <chr> "Proceedings terminated early", "Found guilty", "Dismissed (found not guilty", "Found guilty", "Found guilty", "P…
-    #> $ count                   <int> 1, 6, 1, 1, 10, 1, 1, 1, 31, 1, 3, 15, 1, 5, 2, 1, 1, 4, 2, 85, 2, 20, 4, 5, 11, 1, 2, 1, 18, 168, 2, 15, 55, 44,…
+    #> $ year                    <int> …
+    #> $ quarter                 <chr> …
+    #> $ sex                     <chr> …
+    #> $ type_of_defendent       <chr> …
+    #> $ age_group               <chr> …
+    #> $ age_range               <chr> …
+    #> $ ethnicity               <chr> …
+    #> $ court_type              <chr> …
+    #> $ offence_type            <chr> …
+    #> $ offence_group           <chr> …
+    #> $ tried                   <chr> …
+    #> $ plea_at_the_crown_court <chr> …
+    #> $ convicted_not_convicted <chr> …
+    #> $ sentenced_not_sentenced <chr> …
+    #> $ outcome                 <chr> …
+    #> $ count                   <int> …
 
 ## Information for presenters
 
@@ -1932,22 +1945,37 @@ files in the “rmd_files” folder.
 
 - The bulk of the content is in
   [rmd_files/content.Rmd](rmd_files/content.Rmd).
+
 - The appendix (used in the README) is in
   [rmd_files/appendix.Rmd](rmd_files/appendix.Rmd).
+
 - The README is generated from
   [rmd_files/README.Rmd](rmd_files/README.Rmd) (this will source the
   contents of content.Rmd and appendix.Rmd).
+
 - The slides are generated from
   [rmd_files/slides.Rmd](rmd_files/slides.Rmd) (this will source the
-  contents of content.Rmd).
+  contents of content.Rmd). You may need to disable the large file
+  pre-commit hook for this (see below).
+
 - The [rmd_files/functions.R](rmd_files/functions.R) script is a
   duplicate of the one in the top directory and is required for knitting
   the various files.
+
 - The
   [rmd_files/render_rmakdown_files.R](rmd_files/render_rmakdown_files.R)
   script contains four code chunks. Running them will re-generate all
   the course material. This file should always be run before you merge
   any changes to the `main` branch.
+
+- Disabling the large file pre-commit hook:
+
+  - Ensure hidden files are visible (in the `Files` tab in the bottom
+    right Rstudio pane, select the `More` cog wheel and check that
+    `Show Hidden Files` is ticked).
+  - Navigate to `.git/hooks/pre-commit`
+  - Increase the file size (edit the line `FILE_SIZE_LIMIT=5  # In MB`
+    and save)
 
 ### Tips when presenting
 
