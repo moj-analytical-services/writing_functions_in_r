@@ -568,7 +568,8 @@ Over the course of this section we'll be tackling some exercises that fit into a
 
 For these examples we will be using a few packages:  
 
-* [{Rs3tools}](https://github.com/moj-analytical-services/Rs3tools) to fetch data from s3.
+* [{Rs3tools}](https://github.com/moj-analytical-services/Rs3tools) an MoJ R package for reading and
+writing data from/to s3.
 * {dplyr} is the package we'll use to create summary tables from the data.
 * {stringr} provides functions that can be used to manipulate strings.
 * {ggplot2} to create charts.
