@@ -1,0 +1,17 @@
+Imports:
+    assertthat (== 0.2.1),
+    dplyr (== 1.1.4),
+    ggplot2 (== 3.5.1),
+    here (== 1.0.1),
+    import (== 1.3.4),
+    janitor (== 2.2.0), 
+    lubridate (>= 1.3.0),
+    rlang (== 1.1.4),
+    Rs3tools (== 0.4.4),
+    stringr (== 1.5.1),
+    tidyselect (== 1.2.1)
+Suggests:
+    knitr (== 1.1.4),
+    rmarkdown (== 1.1.4)
+Remotes:
+    git::git@github.com:moj-analytical-services/Rs3tools.git@v0.4.4
