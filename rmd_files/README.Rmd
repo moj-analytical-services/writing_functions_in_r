@@ -104,12 +104,18 @@ The README, slides, solutions, and example_code are all generated from files in 
 * The README is generated from [rmd_files/README.Rmd](rmd_files/README.Rmd) (this will source the contents of
 content.Rmd and appendix.Rmd).
 * The slides are generated from [rmd_files/slides.Rmd](rmd_files/slides.Rmd) (this will source the contents of
-content.Rmd).
+content.Rmd). You may need to disable the large file pre-commit hook for this (see below). 
 * The [rmd_files/functions.R](rmd_files/functions.R) script is a duplicate of the one in the top directory 
 and is required for knitting the various files. 
 * The [rmd_files/render_rmakdown_files.R](rmd_files/render_rmakdown_files.R) script contains four code 
 chunks. Running them will re-generate all the course material. This file should always be run before
 you merge any changes to the `main` branch.
+
+* Disabling the large file pre-commit hook: 
+    * Ensure hidden files are visible (in the `Files` tab in the bottom right Rstudio pane, select 
+    the `More` cog wheel and check that `Show Hidden Files` is ticked).
+    * Navigate to `.git/hooks/pre-commit`
+    * Increase the file size (edit the line `FILE_SIZE_LIMIT=5  # In MB` and save)
 
 ### Tips when presenting
 * You can press F11 to make the presentation full screen. To go off of full screen you can press F11 again.
