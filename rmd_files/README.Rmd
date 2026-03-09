@@ -58,7 +58,7 @@ channel on the ASD workspace](https://moj.enterprise.slack.com/archives/CGKSJV9H
 * [Ensure you have access to the Analytical Platform](https://user-guidance.analytical-platform.service.justice.gov.uk/get-started.html#quickstart-guide).
 * [Ensure you have linked RStudio and GitHub with an SSH key](https://user-guidance.analytical-platform.service.justice.gov.uk/github/set-up-github.html).
 
-A before the session, please:
+Before the session, please:
 
 * [Clone](https://user-guidance.analytical-platform.service.justice.gov.uk/github/rstudio-git.html#work-with-git-in-rstudio) this repo as an RStudio project.
 * Run `install.packages("renv")`
