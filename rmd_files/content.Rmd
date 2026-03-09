@@ -12,9 +12,11 @@
 ### Before we start
 To follow along with the code run during this session and participate in the exercises, open the script "example_code.R" in RStudio. All the code that we'll show in this session is stored in "example_code.R", and you can edit this script to write solutions to the exercises. You may also want to have the course [README](https://github.com/moj-analytical-services/writing_functions_in_r) open as a reference.
 
-The training repo is set up with a `renv` lock.file that includes all the packages and package 
-versions you will need for this course. Please make sure you pull the latest version of the `main`
-branch and run `renv::restore()` before starting!
+The training repo is set up with a DESCRIPTION file for more flexible package management with 
+attendees/trainers potentially using different version of R. To install the required packages:
+
+* Run install.packages("renv")
+* Run renv::install() to install the packages declared in the DESCRIPTION file.
 
 ---
 
@@ -446,8 +448,8 @@ combine them with other functions.
 Create a new version of the `fizz_buzz()` function called `fizz_buzz_vec` which
 instead accepts a vector of numbers. Test it out on a vector of the numbers 1 to 15.
 
-**Hint:** the function `case_when()` from the Tidyverse package `dplyr` is really useful when you want
-to vectorise multiple if-else statements, each with a different desired outcome. Run `?case_when` to bring up 
+**Hint:** the function `dplyr::case_when()` is really useful when you want
+to vectorise multiple if-else statements, each with a different desired outcome. Run `?dplyr::case_when` to bring up 
 the help file.
 
 *This exercise is a bit tricky - if you get stuck, you can still complete exercise 2.3.*
@@ -559,7 +561,7 @@ plot_x_and_y(x, y, col='red', type='l')
 
 ## "Real-world" example functions
 
-This section builds on material covered in the [Intro R Training](https://github.com/moj-analytical-services/IntroRTraining) course and makes use of the `dplyr` package, which is a commonly used R package for data manipulation. In the following examples we'll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we'll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found [here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
+This section builds on material covered in the [Intro R Training](https://github.com/moj-analytical-services/IntroRTraining) course and makes use of the {dplyr} package, which is a commonly used R package for data manipulation. In the following examples we'll see how user-defined functions can be used to help with cleaning, summarising, and plotting data. The data we'll use is from the Criminal Justice System Statistics quarterly publication: December 2018 (published in May 2019), which can be found [here](https://www.gov.uk/government/statistics/criminal-justice-system-statistics-quarterly-december-2018).
 
 Over the course of this section we'll be tackling some exercises that fit into a data processing story, so make sure you run the code in "example_code.R" as we go along.
 
@@ -568,10 +570,11 @@ Over the course of this section we'll be tackling some exercises that fit into a
 
 For these examples we will be using a few packages:  
 
-* [`Rs3tools`](https://github.com/moj-analytical-services/Rs3tools) to fetch data from s3.
-* `dplyr` is the package we'll use to create summary tables from the data.
-* `stringr` provides functions that can be used to manipulate strings.
-* `ggplot2` to create charts.
+* [{Rs3tools}](https://github.com/moj-analytical-services/Rs3tools) an MoJ R package for reading and
+writing data from/to s3.
+* {dplyr} is the package we'll use to create summary tables from the data.
+* {stringr} provides functions that can be used to manipulate strings.
+* {ggplot2} to create charts.
 
 We will use `package::function()` syntax throughout this course instead of `library()` calls.
 This makes it easier to see where functions come from, avoids "function masking" and improves the
@@ -579,7 +582,7 @@ reproducibility and reusability of code. This is particularly important within t
 function. If a dependency has not been attached to the search list at run time, you will get
 a probably very unhelpful error message (or your code might use the wrong function). 
 
-For a similar reason we are using the R native pipe `|>` rather than the `magrittr` one. (If you are using
+For a similar reason we are using the R native pipe `|>` rather than the {magrittr} one. (If you are using
 R < 4.1.0 you will need to replace the native pipe with `%>%` and use `library("magrittr")`.)
 
 
@@ -617,7 +620,7 @@ iris_by_species_1("setosa")
 iris_by_species_2("setosa")
 ```
 
-## Fetching data
+## Reading data
 
 Here we are reading in a copy of the `Prosecutions and Convictions` dataset from s3 and storing the dataframe as a variable called `prosecutions_and_convictions`. In the second step we're filtering the dataset to extract only the prosecutions and saving to another variable, named `prosecutions`.
 
@@ -856,7 +859,7 @@ In the above code we are grouping the `prosecutions` dataframe by the categories
 
 The resulting dataframe is saved as a variable called `prosecutions_grouped`.
 
-Notice how the `dplyr` functions `group_by()` and `summarise()` require that the column names are not enclosed in quotation marks, meaning that they are not passed as strings: this behaviour is known as non-standard evaluation, and will be important later.
+Notice how `dplyr::group_by()` and `dplyr::summarise()` require that the column names are not enclosed in quotation marks, meaning that they are not passed as strings: this behaviour is known as non-standard evaluation, and will be important later.
 
 ---
 
@@ -898,7 +901,7 @@ prosecutions_grouped <- sum_group(df = prosecutions, group_col = "age_range", su
 
 ---
 
-This is because of the non-standard evaluation (NSE) mentioned above. The `dplyr` functions don't recognise `group_col` and `sum_col` as column names, because they can't see that these are variables containing the actual column names. While the NSE usually makes the `dplyr` functions more convenient to use, it makes them slightly trickier to use in user-defined functions. 
+This is because of the non-standard evaluation (NSE) mentioned above. The {dplyr} functions don't recognise `group_col` and `sum_col` as column names, because they can't see that these are variables containing the actual column names. While the NSE usually makes the `dplyr` functions more convenient to use, it makes them slightly trickier to use in user-defined functions. 
 
 Fortunately there are methods available to help get around the NSE problem. The function below shows an example of how our `sum_group()` function can be modified to accept column names stored as strings, using the `.data` pronoun with `[[]]`. 
 
@@ -924,7 +927,7 @@ prosecutions_grouped
 
 ## Plotting data
 
-Let's say we want to produce some plots, and want them all to have the same style. We can define the style of the plot in a function, then we only have to change the styling in one place if it needs changing. This function plots a breakdown of the number of prosecutions over time, with a default breakdown option of `"offence_type"`, and the plot is a line chart with `ggplot2`'s grey theme:
+Let's say we want to produce some plots, and want them all to have the same style. We can define the style of the plot in a function, then we only have to change the styling in one place if it needs changing. This function plots a breakdown of the number of prosecutions over time, with a default breakdown option of `"offence_type"`, and the plot is a line chart with {ggplot2}'s grey theme:
 
 ```{r, purl=purl_example_code}
 # This function produces a plot of the number of prosecutions over time

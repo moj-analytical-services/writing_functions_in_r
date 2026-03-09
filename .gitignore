@@ -2,7 +2,4 @@
 .Rhistory
 .RData
 .Ruserdata
-*.Rproj
 rmd_files/README.html
-renv/*
-!renv/activate.R

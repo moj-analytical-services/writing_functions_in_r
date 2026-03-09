@@ -33,7 +33,7 @@ If you have any feedback on the content, please get in touch!
 
 ## Contents
 
-* [Pre-material](#pre-material)
+* [Set up instructions](#set-up-instructions)
 * [Remote learning](#remote-learning)
 * [Learning outcomes](#learning-outcomes)
 * [What is a function?](#what-is-a-function)
@@ -49,32 +49,37 @@ If you have any feedback on the content, please get in touch!
 * [Appendix](#appendix)
 * [Information for presenters](#information-for-presenters)
 
-## Pre-material
+### Set up instructions
 
-A few days before the session, please make sure that -
+A few days before the session, please:
 
-1. You have access to RStudio on the Analytical Platform
-2. You have requested access to the **alpha-r-training** s3 bucket via the [intro_r slack channel on the ASD
-workspace](https://moj.enterprise.slack.com/archives/CGKSJV9HN)
-3. You have followed the steps in the [Configure Git and Github section of the Platform User Guidance](https://user-guidance.analytical-platform.service.justice.gov.uk/github/set-up-github.html) to configure Git and GitHub (this only needs doing once)
-4. You have cloned this repository (instructions are in the Analytical Platform User Guidance [here](https://user-guidance.analytical-platform.service.justice.gov.uk/github/rstudio-git.html#work-with-git-in-rstudio))
-5. You run the command `renv::restore()` in the console to make sure you have the required packages installed
+* Ensure you have requested access to the **alpha-r-training** s3 bucket via the [intro_r slack 
+channel on the ASD workspace](https://moj.enterprise.slack.com/archives/CGKSJV9HN)
+* [Ensure you have access to the Analytical Platform](https://user-guidance.analytical-platform.service.justice.gov.uk/get-started.html#quickstart-guide).
+* [Ensure you have linked RStudio and GitHub with an SSH key](https://user-guidance.analytical-platform.service.justice.gov.uk/github/set-up-github.html).
 
-If you have any problems with the above please get in touch with the course organisers or ask for help on either the #analytical_platform or #intro_r channel on [ASD slack](https://asdslack.slack.com).
+Before the session, please:
 
-All the examples in the presentation/README are available in the R script example_code.R.
+* [Clone](https://user-guidance.analytical-platform.service.justice.gov.uk/github/rstudio-git.html#work-with-git-in-rstudio) this repo as an RStudio project.
+* Run `install.packages("renv")`
+* Run `renv::install()` to install the packages declared in the `DESCRIPTION` file.
 
 ## Remote learning
 
+This training session is run in person/over Teams every few months. Alternatively, you can go 
+through this material in your own time. Recordings of these sessions can be viewed via links 
+provided in the [Analytical Platform and related tools training section on R training](https://moj-analytical-services.github.io/ap-tools-training/ITG.html#r-training). If you 
+work through the material by yourself please leave feedback about the material 
+[here](https://airtable.com/shr9u2OJB2pW8Y0Af).  
+
+**Please contact [Aidan Mews](aidan.mews@justice.gov.uk) if you have any questions.**
+
 Here are a few suggestions if you are going through this material in your own time:
 
-* Both the README and slides contain the same content so you can use whichever works best for you - the only difference is the exercise solutions are only in the slides
-*  To open the slides, first clone the repo (see [pre-material](#pre-material)) and then open the file "slides.html" from RStudio by clicking "View in web browser"
-* You can find a recording of a previous training session on the R training Microsoft Stream channel [here](https://web.microsoftstream.com/channel/aa3cda5d-99d6-4e9d-ac5e-6548dd55f52a)
-* If you need any help, the best place to ask is on either the [#intro_r](https://app.slack.com/client/T1PU1AP6D/CGKSJV9HN) or [#r](https://app.slack.com/client/T1PU1AP6D/C1PUCG719) slack channels on ASD slack.
-
-If you have any feedback on the material and/or your experience of working through it in your own time, please get in touch with a member of the R training group or leave a review on [Airtable](https://airtable.com/shr9u2OJB2pW8Y0Af).
-
+* Both the README and slides contain the same content so you can use whichever works best for you - 
+the only difference is the exercise solutions are only in the slides
+*  To open the slides, first clone the repo (see [set up instructions](#set-up-instructions)) and then open the 
+file "slides.html" from RStudio by clicking "View in web browser"
 
 ```{r source_content, child = 'content.Rmd'}
 ```
@@ -99,12 +104,18 @@ The README, slides, solutions, and example_code are all generated from files in 
 * The README is generated from [rmd_files/README.Rmd](rmd_files/README.Rmd) (this will source the contents of
 content.Rmd and appendix.Rmd).
 * The slides are generated from [rmd_files/slides.Rmd](rmd_files/slides.Rmd) (this will source the contents of
-content.Rmd).
+content.Rmd). You may need to disable the large file pre-commit hook for this (see below). 
 * The [rmd_files/functions.R](rmd_files/functions.R) script is a duplicate of the one in the top directory 
 and is required for knitting the various files. 
 * The [rmd_files/render_rmakdown_files.R](rmd_files/render_rmakdown_files.R) script contains four code 
 chunks. Running them will re-generate all the course material. This file should always be run before
 you merge any changes to the `main` branch.
+
+* Disabling the large file pre-commit hook: 
+    * Ensure hidden files are visible (in the `Files` tab in the bottom right Rstudio pane, select 
+    the `More` cog wheel and check that `Show Hidden Files` is ticked).
+    * Navigate to `.git/hooks/pre-commit`
+    * Increase the file size (edit the line `FILE_SIZE_LIMIT=5  # In MB` and save)
 
 ### Tips when presenting
 * You can press F11 to make the presentation full screen. To go off of full screen you can press F11 again.
