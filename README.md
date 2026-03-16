@@ -1548,9 +1548,9 @@ pythagoras(b = 2)
 In the final exercise, we will apply `assertthat::assert_that()` to the
 end product before returning it to the user.
 
-We will make a new function, called `pythagorus_rounded()`.
+We will make a new function, called `pythagoras_rounded()`.
 
-1.  Add the below assertion to `pythagorus()` in the correct place to
+1.  Add the below assertion to `pythagoras()` in the correct place to
     test the value that is reported. Reload the function and confirm
     that it fails with positive numeric inputs.
 2.  Add a message to the assertion to explain why it fails. Reload the
@@ -1578,7 +1578,7 @@ assertthat::assert_that(c %% 1 == 0)
 
 ### When you’ve copied and pasted two times
 
-There is a principal in software engineering called Don’t Repeat
+There is a principle in software engineering called Don’t Repeat
 Yourself (DRY) - which basically states that you should avoid
 duplication wherever possible. A good rule of thumb is whenever you find
 you’ve used the same or similar code in three places, it’s time to
@@ -1670,7 +1670,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Red"
+    #> [1] "Magenta"
 
 ------------------------------------------------------------------------
 

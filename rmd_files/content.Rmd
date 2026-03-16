@@ -1173,9 +1173,9 @@ pythagoras(b = 2)
 
 In the final exercise, we will apply `assertthat::assert_that()` to the end product before returning it to the user.
 
-We will make a new function, called `pythagorus_rounded()`.
+We will make a new function, called `pythagoras_rounded()`.
 
-1. Add the below assertion to `pythagorus()` in the correct place to test the value that is reported. Reload the function and confirm that it fails with positive numeric inputs.
+1. Add the below assertion to `pythagoras()` in the correct place to test the value that is reported. Reload the function and confirm that it fails with positive numeric inputs.
 2. Add a message to the assertion to explain why it fails. Reload the function and confirm that failure with this message occurs with positive numeric inputs.
 3. Modify the function so that the assertion passes and the function succeeds. Reload the function and confirm that it passes with positive numeric inputs.
 
@@ -1231,7 +1231,7 @@ pythagoras_rounded(2, 3)
 ## When to write a function
 
 ### When you've copied and pasted two times
-There is a principal in software engineering called Don't Repeat Yourself (DRY) - which basically states that you should avoid duplication wherever possible. A good rule of thumb is whenever you find you've used the same or similar code in three places, it's time to consider replacing that code with a function.
+There is a principle in software engineering called Don't Repeat Yourself (DRY) - which basically states that you should avoid duplication wherever possible. A good rule of thumb is whenever you find you've used the same or similar code in three places, it's time to consider replacing that code with a function.
 
 ### To structure your code
 You may also sometimes want to write a function for code you're only planning to use once as a way of structuring your code and "hiding" some of it to make your main script easier to read.
