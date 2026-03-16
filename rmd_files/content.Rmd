@@ -42,9 +42,9 @@ Functions in a package are the same thing as functions you define yourself, they
 
 ## Why use functions?
 
-### Code maintenance
+### Reusable code
 
-Generally functions are used to automate common tasks, to avoid copying and pasting the same code multiple times with minor alterations. While writing a function has a small up front cost, you'll reap the benefits when you need to make changes to your code, and your QA'er will also thank you, as they'll only need to check your function works once!
+Functions are reusable, so you write the code once and can use it in multiple places. This reduces repetition and mistakes.
 
 ### Abstraction
 
@@ -54,6 +54,13 @@ One of the benefits of functions is they abstract away the details of *how* the 
 
 You can use functions to make your code better structured and easier to read - done well, this can make your code a lot easier to understand for someone unfamiliar with it, or even yourself a few months down the line.
 
+---
+
+### Testing
+
+Functions enable automated testing. We can test that a function returns the expected output for a selection of potential input values. Testing functions in this way is called unit testing. Unit testing of functions makes code more robust, since the function behaviour can be checked for a range of standard inputs and edge cases. If changes are made to the function, rerunning the tests confirms that the behaviour is still correct.
+
+For more information on testing functions, see the [Developing R packages](https://github.com/moj-analytical-services/rpackage_training) and [Code testing](https://github.com/moj-analytical-services/codetestingtraining) training.
 
 ## How to write a function
 
