@@ -94,13 +94,18 @@ Using the previous example function, the syntax to call a function is:
 function_name(arg1 = "abc", arg2 = "def")
 ```
 
-You can specify arguments by name, as above, or by position, e.g.
+You can specify arguments by name, as above, or by position. For example:
 
 ```{r, purl=purl_example_code}
-function_name("abc", arg2 = "def")
+function_name("abc", "def")
 ```
 
-Named arguments are generally safer and clearer. However, when the first argument is a vector or data frame, it is common to omit the name.
+Named arguments are generally safer and clearer. However, when the first argument is a vector or data frame, it is common to omit the name. For example:
+
+```{r, purl=purl_example_code}
+scores <- c(8, 10, NA, 7, 9)
+mean(scores, na.rm = TRUE)
+```
 
 # Examples of basic functions
 
