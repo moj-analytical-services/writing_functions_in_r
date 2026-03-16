@@ -3319,7 +3319,7 @@ sum(x) # Sum the numbers contained in &#39;x&#39;</pre>
 <pre class = 'prettyprint lang-r'># Comment describing what the function does
 function_name &lt;- function(arg1, arg2) {
   # function body, e.g. 
-  paste(arg1, arg2, &quot;!&quot;)
+  paste(arg1, arg2)
 }</pre>
 
 <p>We use <code>function()</code> to create a function and assign it to the object <code>function_name</code>.</p>
@@ -3331,6 +3331,24 @@ function_name &lt;- function(arg1, arg2) {
 <li><p>The function <strong>body</strong> (everything between the curly brackets) - this is where we put the code.</p></li>
 <li><p>And the function <strong>environment</strong> (where the function was created) - this determines what variables and other functions it has access to. You can find out more about environments <a href='https://adv-r.hadley.nz/environments.html' title=''>here</a>.</p></li>
 </ul>
+
+<p>A function returns the final value that it evaluates, which in this example is the result of <br> <code>paste(arg1, arg2)</code>.</p>
+
+</article></slide><slide class=""><hgroup><h2>How to call a function</h2></hgroup><article  id="how-to-call-a-function" class="smaller ">
+
+<p>Using the previous example function, the syntax to call a function is:</p>
+
+<pre class = 'prettyprint lang-r'>function_name(arg1 = &quot;abc&quot;, arg2 = &quot;def&quot; )</pre>
+
+<pre >#&gt; [1] &quot;abc def&quot;</pre>
+
+<p>You can specify arguments by name, as above, or by position, e.g.</p>
+
+<pre class = 'prettyprint lang-r'>function_name(&quot;abc&quot;, arg2 = &quot;def&quot;)</pre>
+
+<pre >#&gt; [1] &quot;abc def&quot;</pre>
+
+<p>Named arguments are generally safer and clearer. However, when the first argument is a vector or data frame, it is common to omit the name.</p>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Examples of basic functions</h2></hgroup><article  id="examples-of-basic-functions" class="smaller ">
 
@@ -4607,7 +4625,7 @@ pythagoras_rounded &lt;- function(a, b) {
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >#&gt; [1] &quot;Yellow&quot;</pre>
+<pre >#&gt; [1] &quot;Blue&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 

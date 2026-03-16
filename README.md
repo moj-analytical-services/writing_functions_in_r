@@ -197,7 +197,7 @@ The syntax for creating a function is:
 # Comment describing what the function does
 function_name <- function(arg1, arg2) {
   # function body, e.g. 
-  paste(arg1, arg2, "!")
+  paste(arg1, arg2)
 }
 ```
 
@@ -217,6 +217,30 @@ A function is made up of three components:
   this determines what variables and other functions it has access to.
   You can find out more about environments
   [here](https://adv-r.hadley.nz/environments.html).
+
+A function returns the final value that it evaluates, which in this
+example is the result of <br> `paste(arg1, arg2)`.
+
+## How to call a function
+
+Using the previous example function, the syntax to call a function is:
+
+``` r
+function_name(arg1 = "abc", arg2 = "def" )
+```
+
+    #> [1] "abc def"
+
+You can specify arguments by name, as above, or by position, e.g.
+
+``` r
+function_name("abc", arg2 = "def")
+```
+
+    #> [1] "abc def"
+
+Named arguments are generally safer and clearer. However, when the first
+argument is a vector or data frame, it is common to omit the name.
 
 # Examples of basic functions
 
@@ -744,7 +768,7 @@ The function can be called with only the required arguments:
 plot_x_and_y(x, y)
 ```
 
-![](../README_files/unnamed-chunk-28-1.png)<!-- -->
+![](../README_files/unnamed-chunk-30-1.png)<!-- -->
 
 ------------------------------------------------------------------------
 
@@ -755,7 +779,7 @@ the plot function:
 plot_x_and_y(x, y, col='red', type='l')
 ```
 
-![](../README_files/unnamed-chunk-29-1.png)<!-- -->
+![](../README_files/unnamed-chunk-31-1.png)<!-- -->
 
 # “Real-world” example functions
 
@@ -1166,7 +1190,7 @@ bar <- 10:1
 plot(foo, bar)
 ```
 
-![](../README_files/unnamed-chunk-47-1.png)<!-- -->
+![](../README_files/unnamed-chunk-49-1.png)<!-- -->
 
 ------------------------------------------------------------------------
 
@@ -1292,7 +1316,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
 plot_prosecutions(prosecutions, breakdown = "offence_type")
 ```
 
-![](../README_files/unnamed-chunk-53-1.png)<!-- -->
+![](../README_files/unnamed-chunk-55-1.png)<!-- -->
 
 ------------------------------------------------------------------------
 
@@ -1624,7 +1648,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Yellow"
+    #> [1] "Cyan"
 
 ------------------------------------------------------------------------
 

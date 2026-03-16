@@ -7,8 +7,16 @@ sum(x) # Sum the numbers contained in 'x'
 # Comment describing what the function does
 function_name <- function(arg1, arg2) {
   # function body, e.g. 
-  paste(arg1, arg2, "!")
+  paste(arg1, arg2)
 }
+
+
+## ----purl=purl_example_code----------------------------------------------------------------------------------------------------------------------------
+function_name(arg1 = "abc", arg2 = "def" )
+
+
+## ----purl=purl_example_code----------------------------------------------------------------------------------------------------------------------------
+function_name("abc", arg2 = "def")
 
 
 ## ----purl=purl_example_code----------------------------------------------------------------------------------------------------------------------------

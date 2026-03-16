@@ -70,7 +70,7 @@ The syntax for creating a function is:
 # Comment describing what the function does
 function_name <- function(arg1, arg2) {
   # function body, e.g. 
-  paste(arg1, arg2, "!")
+  paste(arg1, arg2)
 }
 ```
 
@@ -83,6 +83,24 @@ A function is made up of three components:
 + The function **body** (everything between the curly brackets) - this is where we put the code.
 
 + And the function **environment** (where the function was created) - this determines what variables and other functions it has access to. You can find out more about environments [here](https://adv-r.hadley.nz/environments.html).
+
+A function returns the final value that it evaluates, which in this example is the result of <br> `paste(arg1, arg2)`.
+
+## How to call a function
+
+Using the previous example function, the syntax to call a function is:
+
+```{r, purl=purl_example_code}
+function_name(arg1 = "abc", arg2 = "def" )
+```
+
+You can specify arguments by name, as above, or by position, e.g.
+
+```{r, purl=purl_example_code}
+function_name("abc", arg2 = "def")
+```
+
+Named arguments are generally safer and clearer. However, when the first argument is a vector or data frame, it is common to omit the name.
 
 # Examples of basic functions
 
