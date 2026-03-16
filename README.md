@@ -38,7 +38,7 @@ If you have any feedback on the content, please get in touch!
 - [Examples of basic functions](#examples-of-basic-functions)
 - [“Real-world” example functions](#real-world-example-functions)
 - [When to write a function](#when-to-write-a-function)
-- [Best practice](#best-practice)
+- [Good practice](#good-practice)
 - [How to organise your code](#how-to-organise-your-code)
 - [Writing a package](#writing-a-package)
 - [Further reading](#further-reading)
@@ -1670,7 +1670,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Blue"
+    #> [1] "Cyan"
 
 ------------------------------------------------------------------------
 
