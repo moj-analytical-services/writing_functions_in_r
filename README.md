@@ -1637,8 +1637,8 @@ test this is to get your code reviewed by someone else.
 
 ## How to organise your code
 
-It often helpful to keep your functions separate from the rest of your
-code to make them easier to find and reuse.
+It is often helpful to keep your functions separate from the rest of
+your code to make them easier to find and reuse.
 
 ### Storing your functions in your project
 
@@ -1670,7 +1670,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Cyan"
+    #> [1] "Green"
 
 ------------------------------------------------------------------------
 

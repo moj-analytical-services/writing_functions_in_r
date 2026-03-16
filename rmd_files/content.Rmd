@@ -1262,7 +1262,7 @@ A key measure of a good function (or any piece of code) is how easy it is for so
 
 ## How to organise your code
 
-It often helpful to keep your functions separate from the rest of your code to make them easier to find and reuse.
+It is often helpful to keep your functions separate from the rest of your code to make them easier to find and reuse.
 
 ### Storing your functions in your project
 
