@@ -91,7 +91,7 @@ A function returns the final value that it evaluates, which in this example is t
 Using the previous example function, the syntax to call a function is:
 
 ```{r, purl=purl_example_code}
-function_name(arg1 = "abc", arg2 = "def" )
+function_name(arg1 = "abc", arg2 = "def")
 ```
 
 You can specify arguments by name, as above, or by position, e.g.
