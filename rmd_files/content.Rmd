@@ -173,7 +173,7 @@ sum_squares <- function(x, y) {
   
 }
 
-sum_squares(3, y = 5)
+sum_squares(x = 3, y = 5)
 ```
 
 When you call a function, you can specify the arguments by position or name. In this example, the function accepts arguments called `x` and `y`, with the order specified as `x` then `y` in the function definition. Therefore when `sum_squares(3, 5)` is called, the arguments are interpreted as `x = 3` and `y = 5`. Alternatively, if we called `sum_squares(5, 3)` then the arguments would be interpreted as `x = 5` and `y = 3`.
@@ -191,6 +191,22 @@ sum_squares(y = 5, x = 3)
 
 # Bad
 sum_squares(3, 5)
+```
+
+## Example 3: default arguments
+
+Any value can be used as a default value for an argument. For example, we can generalise the `sum_squares()` function by allowing it to sum together two numbers raised to any power, but with a default power of 2:
+
+```{r, purl=purl_example_code}
+# This function returns the sum of two numbers raised to a particular power (with a default of 2)
+sum_powers <- function(x, y, z = 2) {
+  
+  x ^ z + y ^ z
+  
+}
+
+sum_powers(x = 3, y = 5)
+sum_powers(x = 3, y = 5, z = 3)
 ```
 
 ## Exercises
@@ -230,7 +246,7 @@ my_mean(7.5, 16)
 ```
 
 
-## Example 3: conditional statements and early returns
+## Example 4: conditional statements and early returns
 
 Functions can return different outputs depending on some condition. In this function the condition is `x < 0`, and the condition evaluates to either `TRUE` or `FALSE`:
 
@@ -293,9 +309,7 @@ abs_x_v3(-5)
 abs_x_v3(4)
 ```
 
-
-
-## Example 4: functions with side-effects
+## Example 5: functions with side-effects
 
 A function side-effect can be thought of as any change to the workspace that the function makes other than the object that it returns. This can include printing, plotting a chart, saving a file, or modifying a variable in the wider environment. The side-effect is often the main purpose of the function, and in this case the function doesn't need to return any value. This function has the side-effect of printing a message to the console, depending on the value of the object:
 
@@ -316,7 +330,7 @@ odd_or_even(x = 4)
 
 **Note:** It’s best practice for your function to either return an object or have a side-effect, but not both (with the exception of messages, errors and warnings).
 
-## Example 5: errors and warnings
+## Example 6: errors and warnings
 
 Sometimes it can be useful to include helpful error messages in functions, e.g. by anticipating the sorts of variables that could be input. What happens if you try to use a non-integer or a string as an argument in the previous example? Try the running the function with the following arguments:
 
@@ -360,7 +374,7 @@ odd_or_even(x = c(1, 2, 3))
 
 `stop()` halts execution of the function and prints an error message to the console. Alternatively you can use `warning()`, which returns a warning but does not stop execution of the function.
 
-## Example 6: optional arguments
+## Example 7: optional arguments
 
 Here's an example of how to include optional arguments, where in this case the optional argument is called `y`:
 
@@ -411,23 +425,6 @@ A message will be returned when the relevant condition is found and then R will 
 return_x()
 return_x(NULL)
 return_x(NA)
-```
-
-
-## Example 7: arguments with default values
-
-Any value can be used as a default value for an argument. For example, we can generalise the `sum_squares()` function by allowing it to sum together two numbers raised to any power, but with a default power of 2:
-
-```{r, purl=purl_example_code}
-# This function returns the sum of two numbers raised to a particular power (with a default of 2)
-sum_powers <- function(x, y, z = 2) {
-  
-  x ^ z + y ^ z
-  
-}
-
-sum_powers(x = 3, y = 5)
-sum_powers(x = 3, y = 5, z = 3)
 ```
 
 ## Exercises

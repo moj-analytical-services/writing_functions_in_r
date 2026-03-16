@@ -342,7 +342,7 @@ sum_squares <- function(x, y) {
   
 }
 
-sum_squares(3, y = 5)
+sum_squares(x = 3, y = 5)
 ```
 
     #> [1] 34
@@ -383,6 +383,31 @@ sum_squares(3, 5)
 
     #> [1] 34
 
+## Example 3: default arguments
+
+Any value can be used as a default value for an argument. For example,
+we can generalise the `sum_squares()` function by allowing it to sum
+together two numbers raised to any power, but with a default power of 2:
+
+``` r
+# This function returns the sum of two numbers raised to a particular power (with a default of 2)
+sum_powers <- function(x, y, z = 2) {
+  
+  x ^ z + y ^ z
+  
+}
+
+sum_powers(x = 3, y = 5)
+```
+
+    #> [1] 34
+
+``` r
+sum_powers(x = 3, y = 5, z = 3)
+```
+
+    #> [1] 152
+
 ## Exercises
 
 Let’s start with some simple exercises to get familiar with the syntax
@@ -401,7 +426,7 @@ Create a function called `my_mean` which takes two arguments, `x` and
 
 ------------------------------------------------------------------------
 
-## Example 3: conditional statements and early returns
+## Example 4: conditional statements and early returns
 
 Functions can return different outputs depending on some condition. In
 this function the condition is `x < 0`, and the condition evaluates to
@@ -490,7 +515,7 @@ abs_x_v3(4)
 
     #> [1] 4
 
-## Example 4: functions with side-effects
+## Example 5: functions with side-effects
 
 A function side-effect can be thought of as any change to the workspace
 that the function makes other than the object that it returns. This can
@@ -521,7 +546,7 @@ odd_or_even(x = 4)
 object or have a side-effect, but not both (with the exception of
 messages, errors and warnings).
 
-## Example 5: errors and warnings
+## Example 6: errors and warnings
 
 Sometimes it can be useful to include helpful error messages in
 functions, e.g. by anticipating the sorts of variables that could be
@@ -596,7 +621,7 @@ odd_or_even(x = c(1, 2, 3))
 the console. Alternatively you can use `warning()`, which returns a
 warning but does not stop execution of the function.
 
-## Example 6: optional arguments
+## Example 7: optional arguments
 
 Here’s an example of how to include optional arguments, where in this
 case the optional argument is called `y`:
@@ -680,31 +705,6 @@ return_x(NA)
     #> x is NA
 
     #> [1] NA
-
-## Example 7: arguments with default values
-
-Any value can be used as a default value for an argument. For example,
-we can generalise the `sum_squares()` function by allowing it to sum
-together two numbers raised to any power, but with a default power of 2:
-
-``` r
-# This function returns the sum of two numbers raised to a particular power (with a default of 2)
-sum_powers <- function(x, y, z = 2) {
-  
-  x ^ z + y ^ z
-  
-}
-
-sum_powers(x = 3, y = 5)
-```
-
-    #> [1] 34
-
-``` r
-sum_powers(x = 3, y = 5, z = 3)
-```
-
-    #> [1] 152
 
 ## Exercises
 
@@ -1676,7 +1676,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Purple"
+    #> [1] "Blue"
 
 ------------------------------------------------------------------------
 

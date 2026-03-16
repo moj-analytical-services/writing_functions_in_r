@@ -38,8 +38,6 @@ my_mean(7.5, 16)
 
 
 
-
-
 ## ----include=show_solution, purl=purl_solutions, eval=TRUE----------------------------------------
 # 2.1 fizz_buzz() solution
 
