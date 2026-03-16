@@ -92,12 +92,15 @@ your own time:
 
 ### By the end of this session you should know:
 
-- How to write a basic function.
-- The circumstances when you might want to consider writing a function.
-- Why using functions is beneficial.
-- The best practice for writing functions.
+- How to write basic functions.
+- The benefits of using functions in your code.
+- Good practice for writing functions.
+- What real-world data processing functions could look like.
+- Some more advanced function writing topics.
 - Where to go for more information on some of the topics touched on in
   this course.
+
+------------------------------------------------------------------------
 
 ### Before we start
 
@@ -1673,7 +1676,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Blue"
+    #> [1] "Purple"
 
 ------------------------------------------------------------------------
 
