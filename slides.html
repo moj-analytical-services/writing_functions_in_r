@@ -3376,6 +3376,10 @@ double(4)</pre>
 #&gt;     x * 2
 #&gt; }</pre>
 
+</article></slide><slide class=""><hgroup><h2>Tip: function names</h2></hgroup><article  id="tip-function-names" class="smaller ">
+
+<p>The name of a function should give you a good idea of what it does. A good rule of thumb is to begin with a verb and be concise, for example. <code>read_data()</code>, <code>remove_duplicates()</code>, <code>standardise_dates()</code>.</p>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Examples of basic functions</h2></hgroup><article  id="examples-of-basic-functions" class="smaller ">
 
 </article></slide><slide class=""><hgroup><h2>Example 1: a very basic function</h2></hgroup><article  id="example-1-a-very-basic-function" class="smaller ">
@@ -3774,7 +3778,7 @@ fizz_buzz(15) # &quot;fizz buzz&quot;</pre>
 
 <h3>2.2 fizz_buzz_vec()</h3>
 
-<p>Most functions in R are vectorised. This means they can apply an operation to every element of a vector at the same time. It’s best practice to vectorise your own functions too as this will help you to apply them to data sets and combine them with other functions.</p>
+<p>Most functions in R are vectorised. This means they can apply an operation to every element of a vector at the same time.</p>
 
 <p>Create a new version of the <code>fizz_buzz()</code> function called <code>fizz_buzz_vec</code> which instead accepts a vector of numbers. Test it out on a vector of the numbers 1 to 15.</p>
 
@@ -4589,35 +4593,27 @@ pythagoras_rounded &lt;- function(a, b) {
 
 <p>The R ecosystem is full of high quality packages designed to solve all kinds of problems - it’s generally best to make sure that a function doesn’t already exist before writing your own.</p>
 
-</article></slide><slide class=""><hgroup><h2>Best practice</h2></hgroup><article  id="best-practice" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Good practice</h2></hgroup><article  id="good-practice" class="smaller ">
 
 <p>Writing a function is easy, writing a really good function can be a lot harder! Here are a few things to consider:</p>
 
-<h3>Give your function a good name</h3>
-
-<p>The name of a function should give you a good idea of what it does. Generally function names should be concise and use verbs rather than nouns.</p>
-
-<h3>Pass variables into the function as arguments</h3>
-
-<p>While functions can access objects that haven’t been passed in as an argument, this is generally bad practice as it makes code much harder to understand and modify, and makes the function itself harder to reuse.</p>
-
-<h3>Document your code</h3>
+<h3>Document your functions</h3>
 
 <p>You should have comments explaining what your function does, what each argument is, and what it returns.</p>
 
+<h3>Pass all inputs that a function needs as arguments</h3>
+
+<p>A function can access objects in its surrounding environment that were not passed in as arguments, but this can make code harder to follow and maintain. It is better to pass all objects that a function uses as arguments. This makes it clear what the function depends on and makes it easier to reuse elsewhere.</p>
+
+<h3>Do one thing</h3>
+
+<p>Each function should have a single responsibility. If it seems to do more than one thing, consider whether it can be broken up into separate functions. This leads to simpler and more flexible code that is easier to understand, maintain and write tests for.</p>
+
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-<h3>Keep it short</h3>
-
-<p>A rule of thumb is if all the code for your function doesn’t fit on your screen at the same time, it’s probably too complicated. Consider splitting it up into multiple functions.</p>
 
 <h3>Generalise</h3>
 
-<p>Think about whether there are ways you can make your function usable in more situations. For example, is there anything you’re hard-coding that you could set as an argument instead?</p>
-
-<h3>Vectorise by default</h3>
-
-<p>R is designed to work well with vectors (e.g. columns of a dataframe). Where possible you should write your function so it can take a vector as an input and apply the transformation to each element. The <code>generalise_names()</code> function we looked at is a good example of this!</p>
+<p>Think about whether there are ways you can make your function usable in more situations. For example, is there anything you have hard-coded (set directly in the function) that could be passed as an argument instead?</p>
 
 <h3>Ask for feedback</h3>
 
@@ -4625,17 +4621,15 @@ pythagoras_rounded &lt;- function(a, b) {
 
 </article></slide><slide class=""><hgroup><h2>How to organise your code</h2></hgroup><article  id="how-to-organise-your-code" class="smaller ">
 
-<p>Whenever you’re working on something in R it’s generally best to create an R project and version control your code on GitHub. There’s information on how to do this in the <a href='https://user-guidance.analytical-platform.service.justice.gov.uk/index.html' title=''>Analytical Platform guidance</a>.</p>
-
-<p>It’s also best to keep your functions separate from the rest of your code to make them easier to find.</p>
+<p>It often helpful to keep your functions separate from the rest of your code to make them easier to find and reuse.</p>
 
 <h3>Storing your functions in your project</h3>
 
-<p>The easiest way to store your functions is just to create a folder in your project called &ldquo;functions&rdquo; and save your functions there.</p>
+<p>A simple approach is to create a folder in your project called <code>functions</code> and save your functions there.</p>
 
-<p>You could either put each function in its own R script with the same name, or you could group related functions into clearly named scripts.</p>
+<p>A function could have its own script, with the same name as the function, or related functions could be grouped together into a single clearly named script.</p>
 
-<p>Then just use <code>source(&quot;functions/my_functions_script.R&quot;)</code> (with <code>functions/</code> and <code>my_functions_script.R</code> replaced with the name of the folder and the name of your script, respectively) to run the code and make your functions available to you in the current session. As with loading packages, it’s best to do this at the top of your script.</p>
+<p>You can then load the functions into your current session with <code>source(&quot;functions/my_functions_script.R&quot;)</code>, usually near the top of your main script.</p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -4649,7 +4643,7 @@ pythagoras_rounded &lt;- function(a, b) {
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >#&gt; [1] &quot;Magenta&quot;</pre>
+<pre >#&gt; [1] &quot;Green&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
