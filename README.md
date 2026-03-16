@@ -256,7 +256,7 @@ mean(scores, na.rm = TRUE)
 ## Example 1: a very basic function
 
 Here’s an example of a very basic user-defined function, called
-`add_two()`, that takes `x` as an argument:
+`add_two()`, that takes `x` as an argument and returns `x + 2`:
 
 ``` r
 # This function takes the argument 'x', and adds 2 to it
@@ -266,9 +266,6 @@ add_two <- function(x) {
   
 }
 ```
-
-R will automatically return the value of the last evaluated expression.
-There is also a `return()` function. More on where to use this later.
 
 ------------------------------------------------------------------------
 
@@ -1657,7 +1654,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Red"
+    #> [1] "Green"
 
 ------------------------------------------------------------------------
 
