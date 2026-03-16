@@ -1578,7 +1578,7 @@ assertthat::assert_that(c %% 1 == 0)
 
 ### When you’ve copied and pasted two times
 
-There is a principle in software engineering called Don’t Repeat
+There is a principle in software development called Don’t Repeat
 Yourself (DRY) - which basically states that you should avoid
 duplication wherever possible. A good rule of thumb is whenever you find
 you’ve used the same or similar code in three places, it’s time to
@@ -1670,7 +1670,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Magenta"
+    #> [1] "Blue"
 
 ------------------------------------------------------------------------
 
