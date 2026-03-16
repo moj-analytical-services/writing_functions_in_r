@@ -25,6 +25,15 @@ mean(scores, na.rm = TRUE)
 
 
 ## ----purl=purl_example_code-----------------------------------------------------------------------
+double <- function(x) {
+  x * 2
+}
+
+double(4)
+double
+
+
+## ----purl=purl_example_code-----------------------------------------------------------------------
 # This function takes the argument 'x', and adds 2 to it
 add_two <- function(x) {
   

@@ -107,6 +107,22 @@ scores <- c(8, 10, NA, 7, 9)
 mean(scores, na.rm = TRUE)
 ```
 
+## Don't forget the `()`
+
+Brackets `()` tell R to run a function.
+
+If you type the function name without `()`, R returns the function itself rather than running it.
+
+```{r, purl=purl_example_code}
+double <- function(x) {
+  x * 2
+}
+
+double(4)
+double
+```
+
+
 # Examples of basic functions
 
 ## Example 1: a very basic function

@@ -3355,6 +3355,27 @@ mean(scores, na.rm = TRUE)</pre>
 
 <pre >#&gt; [1] 8.5</pre>
 
+</article></slide><slide class=""><hgroup><h2>Don’t forget the <code>()</code></h2></hgroup><article  id="dont-forget-the" class="smaller ">
+
+<p>Brackets <code>()</code> tell R to run a function.</p>
+
+<p>If you type the function name without <code>()</code>, R returns the function itself rather than running it.</p>
+
+<pre class = 'prettyprint lang-r'>double &lt;- function(x) {
+  x * 2
+}
+
+double(4)</pre>
+
+<pre >#&gt; [1] 8</pre>
+
+<pre class = 'prettyprint lang-r'>double</pre>
+
+<pre >#&gt; function (x) 
+#&gt; {
+#&gt;     x * 2
+#&gt; }</pre>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Examples of basic functions</h2></hgroup><article  id="examples-of-basic-functions" class="smaller ">
 
 </article></slide><slide class=""><hgroup><h2>Example 1: a very basic function</h2></hgroup><article  id="example-1-a-very-basic-function" class="smaller ">
@@ -4628,7 +4649,7 @@ pythagoras_rounded &lt;- function(a, b) {
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >#&gt; [1] &quot;Yellow&quot;</pre>
+<pre >#&gt; [1] &quot;Magenta&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 

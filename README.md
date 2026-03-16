@@ -251,6 +251,32 @@ mean(scores, na.rm = TRUE)
 
     #> [1] 8.5
 
+## Don’t forget the `()`
+
+Brackets `()` tell R to run a function.
+
+If you type the function name without `()`, R returns the function
+itself rather than running it.
+
+``` r
+double <- function(x) {
+  x * 2
+}
+
+double(4)
+```
+
+    #> [1] 8
+
+``` r
+double
+```
+
+    #> function (x) 
+    #> {
+    #>     x * 2
+    #> }
+
 # Examples of basic functions
 
 ## Example 1: a very basic function
@@ -774,7 +800,7 @@ The function can be called with only the required arguments:
 plot_x_and_y(x, y)
 ```
 
-![](../README_files/unnamed-chunk-31-1.png)<!-- -->
+![](../README_files/unnamed-chunk-32-1.png)<!-- -->
 
 ------------------------------------------------------------------------
 
@@ -785,7 +811,7 @@ the plot function:
 plot_x_and_y(x, y, col='red', type='l')
 ```
 
-![](../README_files/unnamed-chunk-32-1.png)<!-- -->
+![](../README_files/unnamed-chunk-33-1.png)<!-- -->
 
 # “Real-world” example functions
 
@@ -1196,7 +1222,7 @@ bar <- 10:1
 plot(foo, bar)
 ```
 
-![](../README_files/unnamed-chunk-50-1.png)<!-- -->
+![](../README_files/unnamed-chunk-51-1.png)<!-- -->
 
 ------------------------------------------------------------------------
 
@@ -1322,7 +1348,7 @@ plot_prosecutions <- function(df, breakdown = "offence_type") {
 plot_prosecutions(prosecutions, breakdown = "offence_type")
 ```
 
-![](../README_files/unnamed-chunk-56-1.png)<!-- -->
+![](../README_files/unnamed-chunk-57-1.png)<!-- -->
 
 ------------------------------------------------------------------------
 
@@ -1654,7 +1680,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Green"
+    #> [1] "Pink"
 
 ------------------------------------------------------------------------
 
