@@ -3332,7 +3332,7 @@ my_function &lt;- function(arg1, arg2) {
 <li><p>And the function <strong>environment</strong> (where the function was created) - this determines what variables and other functions it has access to. You can find out more about environments <a href='https://adv-r.hadley.nz/environments.html' title=''>here</a>.</p></li>
 </ul>
 
-<p>A function returns the final value that it evaluates, which in this example is the result of <br> <code>paste(arg1, arg2)</code>.</p>
+<p>A function returns the value of the last expression it evaluates. In the example, that is the result of <code>paste(arg1, arg2)</code>.</p>
 
 </article></slide><slide class=""><hgroup><h2>How to call a function</h2></hgroup><article  id="how-to-call-a-function" class="smaller ">
 
@@ -4630,7 +4630,7 @@ pythagoras_rounded &lt;- function(a, b) {
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >#&gt; [1] &quot;Purple&quot;</pre>
+<pre >#&gt; [1] &quot;Cyan&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 

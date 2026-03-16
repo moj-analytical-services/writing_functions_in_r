@@ -218,8 +218,8 @@ A function is made up of three components:
   You can find out more about environments
   [here](https://adv-r.hadley.nz/environments.html).
 
-A function returns the final value that it evaluates, which in this
-example is the result of <br> `paste(arg1, arg2)`.
+A function returns the value of the last expression it evaluates. In the
+example, that is the result of `paste(arg1, arg2)`.
 
 ## How to call a function
 
@@ -1657,7 +1657,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Yellow"
+    #> [1] "Red"
 
 ------------------------------------------------------------------------
 
