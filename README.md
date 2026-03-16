@@ -35,7 +35,8 @@ If you have any feedback on the content, please get in touch!
 - [What is a function?](#what-is-a-function)
 - [Why use functions?](#why-use-functions)
 - [How to write a function](#how-to-write-a-function)
-- [Examples of basic functions](#examples-of-basic-functions)
+- [Examples of function-writing
+  patterns](#examples-of-function-writing-patterns)
 - [“Real-world” example functions](#real-world-example-functions)
 - [When to write a function](#when-to-write-a-function)
 - [Best practice](#best-practice)
@@ -1676,7 +1677,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Blue"
+    #> [1] "Pink"
 
 ------------------------------------------------------------------------
 
