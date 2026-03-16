@@ -127,9 +127,11 @@ double
 The name of a function should give you a good idea of what it does. A good rule of thumb is to begin with a verb and be concise, for example. `read_data()`, `remove_duplicates()`, `standardise_dates()`.
 
 
-# Examples of basic functions
+# Examples of function-writing patterns
 
 ## Example 1: a very basic function
+
+We are now going to show a series of example functions that illustrate different concepts and functionality for writing functions.
 
 Here's an example of a very basic user-defined function, called `add_two()`, that takes `x` as an argument and returns `x + 2`:
 
