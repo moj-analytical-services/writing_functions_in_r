@@ -781,8 +781,10 @@ second when you set `buzz = 7` for values 1, 2, 3, 7, 15 and 21.
 
 Sometimes being able to pass an arbitrary number of arguments can be
 useful, especially when another function is called within a wrapper
-function. This requires the ellipsis construct, `...`, which is designed
-to pass a variable number of arguments to a function. Here’s an example:
+function (a function whose main purpose is to call another function to
+make it more convenient to use). This requires the ellipsis construct,
+`...`, which is designed to pass a variable number of arguments to a
+function. Here’s an example:
 
 ``` r
 # This function produces a plot of x vs y
@@ -1668,7 +1670,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Pink"
+    #> [1] "Red"
 
 ------------------------------------------------------------------------
 

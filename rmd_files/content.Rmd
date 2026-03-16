@@ -572,7 +572,7 @@ fizz_buzz_custom_vec(c(1, 2, 3, 7, 15, 21), buzz = 7)
 
 ## Example 8: the ellipsis argument
 
-Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function is called within a wrapper function. This requires the ellipsis construct, `...`, which is designed to pass a variable number of arguments to a function. Here's an example:
+Sometimes being able to pass an arbitrary number of arguments can be useful, especially when another function is called within a wrapper function (a function whose main purpose is to call another function to make it more convenient to use). This requires the ellipsis construct, `...`, which is designed to pass a variable number of arguments to a function. Here's an example:
 
 ```{r, purl=purl_example_code}
 # This function produces a plot of x vs y
