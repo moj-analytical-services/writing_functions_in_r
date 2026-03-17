@@ -245,7 +245,6 @@ my_mean <- function(x, y) {
 my_mean(7.5, 16)
 ```
 
-
 ## Example 4: conditional statements and early returns
 
 Functions can return different outputs depending on some condition. In this function the condition is `x < 0`, and the condition evaluates to either `TRUE` or `FALSE`:

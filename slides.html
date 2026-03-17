@@ -3151,35 +3151,35 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; }
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; }
-code span.at { color: #7d9029; }
-code span.bn { color: #40a070; }
-code span.bu { color: #008000; }
-code span.cf { color: #007020; font-weight: bold; }
-code span.ch { color: #4070a0; }
-code span.cn { color: #880000; }
-code span.co { color: #60a0b0; font-style: italic; }
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; }
-code span.do { color: #ba2121; font-style: italic; }
-code span.dt { color: #902000; }
-code span.dv { color: #40a070; }
-code span.er { color: #ff0000; font-weight: bold; }
-code span.ex { }
-code span.fl { color: #40a070; }
-code span.fu { color: #06287e; }
-code span.im { color: #008000; font-weight: bold; }
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; }
-code span.kw { color: #007020; font-weight: bold; }
-code span.op { color: #666666; }
-code span.ot { color: #007020; }
-code span.pp { color: #bc7a00; }
-code span.sc { color: #4070a0; }
-code span.ss { color: #bb6688; }
-code span.st { color: #4070a0; }
-code span.va { color: #19177c; }
-code span.vs { color: #4070a0; }
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 
 
@@ -3193,7 +3193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
         <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
     <hgroup class="auto-fadein">
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
-
+      
       <p data-config-presenter><!-- populated from slide_config.json --></p>
           </hgroup>
   </slide>
@@ -3323,7 +3323,7 @@ sum(x) # Sum the numbers contained in &#39;x&#39;</pre>
 
 <pre class = 'prettyprint lang-r'># Comment describing what the function does
 my_function &lt;- function(arg1, arg2) {
-  # function body, e.g.
+  # function body, e.g. 
   paste(arg1, arg2)
 }</pre>
 
@@ -3376,7 +3376,7 @@ double(4)</pre>
 
 <pre class = 'prettyprint lang-r'>double</pre>
 
-<pre >#&gt; function (x)
+<pre >#&gt; function (x) 
 #&gt; {
 #&gt;     x * 2
 #&gt; }</pre>
@@ -3395,9 +3395,9 @@ double(4)</pre>
 
 <pre class = 'prettyprint lang-r'># This function takes the argument &#39;x&#39;, and adds 2 to it
 add_two &lt;- function(x) {
-
+  
   x + 2
-
+  
 }</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
@@ -3410,7 +3410,7 @@ add_two(3)</pre>
 <pre >#&gt; [1] 5</pre>
 
 <pre class = 'prettyprint lang-r'># Alternatively the result can be saved as a new variable
-result &lt;- add_two(3)
+result &lt;- add_two(3) 
 result</pre>
 
 <pre >#&gt; [1] 5</pre>
@@ -3423,9 +3423,9 @@ result</pre>
 
 <pre class = 'prettyprint lang-r'># This function sums the squares of two numbers
 sum_squares &lt;- function(x, y) {
-
+  
   x^2 + y^2
-
+  
 }
 
 sum_squares(x = 3, y = 5)</pre>
@@ -3459,9 +3459,9 @@ sum_squares(3, 5)</pre>
 
 <pre class = 'prettyprint lang-r'># This function returns the sum of two numbers raised to a particular power (with a default of 2)
 sum_powers &lt;- function(x, y, z = 2) {
-
+  
   x ^ z + y ^ z
-
+  
 }
 
 sum_powers(x = 3, y = 5)</pre>
@@ -3535,13 +3535,13 @@ abs_x(-5)</pre>
 
 <pre class = 'prettyprint lang-r'># why does this function always return -x?
 abs_x_v2 &lt;- function(x) {
-
+  
   if (x &gt;= 0) {
     x
-  }
-
+  } 
+  
   -x
-
+  
 }
 
 abs_x_v2(-5)</pre>
@@ -3558,13 +3558,13 @@ abs_x_v2(-5)</pre>
 
 <pre class = 'prettyprint lang-r'># We can fix it by using an early return
 abs_x_v3 &lt;- function(x) {
-
+  
   if (x &gt;= 0) {
     return(x)
-  }
-
+  } 
+  
   -x
-
+  
 }
 
 abs_x_v3(-5)</pre>
@@ -3581,13 +3581,13 @@ abs_x_v3(-5)</pre>
 
 <pre class = 'prettyprint lang-r'># This function lets you know whether a number is odd or even
 odd_or_even &lt;- function(x) {
-
+  
   if ((x %% 2) == 0) {
     message(&quot;The number is even.&quot;)
   } else if ((x %% 2) == 1) {
     message(&quot;The number is odd.&quot;)
   }
-
+  
 }
 
 odd_or_even(x = 4)</pre>
@@ -3628,7 +3628,7 @@ odd_or_even &lt;- function(x) {
   } else if((x %% 2) != 0 &amp;&amp; (x %% 2) != 1) {
     stop(&quot;x must be an integer.&quot;)
   }
-
+  
 }</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
@@ -3658,13 +3658,13 @@ odd_or_even &lt;- function(x) {
 
 <pre class = 'prettyprint lang-r'># This function either returns the sum of two numbers, or returns the argument if only one is supplied
 add_a_number &lt;- function(x, y = NULL) {
-
+  
   if (!is.null(y)) {
     x + y
   } else {
     x
   }
-
+  
 }
 
 add_a_number(x = 6)</pre>
@@ -3683,7 +3683,7 @@ add_a_number(x = 6)</pre>
 return_x &lt;- function(x) {
   if (missing(x)) {
     message(&quot;x is missing&quot;)
-  }
+  } 
   if (is.null(x)) {
     message(&quot;x is null&quot;)
   }
@@ -3762,7 +3762,7 @@ code
 <pre class = 'prettyprint lang-r'># 2.1 fizz_buzz() solution
 
 fizz_buzz &lt;- function(x) {
-
+  
   if (x %% 3 == 0 &amp;&amp; x %% 5 == 0) {
     &quot;fizz buzz&quot;
   } else if (x %% 3 == 0) {
@@ -3772,7 +3772,7 @@ fizz_buzz &lt;- function(x) {
   } else {
     as.character(x)
   }
-
+  
 }</pre>
 
 <pre class = 'prettyprint lang-r'>fizz_buzz(1)  # &quot;1&quot;
@@ -3798,19 +3798,19 @@ fizz_buzz(15) # &quot;fizz buzz&quot;</pre>
 <pre class = 'prettyprint lang-r'># 2.2 fizz_buzz_vec() solution
 
 fizz_buzz_vec &lt;- function(x) {
-
+  
   dplyr::case_when(
     x %% 3 == 0 &amp; x %% 5 == 0 ~ &quot;fizz buzz&quot;,
     x %% 3 == 0 ~ &quot;fizz&quot;,
     x %% 5 == 0 ~ &quot;buzz&quot;,
     TRUE ~ as.character(x)
   )
-
+  
 }
 
 fizz_buzz_vec(1:15)</pre>
 
-<pre >#&gt;  [1] &quot;1&quot;         &quot;2&quot;         &quot;fizz&quot;      &quot;4&quot;         &quot;buzz&quot;      &quot;fizz&quot;      &quot;7&quot;         &quot;8&quot;
+<pre >#&gt;  [1] &quot;1&quot;         &quot;2&quot;         &quot;fizz&quot;      &quot;4&quot;         &quot;buzz&quot;      &quot;fizz&quot;      &quot;7&quot;         &quot;8&quot;        
 #&gt;  [9] &quot;fizz&quot;      &quot;buzz&quot;      &quot;11&quot;        &quot;fizz&quot;      &quot;13&quot;        &quot;14&quot;        &quot;fizz buzz&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
@@ -3826,7 +3826,7 @@ fizz_buzz_vec(1:15)</pre>
 <pre class = 'prettyprint lang-r'># 2.3 fizz_buzz_custom() solution
 
 fizz_buzz_custom &lt;- function(x, fizz = 3, buzz = 5) {
-
+  
   if (x %% fizz == 0 &amp; x %% buzz == 0) {
     &quot;fizz buzz&quot;
   } else if (x %% fizz == 0) {
@@ -3836,26 +3836,26 @@ fizz_buzz_custom &lt;- function(x, fizz = 3, buzz = 5) {
   } else {
     as.character(x)
   }
-
+  
 }
 
 
 fizz_buzz_custom_vec &lt;- function(x, fizz = 3, buzz = 5) {
-
+  
   dplyr::case_when(
     x %% fizz == 0 &amp; x %% buzz == 0 ~ &quot;fizz buzz&quot;,
     x %% fizz == 0 ~ &quot;fizz&quot;,
     x %% buzz == 0 ~ &quot;buzz&quot;,
     TRUE ~ as.character(x)
   )
-
+  
 }</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
 <pre class = 'prettyprint lang-r'>fizz_buzz_custom_vec(1:15)</pre>
 
-<pre >#&gt;  [1] &quot;1&quot;         &quot;2&quot;         &quot;fizz&quot;      &quot;4&quot;         &quot;buzz&quot;      &quot;fizz&quot;      &quot;7&quot;         &quot;8&quot;
+<pre >#&gt;  [1] &quot;1&quot;         &quot;2&quot;         &quot;fizz&quot;      &quot;4&quot;         &quot;buzz&quot;      &quot;fizz&quot;      &quot;7&quot;         &quot;8&quot;        
 #&gt;  [9] &quot;fizz&quot;      &quot;buzz&quot;      &quot;11&quot;        &quot;fizz&quot;      &quot;13&quot;        &quot;14&quot;        &quot;fizz buzz&quot;</pre>
 
 <pre class = 'prettyprint lang-r'>fizz_buzz_custom_vec(c(1, 2, 3, 7, 15, 21), buzz = 7)</pre>
@@ -3868,9 +3868,9 @@ fizz_buzz_custom_vec &lt;- function(x, fizz = 3, buzz = 5) {
 
 <pre class = 'prettyprint lang-r'># This function produces a plot of x vs y
 plot_x_and_y &lt;- function(x, y, ...) {
-
+  
   plot(x, y, ...)
-
+  
 }
 
 x &lt;- 1:10
@@ -3998,19 +3998,19 @@ prosecutions &lt;- prosecutions_and_convictions |&gt;
 
 <pre class = 'prettyprint lang-r'># This function standardises strings contained in a vector
 generalise_names &lt;- function(names) {
-
-  names |&gt;
+  
+  names |&gt; 
     # Convert any uppercase letters to lowercase
-    tolower() |&gt;
+    tolower() |&gt; 
     # Trim any blank spaces at the start or end of each string
-    stringr::str_trim() |&gt;
+    stringr::str_trim() |&gt; 
     # Replace anything that isn&#39;t a letter or number with an underscore
-    stringr::str_replace_all(pattern = &quot;[^A-Za-z0-9]&quot;, replacement = &quot;_&quot;) |&gt;
+    stringr::str_replace_all(pattern = &quot;[^A-Za-z0-9]&quot;, replacement = &quot;_&quot;) |&gt; 
     # Remove repeated underscores
-    stringr::str_remove_all(pattern = &quot;(?&lt;=_)_+&quot;) |&gt;
+    stringr::str_remove_all(pattern = &quot;(?&lt;=_)_+&quot;) |&gt; 
     # Remove any underscore at the beginning or end of the string
     stringr::str_remove_all(pattern = &quot;^_|_$&quot;)
-
+  
 }</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
@@ -4076,7 +4076,7 @@ dplyr::glimpse(prosecutions)</pre>
 
 <p>These numbers might be undesirable, so we can write a function like this to remove them:</p>
 
-<pre class = 'prettyprint lang-r'># This function removes patterns at the start of a string that are:
+<pre class = 'prettyprint lang-r'># This function removes patterns at the start of a string that are: 
 # 1 or 2 digits followed by any number of colons and/or spaces
 
 remove_numbering &lt;- function(x) {
@@ -4098,7 +4098,7 @@ remove_numbering(some_strings)</pre>
 
 <p>Then we can use the <code>mutate()</code> function with the <code>across()</code> function from <code>dplyr</code>, and the <code>where()</code> selection helper from <code>tidyselect</code>, to apply the <code>remove_numbering()</code> function to columns in the <code>prosecutions</code> dataframe. The <code>dplyr::mutate()</code> function will apply the specified function to all columns where a particular condition is met, and in this case the condition <code>is.character</code> requires that the column contains strings.</p>
 
-<pre class = 'prettyprint lang-r'>prosecutions &lt;- dplyr::mutate(prosecutions, across(where(is.character), remove_numbering))
+<pre class = 'prettyprint lang-r'>prosecutions &lt;- dplyr::mutate(prosecutions, across(where(is.character), remove_numbering)) 
 dplyr::glimpse(prosecutions)</pre>
 
 <pre >#&gt; Rows: 107,493
@@ -4127,16 +4127,16 @@ dplyr::glimpse(prosecutions)</pre>
 <pre class = 'prettyprint lang-r'>clean_not_known &lt;- function(x,
                             not_known_phrase = &quot;Not known&quot;,
                             values_to_change = c(&quot;n/a&quot;, &quot;not known&quot;, &quot;unknown&quot;, &quot;not stated&quot;)) {
-
+  
   # Replace any missing (NA) values
   x &lt;- replace(x, list = is.na(x), values = not_known_phrase)
-
+  
   # Remove any white space that might cause the strings to not match
   x &lt;- stringr::str_trim(x)
-
+  
   # Replace strings in the data that refer to a missing or unknown value.
   dplyr::if_else(tolower(x) %in% values_to_change, true = not_known_phrase, false = x)
-
+  
 }</pre>
 
 <p>In this function we’ve included some default values, so by default any strings that match &ldquo;n/a&rdquo;, &ldquo;not known&rdquo;, &ldquo;unknown&rdquo;, or &ldquo;not stated&rdquo; are replaced, and the default replacement value is &ldquo;Not known&rdquo;. We’ve used <code>dplyr::if_else()</code> as a vectorised form of an if-else statement. It’s similar to <code>dplyr::case_when()</code> (which we used in exercise 2.2), but can only be used with one condition and two possible outcomes. We’ve also used the <code>tolower()</code> function, which ensures all strings are lower case before searching for the missing/unknown phrases.</p>
@@ -4144,9 +4144,9 @@ dplyr::glimpse(prosecutions)</pre>
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
 <pre class = 'prettyprint lang-r'>prosecutions &lt;- dplyr::mutate(
-  prosecutions,
+  prosecutions, 
   dplyr::across(
-    .cols = tidyselect::where(is.character),
+    .cols = tidyselect::where(is.character), 
     .fns = clean_not_known
   )
 )
@@ -4190,18 +4190,18 @@ clean_not_known &lt;- function(x,
                             not_known_phrase = &quot;Not known&quot;,
                             change_na = TRUE,
                             values_to_change = c(&quot;n/a&quot;, &quot;not known&quot;, &quot;unknown&quot;, &quot;not stated&quot;)) {
-
+  
   # Replace any missing (NA) values
   if (change_na) {
     x &lt;- replace(x, list = is.na(x), values = not_known_phrase)
   }
-
+  
   # Remove any white space that might cause the strings to not match
   x &lt;- stringr::str_trim(x)
-
+  
   # Replace strings in the data that refer to a missing or unknown value.
   dplyr::if_else(tolower(x) %in% values_to_change, true = not_known_phrase, false = x)
-
+  
 }</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
@@ -4209,28 +4209,28 @@ clean_not_known &lt;- function(x,
 <pre class = 'prettyprint lang-r'># Exercise 5 solution
 
 clean_dataset &lt;- function(data) {
-
+  
   # Clean the column headings
   colnames(data) &lt;- generalise_names(colnames(data))
-
+  
   # Remove numeric indices from columns
   data &lt;- dplyr::mutate(
-    data,
+    data, 
     dplyr::across(
-      .cols = tidyselect::where(is.character),
+      .cols = tidyselect::where(is.character), 
       .fns = remove_numbering
     )
   )
-
+  
   # Make missing/unknown value entries more consistent
   dplyr::mutate(
-    data,
+    data, 
     dplyr::across(
-      .cols = tidyselect::where(is.character),
+      .cols = tidyselect::where(is.character), 
       .fns = clean_not_known
     )
   )
-
+  
 }</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summarising data</h2></hgroup><article  id="summarising-data" class="smaller ">
@@ -4285,11 +4285,11 @@ plot(foo, bar)</pre>
 
 <pre class = 'prettyprint lang-r'># This function produces a summary table based on a dataset
 sum_group &lt;- function(df, group_col, sum_col) {
-
+  
   df |&gt;
     dplyr::group_by(group_col) |&gt;
     dplyr::summarise(counts = sum(sum_col))
-
+  
 }</pre>
 
 <p>However trying to use this function results in an error.</p>
@@ -4308,11 +4308,11 @@ sum_group &lt;- function(df, group_col, sum_col) {
 
 <pre class = 'prettyprint lang-r'># This function produces a summary table based on a dataset
 sum_group &lt;- function(df, group_col, sum_col) {
-
+  
   df |&gt;
     dplyr::group_by(.data[[group_col]]) |&gt;
     dplyr::summarise(counts = sum(.data[[sum_col]]))
-
+  
 }</pre>
 
 <p>The way that the tidyverse packages handle NSE has evolved over the past few years, so new methods of addressing this issue may be introduced in the future. For the current recommended approach to working with &ldquo;tidy evaluation&rdquo;, i.e. a special type of NSE used throughout the tidyverse, please see <a href='https://dplyr.tidyverse.org/articles/programming.html' title=''>this vignette</a>. See the appendix for some examples of alternative methods to tackle this problem.</p>
@@ -4346,16 +4346,16 @@ prosecutions_grouped</pre>
 
 <pre class = 'prettyprint lang-r'># This function produces a plot of the number of prosecutions over time
 plot_prosecutions &lt;- function(df, breakdown = &quot;offence_type&quot;) {
-
+  
   df_grouped &lt;- df |&gt;
     dplyr::group_by(.data[[breakdown]], year) |&gt;
     dplyr::summarise(counts = sum(count), .groups = &quot;keep&quot;)
-
+  
   df_grouped |&gt;
     ggplot2::ggplot(
-      ggplot2::aes(x = .data$year,
-                   y = .data$counts,
-                   group = .data[[breakdown]],
+      ggplot2::aes(x = .data$year, 
+                   y = .data$counts, 
+                   group = .data[[breakdown]], 
                    col = .data[[breakdown]])
     ) +
     ggplot2::geom_line() +
@@ -4380,16 +4380,16 @@ plot_prosecutions(prosecutions, breakdown = &quot;offence_type&quot;)</pre>
 
 <pre class = 'prettyprint lang-r'># Exercise 6 solution
 plot_prosecutions &lt;- function(df, breakdown = &quot;offence_type&quot;) {
-
+  
   df_grouped &lt;- df |&gt;
     dplyr::group_by(.data[[breakdown]], year) |&gt;
     dplyr::summarise(counts = sum(count), .groups = &quot;keep&quot;)
-
+  
   df_grouped |&gt;
     ggplot2::ggplot(
-      ggplot2::aes(x = .data$year,
-                   y = .data$counts,
-                   group = .data[[breakdown]],
+      ggplot2::aes(x = .data$year, 
+                   y = .data$counts, 
+                   group = .data[[breakdown]], 
                    col = .data[[breakdown]])
     ) +
     ggplot2::geom_line() +
@@ -4437,13 +4437,13 @@ my_mean(3, 5)</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
-<pre class = 'prettyprint lang-r'># Function to calculate the length of a hypotenuse
+<pre class = 'prettyprint lang-r'># Function to calculate the length of a hypotenuse 
 pythagoras &lt;- function(a, b) {
-
+  
   c &lt;- sqrt(a^2 + b^2)
-
+  
   paste0(&quot;The length of the hypotenuse is &quot;, c)
-
+  
 }
 
 pythagoras(2, -3)</pre>
@@ -4454,16 +4454,16 @@ pythagoras(2, -3)</pre>
 
 <p>We can add assertion statements to prevent this undesirable behaviour.</p>
 
-<pre class = 'prettyprint lang-r'># Function to calculate the length of a hypotenuse
+<pre class = 'prettyprint lang-r'># Function to calculate the length of a hypotenuse 
 pythagoras &lt;- function(a, b) {
-
+  
   assertthat::assert_that(a &gt; 0)
   assertthat::assert_that(b &gt; 0)
-
+  
   c &lt;- sqrt(a^2 + b^2)
-
+  
   paste0(&quot;The length of the hypotenuse is &quot;, c)
-
+  
 }
 
 pythagoras(2, -3)</pre>
@@ -4475,17 +4475,17 @@ pythagoras(2, -3)</pre>
 
 <p>That’s great, but we could improve clarity. The second most useful argument that <code>assertthat::assert_that()</code> takes is <code>msg</code>. This is a string that will be output as part of the error message, overriding the default, e.g. </p>
 
-<pre class = 'prettyprint lang-r'># Function to calculate the length of a hypotenuse
+<pre class = 'prettyprint lang-r'># Function to calculate the length of a hypotenuse 
 pythagoras &lt;- function(a, b) {
-
+  
   assertthat::assert_that(
     a &gt; 0 &amp;&amp; b &gt; 0,
     msg = &quot;both triangle sides must have positive length!&quot;)
-
+  
   c &lt;- sqrt(a^2 + b^2)
-
+  
   paste0(&quot;The length of the hypotenuse is &quot;, c)
-
+  
 }
 
 pythagoras(-2, 1)</pre>
@@ -4499,23 +4499,23 @@ pythagoras(-2, 1)</pre>
 
 <p>In this final example, additional assertions are added to check more fundamental aspects of input.</p>
 
-<pre class = 'prettyprint lang-r'># Function to calculate the length of a hypotenuse
+<pre class = 'prettyprint lang-r'># Function to calculate the length of a hypotenuse 
 pythagoras &lt;- function(a, b) {
-
+  
   assertthat::assert_that(
     !missing(a) &amp;&amp; !missing(b),
     msg = &quot;you must supply two triangle lengths&quot;)
-
+  
   assertthat::assert_that(
     is.numeric(a) &amp;&amp; is.numeric(b),
     msg = &quot;both arguments must be of numeric data type&quot;)
-
+  
   assertthat::assert_that(
     a &gt; 0 &amp;&amp; b &gt; 0,
     msg = &quot;both triangle sides must have positive length!&quot;)
-
+  
   sqrt(a^2 + b^2)
-
+  
 }</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
@@ -4554,27 +4554,27 @@ assertthat::assert_that(c %% 1 == 0)</pre>
 
 <pre class = 'prettyprint lang-r'># Exercise 7 solution - function to return hypotenuse length rounded to whole number
 pythagoras_rounded &lt;- function(a, b) {
-
+  
   assertthat::assert_that(
     !missing(a) &amp;&amp; !missing(b),
     msg = &quot;you must supply two triangle lengths&quot;)
-
+  
   assertthat::assert_that(
     is.numeric(a) &amp;&amp; is.numeric(b),
     msg = &quot;both arguments must be of numeric data type&quot;)
-
+  
   assertthat::assert_that(
     a &gt; 0 &amp;&amp; b &gt; 0,
     msg = &quot;both triangle sides must have positive length!&quot;)
-
+  
   # round the value to ensure it passes the assertion
   c &lt;- round(sqrt(a^2 + b^2))
-
+  
   # assertion statement checks that rounding has occurred
   assertthat::assert_that(
     c %% 1 == 0,
     msg = &quot;calculated answer is not a whole number&quot;)
-
+  
   paste0(&quot;The rounded length of the hypotenuse is &quot;, c)
 }</pre>
 
@@ -4650,7 +4650,7 @@ pythagoras_rounded &lt;- function(a, b) {
 colours &lt;- c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Magenta&quot;, &quot;Cyan&quot;, &quot;Yellow&quot;, &quot;Purple&quot;, &quot;Pink&quot;)
 pick_a_colour(colours)</pre>
 
-<pre >#&gt; [1] &quot;Cyan&quot;</pre>
+<pre >#&gt; [1] &quot;Magenta&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
@@ -4659,13 +4659,13 @@ pick_a_colour(colours)</pre>
 <pre class = 'prettyprint lang-r'>pick_a_colour</pre>
 
 <pre >#&gt; function(colours){
-#&gt;
+#&gt;   
 #&gt;   # Generate a random number between 1 and the number of colours provided
 #&gt;   x &lt;- sample(1:length(colours), 1)
-#&gt;
+#&gt;   
 #&gt;   # Print a randomly chosen colour
 #&gt;   print(colours[x])
-#&gt;
+#&gt;   
 #&gt; }</pre>
 
 </article></slide><slide class=""><hgroup><h2>Writing a package</h2></hgroup><article  id="writing-a-package" class="smaller ">
