@@ -491,7 +491,9 @@ abs_x_v2(4)
 Sometimes exiting a function early is useful. We can achieve this with
 an explicit `return()`. As soon as a `return()` statement is encountered
 in a function, the function finishes and returns the variable in the
-`return()` statement.
+`return()` statement. Note that using `return()` at the end of a
+function is equivalent to relying on R to return the last evaluated
+expression.
 
 ``` r
 # We can fix it by using an early return

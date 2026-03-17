@@ -3554,7 +3554,7 @@ abs_x_v2(-5)</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
-<p>Sometimes exiting a function early is useful. We can achieve this with an explicit <code>return()</code>. As soon as a <code>return()</code> statement is encountered in a function, the function finishes and returns the variable in the <code>return()</code> statement.</p>
+<p>Sometimes exiting a function early is useful. We can achieve this with an explicit <code>return()</code>. As soon as a <code>return()</code> statement is encountered in a function, the function finishes and returns the variable in the <code>return()</code> statement. Note that using <code>return()</code> at the end of a function is equivalent to relying on R to return the last evaluated expression.</p>
 
 <pre class = 'prettyprint lang-r'># We can fix it by using an early return
 abs_x_v3 &lt;- function(x) {
