@@ -1644,7 +1644,7 @@ your code to make them easier to find and reuse.
 
 A simple approach is to create a folder in your project called
 `functions` and save your functions there. The folder could also be
-called `R/`, following R package conventions.
+called `R`, following R package conventions.
 
 A function could have its own script, with the same name as the
 function, or related functions could be grouped together into a single
