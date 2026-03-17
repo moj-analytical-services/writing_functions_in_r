@@ -39,7 +39,7 @@ If you have any feedback on the content, please get in touch!
   patterns](#examples-of-function-writing-patterns)
 - [“Real-world” example functions](#real-world-example-functions)
 - [When to write a function](#when-to-write-a-function)
-- [Best practice](#best-practice)
+- [Good practice](#good-practice)
 - [How to organise your code](#how-to-organise-your-code)
 - [Writing a package](#writing-a-package)
 - [Further reading](#further-reading)
@@ -284,8 +284,8 @@ double
 ## Tip: function names
 
 The name of a function should give you a good idea of what it does. A
-good rule of thumb is to begin with a verb and be concise, for example.
-`read_data()`, `remove_duplicates()`, `standardise_dates()`.
+good rule of thumb is to begin with a verb and be concise. For example
+`read_data()`, `remove_duplicates()` or `standardise_dates()`.
 
 # Examples of function-writing patterns
 
@@ -1644,8 +1644,8 @@ test this is to get your code reviewed by someone else.
 
 ## How to organise your code
 
-It often helpful to keep your functions separate from the rest of your
-code to make them easier to find and reuse.
+It is often helpful to keep your functions separate from the rest of
+your code to make them easier to find and reuse.
 
 ### Storing your functions in your project
 
