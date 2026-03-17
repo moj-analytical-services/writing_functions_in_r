@@ -68,13 +68,13 @@ The syntax for creating a function is:
 
 ```{r, purl=purl_example_code}
 # Comment describing what the function does
-function_name <- function(arg1, arg2) {
+my_function <- function(arg1, arg2) {
   # function body, e.g. 
-  paste(arg1, arg2, "!")
+  paste(arg1, arg2)
 }
 ```
 
-We use `function()` to create a function and assign it to the object `function_name`.
+We use `function()` to create a function and assign it to the object `my_function`.
 
 A function is made up of three components:
 
@@ -84,11 +84,50 @@ A function is made up of three components:
 
 + And the function **environment** (where the function was created) - this determines what variables and other functions it has access to. You can find out more about environments [here](https://adv-r.hadley.nz/environments.html).
 
+A function returns the value of the last expression it evaluates. In the example, that is the result of `paste(arg1, arg2)`.
+
+## How to call a function
+
+Using the previous example function, the syntax to call a function is:
+
+```{r, purl=purl_example_code}
+my_function(arg1 = "abc", arg2 = "def")
+```
+
+You can specify arguments by name, as above, or by position. For example:
+
+```{r, purl=purl_example_code}
+my_function("abc", "def")
+```
+
+Named arguments are generally safer and clearer. However, when the first argument is a vector or data frame, it is common to omit the name. For example:
+
+```{r, purl=purl_example_code}
+scores <- c(8, 10, NA, 7, 9)
+mean(scores, na.rm = TRUE)
+```
+
+## Don't forget the `()`
+
+Brackets `()` tell R to run a function.
+
+If you type the function name without `()`, R returns the function itself rather than running it.
+
+```{r, purl=purl_example_code}
+double <- function(x) {
+  x * 2
+}
+
+double(4)
+double
+```
+
+
 # Examples of basic functions
 
 ## Example 1: a very basic function
 
-Here's an example of a very basic user-defined function, called `add_two()`, that takes `x` as an argument:
+Here's an example of a very basic user-defined function, called `add_two()`, that takes `x` as an argument and returns `x + 2`:
 
 ```{r, purl=purl_example_code}
 # This function takes the argument 'x', and adds 2 to it
@@ -98,9 +137,6 @@ add_two <- function(x) {
   
 }
 ```
-
-R will automatically return the value of the last evaluated expression. There is also a `return()`
-function. More on where to use this later.
 
 ---
 
