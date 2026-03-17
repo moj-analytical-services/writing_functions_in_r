@@ -280,8 +280,8 @@ double
 ## Tip: function names
 
 The name of a function should give you a good idea of what it does. A
-good rule of thumb is to begin with a verb and be concise, for example
-`read_data()`, `remove_duplicates()`, `standardise_dates()`.
+good rule of thumb is to begin with a verb and be concise. For example
+`read_data()`, `remove_duplicates()` or `standardise_dates()`.
 
 # Examples of basic functions
 
@@ -1670,7 +1670,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Green"
+    #> [1] "Magenta"
 
 ------------------------------------------------------------------------
 
