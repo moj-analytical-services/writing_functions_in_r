@@ -59,7 +59,7 @@ sum_squares <- function(x, y) {
   
 }
 
-sum_squares(3, y = 5)
+sum_squares(x = 3, y = 5)
 
 
 ## ----purl=purl_example_code-----------------------------------------------------------------------
@@ -71,6 +71,18 @@ sum_squares(y = 5, x = 3)
 
 # Bad
 sum_squares(3, 5)
+
+
+## ----purl=purl_example_code-----------------------------------------------------------------------
+# This function returns the sum of two numbers raised to a particular power (with a default of 2)
+sum_powers <- function(x, y, z = 2) {
+  
+  x ^ z + y ^ z
+  
+}
+
+sum_powers(x = 3, y = 5)
+sum_powers(x = 3, y = 5, z = 3)
 
 
 
@@ -212,18 +224,6 @@ return_x()
 return_x(NULL)
 return_x(NA)
 })
-
-
-## ----purl=purl_example_code-----------------------------------------------------------------------
-# This function returns the sum of two numbers raised to a particular power (with a default of 2)
-sum_powers <- function(x, y, z = 2) {
-  
-  x ^ z + y ^ z
-  
-}
-
-sum_powers(x = 3, y = 5)
-sum_powers(x = 3, y = 5, z = 3)
 
 
 

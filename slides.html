@@ -3216,6 +3216,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 </article></slide><slide class=""><hgroup><h2>Agenda</h2></hgroup><article  id="agenda" class="smaller ">
 
 <table class = 'rmdtable'>
+<col width="82.432432%" />
+<col width="17.567568%" />
 <tr class="header">
 <th align="left">Item</th>
 <th align="left">Time</th>
@@ -3225,7 +3227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 <td align="left">10:00 - 10:10</td>
 </tr>
 <tr class="even">
-<td align="left">Examples of basic functions (including exercises)</td>
+<td align="left">Examples of function-writing patterns (including exercises)</td>
 <td align="left">10:10 - 11:30</td>
 </tr>
 <tr class="odd">
@@ -3251,12 +3253,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 <h3>By the end of this session you should know:</h3>
 
 <ul>
-<li>How to write a basic function.</li>
-<li>The circumstances when you might want to consider writing a function.</li>
-<li>Why using functions is beneficial.</li>
-<li>The best practice for writing functions.</li>
+<li>How to write basic functions.</li>
+<li>The benefits of using functions in your code.</li>
+<li>Good practice for writing functions.</li>
+<li>What real-world data processing functions could look like.</li>
+<li>Some more advanced function writing topics.</li>
 <li>Where to go for more information on some of the topics touched on in this course.</li>
 </ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
 <h3>Before we start</h3>
 
@@ -3380,9 +3385,11 @@ double(4)</pre>
 
 <p>The name of a function should give you a good idea of what it does. A good rule of thumb is to begin with a verb and be concise. For example <code>read_data()</code>, <code>remove_duplicates()</code> or <code>standardise_dates()</code>.</p>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Examples of basic functions</h2></hgroup><article  id="examples-of-basic-functions" class="smaller ">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Examples of function-writing patterns</h2></hgroup><article  id="examples-of-function-writing-patterns" class="smaller ">
 
 </article></slide><slide class=""><hgroup><h2>Example 1: a very basic function</h2></hgroup><article  id="example-1-a-very-basic-function" class="smaller ">
+
+<p>We are now going to show a series of example functions that illustrate different concepts and functionality for writing functions.</p>
 
 <p>Here’s an example of a very basic user-defined function, called <code>add_two()</code>, that takes <code>x</code> as an argument and returns <code>x + 2</code>:</p>
 
@@ -3421,7 +3428,7 @@ sum_squares &lt;- function(x, y) {
   
 }
 
-sum_squares(3, y = 5)</pre>
+sum_squares(x = 3, y = 5)</pre>
 
 <pre >#&gt; [1] 34</pre>
 
@@ -3445,6 +3452,25 @@ sum_squares(y = 5, x = 3)</pre>
 sum_squares(3, 5)</pre>
 
 <pre >#&gt; [1] 34</pre>
+
+</article></slide><slide class=""><hgroup><h2>Example 3: default arguments</h2></hgroup><article  id="example-3-default-arguments" class="smaller ">
+
+<p>Any value can be used as a default value for an argument. For example, we can generalise the <code>sum_squares()</code> function by allowing it to sum together two numbers raised to any power, but with a default power of 2:</p>
+
+<pre class = 'prettyprint lang-r'># This function returns the sum of two numbers raised to a particular power (with a default of 2)
+sum_powers &lt;- function(x, y, z = 2) {
+  
+  x ^ z + y ^ z
+  
+}
+
+sum_powers(x = 3, y = 5)</pre>
+
+<pre >#&gt; [1] 34</pre>
+
+<pre class = 'prettyprint lang-r'>sum_powers(x = 3, y = 5, z = 3)</pre>
+
+<pre >#&gt; [1] 152</pre>
 
 </article></slide><slide class=""><hgroup><h2>Exercises</h2></hgroup><article  id="exercises" class="smaller ">
 
@@ -3480,7 +3506,7 @@ my_mean(7.5, 16)</pre>
 
 <pre >#&gt; [1] 11.75</pre>
 
-</article></slide><slide class=""><hgroup><h2>Example 3: conditional statements and early returns</h2></hgroup><article  id="example-3-conditional-statements-and-early-returns" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Example 4: conditional statements and early returns</h2></hgroup><article  id="example-4-conditional-statements-and-early-returns" class="smaller ">
 
 <p>Functions can return different outputs depending on some condition. In this function the condition is <code>x &lt; 0</code>, and the condition evaluates to either <code>TRUE</code> or <code>FALSE</code>:</p>
 
@@ -3528,7 +3554,7 @@ abs_x_v2(-5)</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
 
-<p>Sometimes exiting a function early is useful. We can achieve this with an explicit <code>return()</code>. As soon as a <code>return()</code> statement is encountered in a function, the function finishes and returns the variable in the <code>return()</code> statement.</p>
+<p>Sometimes exiting a function early is useful. We can achieve this with an explicit <code>return()</code>. As soon as a <code>return()</code> statement is encountered in a function, the function finishes and returns the variable in the <code>return()</code> statement. Note that using <code>return()</code> at the end of a function is equivalent to relying on R to return the last evaluated expression.</p>
 
 <pre class = 'prettyprint lang-r'># We can fix it by using an early return
 abs_x_v3 &lt;- function(x) {
@@ -3549,7 +3575,7 @@ abs_x_v3(-5)</pre>
 
 <pre >#&gt; [1] 4</pre>
 
-</article></slide><slide class=""><hgroup><h2>Example 4: functions with side-effects</h2></hgroup><article  id="example-4-functions-with-side-effects" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Example 5: functions with side-effects</h2></hgroup><article  id="example-5-functions-with-side-effects" class="smaller ">
 
 <p>A function side-effect can be thought of as any change to the workspace that the function makes other than the object that it returns. This can include printing, plotting a chart, saving a file, or modifying a variable in the wider environment. The side-effect is often the main purpose of the function, and in this case the function doesn’t need to return any value. This function has the side-effect of printing a message to the console, depending on the value of the object:</p>
 
@@ -3570,7 +3596,7 @@ odd_or_even(x = 4)</pre>
 
 <p><strong>Note:</strong> It’s best practice for your function to either return an object or have a side-effect, but not both (with the exception of messages, errors and warnings).</p>
 
-</article></slide><slide class=""><hgroup><h2>Example 5: errors and warnings</h2></hgroup><article  id="example-5-errors-and-warnings" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Example 6: errors and warnings</h2></hgroup><article  id="example-6-errors-and-warnings" class="smaller ">
 
 <p>Sometimes it can be useful to include helpful error messages in functions, e.g. by anticipating the sorts of variables that could be input. What happens if you try to use a non-integer or a string as an argument in the previous example? Try the running the function with the following arguments:</p>
 
@@ -3626,7 +3652,7 @@ odd_or_even &lt;- function(x) {
 
 <p><code>stop()</code> halts execution of the function and prints an error message to the console. Alternatively you can use <code>warning()</code>, which returns a warning but does not stop execution of the function.</p>
 
-</article></slide><slide class=""><hgroup><h2>Example 6: optional arguments</h2></hgroup><article  id="example-6-optional-arguments" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Example 7: optional arguments</h2></hgroup><article  id="example-7-optional-arguments" class="smaller ">
 
 <p>Here’s an example of how to include optional arguments, where in this case the optional argument is called <code>y</code>:</p>
 
@@ -3694,25 +3720,6 @@ return_x(5)</pre>
 <pre >#&gt; x is NA</pre>
 
 <pre >#&gt; [1] NA</pre>
-
-</article></slide><slide class=""><hgroup><h2>Example 7: arguments with default values</h2></hgroup><article  id="example-7-arguments-with-default-values" class="smaller ">
-
-<p>Any value can be used as a default value for an argument. For example, we can generalise the <code>sum_squares()</code> function by allowing it to sum together two numbers raised to any power, but with a default power of 2:</p>
-
-<pre class = 'prettyprint lang-r'># This function returns the sum of two numbers raised to a particular power (with a default of 2)
-sum_powers &lt;- function(x, y, z = 2) {
-  
-  x ^ z + y ^ z
-  
-}
-
-sum_powers(x = 3, y = 5)</pre>
-
-<pre >#&gt; [1] 34</pre>
-
-<pre class = 'prettyprint lang-r'>sum_powers(x = 3, y = 5, z = 3)</pre>
-
-<pre >#&gt; [1] 152</pre>
 
 </article></slide><slide class=""><hgroup><h2>Exercises</h2></hgroup><article  id="exercises-1" class="smaller ">
 
