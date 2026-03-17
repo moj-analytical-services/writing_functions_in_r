@@ -38,7 +38,7 @@ If you have any feedback on the content, please get in touch!
 - [Examples of basic functions](#examples-of-basic-functions)
 - [“Real-world” example functions](#real-world-example-functions)
 - [When to write a function](#when-to-write-a-function)
-- [Best practice](#best-practice)
+- [Good practice](#good-practice)
 - [How to organise your code](#how-to-organise-your-code)
 - [Writing a package](#writing-a-package)
 - [Further reading](#further-reading)
@@ -276,6 +276,12 @@ double
     #> {
     #>     x * 2
     #> }
+
+## Tip: function names
+
+The name of a function should give you a good idea of what it does. A
+good rule of thumb is to begin with a verb and be concise. For example
+`read_data()`, `remove_duplicates()` or `standardise_dates()`.
 
 # Examples of basic functions
 
@@ -739,9 +745,7 @@ Try it out with values 1, 2, 3, 5 & 15.
 ### 2.2 fizz_buzz_vec()
 
 Most functions in R are vectorised. This means they can apply an
-operation to every element of a vector at the same time. It’s best
-practice to vectorise your own functions too as this will help you to
-apply them to data sets and combine them with other functions.
+operation to every element of a vector at the same time.
 
 Create a new version of the `fizz_buzz()` function called
 `fizz_buzz_vec` which instead accepts a vector of numbers. Test it out
@@ -777,8 +781,10 @@ second when you set `buzz = 7` for values 1, 2, 3, 7, 15 and 21.
 
 Sometimes being able to pass an arbitrary number of arguments can be
 useful, especially when another function is called within a wrapper
-function. This requires the ellipsis construct, `...`, which is designed
-to pass a variable number of arguments to a function. Here’s an example:
+function (a function whose main purpose is to call another function to
+make it more convenient to use). This requires the ellipsis construct,
+`...`, which is designed to pass a variable number of arguments to a
+function. Here’s an example:
 
 ``` r
 # This function produces a plot of x vs y
@@ -1542,9 +1548,9 @@ pythagoras(b = 2)
 In the final exercise, we will apply `assertthat::assert_that()` to the
 end product before returning it to the user.
 
-We will make a new function, called `pythagorus_rounded()`.
+We will make a new function, called `pythagoras_rounded()`.
 
-1.  Add the below assertion to `pythagorus()` in the correct place to
+1.  Add the below assertion to `pythagoras()` in the correct place to
     test the value that is reported. Reload the function and confirm
     that it fails with positive numeric inputs.
 2.  Add a message to the assertion to explain why it fails. Reload the
@@ -1572,7 +1578,7 @@ assertthat::assert_that(c %% 1 == 0)
 
 ### When you’ve copied and pasted two times
 
-There is a principal in software engineering called Don’t Repeat
+There is a principle in software development called Don’t Repeat
 Yourself (DRY) - which basically states that you should avoid
 duplication wherever possible. A good rule of thumb is whenever you find
 you’ve used the same or similar code in three places, it’s time to
@@ -1590,48 +1596,38 @@ The R ecosystem is full of high quality packages designed to solve all
 kinds of problems - it’s generally best to make sure that a function
 doesn’t already exist before writing your own.
 
-## Best practice
+## Good practice
 
 Writing a function is easy, writing a really good function can be a lot
 harder! Here are a few things to consider:
 
-### Give your function a good name
-
-The name of a function should give you a good idea of what it does.
-Generally function names should be concise and use verbs rather than
-nouns.
-
-### Pass variables into the function as arguments
-
-While functions can access objects that haven’t been passed in as an
-argument, this is generally bad practice as it makes code much harder to
-understand and modify, and makes the function itself harder to reuse.
-
-### Document your code
+### Document your functions
 
 You should have comments explaining what your function does, what each
 argument is, and what it returns.
 
+### Pass all inputs that a function needs as arguments
+
+A function can access objects in its surrounding environment that were
+not passed in as arguments, but this can make code harder to follow and
+maintain. It is better to pass all objects that a function uses as
+arguments. This makes it clear what the function depends on and makes it
+easier to reuse elsewhere.
+
+### Do one thing
+
+Each function should have a single responsibility. If it seems to do
+more than one thing, consider whether it can be broken up into separate
+functions. This leads to simpler and more flexible code that is easier
+to understand, maintain and write tests for.
+
 ------------------------------------------------------------------------
-
-### Keep it short
-
-A rule of thumb is if all the code for your function doesn’t fit on your
-screen at the same time, it’s probably too complicated. Consider
-splitting it up into multiple functions.
 
 ### Generalise
 
 Think about whether there are ways you can make your function usable in
-more situations. For example, is there anything you’re hard-coding that
-you could set as an argument instead?
-
-### Vectorise by default
-
-R is designed to work well with vectors (e.g. columns of a dataframe).
-Where possible you should write your function so it can take a vector as
-an input and apply the transformation to each element. The
-`generalise_names()` function we looked at is a good example of this!
+more situations. For example, is there anything you have hard-coded (set
+directly in the function) that could be passed as an argument instead?
 
 ### Ask for feedback
 
@@ -1641,27 +1637,22 @@ test this is to get your code reviewed by someone else.
 
 ## How to organise your code
 
-Whenever you’re working on something in R it’s generally best to create
-an R project and version control your code on GitHub. There’s
-information on how to do this in the [Analytical Platform
-guidance](https://user-guidance.analytical-platform.service.justice.gov.uk/index.html).
-
-It’s also best to keep your functions separate from the rest of your
-code to make them easier to find.
+It is often helpful to keep your functions separate from the rest of
+your code to make them easier to find and reuse.
 
 ### Storing your functions in your project
 
-The easiest way to store your functions is just to create a folder in
-your project called “functions” and save your functions there.
+A simple approach is to create a folder in your project called
+`functions` and save your functions there. The folder could also be
+called `R`, following R package conventions.
 
-You could either put each function in its own R script with the same
-name, or you could group related functions into clearly named scripts.
+A function could have its own script, with the same name as the
+function, or related functions could be grouped together into a single
+clearly named script.
 
-Then just use `source("functions/my_functions_script.R")` (with
-`functions/` and `my_functions_script.R` replaced with the name of the
-folder and the name of your script, respectively) to run the code and
-make your functions available to you in the current session. As with
-loading packages, it’s best to do this at the top of your script.
+You can then load the functions into your current session with
+`source("functions/my_functions_script.R")`, usually near the top of
+your main script.
 
 ------------------------------------------------------------------------
 
