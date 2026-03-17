@@ -6,6 +6,10 @@ list.files("README_files/", full.names = TRUE) |> file.remove()
 # Set max line length
 options(width = 100)
 
+# Set seed
+set.seed(1)
+
+
 ### Render README.Rmd as GitHub markdown document --------------------------------------------------
 # Note: this includes rmd_files/content.Rmd and rmd_files/appendix.Rmd.
 rmarkdown::render(

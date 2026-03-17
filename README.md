@@ -1670,7 +1670,7 @@ colours <- c("Red", "Blue", "Green", "Magenta", "Cyan", "Yellow", "Purple", "Pin
 pick_a_colour(colours)
 ```
 
-    #> [1] "Magenta"
+    #> [1] "Red"
 
 ------------------------------------------------------------------------
 
